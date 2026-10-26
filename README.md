@@ -37,7 +37,21 @@ Customers, your numbers, price lists and call transcripts are stored **only on y
 - **Glasses home menu:** Start call · Start call with a customer · Market brief · News · Recent calls · Open follow-ups.
 - **During a call:** tap = pause/resume · swipe = flip through cards · double-tap = end the call and summarize.
 - **Phone:** Live tab shows everything. Tap any transcript line to switch who said it.
-- **Ask Claude about a call:** Calls → open the call → **Copy for Claude** → paste it into Claude. Tip: make a Claude Project with your customer files so it always has context.
+- **Deep notes with Claude (on your subscription):** see below.
+
+## Claude Project — your notes hub
+Set it up once (the app's **Data → Claude Project kit** walks you through it):
+1. In Claude: **Projects → New project → "Sales Edge"**.
+2. Paste `claude-project/PROJECT-INSTRUCTIONS.md` (or tap **Copy instructions** in the app) into the project's **Instructions**.
+3. Add the app's exports to **Project files**: `customers.md`, `my-data.md` (your numbers and price lists), `market-today.md`. Your yearly reports, PDFs or spreadsheets can go here too.
+4. Copy the project's link into **Settings → Claude Project link**.
+
+After every call:
+**Send to Claude** (copies the call and opens your project) → start a new chat and paste → copy Claude's answer → in the app, **Bring Claude's notes back** → Save.
+The follow-ups become checkboxes, the notes show on your glasses, and the "Remember" facts go to the customer's profile, which feeds your talking points next time.
+Because every call chat lives in the project, you can ask things like "what did I talk about with Food Lion on 10/12?" or "prep me for my call with Ukrop's."
+
+**Where does data go?** Load it into the **app** (Customers and Data tabs). That's what feeds the live cards on your glasses. Then export it to the **Claude Project** with the kit buttons. Re-export when it changes.
 
 ## How "who said it" works
 The G2 mics sit on your face, so your voice is much louder than the customer's. The app combines that loudness with the speech service's speaker separation to label each line. It's usually right. Tap a line to fix it, or use "Swap Alan/Customer".

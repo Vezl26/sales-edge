@@ -6,7 +6,8 @@ import { type KB, loadKB, saveKB, numbersDigest } from './kb/knowledge'
 import { loadMarket, type MarketBundle, type Card, marketPages, cutoutCard, killCard, cattleCard, shortDate } from './intel/market'
 import { IntelEngine } from './intel/engine'
 import { CallSession, loadCall, upsertIndex, glassTranscript, deleteCall } from './calls/session'
-import { summaryToText, summaryPrompt, claudePacket, fmtClock } from './calls/summarize'
+import { summaryToText, summaryPrompt, fmtClock } from './calls/summarize'
+import { callPacket, parseClaudeNotes, rememberLines } from './calls/claude'
 import { aiComplete, aiEnabled } from './ai/llm'
 import type { Glasses } from './glasses/ui'
 import { EnergyTracker } from './audio/speaker'
@@ -211,7 +212,26 @@ export class App {
   }
 
   packetFor(call: Call) {
-    return claudePacket(call, this.customerById(call.customerId), this.marketContext(), this.numbersContext())
+    return callPacket(call, this.customerById(call.customerId), this.marketContext(), this.numbersContext())
+  }
+
+  /** Save Claude's notes onto the call; facts to remember go to the customer. */
+  async applyClaudeNotes(id: string, text: string): Promise<{ followUps: number; remembered: number }> {
+    const call = await this.getCall(id)
+    if (!call || !text.trim()) return { followUps: 0, remembered: 0 }
+    call.summary = parseClaudeNotes(text)
+    await this.updateCall(call)
+    let remembered = 0
+    const c = this.customerById(call.customerId)
+    if (c) {
+      const date = new Date(call.startedAt).toLocaleDateString()
+      const facts = rememberLines(text).map(f => `${date}: ${f}`).filter(f => !c.learned.includes(f))
+      c.learned = [...c.learned, ...facts].slice(-40)
+      c.updatedAt = Date.now()
+      remembered = facts.length
+      await this.saveKB()
+    }
+    return { followUps: call.summary.followUps.length, remembered }
   }
 
   // ---------- glasses navigation ----------

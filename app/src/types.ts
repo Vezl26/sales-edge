@@ -102,6 +102,7 @@ export interface Settings {
   defaultGrade: 'Choice' | 'Select'
   caseWeights: Record<string, number> // imps -> lb per case
   liveAiTips: boolean
+  claudeProjectUrl: string
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -118,6 +119,7 @@ export const DEFAULT_SETTINGS: Settings = {
   defaultGrade: 'Choice',
   caseWeights: {},
   liveAiTips: false,
+  claudeProjectUrl: '',
 }
 
 // ---- USDA data shapes (written by the pipeline) ----

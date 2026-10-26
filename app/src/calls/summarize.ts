@@ -135,13 +135,6 @@ export function customerBrief(c: Customer): string {
   ].filter(Boolean).join('\n')
 }
 
-export function claudePacket(call: Call, customer: Customer | null, marketContext: string, myNumbers: string): string {
-  const auto = call.summary
-  return `${summaryPrompt(call, customer, marketContext, myNumbers)}
-
-(For reference, the app's automatic notes: ${auto ? `${auto.headline}; follow-ups: ${auto.followUps.map(f => `${f.owner}: ${f.text}`).join(' | ') || 'none detected'}` : 'none'})`
-}
-
 export function summaryToText(s: CallSummary): string {
   const sec = (t: string, a: string[]) => (a.length ? `${t}\n${a.map(x => `• ${x}`).join('\n')}` : '')
   if (s.aiText) return s.aiText

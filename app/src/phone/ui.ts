@@ -5,6 +5,7 @@ import { uid, importCustomersCsv, parseDelimited, numbersDigest } from '../kb/kn
 import { CUTS, lexFor } from '../intel/lexicon'
 import { bestRow, perLb, money, pct, fmtPct, shortDate, priceCard, cutoutCard, killCard, cattleCard } from '../intel/market'
 import { transcriptText, summaryToText, fmtClock } from '../calls/summarize'
+import { PROJECT_INSTRUCTIONS, customersFile, docsFile } from '../calls/claude'
 import { AI_PRESETS, aiEnabled } from '../ai/llm'
 
 type Tab = 'live' | 'calls' | 'customers' | 'know' | 'market' | 'settings'
@@ -180,12 +181,19 @@ export class PhoneUI {
         <label>Customer</label>
         <select data-field="callCustomer" data-id="${call.id}"><option value="">— none —</option>${this.app.kb.customers.map(c => `<option value="${c.id}" ${c.id === call.customerId ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</select>
         <div class="btns wrap">
-          <button class="primary" data-act="copyClaude" data-id="${call.id}">Copy for Claude</button>
+          <button class="primary" data-act="sendClaude" data-id="${call.id}">Send to Claude</button>
+          <button data-act="shareClaude" data-id="${call.id}">Share sheet…</button>
           <button data-act="share" data-id="${call.id}">Share notes</button>
           ${ai ? `<button data-act="aiSum" data-id="${call.id}">AI summary</button>` : ''}
           ${call.customerId ? `<button data-act="learn" data-id="${call.id}">Save notes to customer</button>` : ''}
         </div>
-        <p class="muted">"Copy for Claude" copies the transcript + context. Paste it into your Claude chat (or a Claude Project with your customer files) for a deep summary on your subscription.</p>
+        <p class="muted">${this.app.settings.claudeProjectUrl ? '"Send to Claude" copies the call and opens your Claude Project. Paste it into a new chat there.' : 'Tip: add your Claude Project link in Settings so "Send to Claude" opens it directly. For now it copies the call and opens Claude.'}</p>
+      </div>
+      <div class="card">
+        <h3>Bring Claude's notes back</h3>
+        <p class="muted">Copy Claude's answer and paste it here. Follow-ups become checkboxes, the notes show on your glasses, and "Remember" facts are saved to the customer.</p>
+        <textarea id="claudeBack" rows="4" placeholder="Paste Claude's summary here"></textarea>
+        <button data-act="saveClaude" data-id="${call.id}">Save Claude's notes</button>
       </div>
       ${s ? `<div class="card"><h3>Summary ${s.generatedBy === 'ai' ? '(AI)' : '(automatic)'}</h3><pre>${esc(summaryToText(s))}</pre>
         ${s.followUps.length ? `<h3>Follow-ups</h3>${s.followUps.map((f, i) => `<label class="check"><input type="checkbox" data-act="fuDone" data-id="${call.id}" data-i="${i}" ${f.done ? 'checked' : ''}> <span><b>${esc(f.owner)}:</b> ${esc(f.text)}${f.due ? ` (${esc(f.due)})` : ''}</span></label>`).join('')}` : ''}
@@ -237,7 +245,23 @@ export class PhoneUI {
   // ---------------- DATA (knowledge) ----------------
   private knowView(): string {
     const docs = this.app.kb.docs
+    const s = this.app.settings
     return `
+      <div class="card">
+        <h2>Claude Project kit</h2>
+        <p class="muted">Your one place to talk with Claude about customers and calls. Set it up once:</p>
+        <ol class="steps">
+          <li>In the Claude app: <b>Projects → New project</b>. Name it "Sales Edge".</li>
+          <li>Open the project's <b>Instructions</b> and paste: <button class="small" data-act="copyInstr">Copy instructions</button></li>
+          <li>In <b>Project files</b>, add these (tap, then save/paste them as files):<br>
+            <button class="small" data-act="kit" data-k="customers">customers.md</button>
+            <button class="small" data-act="kit" data-k="data">my-data.md</button>
+            <button class="small" data-act="kit" data-k="market">market-today.md</button></li>
+          <li>Copy the project's link (Share → Copy link, or from the browser) into <b>Settings → Claude Project link</b>.</li>
+        </ol>
+        <p class="muted">After that, every call: <b>Send to Claude</b> → paste → copy Claude's answer → <b>Bring Claude's notes back</b>. Re-export the files above when your data changes.</p>
+        ${s.claudeProjectUrl ? `<a class="btnlink" href="${esc(s.claudeProjectUrl)}" target="_blank" rel="noopener">Open my Claude Project</a>` : ''}
+      </div>
       <div class="card form">
         <h2>Feed it your data</h2>
         <p class="muted">Your yearly/monthly numbers, price lists (deli, chocolate, prepared foods), Cargill news, notes. Stays on your phone only.</p>
@@ -286,6 +310,17 @@ export class PhoneUI {
       ${news.map(n => `<a class="card news" href="${esc(n.link)}" target="_blank" rel="noopener"><b>${esc(n.title)}</b><div class="muted">${esc(n.source)} · ${new Date(n.date).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric' })}</div></a>`).join('') || '<p class="muted">No news yet.</p>'}`
   }
 
+  private cutTable(): string {
+    const beef = this.app.market.beef
+    if (!beef) return '(none)'
+    const rows = ['| IMPS | Cut | Grade | $/lb | Low | High | Lbs traded |', '|---|---|---|---|---|---|---|']
+    for (const c of CUTS) for (const g of ['Choice', 'Select']) {
+      const r = bestRow(beef, c.imps, g)
+      if (r && (r.wavg ?? 0) > 0) rows.push(`| ${r.imps} | ${c.label} | ${g} | ${money(perLb(r.wavg))} | ${money(perLb(r.low))} | ${money(perLb(r.high))} | ${(r.lbs ?? 0).toLocaleString()} |`)
+    }
+    return rows.join('\n')
+  }
+
   // ---------------- SETTINGS ----------------
   private settingsView(): string {
     const s = this.app.settings
@@ -318,6 +353,11 @@ export class PhoneUI {
         <label>Base URL</label><input id="s_aiBase" value="${esc(s.aiBaseUrl)}">
         <label>Model</label><input id="s_aiModel" value="${esc(s.aiModel)}">
         <label>API key</label><input id="s_aiKey" type="password" value="${esc(s.aiKey)}">
+      </div>
+      <div class="card form">
+        <h2>Claude</h2>
+        <label>Claude Project link</label>
+        <input id="s_claude" value="${esc(s.claudeProjectUrl)}" placeholder="https://claude.ai/project/…">
       </div>
       <div class="card form">
         <h2>Market data link</h2>
@@ -359,9 +399,46 @@ export class PhoneUI {
         if (call && g) { g.spk = g.spk === 'A' ? 'C' : 'A'; g.manual = true; await a.updateCall(call) }
         break
       }
-      case 'copyClaude': {
+      case 'sendClaude': {
+        const call = a.recentCalls.find(c => c.id === id) || this.callDetailCache
+        if (!call) break
+        const text = a.packetFor(call)
+        const target = a.settings.claudeProjectUrl || 'https://claude.ai/new'
+        // Copy and open in the same tap (iOS blocks pop-ups after an await).
+        copySync(text)
+        window.open(target, '_blank')
+        a.notify('Copied. In Claude: start a new chat and paste.')
+        break
+      }
+      case 'shareClaude': {
         const call = await a.getCall(id!)
-        if (call) await copy(a.packetFor(call)) ? a.notify('Copied — paste it into Claude') : a.notify('Copy failed')
+        if (!call) break
+        const text = a.packetFor(call)
+        const name = `call-${new Date(call.startedAt).toISOString().slice(0, 10)}-${(call.customerName || 'customer').replace(/\W+/g, '-').toLowerCase()}.txt`
+        if (!(await shareText(name, text))) { await copy(text); a.notify('Sharing not available here, so I copied it instead') }
+        break
+      }
+      case 'saveClaude': {
+        const text = ($<HTMLTextAreaElement>('#claudeBack')?.value || '').trim()
+        if (!text) { a.notify("Paste Claude's answer first"); break }
+        const r = await a.applyClaudeNotes(id!, text)
+        a.notify(`Saved: ${r.followUps} follow-ups${r.remembered ? `, ${r.remembered} facts saved to the customer` : ''}`)
+        this.callDetailCache = null
+        this.render()
+        break
+      }
+      case 'copyInstr': if (await copy(PROJECT_INSTRUCTIONS)) a.notify('Instructions copied, paste them into the Project'); break
+      case 'kit': {
+        const k = el.dataset.k
+        const files: Record<string, [string, () => string]> = {
+          customers: ['customers.md', () => customersFile(a.kb)],
+          data: ['my-data.md', () => docsFile(a.kb.docs, "Alan's numbers, price lists and notes")],
+          market: ['market-today.md', () => `# Market snapshot\nUSDA data as of ${a.market.beef?.reportDate ?? '?'}\n\n${a.marketContext()}\n\n## Choice cut prices ($/lb)\n${this.cutTable()}`],
+        }
+        const f = files[k!]
+        if (!f) break
+        const [name, make] = f
+        if (!(await shareText(name, make(), true))) { await copy(make()); a.notify(`${name} copied. Paste it into Project files as text.`) }
         break
       }
       case 'share': {
@@ -517,7 +594,7 @@ export class PhoneUI {
       deepgramKey: v('s_deepgram'), micSource: v('s_mic') as Settings['micSource'], myName: v('s_name') || 'Alan',
       defaultGrade: v('s_grade') as Settings['defaultGrade'], caseWeights: cases,
       aiProvider: v('s_aiProvider') as Settings['aiProvider'], aiBaseUrl: v('s_aiBase'), aiModel: v('s_aiModel'), aiKey: v('s_aiKey'),
-      dataBaseUrl: v('s_data'),
+      dataBaseUrl: v('s_data'), claudeProjectUrl: v('s_claude'),
     }
     const dataChanged = patch.dataBaseUrl !== this.app.settings.dataBaseUrl
     await this.app.saveSettings(patch)
@@ -551,6 +628,33 @@ export class PhoneUI {
       await a.loadRecentCalls()
       a.notify('Backup restored')
     } catch (e) { a.notify(`Import failed: ${(e as Error).message}`) }
+  }
+}
+
+function copySync(text: string) {
+  try { void navigator.clipboard.writeText(text).catch(() => fallbackCopy(text)) } catch { fallbackCopy(text) }
+}
+function fallbackCopy(text: string): boolean {
+  try {
+    const ta = document.createElement('textarea')
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0'
+    document.body.appendChild(ta); ta.select()
+    const ok = document.execCommand('copy'); ta.remove(); return ok
+  } catch { return false }
+}
+
+/** iOS share sheet (pick the Claude app, Files, Notes…). Returns false if unavailable. */
+async function shareText(name: string, text: string, asFile = false): Promise<boolean> {
+  if (!navigator.share) return false
+  try {
+    if (asFile || text.length > 3000) {
+      const file = new File([text], name, { type: name.endsWith('.md') ? 'text/markdown' : 'text/plain' })
+      if (navigator.canShare?.({ files: [file] })) { await navigator.share({ files: [file], title: name }); return true }
+    }
+    await navigator.share({ title: name, text })
+    return true
+  } catch (e) {
+    return (e as Error)?.name === 'AbortError' // user cancelled = handled
   }
 }
 
