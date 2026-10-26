@@ -26,6 +26,7 @@ export class CallSession {
   private dirty = false
   onChange: () => void = () => {}
   onCard: (c: Card) => void = () => {}
+  onCustomerTagged: (c: Customer) => void = () => {}
 
   constructor(
     private store: Store,
@@ -47,6 +48,7 @@ export class CallSession {
         this.call.customerId = c.id
         this.call.customerName = c.name
         this.call.otherLabel ||= c.name
+        this.onCustomerTagged(c)
         this.touch()
       }
     }
@@ -129,6 +131,18 @@ export class CallSession {
     this.cardIndex = this.cards.length - 1
     this.call.cards.push({ t: this.elapsedMs, kind: c.kind, title: c.title, body: c.phone })
     this.onCard(c)
+    this.onChange()
+  }
+
+  /** Put prep cards up front and jump to the first one. */
+  addPrepCards(cards: Card[]) {
+    if (!cards.length) return
+    const first = this.cards.length
+    for (const c of cards) {
+      this.cards.push(c)
+      this.call.cards.push({ t: this.elapsedMs, kind: 'prep', title: c.title, body: c.phone })
+    }
+    this.cardIndex = first
     this.onChange()
   }
 

@@ -146,7 +146,7 @@ export class Glasses {
     } else if (s.kind === 'pages') {
       if (ev === 'down' && s.page < s.pages.length - 1) { s.page++; void this.renderPage() }
       else if (ev === 'up' && s.page > 0) { s.page--; void this.renderPage() }
-      else if (ev === 'tap') s.onTap?.()
+      else if (ev === 'tap' && s.onTap) { if (s.page < s.pages.length - 1) { s.page++; void this.renderPage() } else s.onTap() }
       else if (ev === 'double') s.onBack()
     } else if (s.kind === 'call') {
       if (ev === 'tap') s.onTap()

@@ -3,7 +3,9 @@
 import type { Customer, KnowledgeDoc, NewsItem, Call } from '../types'
 import type { Store } from '../store'
 
-export interface KB { customers: Customer[]; docs: KnowledgeDoc[] }
+import type { Prep } from '../prep/prep'
+
+export interface KB { customers: Customer[]; docs: KnowledgeDoc[]; preps?: Prep[] }
 
 export const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4)
 

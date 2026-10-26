@@ -41,6 +41,9 @@ Only real commitments someone made. No "keep in touch" filler. Write "None" if t
 ## Remember about this customer
 - new durable facts (people, preferences, schedules, competitors). These get saved to the customer profile.
 
+WHEN I PASTE A <prep_request>:
+Write meeting prep in the exact headings the request lists, with short bullets (I read them on my glasses mid-conversation, about 4 bullets per heading, under 15 words each). Build on the app draft, fix anything wrong, and add sharper questions and pitches from the project files and past calls.
+
 WHEN I ASK OTHER QUESTIONS (e.g. "what did I talk about with Food Lion on 10/12?", "prep me for my call with X", "how am I tracking vs last year?"):
 Answer from the pasted calls in this project's chats and the project files. Be direct and specific, and use numbers when you have them.`
 

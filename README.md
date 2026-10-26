@@ -39,6 +39,12 @@ Customers, your numbers, price lists and call transcripts are stored **only on y
 - **Phone:** Live tab shows everything. Tap any transcript line to switch who said it.
 - **Deep notes with Claude (on your subscription):** see below.
 
+## Meeting prep (read it on your glasses mid-conversation)
+- **Phone → Prep tab → Create prep.** Pick the customer and date. The app drafts it from open follow-ups, the last call, what they buy (with today's USDA price), market points, questions to ask, news and what you've learned about them.
+- Edit it freely. Each `## Heading` becomes one card on the glasses.
+- **Prep with Claude** sends it, along with their history, to your Claude Project for a sharper version. Paste Claude's answer back into the notes.
+- **On the glasses:** the prep loads automatically when you start a call with that customer, or as soon as the app hears their name. **Swipe** with the ring to flip through it, alongside the price cards. You can also read it beforehand under **Meeting prep** in the glasses menu. On the last page, tap to start the call with it loaded.
+
 ## Claude Project — your notes hub
 Set it up once (the app's **Data → Claude Project kit** walks you through it):
 1. In Claude: **Projects → New project → "Sales Edge"**.

@@ -11,6 +11,7 @@ import { callPacket, parseClaudeNotes, rememberLines } from './calls/claude'
 import { aiComplete, aiEnabled } from './ai/llm'
 import type { Glasses } from './glasses/ui'
 import { EnergyTracker } from './audio/speaker'
+import { prepFor, prepCards, type Prep } from './prep/prep'
 
 export interface Mic {
   open(source: 'glasses' | 'phone'): Promise<boolean>
@@ -92,13 +93,15 @@ export class App {
   }
 
   // ---------- calls ----------
-  async startCall(customer: Customer | null) {
+  async startCall(customer: Customer | null, forcedPrep?: Prep) {
     if (this.session) return
     await this.glasses.ensureStarted()
     const extra = [...this.kb.customers.flatMap(c => [c.name, ...c.aliases]), ...this.kb.customers.flatMap(c => c.items.map(i => i.name))]
     const s = new CallSession(this.store, this.settings, this.engine, customer, extra)
     this.session = s
     s.onChange = () => { this.renderCallOnGlasses(); this.emit() }
+    s.onCustomerTagged = c => this.attachPrep(c.id)
+    this.attachPrep(customer?.id ?? null, forcedPrep)
     await this.glasses.showCall({
       onTap: () => this.togglePause(),
       onDouble: () => void this.endCall(),
@@ -121,6 +124,28 @@ export class App {
       this.callStatus(), glassTranscript(s.call, ''), this.intelText())
     await this.mic.open(this.settings.micSource)
     this.emit()
+  }
+
+  /** Load the customer's prep (or an untagged prep picked on the glasses) into the call. */
+  attachPrep(customerId: string | null, forced?: Prep) {
+    const s = this.session
+    if (!s) return
+    const p = forced ?? (customerId ? prepFor(this.kb, customerId) : null)
+    if (!p || s.cards.some(c => c.key.startsWith(`prep:${p.id}:`))) return
+    s.addPrepCards(prepCards(p))
+  }
+
+  async savePrep(p: Prep) {
+    this.kb.preps ||= []
+    const i = this.kb.preps.findIndex(x => x.id === p.id)
+    p.updatedAt = Date.now()
+    if (i >= 0) this.kb.preps[i] = p; else this.kb.preps.unshift(p)
+    await this.saveKB()
+  }
+
+  async deletePrep(id: string) {
+    this.kb.preps = (this.kb.preps || []).filter(p => p.id !== id)
+    await this.saveKB()
   }
 
   togglePause() {
@@ -237,15 +262,31 @@ export class App {
   // ---------- glasses navigation ----------
   async showHome() {
     if (this.session) return
-    const items = ['▶ Start call', '▶ Start call: pick customer', 'Market brief', 'News', 'Recent calls', 'Open follow-ups']
+    const items = ['▶ Start call', '▶ Start call: pick customer', 'Meeting prep', 'Market brief', 'News', 'Recent calls', 'Open follow-ups']
     await this.glasses.showList('SALES EDGE · tap to choose · 2×tap exit', items, i => {
       if (i === 0) void this.startCall(null)
       if (i === 1) void this.pickCustomer()
-      if (i === 2) void this.glasses.showPages('MARKET', marketPages(this.market, this.settings), () => void this.showHome())
-      if (i === 3) void this.showNews()
-      if (i === 4) void this.showRecent()
-      if (i === 5) void this.showFollowUps()
+      if (i === 2) void this.showPreps()
+      if (i === 3) void this.glasses.showPages('MARKET', marketPages(this.market, this.settings), () => void this.showHome())
+      if (i === 4) void this.showNews()
+      if (i === 5) void this.showRecent()
+      if (i === 6) void this.showFollowUps()
     })
+  }
+
+  /** Glasses: read a prep before walking in; tap starts the call with it loaded. */
+  async showPreps() {
+    const preps = [...(this.kb.preps || [])].sort((a, b) => (b.date || '').localeCompare(a.date || '') || b.updatedAt - a.updatedAt).slice(0, 19)
+    if (!preps.length) {
+      await this.glasses.showPages('PREP', ['No prep notes yet.\nWrite one in the phone app\n> Prep tab.'], () => void this.showHome())
+      return
+    }
+    await this.glasses.showList('MEETING PREP', preps.map(p => `${p.date ? p.date.slice(5).replace('-', '/') + ' ' : ''}${p.title}`), i => {
+      const p = preps[i]
+      const pages = prepCards(p, 380).map(c => c.glass)
+      void this.glasses.showPages(p.title.slice(0, 20).toUpperCase(), [...pages, 'Tap to START THE CALL\nwith this prep loaded.'],
+        () => void this.showPreps(), () => void this.startCall(this.customerById(p.customerId), p))
+    }, () => void this.showHome())
   }
 
   async pickCustomer() {

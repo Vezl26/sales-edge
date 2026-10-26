@@ -6,9 +6,10 @@ import { CUTS, lexFor } from '../intel/lexicon'
 import { bestRow, perLb, money, pct, fmtPct, shortDate, priceCard, cutoutCard, killCard, cattleCard } from '../intel/market'
 import { transcriptText, summaryToText, fmtClock } from '../calls/summarize'
 import { PROJECT_INSTRUCTIONS, customersFile, docsFile } from '../calls/claude'
+import { draftPrep, prepPacket, prepCards, type Prep } from '../prep/prep'
 import { AI_PRESETS, aiEnabled } from '../ai/llm'
 
-type Tab = 'live' | 'calls' | 'customers' | 'know' | 'market' | 'settings'
+type Tab = 'live' | 'prep' | 'calls' | 'customers' | 'know' | 'market' | 'settings'
 
 const esc = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!))
 const $ = <T extends HTMLElement>(sel: string, root: ParentNode = document) => root.querySelector<T>(sel)
@@ -17,6 +18,7 @@ export class PhoneUI {
   tab: Tab = 'live'
   openCallId: string | null = null
   editCustomerId: string | null = null
+  editPrepId: string | null = null
   callSearch = ''
   marketQuery = ''
   newsTopic = ''
@@ -27,7 +29,7 @@ export class PhoneUI {
     this.root = document.querySelector('#app')!
     app.subscribe(() => {
       // Don't wipe half-typed forms; just refresh the toast and header there.
-      const formView = this.tab === 'settings' || this.tab === 'know' || (this.tab === 'customers' && !!this.editCustomerId)
+      const formView = this.tab === 'settings' || this.tab === 'know' || (this.tab === 'customers' && !!this.editCustomerId) || (this.tab === 'prep' && !!this.editPrepId)
       if (formView) this.updateChrome()
       else this.schedule()
     })
@@ -67,7 +69,7 @@ export class PhoneUI {
       <main class="view">${this.view()}</main>
       ${this.app.toast ? `<div class="toast">${esc(this.app.toast)}</div>` : ''}
       <nav class="tabs">
-        ${this.tabBtn('live', 'Live')}${this.tabBtn('calls', 'Calls')}${this.tabBtn('customers', 'Customers')}
+        ${this.tabBtn('live', 'Live')}${this.tabBtn('prep', 'Prep')}${this.tabBtn('calls', 'Calls')}${this.tabBtn('customers', 'Clients')}
         ${this.tabBtn('know', 'Data')}${this.tabBtn('market', 'Market')}${this.tabBtn('settings', 'Settings')}
       </nav>`
 
@@ -90,6 +92,7 @@ export class PhoneUI {
   private view(): string {
     switch (this.tab) {
       case 'live': return this.liveView()
+      case 'prep': return this.editPrepId ? this.prepEditView() : this.prepListView()
       case 'calls': return this.openCallId ? this.callDetailView() : this.callsView()
       case 'customers': return this.editCustomerId ? this.customerEditView() : this.customersView()
       case 'know': return this.knowView()
@@ -145,6 +148,66 @@ export class PhoneUI {
     const kill = killCard(m)
     if (!co && !kill) return `<div class="card"><p class="muted">Market data not loaded (${esc(m.from)}).</p></div>`
     return `<div class="card"><h3>Today's market</h3><pre>${esc([co?.glass, kill?.glass].filter(Boolean).join('\n\n'))}</pre></div>`
+  }
+
+  // ---------------- PREP ----------------
+  private prepListView(): string {
+    const preps = [...(this.app.kb.preps || [])].sort((a, b) => (b.date || '').localeCompare(a.date || '') || b.updatedAt - a.updatedAt)
+    const opts = this.app.kb.customers.map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join('')
+    return `
+      <div class="card">
+        <h2>Prep a meeting</h2>
+        <label>Who are you meeting?</label>
+        <select id="prepCustomer"><option value="">— not a saved customer —</option>${opts}</select>
+        <label>When</label><input id="prepDate" type="date" value="${new Date().toISOString().slice(0, 10)}">
+        <button class="primary big" data-act="newPrep">Create prep (auto-drafted)</button>
+        <p class="muted">The draft pulls in open follow-ups, last call, what they buy with today's USDA prices, market points, questions to ask and news. You edit it, then it shows on your glasses: swipe through it during the call.</p>
+      </div>
+      ${preps.map(p => `
+        <div class="card click" data-act="editPrep" data-id="${p.id}">
+          <div class="row"><b>${esc(p.title)}</b><span class="muted">${p.date ? esc(p.date) : ''}</span></div>
+          <div class="muted">${esc(p.notes.replace(/#+\s*/g, '').split('\n').filter(l => l.trim()).slice(1, 3).join(' · ').slice(0, 120))}</div>
+        </div>`).join('') || '<p class="muted">No prep notes yet.</p>'}`
+  }
+
+  private prepEditView(): string {
+    const p = (this.app.kb.preps || []).find(x => x.id === this.editPrepId)
+    if (!p) return '<p>Not found</p>'
+    const cards = prepCards(p)
+    return `
+      <button class="small" data-act="back">‹ All preps</button>
+      <div class="card form">
+        <label>Title</label><input id="p_title" value="${esc(p.title)}">
+        <label>Customer</label>
+        <select id="p_customer"><option value="">— none —</option>${this.app.kb.customers.map(c => `<option value="${c.id}" ${c.id === p.customerId ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</select>
+        <label>Date</label><input id="p_date" type="date" value="${esc(p.date || '')}">
+        <label>My goal for this meeting</label><input id="p_goal" placeholder="e.g. lock holiday ribeye volume" value="${esc((p.notes.match(/## Goal\n- (.+)/)?.[1] || '').replace(/^\(.*\)$/, ''))}">
+        <label>Prep notes · each "## Heading" becomes a card on your glasses</label>
+        <textarea id="p_notes" rows="18">${esc(p.notes)}</textarea>
+        <div class="btns wrap">
+          <button class="primary" data-act="savePrep">Save</button>
+          <button data-act="redraftPrep">Re-draft</button>
+          <button data-act="claudePrep">Prep with Claude</button>
+          <button data-act="startPrep">Start call with this</button>
+          <button class="danger" data-act="delPrep">Delete</button>
+        </div>
+        <p class="muted">"Prep with Claude" copies everything and opens your Claude Project. Paste it there, then copy Claude's answer back into the notes box and Save.</p>
+      </div>
+      <h3 class="sect">How it looks on the glasses (${cards.length} cards, swipe with the ring)</h3>
+      ${cards.map(c => `<div class="card icard"><pre>${esc(c.glass)}</pre></div>`).join('')}`
+  }
+
+  private readPrepForm(p: Prep) {
+    const v = (id: string) => ($<HTMLInputElement>(`#${id}`)?.value ?? '').trim()
+    p.title = v('p_title') || p.title
+    p.customerId = v('p_customer') || undefined
+    p.date = v('p_date') || undefined
+    p.notes = ($<HTMLTextAreaElement>('#p_notes')?.value ?? p.notes)
+    const goal = v('p_goal')
+    if (goal) {
+      if (/## Goal\n- .*/.test(p.notes)) p.notes = p.notes.replace(/## Goal\n- .*/, `## Goal\n- ${goal}`)
+      else p.notes = `## Goal\n- ${goal}\n\n${p.notes}`
+    }
   }
 
   // ---------------- CALLS ----------------
@@ -375,7 +438,7 @@ export class PhoneUI {
     const a = this.app
     if (el.dataset.tab) {
       this.tab = el.dataset.tab as Tab
-      this.openCallId = null; this.editCustomerId = null
+      this.openCallId = null; this.editCustomerId = null; this.editPrepId = null
       this.render(); return
     }
     const act = el.dataset.act!
@@ -392,7 +455,7 @@ export class PhoneUI {
       case 'swap': a.session?.swapAll(); break
       case 'flip': a.session?.flip(Number(el.dataset.i)); break
       case 'openCall': this.tab = 'calls'; this.openCallId = id!; this.render(); break
-      case 'back': this.openCallId = null; this.editCustomerId = null; this.render(); break
+      case 'back': this.openCallId = null; this.editCustomerId = null; this.editPrepId = null; this.render(); break
       case 'flipSaved': {
         const call = await a.getCall(id!)
         const g = call?.segments[Number(el.dataset.i)]
@@ -468,6 +531,38 @@ export class PhoneUI {
         break
       }
       case 'delCall': if (confirm('Delete this call?')) { await a.removeCall(id!); this.openCallId = null; this.render() } break
+      case 'newPrep': {
+        const c = a.customerById($<HTMLSelectElement>('#prepCustomer')?.value || '')
+        const date = $<HTMLInputElement>('#prepDate')?.value || undefined
+        const p: Prep = { id: uid(), customerId: c?.id, title: c ? c.name : 'Meeting', date, notes: draftPrep(c, a.recentCalls, a.market, a.settings.defaultGrade), createdAt: Date.now(), updatedAt: Date.now() }
+        await a.savePrep(p); this.editPrepId = p.id; this.render()
+        break
+      }
+      case 'editPrep': this.editPrepId = id!; this.render(); break
+      case 'savePrep': case 'redraftPrep': case 'claudePrep': case 'startPrep': {
+        const p = (a.kb.preps || []).find(x => x.id === this.editPrepId)
+        if (!p) break
+        this.readPrepForm(p)
+        const c = a.customerById(p.customerId)
+        if (act === 'redraftPrep') {
+          if (!confirm('Replace the notes with a fresh draft?')) break
+          const goal = p.notes.match(/## Goal\n- (.+)/)?.[1]
+          p.notes = draftPrep(c, a.recentCalls, a.market, a.settings.defaultGrade)
+          if (goal && !/^\(/.test(goal)) p.notes = p.notes.replace(/## Goal\n- .*/, `## Goal\n- ${goal}`)
+        }
+        if (act === 'claudePrep') {
+          const goal = (p.notes.match(/## Goal\n- (.+)/)?.[1] || '').replace(/^\(.*\)$/, '')
+          copySync(prepPacket(c, a.recentCalls, p.notes, a.marketContext(), goal))
+          window.open(a.settings.claudeProjectUrl || 'https://claude.ai/new', '_blank')
+          a.notify('Copied. Paste it in Claude, then paste the answer back here.')
+        }
+        await a.savePrep(p)
+        if (act === 'startPrep') { await a.startCall(c, p); this.tab = 'live'; this.editPrepId = null }
+        else if (act !== 'claudePrep') a.notify('Saved')
+        this.render()
+        break
+      }
+      case 'delPrep': if (confirm('Delete this prep?')) { await a.deletePrep(this.editPrepId!); this.editPrepId = null; this.render() } break
       case 'newCustomer': {
         const c: Customer = { id: uid(), name: 'New customer', aliases: [], items: [], notes: '', learned: [], updatedAt: Date.now() }
         a.kb.customers.push(c); await a.saveKB(); this.editCustomerId = c.id; this.render()
