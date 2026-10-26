@@ -1,0 +1,5 @@
+node_modules
+pipeline/raw
+app/dist
+*.ehpk
+.env.local

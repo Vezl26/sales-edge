@@ -1,0 +1,14 @@
+{
+  "_note": "Public news searches only. Never put customer names or private data here - this repo is public.",
+  "topics": [
+    { "id": "beef", "label": "Beef market", "q": "\"boxed beef\" OR \"beef prices\" OR \"beef cutout\"" },
+    { "id": "cattle", "label": "Cattle", "q": "\"cattle prices\" OR \"cattle futures\" OR \"cattle herd\" OR \"cattle slaughter\"" },
+    { "id": "usda", "label": "USDA / policy", "q": "USDA beef OR \"meat inspection\" OR \"beef imports\" OR \"beef tariffs\"" },
+    { "id": "grocery", "label": "Grocery industry", "q": "supermarket OR \"grocery chain\" OR \"grocery prices\" when:3d" },
+    { "id": "deli", "label": "Deli & prepared foods", "q": "\"deli meat\" OR \"prepared foods\" OR \"grocery deli\" OR \"foodservice\"" },
+    { "id": "cocoa", "label": "Chocolate & cocoa", "q": "\"cocoa prices\" OR \"chocolate prices\" OR \"cocoa futures\"" },
+    { "id": "cargill", "label": "Cargill", "q": "Cargill" },
+    { "id": "local", "label": "Virginia / Richmond", "q": "Richmond Virginia grocery OR restaurant OR food" },
+    { "id": "protein", "label": "Protein & meat industry", "q": "\"meat industry\" OR \"meatpacker\" OR Tyson OR JBS OR \"National Beef\"" }
+  ]
+}

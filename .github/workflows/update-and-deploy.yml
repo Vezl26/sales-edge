@@ -1,0 +1,97 @@
+# Free, automatic: pulls USDA prices + news, builds the glasses app, publishes it
+# to GitHub Pages, and packs a .ehpk you can sideload. No servers to pay for.
+name: Update data and deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */3 * * *'      # news every 3 hours
+    - cron: '41 20,22 * * 1-5'  # USDA afternoon boxed beef + slaughter (weekdays)
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install PDF tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+
+      - name: Fetch USDA market data
+        continue-on-error: true
+        run: node pipeline/fetch-usda.mjs
+
+      - name: Fetch news
+        continue-on-error: true
+        run: node pipeline/fetch-news.mjs
+
+      - name: Save data back to the repo
+        run: |
+          git config user.name "sales-edge-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add app/public/data
+          git diff --cached --quiet || git commit -m "data: $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push || echo "push skipped"
+
+      - name: Work out the public URL
+        id: url
+        run: |
+          OWNER="${GITHUB_REPOSITORY_OWNER,,}"
+          REPO="${GITHUB_REPOSITORY#*/}"
+          if [ "$REPO" = "$OWNER.github.io" ]; then BASE="https://$OWNER.github.io/"; else BASE="https://$OWNER.github.io/$REPO/"; fi
+          echo "base=$BASE" >> "$GITHUB_OUTPUT"
+          echo "origin=https://$OWNER.github.io" >> "$GITHUB_OUTPUT"
+
+      - name: Build app
+        working-directory: app
+        env:
+          VITE_DATA_BASE_URL: ${{ steps.url.outputs.base }}data/
+          DATA_ORIGIN: ${{ steps.url.outputs.origin }}
+        run: |
+          npm install --no-audit --no-fund
+          npm run build
+          npm run manifest
+          npx evenhub pack app.json dist -o sales-edge.ehpk || echo "::warning::pack failed - the URL install still works"
+          [ -f sales-edge.ehpk ] && cp sales-edge.ehpk dist/ || true
+
+      - name: Make the install QR code
+        run: |
+          pip install --quiet "qrcode[pil]"
+          python3 - <<PY
+          import qrcode
+          url = "${{ steps.url.outputs.base }}"
+          qrcode.make(url).save("app/dist/install-qr.png")
+          open("app/dist/install.html","w").write(f"""<!doctype html><meta name=viewport content='width=device-width'>
+          <body style='font-family:system-ui;background:#111;color:#eee;text-align:center;padding:24px'>
+          <h2>Sales Edge</h2><p>In the Even Realities app, scan this code to load the app on your glasses.</p>
+          <img src='install-qr.png' style='width:280px;background:#fff;padding:12px;border-radius:12px'>
+          <p style='word-break:break-all'>{url}</p><p><a style='color:#3cfa44' href='sales-edge.ehpk'>Download .ehpk</a></p></body>""")
+          PY
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: app/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

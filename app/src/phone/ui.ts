@@ -1,0 +1,565 @@
+// Phone screen (the Even app shows this page while the glasses show their own UI).
+import type { App } from '../app'
+import type { Call, Customer, KnowledgeDoc, Settings } from '../types'
+import { uid, importCustomersCsv, parseDelimited, numbersDigest } from '../kb/knowledge'
+import { CUTS, lexFor } from '../intel/lexicon'
+import { bestRow, perLb, money, pct, fmtPct, shortDate, priceCard, cutoutCard, killCard, cattleCard } from '../intel/market'
+import { transcriptText, summaryToText, fmtClock } from '../calls/summarize'
+import { AI_PRESETS, aiEnabled } from '../ai/llm'
+
+type Tab = 'live' | 'calls' | 'customers' | 'know' | 'market' | 'settings'
+
+const esc = (s: unknown) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!))
+const $ = <T extends HTMLElement>(sel: string, root: ParentNode = document) => root.querySelector<T>(sel)
+
+export class PhoneUI {
+  tab: Tab = 'live'
+  openCallId: string | null = null
+  editCustomerId: string | null = null
+  callSearch = ''
+  marketQuery = ''
+  newsTopic = ''
+  private root: HTMLElement
+  private raf = 0
+
+  constructor(private app: App) {
+    this.root = document.querySelector('#app')!
+    app.subscribe(() => {
+      // Don't wipe half-typed forms; just refresh the toast and header there.
+      const formView = this.tab === 'settings' || this.tab === 'know' || (this.tab === 'customers' && !!this.editCustomerId)
+      if (formView) this.updateChrome()
+      else this.schedule()
+    })
+    this.root.addEventListener('click', e => this.onClick(e))
+    this.root.addEventListener('change', e => this.onChange(e))
+    this.root.addEventListener('input', e => this.onInput(e))
+    this.render()
+  }
+
+  private updateChrome() {
+    const t = $('.toast', this.root)
+    if (this.app.toast) {
+      if (t) t.textContent = this.app.toast
+      else this.root.insertAdjacentHTML('beforeend', `<div class="toast">${esc(this.app.toast)}</div>`)
+    } else t?.remove()
+  }
+
+  private schedule() {
+    if (this.raf) return
+    this.raf = requestAnimationFrame(() => { this.raf = 0; this.render() })
+  }
+
+  render() {
+    // keep typing focus/scroll when re-rendering live views
+    const active = document.activeElement as HTMLInputElement | null
+    const focusId = active?.id
+    const caret = active && 'selectionStart' in active ? active.selectionStart : null
+    const scroller = $('.view', this.root)
+    const scroll = scroller?.scrollTop ?? 0
+    const atBottom = scroller ? scroller.scrollHeight - scroller.scrollTop - scroller.clientHeight < 40 : true
+
+    this.root.innerHTML = `
+      <header class="top">
+        <div class="brand">Sales Edge</div>
+        <div class="pill ${this.app.session ? 'rec' : ''}">${this.app.session ? '● ' + fmtClock(this.app.session.elapsedMs) : this.app.glasses.available ? 'Glasses ready' : 'Preview mode'}</div>
+      </header>
+      <main class="view">${this.view()}</main>
+      ${this.app.toast ? `<div class="toast">${esc(this.app.toast)}</div>` : ''}
+      <nav class="tabs">
+        ${this.tabBtn('live', 'Live')}${this.tabBtn('calls', 'Calls')}${this.tabBtn('customers', 'Customers')}
+        ${this.tabBtn('know', 'Data')}${this.tabBtn('market', 'Market')}${this.tabBtn('settings', 'Settings')}
+      </nav>`
+
+    const v = $('.view', this.root)!
+    if (this.tab === 'live' && this.app.session && atBottom) {
+      const tr = $('.transcript', v)
+      if (tr) tr.scrollTop = tr.scrollHeight
+    }
+    v.scrollTop = scroll
+    if (focusId) {
+      const el = document.getElementById(focusId) as HTMLInputElement | null
+      if (el) { el.focus(); if (caret != null) try { el.setSelectionRange(caret, caret) } catch { /* not a text field */ } }
+    }
+  }
+
+  private tabBtn(t: Tab, label: string) {
+    return `<button class="tab ${this.tab === t ? 'on' : ''}" data-tab="${t}">${label}</button>`
+  }
+
+  private view(): string {
+    switch (this.tab) {
+      case 'live': return this.liveView()
+      case 'calls': return this.openCallId ? this.callDetailView() : this.callsView()
+      case 'customers': return this.editCustomerId ? this.customerEditView() : this.customersView()
+      case 'know': return this.knowView()
+      case 'market': return this.marketView()
+      case 'settings': return this.settingsView()
+    }
+  }
+
+  // ---------------- LIVE ----------------
+  private liveView(): string {
+    const a = this.app
+    const s = a.session
+    const setupMissing = !a.settings.deepgramKey
+    if (!s) {
+      const opts = a.kb.customers.map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join('')
+      return `
+        ${setupMissing ? `<div class="card warn">Add your free Deepgram key in <b>Settings</b> so calls get transcribed.</div>` : ''}
+        <div class="card">
+          <h2>Start a conversation</h2>
+          <label>Customer (optional — it also listens for their name)</label>
+          <select id="startCustomer"><option value="">— none —</option>${opts}</select>
+          <button class="primary big" data-act="start">● Start listening</button>
+          <p class="muted">On the glasses: tap = pause, swipe = flip through cards, double-tap = end &amp; summarize.</p>
+        </div>
+        ${a.lastEnded ? `<div class="card"><h3>Last call</h3><p>${esc(a.lastEnded.summary?.headline || '')}</p><button data-act="openCall" data-id="${a.lastEnded.id}">Open notes</button></div>` : ''}
+        ${this.quickMarket()}`
+    }
+    const segs = s.call.segments
+    const other = s.call.otherLabel || 'Customer'
+    const lines = segs.map((g, i) => `<div class="seg ${g.spk}" data-act="flip" data-i="${i}"><span class="who">${g.spk === 'A' ? 'Alan' : g.spk === 'C' ? esc(other) : '?'}</span> ${esc(g.text)}</div>`).join('')
+    const cards = [...s.cards].reverse().map(c => `<div class="icard ${c.kind}"><div class="ititle">${esc(c.title)}</div><pre>${esc(c.phone)}</pre></div>`).join('')
+    return `
+      <div class="card row">
+        <div><b>${s.paused ? 'Paused' : s.sttState === 'live' ? 'Listening' : esc(s.sttState)}</b> ${s.sttDetail ? `<span class="muted">${esc(s.sttDetail)}</span>` : ''}<br><span class="muted">${esc(s.call.customerName || 'No customer picked')}</span></div>
+        <div class="btns">
+          <button data-act="pause">${s.paused ? 'Resume' : 'Pause'}</button>
+          <button class="danger" data-act="end">End</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="row"><h3>Transcript</h3><button class="small" data-act="swap">Swap Alan/Customer</button></div>
+        <div class="transcript">${lines}${s.interim ? `<div class="seg interim">${esc(s.interim)}</div>` : ''}${!lines && !s.interim ? '<p class="muted">Waiting for speech… (tap a line later to fix who said it)</p>' : ''}</div>
+        <label>Customer for this call</label>
+        <select id="liveCustomer"><option value="">— none —</option>${a.kb.customers.map(c => `<option value="${c.id}" ${c.id === s.call.customerId ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</select>
+      </div>
+      <h3 class="sect">Live cards</h3>
+      ${cards || '<p class="muted">Say a cut ("how is strip loin running?"), "cutout", "kill", or a customer/item name.</p>'}`
+  }
+
+  private quickMarket(): string {
+    const m = this.app.market
+    const co = cutoutCard(m)
+    const kill = killCard(m)
+    if (!co && !kill) return `<div class="card"><p class="muted">Market data not loaded (${esc(m.from)}).</p></div>`
+    return `<div class="card"><h3>Today's market</h3><pre>${esc([co?.glass, kill?.glass].filter(Boolean).join('\n\n'))}</pre></div>`
+  }
+
+  // ---------------- CALLS ----------------
+  private callsView(): string {
+    const q = this.callSearch.toLowerCase()
+    const list = this.app.index.filter(e => !q || `${e.customerName} ${e.headline} ${new Date(e.startedAt).toLocaleDateString()}`.toLowerCase().includes(q))
+    const fu = this.app.recentCalls.flatMap(c => (c.summary?.followUps || []).map((f, i) => ({ c, f, i }))).filter(x => !x.f.done)
+    return `
+      <input id="callSearch" type="search" placeholder="Search calls (customer, topic, date)" value="${esc(this.callSearch)}">
+      ${fu.length ? `<div class="card"><h3>Open follow-ups (${fu.length})</h3>${fu.slice(0, 12).map(x => `
+        <label class="check"><input type="checkbox" data-act="fuDone" data-id="${x.c.id}" data-i="${x.i}"> <span><b>${esc(x.f.owner)}:</b> ${esc(x.f.text)}${x.f.due ? ` <em>(${esc(x.f.due)})</em>` : ''}<br><span class="muted">${esc(x.c.customerName || 'Call')} · ${new Date(x.c.startedAt).toLocaleDateString()}</span></span></label>`).join('')}</div>` : ''}
+      ${list.map(e => `
+        <div class="card click" data-act="openCall" data-id="${e.id}">
+          <div class="row"><b>${esc(e.customerName || 'Call')}</b><span class="muted">${new Date(e.startedAt).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })} · ${Math.max(1, Math.round(e.durationSec / 60))}m</span></div>
+          <div class="muted">${esc(e.headline || '')}</div>
+        </div>`).join('') || '<p class="muted">No calls yet.</p>'}`
+  }
+
+  private callDetailCache: Call | null = null
+  private callDetailView(): string {
+    const id = this.openCallId!
+    const call = this.app.recentCalls.find(c => c.id === id) || (this.callDetailCache?.id === id ? this.callDetailCache : null)
+    if (!call) {
+      void this.app.getCall(id).then(c => { this.callDetailCache = c; this.schedule() })
+      return '<p>Loading…</p>'
+    }
+    const s = call.summary
+    const ai = aiEnabled(this.app.settings)
+    return `
+      <button class="small" data-act="back">‹ All calls</button>
+      <div class="card">
+        <h2>${esc(call.customerName || 'Call')}</h2>
+        <p class="muted">${new Date(call.startedAt).toLocaleString()} · ${fmtClock((call.endedAt ?? call.startedAt) - call.startedAt)}</p>
+        <label>Customer</label>
+        <select data-field="callCustomer" data-id="${call.id}"><option value="">— none —</option>${this.app.kb.customers.map(c => `<option value="${c.id}" ${c.id === call.customerId ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</select>
+        <div class="btns wrap">
+          <button class="primary" data-act="copyClaude" data-id="${call.id}">Copy for Claude</button>
+          <button data-act="share" data-id="${call.id}">Share notes</button>
+          ${ai ? `<button data-act="aiSum" data-id="${call.id}">AI summary</button>` : ''}
+          ${call.customerId ? `<button data-act="learn" data-id="${call.id}">Save notes to customer</button>` : ''}
+        </div>
+        <p class="muted">"Copy for Claude" copies the transcript + context. Paste it into your Claude chat (or a Claude Project with your customer files) for a deep summary on your subscription.</p>
+      </div>
+      ${s ? `<div class="card"><h3>Summary ${s.generatedBy === 'ai' ? '(AI)' : '(automatic)'}</h3><pre>${esc(summaryToText(s))}</pre>
+        ${s.followUps.length ? `<h3>Follow-ups</h3>${s.followUps.map((f, i) => `<label class="check"><input type="checkbox" data-act="fuDone" data-id="${call.id}" data-i="${i}" ${f.done ? 'checked' : ''}> <span><b>${esc(f.owner)}:</b> ${esc(f.text)}${f.due ? ` (${esc(f.due)})` : ''}</span></label>`).join('')}` : ''}
+      </div>` : ''}
+      <div class="card"><h3>My notes</h3><textarea data-field="callNotes" data-id="${call.id}" rows="3" placeholder="Anything to add…">${esc(call.notes || '')}</textarea></div>
+      <div class="card"><h3>Transcript</h3>
+        ${call.segments.map((g, i) => `<div class="seg ${g.spk}" data-act="flipSaved" data-id="${call.id}" data-i="${i}"><span class="who">${fmtClock(g.t)} ${g.spk === 'A' ? 'Alan' : g.spk === 'C' ? esc(call.otherLabel || 'Customer') : '?'}</span> ${esc(g.text)}</div>`).join('') || '<p class="muted">Empty</p>'}
+        <p class="muted">Tap a line to switch who said it.</p>
+      </div>
+      ${call.cards.length ? `<div class="card"><h3>Cards shown</h3>${call.cards.map(c => `<details><summary>${fmtClock(c.t)} ${esc(c.title)}</summary><pre>${esc(c.body)}</pre></details>`).join('')}</div>` : ''}
+      <button class="danger" data-act="delCall" data-id="${call.id}">Delete call</button>`
+  }
+
+  // ---------------- CUSTOMERS ----------------
+  private customersView(): string {
+    return `
+      <div class="btns wrap"><button class="primary" data-act="newCustomer">+ Add customer</button>
+      <label class="filebtn">Import CSV<input type="file" accept=".csv,.tsv,.txt,text/*" data-act="importCustomers" hidden></label></div>
+      <p class="muted">CSV columns it understands: Customer, Item, Volume, Price, Contact, Segment, Notes. One row per customer-item.</p>
+      ${this.app.kb.customers.sort((a, b) => a.name.localeCompare(b.name)).map(c => `
+        <div class="card click" data-act="editCustomer" data-id="${c.id}">
+          <b>${esc(c.name)}</b> ${c.segment ? `<span class="muted">· ${esc(c.segment)}</span>` : ''}
+          <div class="muted">${esc(c.items.slice(0, 4).map(i => i.name).join(', '))}${c.items.length > 4 ? '…' : ''}</div>
+        </div>`).join('') || '<p class="muted">No customers yet.</p>'}`
+  }
+
+  private customerEditView(): string {
+    const c = this.app.kb.customers.find(x => x.id === this.editCustomerId)
+    if (!c) return '<p>Not found</p>'
+    const items = c.items.map(i => [i.name, i.volume, i.price, i.notes].map(x => x ?? '').join(' | ').replace(/( \| )+$/, '')).join('\n')
+    const calls = this.app.index.filter(e => e.customerName === c.name).slice(0, 8)
+    return `
+      <button class="small" data-act="back">‹ Customers</button>
+      <div class="card form">
+        <label>Name</label><input id="c_name" value="${esc(c.name)}">
+        <label>Other names they go by (comma separated)</label><input id="c_aliases" value="${esc(c.aliases.join(', '))}">
+        <label>Contact / buyer</label><input id="c_contact" value="${esc(c.contact || '')}">
+        <label>Segment</label><input id="c_segment" value="${esc(c.segment || '')}" placeholder="Retail, foodservice, distributor…">
+        <label>Location</label><input id="c_location" value="${esc(c.location || '')}">
+        <label>What they buy — one per line: item | volume | price | note</label>
+        <textarea id="c_items" rows="6" placeholder="180 strips | 2,000 lb/wk | $9.40 | Choice only&#10;Deli turkey breast | 40 cs/wk">${esc(items)}</textarea>
+        <label>Notes</label><textarea id="c_notes" rows="4">${esc(c.notes)}</textarea>
+        <label>Learned from calls (one per line)</label><textarea id="c_learned" rows="4">${esc(c.learned.join('\n'))}</textarea>
+        <div class="btns"><button class="primary" data-act="saveCustomer">Save</button><button class="danger" data-act="delCustomer">Delete</button></div>
+      </div>
+      ${calls.length ? `<div class="card"><h3>Calls</h3>${calls.map(e => `<div class="click" data-act="openCall" data-id="${e.id}">${new Date(e.startedAt).toLocaleDateString()} — ${esc(e.headline || '')}</div>`).join('')}</div>` : ''}`
+  }
+
+  // ---------------- DATA (knowledge) ----------------
+  private knowView(): string {
+    const docs = this.app.kb.docs
+    return `
+      <div class="card form">
+        <h2>Feed it your data</h2>
+        <p class="muted">Your yearly/monthly numbers, price lists (deli, chocolate, prepared foods), Cargill news, notes. Stays on your phone only.</p>
+        <label>Title</label><input id="d_title" placeholder="e.g. 2026 YTD by customer">
+        <label>Type</label>
+        <select id="d_kind"><option value="numbers">My numbers / reports</option><option value="pricing">Price list</option><option value="news">News / company updates</option><option value="notes">Notes</option><option value="other">Other</option></select>
+        <label>Paste text or CSV</label><textarea id="d_text" rows="6" placeholder="Paste here, or upload a file below"></textarea>
+        <div class="btns wrap"><button class="primary" data-act="addDoc">Save</button>
+        <label class="filebtn">Upload file<input type="file" accept=".csv,.tsv,.txt,.md,.json,text/*" data-act="uploadDoc" hidden></label></div>
+        <p class="muted">Tip: Excel → "Save As CSV" first. PDFs: copy the text and paste it.</p>
+      </div>
+      ${docs.map(d => `
+        <div class="card">
+          <div class="row"><b>${esc(d.title)}</b><span class="muted">${esc(d.kind)} · ${new Date(d.addedAt).toLocaleDateString()}</span></div>
+          ${d.table ? `<p class="muted">${d.table.rows.length} rows · columns: ${esc(d.table.headers.join(', '))}</p>` : `<p class="muted">${esc(d.text.slice(0, 140))}${d.text.length > 140 ? '…' : ''}</p>`}
+          ${d.kind === 'numbers' ? `<pre>${esc(numbersDigest(d).join('\n'))}</pre>` : ''}
+          <div class="btns"><button class="small" data-act="copyDoc" data-id="${d.id}">Copy for Claude</button><button class="small danger" data-act="delDoc" data-id="${d.id}">Delete</button></div>
+        </div>`).join('')}
+      <div class="card">
+        <h3>Backup</h3>
+        <p class="muted">Export everything (customers, data, calls) to a file you keep. Import restores it.</p>
+        <div class="btns wrap"><button data-act="export">Export backup</button><label class="filebtn">Import backup<input type="file" accept=".json" data-act="importBackup" hidden></label></div>
+      </div>`
+  }
+
+  // ---------------- MARKET ----------------
+  private marketView(): string {
+    const m = this.app.market
+    const s = this.app.settings
+    const beef = m.beef
+    const q = this.marketQuery.toLowerCase()
+    const rows = beef ? CUTS.flatMap(c => ['Choice', 'Select'].map(g => bestRow(beef, c.imps, g))).filter(r => r && (r.wavg ?? 0) > 0)
+      .filter(r => !q || `${r!.imps} ${r!.desc} ${lexFor(r!.imps)?.names.join(' ')}`.toLowerCase().includes(q)) : []
+    const news = (m.news?.items || []).filter(n => !this.newsTopic || n.topics.includes(this.newsTopic)).slice(0, 40)
+    return `
+      <div class="card"><div class="row"><h3>USDA ${beef ? shortDate(beef.reportDate) : ''}</h3><button class="small" data-act="refresh">Refresh</button></div>
+        <pre>${esc([cutoutCard(m)?.phone, killCard(m)?.phone, cattleCard(m)?.phone].filter(Boolean).join('\n\n') || 'No data')}</pre>
+        <p class="muted">Source: ${esc(beef?.source || '—')} · loaded from ${esc(m.from)}</p></div>
+      <input id="marketQuery" type="search" placeholder="Find a cut (strip, 189A, brisket…)" value="${esc(this.marketQuery)}">
+      <div class="card"><table class="cuts"><tr><th>Cut</th><th>Gr</th><th>$/lb</th><th>d/d</th></tr>
+        ${rows.map(r => `<tr data-act="cutCard" data-imps="${r!.imps}" data-grade="${r!.grade}"><td>${esc(r!.imps)} ${esc(lexFor(r!.imps)?.label)}</td><td>${r!.grade[0]}</td><td>${money(perLb(r!.wavg))}</td><td>${fmtPct(pct(r!.wavg, r!.prev))}</td></tr>`).join('')}
+      </table><p class="muted">Tap a row for conversions and questions. Default grade: ${s.defaultGrade}.</p></div>
+      <div id="cutDetail"></div>
+      <h3 class="sect">News</h3>
+      <select id="newsTopic"><option value="">All topics</option>${(m.news?.topics || []).map(t => `<option value="${t.id}" ${t.id === this.newsTopic ? 'selected' : ''}>${esc(t.label)}</option>`).join('')}</select>
+      ${news.map(n => `<a class="card news" href="${esc(n.link)}" target="_blank" rel="noopener"><b>${esc(n.title)}</b><div class="muted">${esc(n.source)} · ${new Date(n.date).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric' })}</div></a>`).join('') || '<p class="muted">No news yet.</p>'}`
+  }
+
+  // ---------------- SETTINGS ----------------
+  private settingsView(): string {
+    const s = this.app.settings
+    const st = this.app.market
+    return `
+      <div class="card form">
+        <h2>Transcription</h2>
+        <label>Deepgram API key <a href="https://console.deepgram.com/signup" target="_blank" rel="noopener">(free signup)</a></label>
+        <input id="s_deepgram" type="password" value="${esc(s.deepgramKey)}" placeholder="paste key">
+        <label>Microphone</label>
+        <select id="s_mic"><option value="glasses" ${s.micSource === 'glasses' ? 'selected' : ''}>Glasses (recommended)</option><option value="phone" ${s.micSource === 'phone' ? 'selected' : ''}>Phone</option></select>
+        <label>Voice check (teaches it what YOUR voice sounds like at the mic)</label>
+        <div class="row"><span class="muted">${s.alanLevelDb != null ? `Calibrated: ${s.alanLevelDb} dB` : 'Not calibrated'}</span><button data-act="calibrate">Start 6-sec voice check</button></div>
+        <label>Your first name</label><input id="s_name" value="${esc(s.myName)}">
+      </div>
+      <div class="card form">
+        <h2>Prices</h2>
+        <label>Default grade</label>
+        <select id="s_grade"><option ${s.defaultGrade === 'Choice' ? 'selected' : ''}>Choice</option><option ${s.defaultGrade === 'Select' ? 'selected' : ''}>Select</option></select>
+        <label>Case weights for case pricing — one per line: IMPS = lb (e.g. 180 = 60)</label>
+        <textarea id="s_cases" rows="4">${esc(Object.entries(s.caseWeights).map(([k, v]) => `${k} = ${v}`).join('\n'))}</textarea>
+      </div>
+      <div class="card form">
+        <h2>Optional AI (off = 100% free)</h2>
+        <p class="muted">Without this, you still get automatic notes plus "Copy for Claude". With a free Gemini or Groq key, summaries happen in the app.</p>
+        <label>Preset</label>
+        <select id="s_preset"><option value="">— choose —</option>${AI_PRESETS.map((p, i) => `<option value="${i}">${esc(p.label)}</option>`).join('')}<option value="off">Turn AI off</option></select>
+        <label>Provider</label>
+        <select id="s_aiProvider"><option value="none" ${s.aiProvider === 'none' ? 'selected' : ''}>Off</option><option value="openai-compatible" ${s.aiProvider === 'openai-compatible' ? 'selected' : ''}>OpenAI-compatible (Gemini, Groq…)</option><option value="anthropic" ${s.aiProvider === 'anthropic' ? 'selected' : ''}>Claude API</option></select>
+        <label>Base URL</label><input id="s_aiBase" value="${esc(s.aiBaseUrl)}">
+        <label>Model</label><input id="s_aiModel" value="${esc(s.aiModel)}">
+        <label>API key</label><input id="s_aiKey" type="password" value="${esc(s.aiKey)}">
+      </div>
+      <div class="card form">
+        <h2>Market data link</h2>
+        <label>Data URL (leave blank to use the built-in link)</label>
+        <input id="s_data" value="${esc(s.dataBaseUrl)}" placeholder="https://YOURNAME.github.io/sales-edge/data/">
+        <p class="muted">Loaded from: ${esc(st.from)} · USDA report ${esc(st.beef?.reportDate || '—')} · news ${st.news?.updatedAt ? new Date(st.news.updatedAt).toLocaleString() : '—'}</p>
+      </div>
+      <button class="primary big" data-act="saveSettings">Save settings</button>`
+  }
+
+  // ---------------- events ----------------
+  private async onClick(e: Event) {
+    const el = (e.target as HTMLElement).closest<HTMLElement>('[data-tab],[data-act]')
+    if (!el) return
+    const a = this.app
+    if (el.dataset.tab) {
+      this.tab = el.dataset.tab as Tab
+      this.openCallId = null; this.editCustomerId = null
+      this.render(); return
+    }
+    const act = el.dataset.act!
+    const id = el.dataset.id
+    if (el instanceof HTMLInputElement && el.type === 'file') return
+    switch (act) {
+      case 'start': {
+        const cid = ($<HTMLSelectElement>('#startCustomer')?.value) || ''
+        await a.startCall(a.customerById(cid))
+        break
+      }
+      case 'pause': a.togglePause(); break
+      case 'end': await a.endCall(); this.tab = 'calls'; this.openCallId = a.lastEnded?.id ?? null; this.render(); break
+      case 'swap': a.session?.swapAll(); break
+      case 'flip': a.session?.flip(Number(el.dataset.i)); break
+      case 'openCall': this.tab = 'calls'; this.openCallId = id!; this.render(); break
+      case 'back': this.openCallId = null; this.editCustomerId = null; this.render(); break
+      case 'flipSaved': {
+        const call = await a.getCall(id!)
+        const g = call?.segments[Number(el.dataset.i)]
+        if (call && g) { g.spk = g.spk === 'A' ? 'C' : 'A'; g.manual = true; await a.updateCall(call) }
+        break
+      }
+      case 'copyClaude': {
+        const call = await a.getCall(id!)
+        if (call) await copy(a.packetFor(call)) ? a.notify('Copied — paste it into Claude') : a.notify('Copy failed')
+        break
+      }
+      case 'share': {
+        const call = await a.getCall(id!)
+        if (!call) break
+        const text = `${call.summary ? summaryToText(call.summary) : ''}\n\n---\n${transcriptText(call)}`
+        if (navigator.share) { try { await navigator.share({ title: call.summary?.headline || 'Call notes', text }) } catch { /* cancelled */ } }
+        else if (await copy(text)) a.notify('Copied notes')
+        break
+      }
+      case 'aiSum': a.notify('Summarizing…'); await a.aiSummarize(id!); break
+      case 'learn': {
+        const call = await a.getCall(id!)
+        const c = a.customerById(call?.customerId)
+        if (!call || !c || !call.summary) break
+        const date = new Date(call.startedAt).toLocaleDateString()
+        const facts = [...call.summary.customerNeeds.slice(0, 2).map(n => `${date}: needs — ${n}`), ...call.summary.followUps.filter(f => !f.done).slice(0, 2).map(f => `${date}: ${f.owner} to ${f.text}`)]
+        c.learned = [...c.learned, ...facts.filter(f => !c.learned.includes(f))].slice(-30)
+        c.updatedAt = Date.now()
+        await a.saveKB(); a.notify(`Saved ${facts.length} notes to ${c.name}`)
+        break
+      }
+      case 'fuDone': {
+        const call = await a.getCall(id!)
+        const f = call?.summary?.followUps[Number(el.dataset.i)]
+        if (call && f) { f.done = (el as HTMLInputElement).checked; await a.updateCall(call) }
+        break
+      }
+      case 'delCall': if (confirm('Delete this call?')) { await a.removeCall(id!); this.openCallId = null; this.render() } break
+      case 'newCustomer': {
+        const c: Customer = { id: uid(), name: 'New customer', aliases: [], items: [], notes: '', learned: [], updatedAt: Date.now() }
+        a.kb.customers.push(c); await a.saveKB(); this.editCustomerId = c.id; this.render()
+        break
+      }
+      case 'editCustomer': this.editCustomerId = id!; this.render(); break
+      case 'saveCustomer': this.saveCustomer(); break
+      case 'delCustomer': if (confirm('Delete this customer?')) { a.kb.customers = a.kb.customers.filter(c => c.id !== this.editCustomerId); await a.saveKB(); this.editCustomerId = null; this.render() } break
+      case 'addDoc': await this.addDoc(); break
+      case 'delDoc': if (confirm('Delete?')) { a.kb.docs = a.kb.docs.filter(d => d.id !== id); await a.saveKB(); this.render() } break
+      case 'copyDoc': { const d = a.kb.docs.find(x => x.id === id); if (d && await copy(`${d.title}\n\n${d.text}`)) a.notify('Copied'); break }
+      case 'export': await this.exportBackup(); break
+      case 'refresh': a.notify('Refreshing…'); await a.refreshMarket(); break
+      case 'cutCard': {
+        const card = priceCard(a.market, a.settings, el.dataset.imps!, el.dataset.grade)
+        const box = $('#cutDetail')
+        if (card && box) { box.innerHTML = `<div class="card icard"><div class="ititle">${esc(card.title)}</div><pre>${esc(card.phone)}</pre></div>`; box.scrollIntoView({ behavior: 'smooth' }) }
+        break
+      }
+      case 'calibrate': {
+        a.notify('Talk normally for 6 seconds…')
+        try { const db = await a.calibrateVoice(); a.notify(db != null ? `Voice level saved (${db.toFixed(1)} dB)` : 'Did not hear enough speech — try again'); this.render() }
+        catch (err) { a.notify((err as Error).message) }
+        break
+      }
+      case 'saveSettings': await this.saveSettings(); break
+    }
+  }
+
+  private async onChange(e: Event) {
+    const el = e.target as HTMLInputElement | HTMLSelectElement
+    const a = this.app
+    if (el instanceof HTMLInputElement && el.type === 'file' && el.files?.[0]) {
+      const file = el.files[0]
+      const text = await file.text()
+      if (el.dataset.act === 'importCustomers') {
+        const n = importCustomersCsv(a.kb, text); await a.saveKB(); a.notify(`Imported — ${n} new customers`)
+      } else if (el.dataset.act === 'uploadDoc') {
+        const title = ($<HTMLInputElement>('#d_title')?.value || file.name).trim()
+        const kind = ($<HTMLSelectElement>('#d_kind')?.value || 'other') as KnowledgeDoc['kind']
+        this.pushDoc(title, kind, text); await a.saveKB(); a.notify(`Saved ${file.name}`); this.render()
+      } else if (el.dataset.act === 'importBackup') {
+        await this.importBackup(text)
+      }
+      el.value = ''
+      return
+    }
+    if (el.id === 'liveCustomer' && a.session) {
+      const c = a.customerById(el.value)
+      a.session.call.customerId = c?.id
+      a.session.call.customerName = c?.name
+      a.session.call.otherLabel = c?.name
+      a.engine.customer = c
+      if (c) { const card = a.engine.customerCard(c); if (card) a.session.addCard(card) }
+      a.emit()
+    }
+    if (el.dataset.field === 'callCustomer') {
+      const call = await a.getCall(el.dataset.id!)
+      const c = a.customerById(el.value)
+      if (call) { call.customerId = c?.id; call.customerName = c?.name; call.otherLabel = c?.name; await a.updateCall(call) }
+    }
+    if (el.dataset.field === 'callNotes') {
+      const call = await a.getCall(el.dataset.id!)
+      if (call) { call.notes = el.value; await a.updateCall(call) }
+    }
+    if (el.id === 'newsTopic') { this.newsTopic = el.value; this.render() }
+    if (el.id === 's_preset') {
+      if (el.value === 'off') { ($<HTMLSelectElement>('#s_aiProvider')!).value = 'none'; return }
+      const p = AI_PRESETS[Number(el.value)]
+      if (!p) return
+      $<HTMLSelectElement>('#s_aiProvider')!.value = p.provider
+      $<HTMLInputElement>('#s_aiBase')!.value = p.baseUrl
+      $<HTMLInputElement>('#s_aiModel')!.value = p.model
+    }
+  }
+
+  private onInput(e: Event) {
+    const el = e.target as HTMLInputElement
+    if (el.id === 'callSearch') { this.callSearch = el.value; this.schedule() }
+    if (el.id === 'marketQuery') { this.marketQuery = el.value; this.schedule() }
+  }
+
+  private async saveCustomer() {
+    const a = this.app
+    const c = a.kb.customers.find(x => x.id === this.editCustomerId)
+    if (!c) return
+    const v = (id: string) => ($<HTMLInputElement>(`#${id}`)?.value ?? '').trim()
+    c.name = v('c_name') || c.name
+    c.aliases = v('c_aliases').split(',').map(x => x.trim()).filter(Boolean)
+    c.contact = v('c_contact'); c.segment = v('c_segment'); c.location = v('c_location')
+    c.items = v('c_items').split('\n').map(l => l.split('|').map(x => x.trim())).filter(p => p[0])
+      .map(([name, volume, price, notes]) => ({ name, volume: volume || undefined, price: price || undefined, notes: notes || undefined }))
+    c.notes = ($<HTMLTextAreaElement>('#c_notes')?.value ?? '').trim()
+    c.learned = ($<HTMLTextAreaElement>('#c_learned')?.value ?? '').split('\n').map(x => x.trim()).filter(Boolean)
+    c.updatedAt = Date.now()
+    await a.saveKB()
+    a.notify('Saved')
+  }
+
+  private pushDoc(title: string, kind: KnowledgeDoc['kind'], text: string) {
+    const table = parseDelimited(text) ?? undefined
+    this.app.kb.docs.unshift({ id: uid(), title: title || 'Untitled', kind, text: text.slice(0, 400_000), addedAt: Date.now(), table: table && table.headers.length > 1 ? table : undefined })
+  }
+
+  private async addDoc() {
+    const title = ($<HTMLInputElement>('#d_title')?.value || '').trim()
+    const kind = ($<HTMLSelectElement>('#d_kind')?.value || 'other') as KnowledgeDoc['kind']
+    const text = ($<HTMLTextAreaElement>('#d_text')?.value || '').trim()
+    if (!text) { this.app.notify('Paste something first'); return }
+    this.pushDoc(title, kind, text)
+    await this.app.saveKB()
+    this.app.notify('Saved')
+    this.render()
+  }
+
+  private async saveSettings() {
+    const v = (id: string) => ($<HTMLInputElement>(`#${id}`)?.value ?? '').trim()
+    const cases: Record<string, number> = {}
+    for (const l of v('s_cases').split('\n')) {
+      const m = l.match(/^\s*(\w+)\s*[=:]\s*([\d.]+)/)
+      if (m) cases[m[1].toUpperCase()] = Number(m[2])
+    }
+    const patch: Partial<Settings> = {
+      deepgramKey: v('s_deepgram'), micSource: v('s_mic') as Settings['micSource'], myName: v('s_name') || 'Alan',
+      defaultGrade: v('s_grade') as Settings['defaultGrade'], caseWeights: cases,
+      aiProvider: v('s_aiProvider') as Settings['aiProvider'], aiBaseUrl: v('s_aiBase'), aiModel: v('s_aiModel'), aiKey: v('s_aiKey'),
+      dataBaseUrl: v('s_data'),
+    }
+    const dataChanged = patch.dataBaseUrl !== this.app.settings.dataBaseUrl
+    await this.app.saveSettings(patch)
+    if (dataChanged) await this.app.refreshMarket()
+    this.app.notify('Settings saved')
+    this.render()
+  }
+
+  private async exportBackup() {
+    const a = this.app
+    const calls = await Promise.all(a.index.map(e => a.getCall(e.id)))
+    const blob = JSON.stringify({ app: 'sales-edge', version: 1, exportedAt: new Date().toISOString(), kb: a.kb, calls: calls.filter(Boolean), settings: { ...a.settings, deepgramKey: '', aiKey: '' } })
+    const name = `sales-edge-backup-${new Date().toISOString().slice(0, 10)}.json`
+    try {
+      const file = new File([blob], name, { type: 'application/json' })
+      if (navigator.canShare?.({ files: [file] })) { await navigator.share({ files: [file], title: name }); return }
+    } catch { /* fall through */ }
+    if (await copy(blob)) a.notify('Backup copied to clipboard (paste into Notes/Files)')
+  }
+
+  private async importBackup(text: string) {
+    const a = this.app
+    try {
+      const j = JSON.parse(text)
+      if (j.app !== 'sales-edge') throw new Error('Not a Sales Edge backup')
+      if (!confirm(`Restore ${j.kb?.customers?.length ?? 0} customers, ${j.kb?.docs?.length ?? 0} docs and ${j.calls?.length ?? 0} calls? This merges with what is here.`)) return
+      for (const c of j.kb.customers || []) if (!a.kb.customers.some(x => x.id === c.id)) a.kb.customers.push(c)
+      for (const d of j.kb.docs || []) if (!a.kb.docs.some(x => x.id === d.id)) a.kb.docs.push(d)
+      await a.saveKB()
+      for (const call of j.calls || []) await a.updateCall(call)
+      await a.loadRecentCalls()
+      a.notify('Backup restored')
+    } catch (e) { a.notify(`Import failed: ${(e as Error).message}`) }
+  }
+}
+
+async function copy(text: string): Promise<boolean> {
+  try { await navigator.clipboard.writeText(text); return true } catch { /* fallback */ }
+  try {
+    const ta = document.createElement('textarea')
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0'
+    document.body.appendChild(ta); ta.select()
+    const ok = document.execCommand('copy'); ta.remove(); return ok
+  } catch { return false }
+}
