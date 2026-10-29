@@ -4,7 +4,7 @@ import type { Settings, Customer } from '../types'
 import type { KB } from '../kb/knowledge'
 import { findCustomerMention, findPriceListItems, formatRow, customerTalkingPoints } from '../kb/knowledge'
 import { findCuts } from './lexicon'
-import { type Card, type MarketBundle, priceCard, cutoutCard, killCard, cattleCard, groundCard, money } from './market'
+import { type Card, type MarketBundle, priceCard, cutoutCard, killCard, cattleCard, groundCard, retailCard, money } from './market'
 import type { Call } from '../types'
 
 const ASKY = /\b(price|prices|cost|costs|where('?s| is)|what('?s| is)|market|quote|how much|at now|trading|running|going for|per pound|a pound)\b/i
@@ -66,6 +66,7 @@ export class IntelEngine {
     if (/\b(kill|slaughter|harvest|packers? (are )?running|head count)\b/i.test(lower)) pushIf(cards, killCard(b), c => this.fresh(c.key, asky))
     if (/\b(fed cattle|cash cattle|live cattle|cattle prices?|steer prices?|carcass weights?|cattle weights?|dressed (price|weight)|live weight)\b/i.test(lower)) pushIf(cards, cattleCard(b), c => this.fresh(c.key, asky))
     if (/\b(ground beef|chubs?|grind|trim(mings)?|81s|80\/20|81\/19|93\/7|90s|50s|lean)\b/i.test(lower)) pushIf(cards, groundCard(b, text), c => this.fresh(c.key, asky))
+    if (/\b(retail|in (the )?stores?|shelf|ad price|ads?\b|feature(d|s)?|grocery|consumers?|shoppers?)\b/i.test(lower)) pushIf(cards, retailCard(b, text), c => this.fresh(c.key, asky))
 
     // Your own price lists (deli, chocolate, prepared foods...)
     for (const hit of findPriceListItems(this.getKB(), text)) {

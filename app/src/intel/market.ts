@@ -230,6 +230,38 @@ export function marketPages(b: MarketBundle, s: Settings): string[] {
     const movers = rows.filter(r => r.prev).map(r => ({ r, p: pct(r.wavg, r.prev)! })).sort((a, z) => Math.abs(z.p) - Math.abs(a.p)).slice(0, 7)
     if (movers.length) pages.splice(1, 0, ['BIGGEST MOVERS d/d', ...movers.map(({ r, p }) => `${lexFor(r.imps)!.label.slice(0, 18)} ${fmtPct(p)} ${money(perLb(r.wavg))}`)].join('\n'))
   }
+  const rc = retailCard(b, '', 8)
+  if (rc) pages.push(rc.glass)
   if (!pages.length) pages.push('No market data yet.\nOpen the phone app > Settings\nto check the data link.')
   return pages
+}
+
+/** US grocery ad prices (USDA weekly retail feature report) matching words in the text. */
+export function retailCard(b: MarketBundle, text: string, max = 5): Card | null {
+  const r = b.market?.retail
+  if (!r?.items?.length) return null
+  const t = text.toLowerCase()
+  const want: RegExp[] = []
+  if (/ground|grind|hamburger|burger|chub|patt/.test(t)) want.push(/ground/i)
+  if (/strip|new york|ny strip/.test(t)) want.push(/strip/i)
+  if (/rib ?eye|ribeye|rib roast|prime rib/.test(t)) want.push(/rib ?eye|rib roast/i)
+  if (/tenderloin|filet|fillet/.test(t)) want.push(/tenderloin|filet/i)
+  if (/sirloin|top butt/.test(t)) want.push(/sirloin/i)
+  if (/brisket/.test(t)) want.push(/brisket/i)
+  if (/chuck|roast/.test(t)) want.push(/chuck/i)
+  if (/round|london broil/.test(t)) want.push(/round|london/i)
+  if (/flank|skirt|flap/.test(t)) want.push(/flank|skirt|flap/i)
+  if (/short rib/.test(t)) want.push(/short rib/i)
+  const rows = r.items
+    .filter(i => i.price != null && (want.length ? want.some(w => w.test(i.item)) : true) && /conventional/i.test(i.env))
+    .sort((a, z) => (z.stores ?? 0) - (a.stores ?? 0))
+    .slice(0, max)
+  if (!rows.length) return null
+  const fr = r.summary?.feature_rate
+  const lines = [
+    `RETAIL ADS wk of ${shortDate(r.reportDate)}`,
+    ...rows.map(i => `${i.item.slice(0, 24)} ${money(i.price)}${i.pyPrice ? ` ${fmtPct(pct(i.price, i.pyPrice))} y/y` : ''}`),
+  ]
+  if (fr?.cw != null) lines.push(`Feature rate ${fr.cw}%${fr.pw != null ? ` (prev ${fr.pw}%)` : ''}`)
+  return { kind: 'info', key: `retail:${want.map(w => w.source).join(',') || 'all'}`, title: 'US retail beef ads', glass: lines.join('\n'), phone: [...lines, '', '$/lb, weighted average advertised price, USDA AMS weekly retail feature report. y/y = vs same week last year.'].join('\n'), at: Date.now() }
 }

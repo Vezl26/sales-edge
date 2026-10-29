@@ -8,7 +8,7 @@ import path from 'node:path'
 import { fetchJson, fetchBuffer, pdfToText, readJson, writeJson, OUT_DIR, log } from './lib.mjs'
 import {
   parseBoxedBeefText, normalizeBoxedBeefDatamart, boxedBeefLooksValid,
-  parseSlaughterText, normalizeFedCattle,
+  parseSlaughterText, normalizeFedCattle, parseRetailText,
 } from './parse-usda.mjs'
 
 const DM = 'https://mpr.datamart.ams.usda.gov/services/v1.1/reports'
@@ -97,6 +97,14 @@ async function slaughter() {
   return s
 }
 
+async function retail() {
+  const txt = await pdfToText(await fetchBuffer('https://www.ams.usda.gov/mnreports/ams_3228.pdf'))
+  await saveRaw('3228.txt', txt)
+  const r = parseRetailText(txt)
+  if (r.items.length < 5) throw new Error('retail report parsed too few items')
+  return r
+}
+
 async function fedCattle() {
   // Slug 2466 is the 5-area daily weighted average direct slaughter cattle report
   // in the datamart user guide examples; verify via raw dump if numbers look off.
@@ -139,6 +147,14 @@ async function main() {
   } catch (e) {
     status.sources.fedCattle = { ok: false, error: String(e.message || e) }
     log('fed cattle FAILED', e.message)
+  }
+
+  try {
+    market.retail = await retail()
+    status.sources.retail = { ok: true, reportDate: market.retail.reportDate, items: market.retail.items.length }
+  } catch (e) {
+    status.sources.retail = { ok: false, error: String(e.message || e) }
+    log('retail FAILED', e.message)
   }
 
   market.updatedAt = status.updatedAt

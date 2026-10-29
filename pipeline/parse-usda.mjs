@@ -211,6 +211,34 @@ export function parseSlaughterText(text) {
   return out
 }
 
+// ---------- Weekly retail beef feature activity (ams_3228.pdf) ----------
+const RETAIL_SECTIONS = ['Brisket', 'Chuck', 'Loin', 'Rib', 'Round', 'Sirloin', 'Other/Misc.', 'Ground', 'Deli', 'Variety Meat']
+const ENV = '(Conventional|Organic|Natural|Grass ?Fed|Grassfed|Kosher|Halal|Branded)'
+export function parseRetailText(text) {
+  const out = { source: 'USDA AMS Weekly Retail Beef Feature Activity (ams_3228)', reportDate: findLongDate(text), summary: {}, items: [] }
+  const seen = new Set()
+  let section = ''
+  for (const raw of text.split(/\r?\n/)) {
+    let line = raw.trim()
+    if (!line) continue
+    let m = line.match(/^(Feature Rate|Activity Index|Total Outlets)[^\d]*([\d,.]+)%?\s+([\d,.]+)%?\s+([\d,.]+)%?/i)
+    if (m) { out.summary[m[1].toLowerCase().replace(/\s+/g, '_')] = { cw: num(m[2]), pw: num(m[3]), py: num(m[4]) }; continue }
+    for (const s of RETAIL_SECTIONS) {
+      if (line.startsWith(s + ' ') && /\b(Per lb|Each|Per Unit|Per Pkg)\b/i.test(line.slice(s.length, s.length + 12))) {
+        section = s; line = line.slice(s.length).trim(); break
+      }
+    }
+    line = line.replace(/^(Per lb|Each|Per Unit|Per Pkg)\s+/i, '')
+    m = line.match(new RegExp(`^(.+?)\\s+${ENV}\\s+(Fresh|Frozen)\\s+([\\d,]+)\\s+(\\d+\\.\\d{2})(?:\\s+([\\d,]+)\\s+(\\d+\\.\\d{2}))?(?:\\s+([\\d,]+)\\s+(\\d+\\.\\d{2}))?\\s*$`, 'i'))
+    if (!m) continue
+    const key = `${m[1]}|${m[2]}|${m[3]}`
+    if (seen.has(key)) continue // regional tables repeat items; keep the national row
+    seen.add(key)
+    out.items.push({ section, item: m[1].trim(), env: m[2], cond: m[3], stores: num(m[4]), price: num(m[5]), pwStores: num(m[6]), pwPrice: num(m[7]), pyStores: num(m[8]), pyPrice: num(m[9]) })
+  }
+  return out
+}
+
 // ---------- 5-area fed cattle (datamart) ----------
 export function normalizeFedCattle(json) {
   const rows = collectRows(json, '', []).map(r => r.row)

@@ -45,6 +45,24 @@ Customers, your numbers, price lists and call transcripts are stored **only on y
 - **Prep with Claude** sends it, along with their history, to your Claude Project for a sharper version. Paste Claude's answer back into the notes.
 - **On the glasses:** the prep loads automatically when you start a call with that customer, or as soon as the app hears their name. **Swipe** with the ring to flip through it, alongside the price cards. You can also read it beforehand under **Meeting prep** in the glasses menu. On the last page, tap to start the call with it loaded.
 
+## Market tracking (automatic)
+- **Wholesale:** USDA boxed beef cutout and every cut (daily), cattle slaughter, fed cattle.
+- **Retail:** USDA weekly grocery-store beef ad prices (ground beef, steaks, roasts) vs last week and last year, plus the feature rate.
+- **News:** beef, cattle, grocery, deli, cocoa, Cargill, Richmond (every 3 hours).
+- **Your weekly reports:** Data tab → type "Weekly report" with its week. The newest one is marked **CURRENT** and feeds prep and Claude. Older ones stay as history.
+
+## Topic prep (e.g. "ground beef issue")
+Create a prep with a topic and the draft pulls in:
+- what happened, from your notes and documents (temps, lots, credits)
+- past calls that mention it
+- wholesale and retail prices for it
+- how it should be handled (USDA FSIS points, with your specs first)
+- a quality-claim checklist
+- auto talking points that compare what happened against the standard (e.g. "walk-in at 44°F is above the 40°F hold standard")
+- this week's report
+
+All of it shows on your glasses as swipeable cards.
+
 ## Claude Project — your notes hub
 Set it up once (the app's **Data → Claude Project kit** walks you through it):
 1. In Claude: **Projects → New project → "Sales Edge"**.

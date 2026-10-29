@@ -160,6 +160,7 @@ export class PhoneUI {
         <label>Who are you meeting?</label>
         <select id="prepCustomer"><option value="">— not a saved customer —</option>${opts}</select>
         <label>When</label><input id="prepDate" type="date" value="${new Date().toISOString().slice(0, 10)}">
+        <label>What's it about? (optional)</label><input id="prepTopic" placeholder="e.g. ground beef issue, holiday ribeye program">
         <button class="primary big" data-act="newPrep">Create prep (auto-drafted)</button>
         <p class="muted">The draft pulls in open follow-ups, last call, what they buy with today's USDA prices, market points, questions to ask and news. You edit it, then it shows on your glasses: swipe through it during the call.</p>
       </div>
@@ -181,6 +182,7 @@ export class PhoneUI {
         <label>Customer</label>
         <select id="p_customer"><option value="">— none —</option>${this.app.kb.customers.map(c => `<option value="${c.id}" ${c.id === p.customerId ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</select>
         <label>Date</label><input id="p_date" type="date" value="${esc(p.date || '')}">
+        <label>Topic</label><input id="p_topic" value="${esc(p.topic || '')}" placeholder="e.g. ground beef issue">
         <label>My goal for this meeting</label><input id="p_goal" placeholder="e.g. lock holiday ribeye volume" value="${esc((p.notes.match(/## Goal\n- (.+)/)?.[1] || '').replace(/^\(.*\)$/, ''))}">
         <label>Prep notes · each "## Heading" becomes a card on your glasses</label>
         <textarea id="p_notes" rows="18">${esc(p.notes)}</textarea>
@@ -202,6 +204,7 @@ export class PhoneUI {
     p.title = v('p_title') || p.title
     p.customerId = v('p_customer') || undefined
     p.date = v('p_date') || undefined
+    p.topic = v('p_topic') || undefined
     p.notes = ($<HTMLTextAreaElement>('#p_notes')?.value ?? p.notes)
     const goal = v('p_goal')
     if (goal) {
@@ -330,7 +333,8 @@ export class PhoneUI {
         <p class="muted">Your yearly/monthly numbers, price lists (deli, chocolate, prepared foods), Cargill news, notes. Stays on your phone only.</p>
         <label>Title</label><input id="d_title" placeholder="e.g. 2026 YTD by customer">
         <label>Type</label>
-        <select id="d_kind"><option value="numbers">My numbers / reports</option><option value="pricing">Price list</option><option value="news">News / company updates</option><option value="notes">Notes</option><option value="other">Other</option></select>
+        <select id="d_kind"><option value="report">Weekly report (newest = current)</option><option value="numbers">My numbers</option><option value="pricing">Price list</option><option value="news">News / company updates</option><option value="notes">Notes</option><option value="other">Other</option></select>
+        <label>Week of (for weekly reports)</label><input id="d_asof" type="date" value="${new Date().toISOString().slice(0, 10)}">
         <label>Paste text or CSV</label><textarea id="d_text" rows="6" placeholder="Paste here, or upload a file below"></textarea>
         <div class="btns wrap"><button class="primary" data-act="addDoc">Save</button>
         <label class="filebtn">Upload file<input type="file" accept=".csv,.tsv,.txt,.md,.json,text/*" data-act="uploadDoc" hidden></label></div>
@@ -338,9 +342,9 @@ export class PhoneUI {
       </div>
       ${docs.map(d => `
         <div class="card">
-          <div class="row"><b>${esc(d.title)}</b><span class="muted">${esc(d.kind)} · ${new Date(d.addedAt).toLocaleDateString()}</span></div>
+          <div class="row"><b>${esc(d.title)}${d.id === this.app.latestReport()?.id ? ' <span class="pill rec">CURRENT</span>' : ''}</b><span class="muted">${esc(d.kind)}${d.asOf ? ` · week of ${esc(d.asOf)}` : ''} · ${new Date(d.addedAt).toLocaleDateString()}</span></div>
           ${d.table ? `<p class="muted">${d.table.rows.length} rows · columns: ${esc(d.table.headers.join(', '))}</p>` : `<p class="muted">${esc(d.text.slice(0, 140))}${d.text.length > 140 ? '…' : ''}</p>`}
-          ${d.kind === 'numbers' ? `<pre>${esc(numbersDigest(d).join('\n'))}</pre>` : ''}
+          ${d.kind === 'numbers' || (d.kind === 'report' && d.table) ? `<pre>${esc(numbersDigest(d).join('\n'))}</pre>` : ''}
           <div class="btns"><button class="small" data-act="copyDoc" data-id="${d.id}">Copy for Claude</button><button class="small danger" data-act="delDoc" data-id="${d.id}">Delete</button></div>
         </div>`).join('')}
       <div class="card">
@@ -534,7 +538,9 @@ export class PhoneUI {
       case 'newPrep': {
         const c = a.customerById($<HTMLSelectElement>('#prepCustomer')?.value || '')
         const date = $<HTMLInputElement>('#prepDate')?.value || undefined
-        const p: Prep = { id: uid(), customerId: c?.id, title: c ? c.name : 'Meeting', date, notes: draftPrep(c, a.recentCalls, a.market, a.settings.defaultGrade), createdAt: Date.now(), updatedAt: Date.now() }
+        const topic = ($<HTMLInputElement>('#prepTopic')?.value || '').trim() || undefined
+        const title = [c?.name, topic].filter(Boolean).join(' · ') || 'Meeting'
+        const p: Prep = { id: uid(), customerId: c?.id, title, date, topic, notes: draftPrep(c, a.recentCalls, a.market, a.settings.defaultGrade, { topic, kb: a.kb, latestReport: a.latestReportBrief() }), createdAt: Date.now(), updatedAt: Date.now() }
         await a.savePrep(p); this.editPrepId = p.id; this.render()
         break
       }
@@ -547,12 +553,12 @@ export class PhoneUI {
         if (act === 'redraftPrep') {
           if (!confirm('Replace the notes with a fresh draft?')) break
           const goal = p.notes.match(/## Goal\n- (.+)/)?.[1]
-          p.notes = draftPrep(c, a.recentCalls, a.market, a.settings.defaultGrade)
+          p.notes = draftPrep(c, a.recentCalls, a.market, a.settings.defaultGrade, { topic: p.topic, kb: a.kb, latestReport: a.latestReportBrief() })
           if (goal && !/^\(/.test(goal)) p.notes = p.notes.replace(/## Goal\n- .*/, `## Goal\n- ${goal}`)
         }
         if (act === 'claudePrep') {
           const goal = (p.notes.match(/## Goal\n- (.+)/)?.[1] || '').replace(/^\(.*\)$/, '')
-          copySync(prepPacket(c, a.recentCalls, p.notes, a.marketContext(), goal))
+          copySync(prepPacket(c, a.recentCalls, p.notes, a.marketContext(), goal, p.topic))
           window.open(a.settings.claudeProjectUrl || 'https://claude.ai/new', '_blank')
           a.notify('Copied. Paste it in Claude, then paste the answer back here.')
         }
@@ -664,7 +670,8 @@ export class PhoneUI {
 
   private pushDoc(title: string, kind: KnowledgeDoc['kind'], text: string) {
     const table = parseDelimited(text) ?? undefined
-    this.app.kb.docs.unshift({ id: uid(), title: title || 'Untitled', kind, text: text.slice(0, 400_000), addedAt: Date.now(), table: table && table.headers.length > 1 ? table : undefined })
+    const asOf = kind === 'report' ? ($<HTMLInputElement>('#d_asof')?.value || new Date().toISOString().slice(0, 10)) : undefined
+    this.app.kb.docs.unshift({ id: uid(), title: title || 'Untitled', kind, asOf, text: text.slice(0, 400_000), addedAt: Date.now(), table: table && table.headers.length > 1 ? table : undefined })
   }
 
   private async addDoc() {

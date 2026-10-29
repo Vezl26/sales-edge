@@ -3,7 +3,7 @@ import type { Call, CallIndexEntry, Customer, Settings } from './types'
 import { DEFAULT_SETTINGS } from './types'
 import type { Store } from './store'
 import { type KB, loadKB, saveKB, numbersDigest } from './kb/knowledge'
-import { loadMarket, type MarketBundle, type Card, marketPages, cutoutCard, killCard, cattleCard, shortDate } from './intel/market'
+import { loadMarket, type MarketBundle, type Card, marketPages, cutoutCard, killCard, cattleCard, retailCard, shortDate } from './intel/market'
 import { IntelEngine } from './intel/engine'
 import { CallSession, loadCall, upsertIndex, glassTranscript, deleteCall } from './calls/session'
 import { summaryToText, summaryPrompt, fmtClock } from './calls/summarize'
@@ -213,8 +213,20 @@ export class App {
   }
 
   marketContext(): string {
-    const parts = [cutoutCard(this.market)?.phone, killCard(this.market)?.phone, cattleCard(this.market)?.phone].filter(Boolean)
+    const parts = [cutoutCard(this.market)?.phone, killCard(this.market)?.phone, cattleCard(this.market)?.phone, retailCard(this.market, '', 12)?.phone, this.latestReportBrief()].filter(Boolean)
     return parts.join('\n\n')
+  }
+
+  /** Newest weekly report = "current". */
+  latestReport() {
+    return [...this.kb.docs].filter(d => d.kind === 'report').sort((a, b) => (b.asOf || '').localeCompare(a.asOf || '') || b.addedAt - a.addedAt)[0] || null
+  }
+
+  latestReportBrief(): string {
+    const r = this.latestReport()
+    if (!r) return ''
+    const body = r.table ? numbersDigest(r).join('\n') : r.text.split('\n').filter(l => l.trim()).slice(0, 12).join('\n')
+    return `CURRENT WEEKLY REPORT: ${r.title}${r.asOf ? ` (week of ${r.asOf})` : ''}\n${body}`
   }
 
   numbersContext(): string {

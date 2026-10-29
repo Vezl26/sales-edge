@@ -81,7 +81,9 @@ export interface Customer {
 export interface KnowledgeDoc {
   id: string
   title: string
-  kind: 'numbers' | 'news' | 'notes' | 'pricing' | 'other'
+  kind: 'numbers' | 'report' | 'news' | 'notes' | 'pricing' | 'other'
+  /** For weekly reports: the week/date the report covers (YYYY-MM-DD) */
+  asOf?: string
   text: string
   addedAt: number
   /** Parsed table, if the doc looked like CSV/TSV */
@@ -163,6 +165,11 @@ export interface SlaughterRow {
 export interface MarketData {
   updatedAt?: string
   slaughter?: { reportDate: string | null; status: string; cattle?: SlaughterRow; calves?: SlaughterRow; hogs?: SlaughterRow }
+  retail?: {
+    reportDate: string | null
+    summary: Record<string, { cw: number | null; pw: number | null; py: number | null }>
+    items: { section: string; item: string; env: string; cond: string; stores: number | null; price: number | null; pwStores: number | null; pwPrice: number | null; pyStores: number | null; pyPrice: number | null }[]
+  }
   fedCattle?: { reportDate: string | null; rows: { cls: string; basis: string; grade: string; head: number | null; price: number; low: number | null; high: number | null; weight: number | null }[] }
 }
 

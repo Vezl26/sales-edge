@@ -4,7 +4,9 @@ import type { Call, Customer } from '../types'
 import type { KB } from '../kb/knowledge'
 import { customerBrief } from '../calls/summarize'
 import { findCuts, lexFor } from '../intel/lexicon'
-import { type MarketBundle, type Card, bestRow, perLb, money, pct, fmtPct, questionsFor, shortDate } from '../intel/market'
+import { type MarketBundle, type Card, bestRow, perLb, money, pct, fmtPct, questionsFor, shortDate, groundCard, retailCard, priceCard } from '../intel/market'
+import { referencesFor } from './references'
+import { DEFAULT_SETTINGS } from '../types'
 
 export interface Prep {
   id: string
@@ -12,6 +14,8 @@ export interface Prep {
   title: string
   /** Meeting date YYYY-MM-DD (optional) */
   date?: string
+  /** What the meeting is about, e.g. "ground beef issue" */
+  topic?: string
   /** The prep itself. "## Heading" lines split it into cards on the glasses. */
   notes: string
   createdAt: number
@@ -21,12 +25,89 @@ export interface Prep {
 const today = () => new Date().toISOString().slice(0, 10)
 
 /** Build a first draft from customer profile, past calls, USDA prices and news. */
-export function draftPrep(c: Customer | null, calls: Call[], m: MarketBundle, defaultGrade: string): string {
+export interface DraftOpts { topic?: string; kb?: KB; latestReport?: string }
+
+const STOP = new Set(['beef', 'issue', 'issues', 'problem', 'meeting', 'about', 'with', 'their', 'from', 'that', 'this', 'call', 'review', 'the', 'and', 'for'])
+
+/** Words + synonyms used to find topic-related lines. */
+export function topicMatcher(topic: string): RegExp | null {
+  const words = topic.toLowerCase().split(/[^a-z0-9/%]+/).filter(w => w.length > 2 && !STOP.has(w))
+  const extra: string[] = []
+  if (/ground|grind|burger|hamburger|chub/.test(topic.toLowerCase())) extra.push('ground beef', 'grind', 'chubs?', 'patt(y|ies)', '\\d{2}/\\d{1,2}')
+  const all = [...words.map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\w*'), ...extra]
+  return all.length ? new RegExp(`\\b(${all.join('|')})`, 'i') : null
+}
+
+export function draftPrep(c: Customer | null, calls: Call[], m: MarketBundle, defaultGrade: string, opts: DraftOpts = {}): string {
   const out: string[] = []
   const mine = c ? calls.filter(x => x.customerId === c.id).sort((a, b) => b.startedAt - a.startedAt) : []
   const last = mine[0]
 
   out.push('## Goal', '- (what do you want out of this meeting?)', '')
+
+  const topic = (opts.topic || '').trim()
+  const re = topic ? topicMatcher(topic) : null
+  if (topic && re) {
+    // What happened: lines from your uploaded docs/notes/reports
+    const hits: string[] = []
+    for (const d of opts.kb?.docs || []) {
+      if (d.table) {
+        for (const r of d.table.rows) {
+          const l = d.table.headers.map((h, i) => (r[i] ? `${h}: ${r[i]}` : '')).filter(Boolean).join(', ')
+          if (re.test(l)) hits.push(`${l.slice(0, 160)} [${d.title}]`)
+        }
+        continue
+      }
+      // Notes about the topic: keep the whole story (temps, credits, lots), not just matching lines
+      const sents = d.text.split(/\n+|(?<=[.!?])\s+/).map(x => x.trim()).filter(x => x.length > 8)
+      const n = sents.filter(x => re.test(x)).length
+      const about = n >= 2 || re.test(d.title) || (n >= 1 && sents.length <= 10)
+      for (const x of about ? sents.slice(0, 10) : sents.filter(y => re.test(y))) hits.push(`${x.slice(0, 160)} [${d.title}]`)
+    }
+    out.push(`## Topic: ${topic}`, ...(hits.length ? hits.slice(0, 8).map(h => `- ${h}`) : ['- (add what happened: dates, lots, cases, what was done)']), '')
+
+    // Past calls that touched it
+    const callHits: string[] = []
+    for (const x of calls) {
+      const said = x.segments.map(s => s.text).join(' ').split(/(?<=[.!?])\s+/).filter(s => re.test(s))
+      if (said.length || (x.summary && re.test(x.summary.headline))) {
+        callHits.push(`${new Date(x.startedAt).toLocaleDateString('en-US', { month: 'numeric', day: 'numeric' })} ${x.customerName || ''}: ${(said[0] || x.summary?.headline || '').slice(0, 140)}`)
+      }
+    }
+    if (callHits.length) out.push('## Past calls on this', ...callHits.slice(0, 5).map(h => `- ${h}`), '')
+
+    // Market for the topic: wholesale + retail
+    const mk: string[] = []
+    const g = groundCard(m, topic)
+    if (g) mk.push(...g.glass.split('\n').slice(1, 4).map(x => `Wholesale ${x}`))
+    for (const h of findCuts(topic).slice(0, 2)) {
+      const pc = priceCard(m, { ...DEFAULT_SETTINGS, defaultGrade: defaultGrade as 'Choice' | 'Select' }, h.imps)
+      if (pc) mk.push(pc.glass.split('\n').slice(0, 3).join(' · '))
+    }
+    const rc = retailCard(m, topic, 3)
+    if (rc) mk.push(...rc.glass.split('\n').slice(1).map(x => (/^Feature/.test(x) ? `Retail ${x.toLowerCase()}` : `Retail ad ${x}`)))
+    if (mk.length) out.push(`## Market: ${topic}`, ...mk.map(x => `- ${x}`), '')
+
+    // Compare what happened to the standard and the market
+    const tp: string[] = []
+    for (const h of hits) {
+      for (const mt of h.matchAll(/(walk-?in|cooler|reefer|truck|trailer|case|display|product|internal|receiving)[^.\d]{0,30}?(\d{2})\s?°?\s?F\b/gi)) {
+        const t = Number(mt[2]); const where = mt[1].toLowerCase()
+        if (t > 40 && t < 100) tp.push(`${where[0].toUpperCase() + where.slice(1)} at ${t}°F is above the 40°F hold standard: that's the likely cause, so lead with the facts.`)
+        else if (t <= 40) tp.push(`${where[0].toUpperCase() + where.slice(1)} at ${t}°F was within standard on our side.`)
+      }
+    }
+    if (/gray|grey|brown|discolor/i.test(hits.join(' '))) tp.push('Color alone is not spoilage: gray inside a chub/package is normal (no oxygen). Check odor, dates and temps.')
+    const gr = m.market?.retail?.items.find(i => /ground/i.test(i.item) && i.pyPrice)
+    if (gr && gr.price) tp.push(`Retail ground beef is ${money(gr.price)}/lb (${fmtPct(pct(gr.price, gr.pyPrice))} y/y): shoppers are price-sensitive, so protecting quality protects their sales.`)
+    if (tp.length) out.push('## Talking points', ...[...new Set(tp)].slice(0, 5).map(x => `- ${x}`), '')
+
+    // Standards & handling
+    const refs = referencesFor(`${topic} ${hits.join(' ')}`)
+    for (const r of refs) out.push(`## ${r.title}`, ...r.points.map(p => `- ${p}`), `- Source: ${r.source}. Your company specs come first.`, '')
+  }
+
+  if (opts.latestReport) out.push("## This week's report", ...opts.latestReport.split('\n').slice(0, 7).map(l => `- ${l}`), '')
 
   const open = mine.flatMap(x => (x.summary?.followUps || []).filter(f => !f.done).map(f => ({ f, x })))
   if (open.length) {
@@ -145,7 +226,7 @@ export function prepFor(kb: KB, customerId?: string): Prep | null {
 }
 
 /** Ask Claude to write the prep (pasted into the Claude Project). */
-export function prepPacket(c: Customer | null, calls: Call[], draft: string, marketSnapshot: string, goal: string): string {
+export function prepPacket(c: Customer | null, calls: Call[], draft: string, marketSnapshot: string, goal: string, topic = ''): string {
   const mine = c ? calls.filter(x => x.customerId === c.id).sort((a, b) => b.startedAt - a.startedAt).slice(0, 5) : []
   const hist = mine.map(x => `${new Date(x.startedAt).toLocaleDateString()}: ${x.summary?.aiText?.slice(0, 1200) || x.summary?.headline || ''}`).join('\n\n')
   return `Prep me for an upcoming meeting. Use the project files (customers, my numbers, price lists, market) and our past call chats in this project.
@@ -159,9 +240,10 @@ Write it in exactly this format. Short bullets, because I read it on my glasses 
 ## Add / pitch
 ## Watch out for
 ## Remember
+(If there is a topic: also add "## What happened" (timeline from my files) and "## Standards" (how it should be handled, citing my specs first, then USDA/FSIS). Compare what happened to the standard and to the current market.)
 
 <prep_request>
-<meeting>${c ? c.name : 'not tagged'}${goal ? `\nmy goal: ${goal}` : ''}</meeting>
+<meeting>${c ? c.name : 'not tagged'}${topic ? `\ntopic: ${topic}` : ''}${goal ? `\nmy goal: ${goal}` : ''}</meeting>
 ${c ? `<customer_profile>\n${customerBrief(c)}\n</customer_profile>` : ''}
 ${hist ? `<recent_calls>\n${hist}\n</recent_calls>` : ''}
 <market_snapshot>
