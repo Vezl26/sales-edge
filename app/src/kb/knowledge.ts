@@ -200,7 +200,7 @@ export function reportHighlights(text: string, max = 8): string[] {
     .filter(x => /\d/.test(x) && x.length > 40 && x.length < 300).slice(0, max)
 }
 
-export const isPrivateMetric = (k: string) => /margin|gp\b|gross profit|profit|cost|cogs|markup|rebate/i.test(k)
+export const isPrivateMetric = (k: string) => /margin|\bcm\b|cm\$|cm%|gp\b|gross profit|profit|cost|cogs|markup|rebate/i.test(k)
 
 /** Account snapshot for the glasses (internal: includes margin). */
 export function accountLines(c: Customer, max = 9): string[] {
