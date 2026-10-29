@@ -12,6 +12,7 @@ import { aiComplete, aiEnabled } from './ai/llm'
 import type { Glasses } from './glasses/ui'
 import { EnergyTracker } from './audio/speaker'
 import { prepFor, prepCards, type Prep } from './prep/prep'
+import { Prompter, searchDocs, onPrepShare } from './prep/prompter'
 
 export interface Mic {
   open(source: 'glasses' | 'phone'): Promise<boolean>
@@ -101,11 +102,12 @@ export class App {
     this.session = s
     s.onChange = () => { this.renderCallOnGlasses(); this.emit() }
     s.onCustomerTagged = c => this.attachPrep(c.id)
+    s.onLines = (text, spk) => this.assist(text, spk)
     this.attachPrep(customer?.id ?? null, forcedPrep)
     await this.glasses.showCall({
       onTap: () => this.togglePause(),
       onDouble: () => void this.endCall(),
-      onStep: d => s.stepCard(d),
+      onStep: d => s.swipe(d),
     }, this.callStatus(), glassTranscript(s.call, ''), this.intelText())
     const ok = await this.mic.open(this.settings.micSource)
     if (!ok) this.notify('Microphone did not open — check app permissions')
@@ -120,7 +122,7 @@ export class App {
     const s = new CallSession(this.store, this.settings, this.engine, this.customerById(call.customerId), extra, call)
     this.session = s
     s.onChange = () => { this.renderCallOnGlasses(); this.emit() }
-    await this.glasses.showCall({ onTap: () => this.togglePause(), onDouble: () => void this.endCall(), onStep: d => s.stepCard(d) },
+    await this.glasses.showCall({ onTap: () => this.togglePause(), onDouble: () => void this.endCall(), onStep: d => s.swipe(d) },
       this.callStatus(), glassTranscript(s.call, ''), this.intelText())
     await this.mic.open(this.settings.micSource)
     this.emit()
@@ -133,6 +135,8 @@ export class App {
     const p = forced ?? (customerId ? prepFor(this.kb, customerId) : null)
     if (!p || s.cards.some(c => c.key.startsWith(`prep:${p.id}:`))) return
     s.addPrepCards(prepCards(p))
+    s.prompter = new Prompter(p)
+    s.call.notes = [s.call.notes, `Prep used: ${p.title}`].filter(Boolean).join('\n')
   }
 
   async savePrep(p: Prep) {
@@ -160,12 +164,37 @@ export class App {
     if (!s) return ''
     const st = s.paused ? 'II PAUSED' : s.sttState === 'live' ? '● LIVE' : s.sttState === 'error' ? '! ' + s.sttDetail.slice(0, 30) : `… ${s.sttState}`
     const who = s.call.customerName ? ` · ${s.call.customerName.slice(0, 16)}` : ''
-    const cards = s.cards.length ? ` · card ${s.cardIndex + 1}/${s.cards.length}` : ''
+    const cards = s.prompter ? ` · prep ${s.prompter.done}/${s.prompter.points.length}✓` : s.cards.length ? ` · card ${s.cardIndex + 1}/${s.cards.length}` : ''
     return `${st} ${fmtClock(s.elapsedMs)}${who}${cards} · 2×tap end`
+  }
+
+  private lastRefAt = 0
+  /** Conversate-style help: when talk drifts away from the prep, pull a reference from your documents. */
+  assist(text: string, spk: string[]) {
+    const s = this.session
+    if (!s || Date.now() - this.lastRefAt < 45000) return
+    const vocab = s.prompter?.vocab()
+    // With prep: only step in when the conversation is mostly off the prep.
+    if (vocab && onPrepShare(text, vocab) > 0.35) return
+    // Without prep: only for what the customer raises.
+    if (!vocab && !spk.includes('C')) return
+    const hits = searchDocs(this.kb, text, vocab, 2)
+    if (!hits.length) return
+    this.lastRefAt = Date.now()
+    const body = hits.map(h => `• ${h.text.slice(0, 150)}\n  [${h.doc.slice(0, 28)}]`).join('\n')
+    s.addCard({ kind: 'info', key: `ref:${Date.now()}`, title: 'Reference', glass: `REFERENCE (off prep)\n${body}`, phone: `From your documents:\n${hits.map(h => `• ${h.text}\n  — ${h.doc}`).join('\n')}`, at: Date.now() })
   }
 
   intelText(): string {
     const s = this.session
+    if (s?.prompter) {
+      if (s.overlay && Date.now() < s.overlayUntil) {
+        const left = Math.ceil((s.overlayUntil - Date.now()) / 1000)
+        setTimeout(() => this.renderCallOnGlasses(), (left + 0.3) * 1000)
+        return `${s.overlay.glass}\n\n(back to prep in ${left}s · swipe = now)`
+      }
+      return s.prompter.view()
+    }
     if (!s || s.cardIndex < 0) {
       const co = cutoutCard(this.market)
       return co ? `Say a cut to see price.\n\n${co.glass}` : 'Say a cut name\n(e.g. "strip loin")\nto see USDA price.'

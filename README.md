@@ -63,6 +63,12 @@ Create a prep with a topic and the draft pulls in:
 
 All of it shows on your glasses as swipeable cards.
 
+## During a call with prep: Teleprompter + Conversate
+- **Prep comes first.** When a call has prep, the right panel works like a teleprompter: your goal stays pinned, the current point is marked ▶, and the next points line up below it.
+- **It follows the conversation.** When something on the prep gets talked about, it's checked off ✓ and the next point moves up. Swipe down = mark done and move on, swipe up = go back.
+- **Off-prep help.** If the conversation drifts somewhere the prep doesn't cover, it pulls the best matching lines from your documents (weekly reports, notes, price lists) as a REFERENCE pop-up. After 20 seconds it switches back to your prep, or you can swipe to go back right away. Price cards pop up the same way.
+- **After the call:** any prep points you didn't get to show up in the summary as "Not covered".
+
 ## Claude Project — your notes hub
 Set it up once (the app's **Data → Claude Project kit** walks you through it):
 1. In Claude: **Projects → New project → "Sales Edge"**.

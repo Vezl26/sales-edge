@@ -8,6 +8,7 @@ import type { IntelEngine } from '../intel/engine'
 import { autoSummary } from './summarize'
 import { uid } from '../kb/knowledge'
 import { recognizerKeyterms } from '../intel/lexicon'
+import type { Prompter } from '../prep/prompter'
 
 export type SttState = 'idle' | 'connecting' | 'live' | 'reconnecting' | 'closed' | 'error' | 'paused'
 
@@ -27,6 +28,13 @@ export class CallSession {
   onChange: () => void = () => {}
   onCard: (c: Card) => void = () => {}
   onCustomerTagged: (c: Customer) => void = () => {}
+  /** Teleprompter for the attached prep (null = no prep). */
+  prompter: Prompter | null = null
+  /** A pop-up card shown over the prep for a few seconds. */
+  overlay: Card | null = null
+  overlayUntil = 0
+  /** Extra listener for finished lines: (text, speakers) */
+  onLines: (text: string, spk: string[]) => void = () => {}
 
   constructor(
     private store: Store,
@@ -104,7 +112,10 @@ export class CallSession {
       newText.push(run.text)
     }
     this.relabel()
-    for (const c of this.engine.ingest(newText.join(' '))) this.addCard(c)
+    const joined = newText.join(' ')
+    if (this.prompter) this.prompter.ingest(joined)
+    for (const c of this.engine.ingest(joined)) this.addCard(c)
+    this.onLines(joined, this.call.segments.slice(-runs.length).map(s => s.spk))
     this.touch()
   }
 
@@ -129,6 +140,7 @@ export class CallSession {
   addCard(c: Card) {
     this.cards.push(c)
     this.cardIndex = this.cards.length - 1
+    if (this.prompter) { this.overlay = c; this.overlayUntil = Date.now() + 20000 }
     this.call.cards.push({ t: this.elapsedMs, kind: c.kind, title: c.title, body: c.phone })
     this.onCard(c)
     this.onChange()
@@ -144,6 +156,17 @@ export class CallSession {
     }
     this.cardIndex = first
     this.onChange()
+  }
+
+  /** Ring swipe. With prep: an open pop-up closes first, then swipes move through the prep. */
+  swipe(dir: 1 | -1) {
+    if (this.prompter) {
+      if (this.overlay && Date.now() < this.overlayUntil) { this.overlay = null; this.onChange(); return }
+      this.prompter.step(dir)
+      this.touch()
+      return
+    }
+    this.stepCard(dir)
   }
 
   stepCard(dir: 1 | -1) {
@@ -165,6 +188,8 @@ export class CallSession {
     this.stt?.close()
     if (this.saveTimer !== null) clearInterval(this.saveTimer)
     this.call.summary = autoSummary(this.call, customer)
+    const missed = this.prompter?.uncovered() ?? []
+    if (missed.length) this.call.summary.talkingPointsNext = [...missed.slice(0, 6).map(m => `Not covered: ${m}`), ...this.call.summary.talkingPointsNext]
     await this.save()
     return this.call
   }
