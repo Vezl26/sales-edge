@@ -1,7 +1,8 @@
 // Phone screen (the Even app shows this page while the glasses show their own UI).
 import type { App } from '../app'
 import type { Call, Customer, KnowledgeDoc, Settings } from '../types'
-import { uid, importCustomersCsv, parseDelimited, numbersDigest } from '../kb/knowledge'
+import { uid, importCustomersCsv, parseDelimited, numbersDigest, reportHighlights } from '../kb/knowledge'
+import { pdfToText } from '../kb/pdf'
 import { CUTS, lexFor } from '../intel/lexicon'
 import { bestRow, perLb, money, pct, fmtPct, shortDate, priceCard, cutoutCard, killCard, cattleCard } from '../intel/market'
 import { transcriptText, summaryToText, fmtClock } from '../calls/summarize'
@@ -337,14 +338,14 @@ export class PhoneUI {
         <label>Week of (for weekly reports)</label><input id="d_asof" type="date" value="${new Date().toISOString().slice(0, 10)}">
         <label>Paste text or CSV</label><textarea id="d_text" rows="6" placeholder="Paste here, or upload a file below"></textarea>
         <div class="btns wrap"><button class="primary" data-act="addDoc">Save</button>
-        <label class="filebtn">Upload file<input type="file" accept=".csv,.tsv,.txt,.md,.json,text/*" data-act="uploadDoc" hidden></label></div>
-        <p class="muted">Tip: Excel → "Save As CSV" first. PDFs: copy the text and paste it.</p>
+        <label class="filebtn">Upload file<input type="file" accept=".pdf,application/pdf,.csv,.tsv,.txt,.md,.json,text/*" data-act="uploadDoc" hidden></label></div>
+        <p class="muted">PDFs (like your weekly outlook) upload directly. Excel: "Save As CSV" first.</p>
       </div>
       ${docs.map(d => `
         <div class="card">
           <div class="row"><b>${esc(d.title)}${d.id === this.app.latestReport()?.id ? ' <span class="pill rec">CURRENT</span>' : ''}</b><span class="muted">${esc(d.kind)}${d.asOf ? ` · week of ${esc(d.asOf)}` : ''} · ${new Date(d.addedAt).toLocaleDateString()}</span></div>
           ${d.table ? `<p class="muted">${d.table.rows.length} rows · columns: ${esc(d.table.headers.join(', '))}</p>` : `<p class="muted">${esc(d.text.slice(0, 140))}${d.text.length > 140 ? '…' : ''}</p>`}
-          ${d.kind === 'numbers' || (d.kind === 'report' && d.table) ? `<pre>${esc(numbersDigest(d).join('\n'))}</pre>` : ''}
+          ${d.kind === 'numbers' || (d.kind === 'report' && d.table) ? `<pre>${esc(numbersDigest(d).join('\n'))}</pre>` : d.kind === 'report' ? `<pre>${esc(reportHighlights(d.text).join('\n\n'))}</pre>` : ''}
           <div class="btns"><button class="small" data-act="copyDoc" data-id="${d.id}">Copy for Claude</button><button class="small danger" data-act="delDoc" data-id="${d.id}">Delete</button></div>
         </div>`).join('')}
       <div class="card">
@@ -603,7 +604,12 @@ export class PhoneUI {
     const a = this.app
     if (el instanceof HTMLInputElement && el.type === 'file' && el.files?.[0]) {
       const file = el.files[0]
-      const text = await file.text()
+      let text: string
+      if (/\.pdf$/i.test(file.name) || file.type === 'application/pdf') {
+        try { text = await pdfToText(file, (i, n) => a.notify(`Reading PDF… page ${i}/${n}`)) }
+        catch (err) { a.notify((err as Error).message); el.value = ''; return }
+        if (!text.trim()) { a.notify('That PDF has no readable text (scanned image?)'); el.value = ''; return }
+      } else text = await file.text()
       if (el.dataset.act === 'importCustomers') {
         const n = importCustomersCsv(a.kb, text); await a.saveKB(); a.notify(`Imported — ${n} new customers`)
       } else if (el.dataset.act === 'uploadDoc') {

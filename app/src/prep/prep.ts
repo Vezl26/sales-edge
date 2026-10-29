@@ -33,7 +33,7 @@ const STOP = new Set(['beef', 'issue', 'issues', 'problem', 'meeting', 'about', 
 export function topicMatcher(topic: string): RegExp | null {
   const words = topic.toLowerCase().split(/[^a-z0-9/%]+/).filter(w => w.length > 2 && !STOP.has(w))
   const extra: string[] = []
-  if (/ground|grind|burger|hamburger|chub/.test(topic.toLowerCase())) extra.push('ground beef', 'grind', 'chubs?', 'patt(y|ies)', '\\d{2}/\\d{1,2}')
+  if (/ground|grind|burger|hamburger|chub/.test(topic.toLowerCase())) extra.push('ground beef', 'grind', 'chubs?', 'patt(y|ies)', '[789]\\d/\\d{1,2}(?![/\\d])')
   const all = [...words.map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\w*'), ...extra]
   return all.length ? new RegExp(`\\b(${all.join('|')})`, 'i') : null
 }
@@ -59,10 +59,13 @@ export function draftPrep(c: Customer | null, calls: Call[], m: MarketBundle, de
         continue
       }
       // Notes about the topic: keep the whole story (temps, credits, lots), not just matching lines
-      const sents = d.text.split(/\n+|(?<=[.!?])\s+/).map(x => x.trim()).filter(x => x.length > 8)
+      const joined = d.text.replace(/([^.!?:\n])\n(?=[a-z(])/g, '$1 ').replace(/-\n(?=\S)/g, '-')
+      const sents = joined.split(/\n+|(?<=[.!?])\s+/).map(x => x.trim())
+        .filter(x => x.length > 20 && (x.match(/[a-z]/gi)?.length ?? 0) > x.length * 0.55)
       const n = sents.filter(x => re.test(x)).length
-      const about = n >= 2 || re.test(d.title) || (n >= 1 && sents.length <= 10)
-      for (const x of about ? sents.slice(0, 10) : sents.filter(y => re.test(y))) hits.push(`${x.slice(0, 160)} [${d.title}]`)
+      const small = sents.length <= 40
+      const about = small && (n >= 2 || re.test(d.title) || (n >= 1 && sents.length <= 10))
+      for (const x of about ? sents.slice(0, 10) : sents.filter(y => re.test(y)).slice(0, 4)) hits.push(`${x.slice(0, 220)} [${d.title}]`)
     }
     out.push(`## Topic: ${topic}`, ...(hits.length ? hits.slice(0, 8).map(h => `- ${h}`) : ['- (add what happened: dates, lots, cases, what was done)']), '')
 

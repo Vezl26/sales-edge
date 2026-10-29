@@ -2,7 +2,7 @@
 import type { Call, CallIndexEntry, Customer, Settings } from './types'
 import { DEFAULT_SETTINGS } from './types'
 import type { Store } from './store'
-import { type KB, loadKB, saveKB, numbersDigest } from './kb/knowledge'
+import { type KB, loadKB, saveKB, numbersDigest, reportHighlights } from './kb/knowledge'
 import { loadMarket, type MarketBundle, type Card, marketPages, cutoutCard, killCard, cattleCard, retailCard, shortDate } from './intel/market'
 import { IntelEngine } from './intel/engine'
 import { CallSession, loadCall, upsertIndex, glassTranscript, deleteCall } from './calls/session'
@@ -225,7 +225,7 @@ export class App {
   latestReportBrief(): string {
     const r = this.latestReport()
     if (!r) return ''
-    const body = r.table ? numbersDigest(r).join('\n') : r.text.split('\n').filter(l => l.trim()).slice(0, 12).join('\n')
+    const body = r.table ? numbersDigest(r).join('\n') : reportHighlights(r.text).join('\n')
     return `CURRENT WEEKLY REPORT: ${r.title}${r.asOf ? ` (week of ${r.asOf})` : ''}\n${body}`
   }
 

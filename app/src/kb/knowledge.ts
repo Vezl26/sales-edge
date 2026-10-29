@@ -170,3 +170,23 @@ export function numbersDigest(doc: KnowledgeDoc): string[] {
   }
   return out
 }
+
+/** Pull the key points out of a long prose report (e.g. a weekly market outlook PDF). */
+export function reportHighlights(text: string, max = 8): string[] {
+  const flat = text.replace(/\r/g, '')
+  // 1) Executive-summary bullets with CAPS labels: "• CATTLE PRICES (link): ..."
+  const bullets = flat.split(/\n?\s*[•▪●]\s+/).slice(1)
+    .map(b => b.replace(/\s*\n\s*/g, ' ').trim())
+    .filter(b => /^[A-Z][A-Z0-9 ,&/-]{3,}(\s*\([^)]*\))?\s*:/.test(b))
+  if (bullets.length >= 2) {
+    return bullets.slice(0, max).map(b => {
+      const m = b.match(/^([A-Z][A-Z0-9 ,&/-]{3,})(?:\s*\([^)]*\))?\s*:\s*(.+)$/)!
+      const label = m[1].trim().replace(/\b\w+/g, w => w[0] + w.slice(1).toLowerCase())
+      const body = m[2].split(/(?<=[.!?])\s+/).slice(0, 2).join(' ')
+      return `${label}: ${body}`.slice(0, 320)
+    })
+  }
+  // 2) Otherwise: sentences that carry numbers
+  return flat.replace(/\s*\n\s*/g, ' ').split(/(?<=[.!?])\s+/)
+    .filter(x => /\d/.test(x) && x.length > 40 && x.length < 300).slice(0, max)
+}

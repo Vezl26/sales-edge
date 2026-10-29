@@ -6,7 +6,7 @@ const dataOrigin = process.env.DATA_ORIGIN || ''
 const whitelist = [
   'https://api.deepgram.com', 'wss://api.deepgram.com',
   'https://generativelanguage.googleapis.com', 'https://api.groq.com', 'https://api.anthropic.com',
-  'https://news.google.com',
+  'https://news.google.com', 'https://cdnjs.cloudflare.com',
   ...(dataOrigin ? [dataOrigin] : []),
 ]
 const manifest = {
