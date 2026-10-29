@@ -13,6 +13,7 @@ import type { Glasses } from './glasses/ui'
 import { EnergyTracker } from './audio/speaker'
 import { prepFor, prepCards, type Prep } from './prep/prep'
 import { Prompter, searchDocs, onPrepShare } from './prep/prompter'
+import { suggestReply, aiReplyPrompt } from './intel/replies'
 
 export interface Mic {
   open(source: 'glasses' | 'phone'): Promise<boolean>
@@ -172,7 +173,9 @@ export class App {
   /** Conversate-style help: when talk drifts away from the prep, pull a reference from your documents. */
   assist(text: string, spk: string[]) {
     const s = this.session
-    if (!s || Date.now() - this.lastRefAt < 45000) return
+    if (!s) return
+    if (spk.includes('C') || spk.includes('?')) this.maybeReply(text)
+    if (Date.now() - this.lastRefAt < 45000) return
     const vocab = s.prompter?.vocab()
     // With prep: only step in when the conversation is mostly off the prep.
     if (vocab && onPrepShare(text, vocab) > 0.35) return
@@ -183,6 +186,29 @@ export class App {
     this.lastRefAt = Date.now()
     const body = hits.map(h => `• ${h.text.slice(0, 150)}\n  [${h.doc.slice(0, 28)}]`).join('\n')
     s.addCard({ kind: 'info', key: `ref:${Date.now()}`, title: 'Reference', glass: `REFERENCE (off prep)\n${body}`, phone: `From your documents:\n${hits.map(h => `• ${h.text}\n  — ${h.doc}`).join('\n')}`, at: Date.now() })
+  }
+
+  private lastReplyAt = 0
+  /** Suggested line to say back when the customer asks or pushes back. */
+  private maybeReply(text: string) {
+    const s = this.session
+    if (!s || Date.now() - this.lastReplyAt < 20000) return
+    const goal = s.prompter?.goal
+    const line = suggestReply(text, { m: this.market, s: this.settings, kb: this.kb, goal })
+    const show = (say: string, via: string) => {
+      this.lastReplyAt = Date.now()
+      s.addCard({ kind: 'tip', key: `say:${Date.now()}`, title: 'Suggested reply', glass: `SAY:\n${say}`, phone: `They said: "${text}"\n\nYou could say (${via}):\n${say}`, at: Date.now() })
+    }
+    if (line) { show(line, 'from market data'); return }
+    const asked = /\?\s*$/.test(text.trim())
+    if (asked && aiEnabled(this.settings)) {
+      this.lastReplyAt = Date.now()
+      const recent = s.call.segments.slice(-8).map(x => `${x.spk === 'A' ? 'Alan' : 'Customer'}: ${x.text}`).join('\n')
+      const facts = [this.marketContext().slice(0, 1500), s.prompter ? s.prompter.prep.notes.slice(0, 1500) : ''].filter(Boolean).join('\n')
+      aiComplete(this.settings, aiReplyPrompt(text, recent, goal || '', facts), 120)
+        .then(say => { if (say && this.session === s) show(say.replace(/^["']|["']$/g, ''), 'AI') })
+        .catch(() => {})
+    }
   }
 
   intelText(): string {

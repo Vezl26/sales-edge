@@ -67,6 +67,7 @@ All of it shows on your glasses as swipeable cards.
 - **Prep comes first.** When a call has prep, the right panel works like a teleprompter: your goal stays pinned, the current point is marked ▶, and the next points line up below it.
 - **It follows the conversation.** When something on the prep gets talked about, it's checked off ✓ and the next point moves up. Swipe down = mark done and move on, swipe up = go back.
 - **Off-prep help.** If the conversation drifts somewhere the prep doesn't cover, it pulls the best matching lines from your documents (weekly reports, notes, price lists) as a REFERENCE pop-up. After 20 seconds it switches back to your prep, or you can swipe to go back right away. Price cards pop up the same way.
+- **Suggested replies (SAY:).** When the customer asks something or pushes back (price, competitor, supply, quality, delivery, holiday ads, retail), a line to say pops up, built from today's USDA numbers. With a free AI key in Settings, it also suggests replies for any other question.
 - **After the call:** any prep points you didn't get to show up in the summary as "Not covered".
 
 ## Claude Project — your notes hub
