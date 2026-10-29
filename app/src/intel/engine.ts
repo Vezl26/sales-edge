@@ -2,7 +2,7 @@
 // (prices, market stats, customer talking points, your own price list hits).
 import type { Settings, Customer } from '../types'
 import type { KB } from '../kb/knowledge'
-import { findCustomerMention, findPriceListItems, formatRow, customerTalkingPoints } from '../kb/knowledge'
+import { findCustomerMention, findPriceListItems, formatRow, customerTalkingPoints, accountLines } from '../kb/knowledge'
 import { findCuts } from './lexicon'
 import { type Card, type MarketBundle, priceCard, cutoutCard, killCard, cattleCard, groundCard, retailCard, money } from './market'
 import type { Call } from '../types'
@@ -67,6 +67,15 @@ export class IntelEngine {
     if (/\b(fed cattle|cash cattle|live cattle|cattle prices?|steer prices?|carcass weights?|cattle weights?|dressed (price|weight)|live weight)\b/i.test(lower)) pushIf(cards, cattleCard(b), c => this.fresh(c.key, asky))
     if (/\b(ground beef|chubs?|grind|trim(mings)?|81s|80\/20|81\/19|93\/7|90s|50s|lean)\b/i.test(lower)) pushIf(cards, groundCard(b, text), c => this.fresh(c.key, asky))
     if (/\b(retail|in (the )?stores?|shelf|ad price|ads?\b|feature(d|s)?|grocery|consumers?|shoppers?)\b/i.test(lower)) pushIf(cards, retailCard(b, text), c => this.fresh(c.key, asky))
+
+    // Account questions: "how's the account doing", volume, margin, vs last year
+    if (this.customer && /\b(how('?s| is| are) (we|the account|it|things|business) (doing|going|trending|looking)|account|volume|margin|numbers|year over year|vs\.? last year|up or down|trending|ytd|year to date)\b/i.test(lower)) {
+      const c = this.customer
+      const lines = accountLines(c)
+      if (lines.length && this.fresh(`acct:${c.id}`, asky, 60000)) {
+        cards.push({ kind: 'customer', key: `acct:${c.id}`, title: `${c.name} account`, glass: [`ACCOUNT ${c.name.toUpperCase().slice(0, 18)}${c.metricsAsOf ? ` · ${c.metricsAsOf.slice(5)}` : ''}`, ...lines].join('\n').slice(0, 420), phone: [`${c.name} — numbers as of ${c.metricsAsOf || '?'} (internal, don't read margin aloud)`, ...lines].join('\n'), at: Date.now() })
+      }
+    }
 
     // Your own price lists (deli, chocolate, prepared foods...)
     for (const hit of findPriceListItems(this.getKB(), text)) {

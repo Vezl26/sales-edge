@@ -70,6 +70,15 @@ All of it shows on your glasses as swipeable cards.
 - **Suggested replies (SAY:).** When the customer asks something or pushes back (price, competitor, supply, quality, delivery, holiday ads, retail), a line to say pops up, built from today's USDA numbers. With a free AI key in Settings, it also suggests replies for any other question.
 - **After the call:** any prep points you didn't get to show up in the summary as "Not covered".
 
+## Account numbers (volumes, % vs LY, margin)
+- **Clients → Import CSV** with any columns you have, for example `Customer, Item, Weekly Lbs, LY Lbs, % vs LY, Margin %, Price`, or account-level `Customer, YTD Lbs, % vs LY, GP $`.
+- Re-import whenever you get new numbers. The newest values replace the old ones and get stamped with the date.
+- **On the glasses:** when the account comes up ("how's the account doing?", volume, margin, vs last year), an ACCOUNT card shows the numbers.
+- **Suggested replies only ever use volume and trend.** Margin, GP, cost and profit are for your eyes only and never go into a "SAY:" line.
+
+## Optional AI (free Gemini)
+Get a key at aistudio.google.com → Settings → paste into API key → Save. That's it. The free tier's terms let Google use what you send, so **"Keep my customer numbers, margins and prep out of AI requests"** is on by default. With it on, only public market data and the question are sent.
+
 ## Claude Project — your notes hub
 Set it up once (the app's **Data → Claude Project kit** walks you through it):
 1. In Claude: **Projects → New project → "Sales Edge"**.

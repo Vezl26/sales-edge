@@ -1,7 +1,7 @@
 // Phone screen (the Even app shows this page while the glasses show their own UI).
 import type { App } from '../app'
 import type { Call, Customer, KnowledgeDoc, Settings } from '../types'
-import { uid, importCustomersCsv, parseDelimited, numbersDigest, reportHighlights } from '../kb/knowledge'
+import { uid, importCustomersCsv, parseDelimited, numbersDigest, reportHighlights, accountLines } from '../kb/knowledge'
 import { pdfToText } from '../kb/pdf'
 import { CUTS, lexFor } from '../intel/lexicon'
 import { bestRow, perLb, money, pct, fmtPct, shortDate, priceCard, cutoutCard, killCard, cattleCard } from '../intel/market'
@@ -279,7 +279,7 @@ export class PhoneUI {
     return `
       <div class="btns wrap"><button class="primary" data-act="newCustomer">+ Add customer</button>
       <label class="filebtn">Import CSV<input type="file" accept=".csv,.tsv,.txt,text/*" data-act="importCustomers" hidden></label></div>
-      <p class="muted">CSV columns it understands: Customer, Item, Volume, Price, Contact, Segment, Notes. One row per customer-item.</p>
+      <p class="muted">CSV columns it understands: Customer, Item, Volume, Price, Contact, Segment, Notes. Any other columns (YTD lbs, % vs LY, Margin…) are kept as account numbers. Re-import anytime and the newest numbers replace the old ones.</p>
       ${this.app.kb.customers.sort((a, b) => a.name.localeCompare(b.name)).map(c => `
         <div class="card click" data-act="editCustomer" data-id="${c.id}">
           <b>${esc(c.name)}</b> ${c.segment ? `<span class="muted">· ${esc(c.segment)}</span>` : ''}
@@ -295,6 +295,7 @@ export class PhoneUI {
     return `
       <button class="small" data-act="back">‹ Customers</button>
       <div class="card form">
+        ${accountLines(c).length ? `<div class="card icard customer"><div class="ititle">Account numbers${c.metricsAsOf ? ` · as of ${esc(c.metricsAsOf)}` : ''}</div><pre>${esc(accountLines(c, 30).join('\n'))}</pre></div>` : ''}
         <label>Name</label><input id="c_name" value="${esc(c.name)}">
         <label>Other names they go by (comma separated)</label><input id="c_aliases" value="${esc(c.aliases.join(', '))}">
         <label>Contact / buyer</label><input id="c_contact" value="${esc(c.contact || '')}">
@@ -420,7 +421,8 @@ export class PhoneUI {
         <select id="s_aiProvider"><option value="none" ${s.aiProvider === 'none' ? 'selected' : ''}>Off</option><option value="openai-compatible" ${s.aiProvider === 'openai-compatible' ? 'selected' : ''}>OpenAI-compatible (Gemini, Groq…)</option><option value="anthropic" ${s.aiProvider === 'anthropic' ? 'selected' : ''}>Claude API</option></select>
         <label>Base URL</label><input id="s_aiBase" value="${esc(s.aiBaseUrl)}">
         <label>Model</label><input id="s_aiModel" value="${esc(s.aiModel)}">
-        <label>API key</label><input id="s_aiKey" type="password" value="${esc(s.aiKey)}">
+        <label>API key <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">(get a free Gemini key)</a></label><input id="s_aiKey" type="password" value="${esc(s.aiKey)}" placeholder="paste key, then Save">
+        <label class="check"><input type="checkbox" id="s_aiPrivate" ${s.aiPrivate ? 'checked' : ''}> <span>Keep my customer numbers, margins and prep out of AI requests (recommended with free Gemini)</span></label>
       </div>
       <div class="card form">
         <h2>Claude</h2>
@@ -678,6 +680,9 @@ export class PhoneUI {
     const table = parseDelimited(text) ?? undefined
     const asOf = kind === 'report' ? ($<HTMLInputElement>('#d_asof')?.value || new Date().toISOString().slice(0, 10)) : undefined
     this.app.kb.docs.unshift({ id: uid(), title: title || 'Untitled', kind, asOf, text: text.slice(0, 400_000), addedAt: Date.now(), table: table && table.headers.length > 1 ? table : undefined })
+    // Keep the phone light: only the 8 newest weekly reports keep full text, older ones keep their highlights
+    const reports = this.app.kb.docs.filter(d => d.kind === 'report' && !d.table).sort((a, b) => (b.asOf || '').localeCompare(a.asOf || '') || b.addedAt - a.addedAt)
+    for (const d of reports.slice(8)) if (d.text.length > 4000) d.text = `[highlights only, full report archived]\n${reportHighlights(d.text).join('\n')}`
   }
 
   private async addDoc() {
@@ -702,7 +707,7 @@ export class PhoneUI {
       deepgramKey: v('s_deepgram'), micSource: v('s_mic') as Settings['micSource'], myName: v('s_name') || 'Alan',
       defaultGrade: v('s_grade') as Settings['defaultGrade'], caseWeights: cases,
       aiProvider: v('s_aiProvider') as Settings['aiProvider'], aiBaseUrl: v('s_aiBase'), aiModel: v('s_aiModel'), aiKey: v('s_aiKey'),
-      dataBaseUrl: v('s_data'), claudeProjectUrl: v('s_claude'),
+      dataBaseUrl: v('s_data'), claudeProjectUrl: v('s_claude'), aiPrivate: !!$<HTMLInputElement>('#s_aiPrivate')?.checked,
     }
     const dataChanged = patch.dataBaseUrl !== this.app.settings.dataBaseUrl
     await this.app.saveSettings(patch)

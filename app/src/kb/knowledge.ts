@@ -49,11 +49,15 @@ export function importCustomersCsv(kb: KB, text: string): number {
   const cName = col(/customer|account|company|store|name/)
   if (cName < 0) return 0
   const cItem = col(/item|product|sku|cut|description/)
-  const cVol = col(/vol|lbs|pounds|cases|qty|quantity|weekly/)
-  const cPrice = col(/price|\$|cost|fob/)
+  const isDelta = (x: string) => /\bly\b|prior|last|prev|chg|change|%|vs|diff|yoy|margin|gp/.test(x)
+  const cVol = h.findIndex(x => /vol|lbs|pounds|cases|qty|quantity|weekly/.test(x) && !isDelta(x))
+  const cPrice = h.findIndex(x => /price|\$|fob/.test(x) && !/gp|margin|profit|cost|rebate|sales|revenue|total/.test(x))
   const cNotes = col(/note|comment/)
   const cContact = col(/contact|buyer|phone|email/)
   const cSeg = col(/segment|channel|type/)
+  const known = new Set([cName, cItem, cVol, cPrice, cNotes, cContact, cSeg].filter(i => i >= 0))
+  const extra = t.headers.map((hd, i) => ({ hd, i })).filter(x => !known.has(x.i))
+  const today = new Date().toISOString().slice(0, 10)
   let n = 0
   for (const r of t.rows) {
     const name = r[cName]?.trim()
@@ -69,10 +73,15 @@ export function importCustomersCsv(kb: KB, text: string): number {
     if (cItem >= 0 && r[cItem]) {
       const existing = c.items.find(i => normName(i.name) === normName(r[cItem]))
       const item = existing || { name: r[cItem] }
-      if (cVol >= 0 && r[cVol]) item.volume = r[cVol]
+      if (cVol >= 0 && r[cVol]) item.volume = /^[\d,.\s]+$/.test(r[cVol]) ? `${r[cVol]} ${t.headers[cVol]}` : r[cVol]
       if (cPrice >= 0 && r[cPrice]) item.price = r[cPrice]
+      for (const x of extra) if (r[x.i]) (item.metrics ||= {})[x.hd] = r[x.i]
       if (!existing) c.items.push(item)
+    } else {
+      for (const x of extra) if (r[x.i]) (c.metrics ||= {})[x.hd] = r[x.i]
+      if (cVol >= 0 && r[cVol]) (c.metrics ||= {})[t.headers[cVol]] = r[cVol]
     }
+    c.metricsAsOf = today
     c.updatedAt = Date.now()
   }
   return n
@@ -190,3 +199,20 @@ export function reportHighlights(text: string, max = 8): string[] {
   return flat.replace(/\s*\n\s*/g, ' ').split(/(?<=[.!?])\s+/)
     .filter(x => /\d/.test(x) && x.length > 40 && x.length < 300).slice(0, max)
 }
+
+export const isPrivateMetric = (k: string) => /margin|gp\b|gross profit|profit|cost|cogs|markup|rebate/i.test(k)
+
+/** Account snapshot for the glasses (internal: includes margin). */
+export function accountLines(c: Customer, max = 9): string[] {
+  const out: string[] = []
+  const fmt = (m?: Record<string, string>) => Object.entries(m || {}).map(([k, v]) => `${k} ${v}`).join(' · ')
+  if (c.metrics && Object.keys(c.metrics).length) out.push(fmt(c.metrics))
+  const items = [...c.items].sort((a, b) => num(b.volume) - num(a.volume))
+  for (const i of items) {
+    const parts = [i.volume, i.price ? `@ ${i.price}` : '', fmt(i.metrics)].filter(Boolean).join(' · ')
+    out.push(`${i.name}: ${parts}`)
+    if (out.length >= max) break
+  }
+  return out
+}
+const num = (s?: string) => Number(String(s ?? '').replace(/[^\d.-]/g, '')) || 0

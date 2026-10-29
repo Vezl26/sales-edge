@@ -63,6 +63,10 @@ export class App {
 
   async saveSettings(patch: Partial<Settings>) {
     this.settings = { ...this.settings, ...patch }
+    // Pasting a key is enough: default to the free Gemini setup
+    if (this.settings.aiKey && this.settings.aiProvider === 'none') {
+      this.settings = { ...this.settings, aiProvider: 'openai-compatible', aiBaseUrl: this.settings.aiBaseUrl || DEFAULT_SETTINGS.aiBaseUrl, aiModel: this.settings.aiModel || DEFAULT_SETTINGS.aiModel }
+    }
     await this.store.set('settings', this.settings)
     this.emit()
   }
@@ -134,6 +138,8 @@ export class App {
     const s = this.session
     if (!s) return
     const p = forced ?? (customerId ? prepFor(this.kb, customerId) : null)
+    const cust = this.customerById(customerId ?? undefined)
+    if (cust) this.engine.customer = cust
     if (!p || s.cards.some(c => c.key.startsWith(`prep:${p.id}:`))) return
     s.addPrepCards(prepCards(p))
     s.prompter = new Prompter(p)
@@ -194,7 +200,7 @@ export class App {
     const s = this.session
     if (!s || Date.now() - this.lastReplyAt < 20000) return
     const goal = s.prompter?.goal
-    const line = suggestReply(text, { m: this.market, s: this.settings, kb: this.kb, goal })
+    const line = suggestReply(text, { m: this.market, s: this.settings, kb: this.kb, goal, customer: this.customerById(s.call.customerId) })
     const show = (say: string, via: string) => {
       this.lastReplyAt = Date.now()
       s.addCard({ kind: 'tip', key: `say:${Date.now()}`, title: 'Suggested reply', glass: `SAY:\n${say}`, phone: `They said: "${text}"\n\nYou could say (${via}):\n${say}`, at: Date.now() })
@@ -204,7 +210,8 @@ export class App {
     if (asked && aiEnabled(this.settings)) {
       this.lastReplyAt = Date.now()
       const recent = s.call.segments.slice(-8).map(x => `${x.spk === 'A' ? 'Alan' : 'Customer'}: ${x.text}`).join('\n')
-      const facts = [this.marketContext().slice(0, 1500), s.prompter ? s.prompter.prep.notes.slice(0, 1500) : ''].filter(Boolean).join('\n')
+      const priv = this.settings.aiPrivate
+      const facts = [this.marketContext().slice(0, 1500), !priv && s.prompter ? s.prompter.prep.notes.slice(0, 1500) : ''].filter(Boolean).join('\n')
       aiComplete(this.settings, aiReplyPrompt(text, recent, goal || '', facts), 120)
         .then(say => { if (say && this.session === s) show(say.replace(/^["']|["']$/g, ''), 'AI') })
         .catch(() => {})
@@ -292,7 +299,8 @@ export class App {
     const call = await this.getCall(id)
     if (!call) return
     try {
-      const text = await aiComplete(this.settings, summaryPrompt(call, this.customerById(call.customerId), this.marketContext(), this.numbersContext()), 1400)
+      const priv = this.settings.aiPrivate
+      const text = await aiComplete(this.settings, summaryPrompt(call, priv ? null : this.customerById(call.customerId), this.marketContext(), priv ? '' : this.numbersContext()), 1400)
       call.summary = { ...(call.summary ?? { generatedBy: 'ai', headline: '', topics: [], followUps: [], prices: [], volumes: [], customerNeeds: [], talkingPointsNext: [] }), generatedBy: 'ai', aiText: text }
       const head = text.split('\n').find(l => l.trim() && !/^#*\s*1\.?\s*headline/i.test(l))
       if (head) call.summary.headline = head.replace(/^[#*\d.\s-]+/, '').slice(0, 120)

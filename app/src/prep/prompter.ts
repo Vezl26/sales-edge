@@ -85,6 +85,7 @@ export class Prompter {
 // ---------- reference search over your documents ----------
 interface Sent { doc: string; text: string; words: string[] }
 const cache = new Map<string, Sent[]>()
+let dfCache: { key: string; all: Sent[]; df: Map<string, number> } | null = null
 
 function sentencesOf(kb: KB): Sent[] {
   const out: Sent[] = []
@@ -108,10 +109,14 @@ function sentencesOf(kb: KB): Sent[] {
 export function searchDocs(kb: KB, text: string, avoid?: Set<string>, max = 3): { doc: string; text: string; score: number }[] {
   const q = keywords(text).filter(w => !avoid?.has(w))
   if (q.length < 2) return []
-  const all = sentencesOf(kb)
-  // rarer words count more
-  const df = new Map<string, number>()
-  for (const s of all) for (const w of new Set(s.words)) df.set(w, (df.get(w) ?? 0) + 1)
+  const key = kb.docs.map(d => `${d.id}:${d.addedAt}:${d.text.length}`).join('|')
+  if (!dfCache || dfCache.key !== key) {
+    const all = sentencesOf(kb)
+    const df = new Map<string, number>()
+    for (const s of all) for (const w of new Set(s.words)) df.set(w, (df.get(w) ?? 0) + 1)
+    dfCache = { key, all, df }
+  }
+  const { all, df } = dfCache
   const scored = all.map(s => {
     const hits = q.filter(w => s.words.includes(w))
     const score = hits.reduce((a, w) => a + 1 / Math.log2(1 + (df.get(w) ?? 1)), 0)

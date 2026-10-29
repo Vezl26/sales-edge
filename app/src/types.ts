@@ -62,6 +62,8 @@ export interface CustomerItem {
   volume?: string // e.g. "2,000 lb/week"
   price?: string // their current price, free text
   notes?: string
+  /** Any other columns from your report: % vs LY, margin, YTD lbs… */
+  metrics?: Record<string, string>
 }
 
 export interface Customer {
@@ -72,6 +74,10 @@ export interface Customer {
   segment?: string // retail, foodservice, distributor...
   location?: string
   items: CustomerItem[]
+  /** Account-level numbers from your report (YTD lbs, % change, margin…) */
+  metrics?: Record<string, string>
+  /** When the numbers were last updated (YYYY-MM-DD) */
+  metricsAsOf?: string
   notes: string
   /** Free-form facts learned from calls ("prefers Tuesday deliveries") */
   learned: string[]
@@ -105,6 +111,8 @@ export interface Settings {
   caseWeights: Record<string, number> // imps -> lb per case
   liveAiTips: boolean
   claudeProjectUrl: string
+  /** Keep customer numbers and prep out of AI requests (default on) */
+  aiPrivate: boolean
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -122,6 +130,7 @@ export const DEFAULT_SETTINGS: Settings = {
   caseWeights: {},
   liveAiTips: false,
   claudeProjectUrl: '',
+  aiPrivate: true,
 }
 
 // ---- USDA data shapes (written by the pipeline) ----

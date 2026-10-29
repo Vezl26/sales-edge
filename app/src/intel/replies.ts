@@ -6,8 +6,10 @@ import type { KB } from '../kb/knowledge'
 import { findCuts, lexFor } from './lexicon'
 import { type MarketBundle, bestRow, perLb, money, pct } from './market'
 import { searchDocs } from '../prep/prompter'
+import { isPrivateMetric } from '../kb/knowledge'
+import type { Customer } from '../types'
 
-export interface ReplyCtx { m: MarketBundle; s: Settings; kb: KB; goal?: string; avoid?: Set<string> }
+export interface ReplyCtx { m: MarketBundle; s: Settings; kb: KB; goal?: string; avoid?: Set<string>; customer?: Customer | null }
 
 const has = (re: RegExp, t: string) => re.test(t)
 const spokenPct = (p: number | null) => (p == null ? '' : `${p >= 0 ? 'up' : 'down'} ${Math.abs(p).toFixed(0)}%`)
@@ -21,6 +23,17 @@ export function suggestReply(text: string, ctx: ReplyCtx): string | null {
   const kill = m.market?.slaughter?.cattle
   const cut = findCuts(text)[0]
 
+  // "How are we doing?": volume trend only, never margin or cost
+  if (ctx.customer && /how('?s| is| are) (we|the account|it|things|business) (doing|going|trending|looking)|our (volume|numbers)|up or down|vs\.? last year/.test(t)) {
+    const all = { ...(ctx.customer.metrics || {}) }
+    const pub = Object.entries(all).filter(([k]) => !isPrivateMetric(k))
+    const trend = pub.find(([k]) => /%|chg|change|vs|ly|yoy/i.test(k))
+    const vol = pub.find(([k]) => /vol|lbs|cases|ytd/i.test(k) && k !== trend?.[0])
+    if (trend || vol) {
+      const up = trend && !/^-|\(/.test(trend[1].trim())
+      return `${vol ? `You're at ${vol[1]} ${vol[0].toLowerCase()}` : 'Volume is'}${trend ? `, ${trend[1]} vs last year` : ''}. ${up ? "Good momentum, so let's build on it." : "Let's talk about what would get that back up."} What's moving best for you right now?`
+    }
+  }
   // Price question or push-back on a specific cut
   if (cut && has(/price|cost|pay|paying|quote|how much|where('?s| is)|running|market|high|expensive|cheaper|deal/, t)) {
     const r = bestRow(m.beef, cut.imps, s.defaultGrade)
