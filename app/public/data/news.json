@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-10-30T13:39:47.480Z",
+ "updatedAt": "2026-10-30T13:43:05.648Z",
  "topics": [
   {
    "id": "beef",
@@ -161,6 +161,15 @@
    "link": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPeTdDUTdYVlJyV185d2MxajVGRk1lT3pEMWdTVDItSk1KSC1vUk16QUhWeUdNckFRVENOZkNHaldFVFplM3NxbGpnU3I0SnhNUlBZUW5SNjl3MkNSYzIxd0xCcDJ0Mm9xRzU4RUNyUHhZWngzZWQtX3FTa01lOWtkOXVIMGpEUFJ0WndNZElHYVpqMHBpVmdEODVMeENfbkRpOVA1cXJqM3hENlhUNWF2WGxLSmRDa0JIc3hTMUVoV2NqUk9ZT3hsZDhnbzZheFE?oc=5",
    "source": "wtvcfox",
    "date": "2026-10-30T06:05:48.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "In this campaign-season supermarket, limited chances to comparison shop",
+   "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQMEhiZVpGNXJyckxJNU5oT0hJekhHQ0tZZWkwZXR3djE0b1RiZXNWcUtraVRRLWlsd2YxRUplenhwOWRKbDNfNUhBNWt5WVR4cFZ5bkRBOEEwem92dHRGalBqMUluTHo2Sl9tTWs3aG1tajdaaTVXalE2RVRRSFlhX2djbWFIb19VM0R2SXRoT1dhQ2lYbXJSQk9DbEY?oc=5",
+   "source": "MASSterList",
+   "date": "2026-10-30T03:19:54.000Z",
    "topics": [
     "grocery"
    ]
@@ -446,6 +455,15 @@
    ]
   },
   {
+   "title": "The 10 Most Popular Green Teas, Ranked from Best to Worst",
+   "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFB1ZndhbUtuVW5McEF5TC1vN0lEQ2RyMkRzbjJIMnk2ekZJY2ZQQ2dRd3c4aTRFV1hQSDNhV1pFNGFlZTBxTTViR2dyOThldU1Qaks1dkRPaDVSSzJaTHdOSUtNTEhTUm9l?oc=5",
+   "source": "Food & Wine",
+   "date": "2026-10-29T11:30:00.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
    "title": "TYSON FURY Documentary Goes Beyond the Ring Ahead of Joshua Fight",
    "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxORGVzUkRtb3pZMVBvcEVpdW5RbEZFTjZJX1pZRTVrUkRiZFJObWdxV2dWVmdLRURUYkI3aklMajdLZjUyUUYyZGZBcWpxUkU0c0ZHel91V1dRNlZvaW5aYjY5QVJRTWtiOXp4ai14OHRkdTU4NTJ6cnNka1h2ckJsWjFQaF9JTVZuWHFIakxBUno?oc=5",
    "source": "Netflix",
@@ -505,7 +523,8 @@
    "source": "AgroLatam",
    "date": "2026-10-28T22:32:03.000Z",
    "topics": [
-    "cattle"
+    "cattle",
+    "beef"
    ]
   },
   {
@@ -644,6 +663,24 @@
    ]
   },
   {
+   "title": "Michigan confirms bovine TB in Alcona County cattle herd",
+   "link": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNN1VWa1ZuVFdESVB0QWQ3WElodHA4b04taW53eXktVUNPV0pLSmZzSUZEOTdURDVJMG55WC1Bamd4NVNlQlZYN2xNT1lMMDM0YkdZenhtWkpzSENQaFVRZVhJTnEwZ2dCN2JRTHhKS1lmazkzSEMweXBPTlZaM1JOdDN3S2g1RTZ3ZjViTHJnbnhoQjdHREN1RFdtMVlLZ3BLUjI2M0RmTDFtZ1A5cEpUenJpT1Q2UXNCcmFIQ0NScHkwdGI5S19TSXNYWnRnbEhxZHJzQ3FXTUFNVmRuN2V5ZGxXNDVoZw?oc=5",
+   "source": "Feed Strategy",
+   "date": "2026-10-27T20:29:29.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "Cattle futures firm on Monday after cattle-on-feed report - CME",
+   "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxONEtfQ3puektlWVdjdE9uNmhPV3JNdTlMY2JkNDdhWFBta0RzU0tVRW4wc0JMSlc3LUdjcHlkMVQtUXllN3hKdU9BbjBKWUpOWDJQdTJMRWhoTDdLaDBRa2xMZUw1YU9KYll1T0ZqdEpENmYtMElnNTRGRW43RmxoSUs1SUR5aWpSY0FKa01ycHk2ZmV0TnZGOWozQVdtMWV0ZE9z?oc=5",
+   "source": "The Pig Site",
+   "date": "2026-10-27T19:50:20.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
    "title": "High beef prices aren’t delivering anticipated lift in protein demand",
    "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNdWVBV21VYUNQZ0xBbFA5aFpIcEVWb2FGV2hZZllObFJ2c0xlMjBjVUplNWlNY1MtaGtBUnpmak5SWEdNdTI5Mm1ZRE9DYjFGWU10RWV0dzZpUWNzVlRuT3ZwVjNfUFZMdlA5ODVpWFkwUkNvWFUta2pfb3AzZlNDUlQ5R29zWExDSnlpRV9Rc1ZYemJCaWV0d3JRTTBLR3FvTXlYSWRR?oc=5",
    "source": "Brownfield Ag News",
@@ -657,6 +694,15 @@
    "link": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNcmJLVEtNRkpRTEs1dS1kRHVZZXpjNDVlcDlVdUR2WXhmb3VjQnd5SU1LRHZueVhEVm9xVmo4Y0xmS0lXQlJWU21PbXZuWEFESHloS3hEbWh3eXVid09DRzdUSGVrRk15dlhKWXg4aHpCZW9mM1BuZVJZZ2R6UE9VMnpLMjJidzZIMVM4TTd5RmEwN2MzY1FfUGZXMWdjeDk0TVctdVpYT1VGVVRLSjR0ZFh3QXd5d0NTTF8tQ1ZEMFMzLTZleDJaTFlTRG1zZ1k2cjQ4R24zSFNwMlk?oc=5",
    "source": "Daytona Beach News-Journal",
    "date": "2026-10-27T19:30:00.000Z",
+   "topics": [
+    "cocoa"
+   ]
+  },
+  {
+   "title": "Cocoa Prices Recover from Monday’s 3-week Low",
+   "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQVXpuS09TSnpHNHdDb2JtN01FNGZ3ZkxMby1vVlhGbWROeGhiVXhPLXdxWVRDM0JIaFRNNFJVQzQ3WFRVQWtHSFg0anY2UmdBOFcydDdVejRfLU50STh3a2pEQ2tES3NnOFRTbC16Y2xwWDlIb1RDbmJHZWhseUxEMF83aU5UNEppUjhWZmM0UmZqZ25FWlFNYXN6OFR2V1Q0ZlNjSE9JSQ?oc=5",
+   "source": "TradingView",
+   "date": "2026-10-27T18:37:47.000Z",
    "topics": [
     "cocoa"
    ]
@@ -698,6 +744,15 @@
    ]
   },
   {
+   "title": "State finds bovine TB in northeast Michigan herd. What it means",
+   "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPamtfandXMkFSQU5sSDhIbVA3NmxHOHNtRy1xSW5YNDJzZkFQTUpjVDRlM0xXOFNWZjFod19HYkR6ZzFLLUZ0cDVocVNZQkstb1FQWUw2cWxCUGM4akJTdzBNWmQ1bXp4ZzM4LXhHcE9PcFVpRW94LW1ueDFudnVpdmQzSDJIaE52dmhuMXN5Mnp2UjlwT2d3bllYTDltRFFFUmNHVXM2aGxjUm1MYmdaM3NB?oc=5",
+   "source": "Detroit Free Press",
+   "date": "2026-10-27T14:20:00.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
    "title": "Beef jerky recalled under most serious classification in Iowa and 6 other states",
    "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNSHlaS3hYWE9xOWx5NzdNSV9lN08za0d0RG1jTW43c1lYSkNCXzM1alVKNnNaQ29TT3Z3Zl9vWUhuZkN2bFFySEY0RkJiWUsyZDA1eTNpVlEtMXJ0WjZ1cVFSRkk1NzNJa1RjTko4djFlSGdMYzdNaTdOMUtsREFLeDI0OTh2anA3amRBUGtTTk54TzNlNEdITDFQZVZSMTA2b3BSalJPZzA0d9IBvgFBVV95cUxOeW05ZmVIVFNJM2hJYV9vMUJoVTc0Um5VT3pxak0wblh4WDZ2YTFucG81dnVoSWtsS3JLeE1kSGRhUXJYeGoyWEdfX1BfWEFxb21HdW5CZmtoS2dCbDl3WTU2cWw0dlNXc3pCVHVtTm9JU2NaNmVyVElQLTNTdGlFejZ4WXczcHhRdDlaa3RfcnBqUS1McWYtOWRsZ01FR3hHSFpZc2pVVFZZRXJReFpEWUp0UnNiaHItdmctRU5B?oc=5",
    "source": "KCRG",
@@ -729,6 +784,15 @@
    "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNZGxBNTFXSmllVllqekRvODhfVnhLRy1TSXZPUkhtcEJ4UzFEanNrS3N3Rk0weWl5ZjRqUVp0aXBGZzJjTklDNnVsRjFINkpZaWJuOHAtcTA2cGY0NDRRbkJDQURyTHU1VWw5M2ZkMFlRQzBCTHNTaTFQeXQ4R0lPRUZtNXpJTHNzclFWZ0hoNDBkUVV5M2tTTzZR?oc=5",
    "source": "Beef Magazine",
    "date": "2026-10-27T11:13:39.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "Bovine tuberculosis detected in Northern Michigan cattle herd",
+   "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNTVhrMEVGR2puMlBwWTBMUGlXWU5ZZEpxQTZJT1k1bFpLNXFXdEt1b2hScnE4dXNZYTBBTlpjZEFHNERqVkFnMG5wNXFtc0pwc2JMVEV2YWxia2NHVDA3aVJ4SjItTUJoeXF3U0VLWFZXekNfRnZsc0t4UkxMRHRhSGhEc29lREVYNDd5OUNsTlotY3FaUDhZdjBfZ0VvUEJucC1r?oc=5",
+   "source": "MLive.com",
+   "date": "2026-10-27T10:44:00.000Z",
    "topics": [
     "cattle"
    ]
