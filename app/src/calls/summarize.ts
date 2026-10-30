@@ -25,7 +25,9 @@ export const fmtClock = (ms: number) => {
 }
 
 const DAY = /(today|tonight|tomorrow|monday|tuesday|wednesday|thursday|friday|saturday|sunday|next week|this week|end of (the )?(day|week|month)|first thing|by \w+day|\d{1,2}\/\d{1,2})/i
-const COMMIT_ALAN = /\b(i'll|i will|i'm going to|i am going to|let me|i can (get|send|check|have)|i'll get back|i'll follow up|we'll get|we will get|i'll send|i'll call|i'll check|i'll talk to|i'll have)\b/i
+// A real follow-up = a commitment AND a business action verb (not "I'll kick it off to you").
+const COMMIT_ALAN = /\b(i'll|i will|i'm going to|i am going to|let me|i can)\b.{0,40}\b(send|email|quote|price|check|confirm|call|follow up|get back|look into|find out|talk to|ask|ship|order|set up|schedule|book|deliver|pull|run|update)\b/i
+const MEETING_TALK = /\b(kick it off|kick off|hand it (over|off)|turn it over|pass it|share my screen|go ahead|next slide|on mute|can you hear|you're up|over to you|agenda)\b/i
 const COMMIT_CUST = /\b(i'll|i will|we'll|we will|let me|i'm going to|i need to|i have to)\b.*\b(check|send|confirm|get back|talk to|look|order|place|review|run it by|ask)\b/i
 const NEED = /\b(need|needs|looking for|want|wanted|short on|out of|running low|problem|issue|complain|too high|too expensive|competitor|cheaper|quality|late|delivery|shortage|promo|feature|ad)\b/i
 const PRICE = /(\$\s?\d[\d,]*(\.\d+)?|\d+(\.\d+)?\s?(dollars|bucks|cents))(\s?(a|per|\/)\s?(lb|pound|case|cwt|hundredweight|box))?/gi
@@ -64,6 +66,8 @@ export function autoSummary(call: Call, customer?: Customer | null): CallSummary
     for (const sent of s.text.split(/(?<=[.!?])\s+/)) {
       if (sent.trim().endsWith('?')) continue
       const isAlan = s.spk === 'A'
+      if (sent.split(/\s+/).length < 5 || MEETING_TALK.test(sent)) continue
+      if (s.spk === '?') continue
       const hit = isAlan ? COMMIT_ALAN.test(sent) : COMMIT_CUST.test(sent)
       if (!hit) continue
       const due = sent.match(DAY)?.[0]
