@@ -1,17 +1,17 @@
 {
  "seed": true,
  "usda": {
-  "updatedAt": "2026-10-30T14:11:22.269Z",
+  "updatedAt": "2026-10-30T19:57:12.822Z",
   "sources": {
    "boxedBeef": {
     "ok": true,
-    "reportDate": "2026-10-29",
-    "cuts": 69,
+    "reportDate": "2026-10-30",
+    "cuts": 71,
     "via": "USDA AMS LM_XB403 (PDF)"
    },
    "slaughter": {
     "ok": true,
-    "reportDate": "2026-10-29"
+    "reportDate": "2026-10-30"
    },
    "fedCattle": {
     "ok": false,
@@ -19,15 +19,15 @@
    },
    "retail": {
     "ok": true,
-    "reportDate": "2026-10-19",
-    "items": 157
+    "reportDate": "2026-10-26",
+    "items": 153
    }
   }
  },
  "news": {
-  "updatedAt": "2026-10-30T14:11:34.608Z",
-  "added": 40,
-  "total": 115,
+  "updatedAt": "2026-10-30T19:57:25.133Z",
+  "added": 51,
+  "total": 137,
   "errors": {}
  }
 }
