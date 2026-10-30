@@ -1,1 +1,926 @@
-{"updatedAt": null, "topics": [], "items": []}
+{
+ "updatedAt": "2026-10-30T13:39:47.480Z",
+ "topics": [
+  {
+   "id": "beef",
+   "label": "Beef market"
+  },
+  {
+   "id": "cattle",
+   "label": "Cattle"
+  },
+  {
+   "id": "usda",
+   "label": "USDA / policy"
+  },
+  {
+   "id": "grocery",
+   "label": "Grocery industry"
+  },
+  {
+   "id": "deli",
+   "label": "Deli & prepared foods"
+  },
+  {
+   "id": "cocoa",
+   "label": "Chocolate & cocoa"
+  },
+  {
+   "id": "cargill",
+   "label": "Cargill"
+  },
+  {
+   "id": "local",
+   "label": "Virginia / Richmond"
+  },
+  {
+   "id": "protein",
+   "label": "Protein & meat industry"
+  }
+ ],
+ "items": [
+  {
+   "title": "Young parents are reshaping grocery shopping and forcing industry change",
+   "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOb083YWJTV2RJTkdwN0s2a0Flb0JZWHFNbGJVdXBBSHY0c0tCQ0h5bGVYcFhUTjMwd0VkQnlwbE9MbE5VbGlQRUM5YnVoSnNHSmZDdDFicnBKc0tYREgtZFMxU09vdW96ZFpnRkhFYzRTZ000QUJ2ejFzX2kxa1V1aUc0Z2hiWjBZRTVfQ24zenBqdkxtNk1ZenRyV2RjcWFvTXFuWkhGcmFXRXlvUzUzY3ZNVDFHTUVzVVVkRmFuRnFBUQ?oc=5",
+   "source": "Supermarket Perimeter",
+   "date": "2026-10-30T13:33:02.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "National Beef Workers in Liberal, Kansas Ratify Strong Union Contract",
+   "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNMnBjUng1ejBER01OTVBZRGZJbDNGbUlMV3dhUkU3bUxuajkxRUZ0OUptaFFWNm51NE54OEU0Nk9RT290OUJlWnlyc1pUeHEwUkhTbkxtUFNETlV1a1RCRUwydnR6cnluZE5BVFZzT0xJVTFjTTIyVjIzSXZGdmFNQ1M3SDM3b0ljUDMtZVdEcnVWSTNZLThpTUF1dlY2anB2TGNwQXBuRUwxc1dkT25nVzlubDhsdw?oc=5",
+   "source": "Oklahoma Farm Report",
+   "date": "2026-10-30T13:19:09.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "Once Upon a Coconut Adds Fruit Punch Coconut Water",
+   "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOb2pvZC1pc04xVVh2eVk5QzU4cnJrdktUNEdzVWZ4dnA3SDloMU81ZUp1cEFWbTJEWG5zc0xlcHVoakVpVUhVQktDcTBobVVaZl8tXzdUbG1RaHRVYnk5QmZ1aTdueDVHZ2xYQ053WjRXSC1jd1ktWFJ1dS1JN2J0NDdSOFZqcFV5eFlzSkhWMHlOU1pjS0VuOVduUEQ?oc=5",
+   "source": "Prepared Foods",
+   "date": "2026-10-30T12:00:00.000Z",
+   "topics": [
+    "deli"
+   ]
+  },
+  {
+   "title": "85% of Large French Supermarket Car Parks Lack Solar Canopies After July 2026 APER Deadline - News and Statistics",
+   "link": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPZ0tSWThJLUtuU3F1NkFDTERveDF4dlRTdjNjOEFNMmMtNGJRcjVxQ0VZWElkNlhlSVowQzcxMzFEVXZUNXJFTkpfUmdCeTFxcll4R00xNGxpOEY4aVl3UndIalRObkk1b0xnZzVYYXUtM3VIMGhfUVdaWk95LW4wR0t3MGhWRHlmcVpWaGxhUHUzMnZHeHBsRVhucUJkZmNXblI4dXhzYnZrQUIxLUxLQ2JXQTVxR29iMUZWSGZWZldUQTZQbG5WSTRyMA?oc=5",
+   "source": "IndexBox",
+   "date": "2026-10-30T11:32:43.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Swiss supermarket chain plays down job loss rumours",
+   "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPMVdXaGNMVHpCNFNsQzR0MXNZLV84RUVRS094RnhDLUMtMWNFTUpYblYwNktYU1AzcFRrV08wQWVyT0x0YjZvZkh5R1RoMlNrNTE2Y1MxOV9BZEhfLV9CUjZSUUxJd19oUG0yOXRhcWVMd1BGWWhQSVJDeFBlVExoUHdDZ1R1ZHFsUWpqZUdnUC1mSU5yMEJkeXZHTVJWUGUxUmN2dWFRVTJXY0I2VVh3?oc=5",
+   "source": "SWI swissinfo.ch",
+   "date": "2026-10-30T11:14:15.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "What managed service providers can learn from the 2026 French supermarket attacks",
+   "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPcmV1a1phX2hfR2FFNER5MVR1TF9vbTZNN2xqSXFRYlM5bGtSWnlna21vYTAyeTdLUTFHcExVajhadUpkUTJHZXRySFBOZm9RaUZheFNBclI1d0RxcnVKbnpNT2xVeEtOQkswRFlST3o5cUY0bnZxYnRvVE13Nk1zckRMUmwyaG5HbElVVVQ2dWtxbElTbTM5bmlmSjZ1VGZxM05WYw?oc=5",
+   "source": "Barracuda Blog",
+   "date": "2026-10-30T11:07:51.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Wendy's, struggling with beef prices and growing competition, gets buyout offer",
+   "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNaExOMTk3VncxU1VoR0d4NGpOdjBqQS1wRE9zbERHN04wT0tHd19KZlB3bk9BZWhmU29jMTlLa3ZuVl82UjdySWdkZFpVMmxCQ0hBV0dRdHFTZlVWQmhWaU9NdGo4cDNBV0p0d2s5MlpnaFZTZnZtUF9pTlVCMUdsOElhQXFhaDRGR3pydy1XVDJNUnhWeEhxYm5IeGRLcWsxWC1vX2VIMVI5dmdrMWJWQXVOVXh4aHA2ZW15djYzYw?oc=5",
+   "source": "KOAA News 5",
+   "date": "2026-10-30T10:53:28.000Z",
+   "topics": [
+    "beef"
+   ]
+  },
+  {
+   "title": "USDA Rural Development Announces Loan Guarantee for New Beef Processing Facility in Dimmitt, Texas",
+   "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQMUE2NElsUzg5OGtxZ3NwVmFXMU9vLXdocTJfMjBmQTJLZ2EwYzVHQUZfdWJVRkIwNDVxRzJFRGV6NU03eWtzUUdhUjhCSFVXa0xvQVFwVE9hZFNKai1SZHpHU2tDWlhQdXVFNWZQR0xKcUhyYTRsa2Zya0F3QlN5VGNJOE9NVkNsMnBOZmZtQU1ROS15SklYWHR1Q2lSbkMwRm0tYnlWTzY1X3pfREZ1Yk5Scm10MGJpYWxoQ0ZVLVNkdzFHQzRDcU9hOC0ycFMwQjBrZUZxdk4?oc=5",
+   "source": "www.foodmarket.com",
+   "date": "2026-10-30T10:15:02.000Z",
+   "topics": [
+    "usda"
+   ]
+  },
+  {
+   "title": "Aldi Accelerates £370m UK Expansion with Seven New Supermarket Openings in November",
+   "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPbGJ6LUVVSkRHZ1dzbVQyaDJmemxUSFFhWk84R1RRRkxtYTZVcE9VTlh1dzBheWM1UVlNSkxJYU5iRTA3RHNWWENWWG0zc1AzMHFsc3owRVZNMVpQUmdJTi1UWW1wNWVlMUl3Slo1S1RWa0pXb25COGRjWUFNNkV3Sng3c0pEOWdKam5nalNSYnVTNjRjRk10VE1WTU42dE5aNEk1UHM3R2JZa2hRRkVTTEFDeVdoUkpGSEktYmtaSFNiRXNrcFlNcXRfT3pvajBLTEVscA?oc=5",
+   "source": "www.facilitiesmanagement-now.com",
+   "date": "2026-10-30T10:13:38.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Beef prices squeeze a beloved Texas BBQ joint as the midterms approach",
+   "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQekFVVTVhRnZtOU45eUxVZjZaMFpiSEtOZVI0bjR4UF9LS3JtUnFrYjVFVkhwN1VjZlZHWGxNY3JZWnRHSnRPUVFBQlo2S25RUURhZk9TbzBiT09OcGF6MDF2cjRYclpOVERBRi1EQW1OaHlYVzRmNXJrNG55NEc5ZDFUbDlSLU83TC14WlZ6SXdCU25ZUWo4T3lwWmw3bXk5RjBreWZuMA?oc=5",
+   "source": "2 News Oklahoma KJRH Tulsa",
+   "date": "2026-10-30T08:08:43.000Z",
+   "topics": [
+    "beef"
+   ]
+  },
+  {
+   "title": "International Foodservice Distributors Association Celebrates Winners at National Championship",
+   "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNbnBXdXhzQ2NuMC1lc1BMZWtKeGJFc09ZdUl1d3FURElZa180V3lPR2pDUURhTHlfRWRXRW5tcmg5R21HU2hJblJCam5zTUVHN1R0SmZlMllnemwwQ2VIc25fbG12RUJEemRXSGlNV2pVMExkWThfOG8yM3V2N1h0VkRKUUgtSDB4cEkweXhqXzBGTXBRc28yVzJpazJtU1MzczNZWjBaWTc4eWlpb3hFSEU0YUNvY3JMdUtYZkJSUnhkYkg5SlE0NmY4Ti1aTmk3VVdCd1E5Zw?oc=5",
+   "source": "Perishable News",
+   "date": "2026-10-30T08:01:09.000Z",
+   "topics": [
+    "deli"
+   ]
+  },
+  {
+   "title": "Australia’s Coles marks steepest fall since 2020 as rival promotions bite",
+   "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQZkJpWGd3Y1FtNDBtU0hvTDFBUUZ6eUdjVWUzR2ZTY3dBVlItT0JhY1UwMk1pSWpYTm15OVhrX3NYWldaT3lFX1kyWloyaTFIVjZsMDAyMXhzcWRpbzJxak9BUHg0RmhUWEZWcDdNNkJ0OW9VbkNsUzZYeXM1UFRtcjZGTXViSGozQnRhbDhtd0hwRGtEaU84VXR1ZG03bng1dVIzSE9UeXRzZTVRd3pxR1YtRzMzYVU?oc=5",
+   "source": "WTVB",
+   "date": "2026-10-30T07:38:48.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Sabres' Tyson Kozak: Deposits goal in win",
+   "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPUXJjNDNHWUY4VTdFY1MtYnZMYk5Gb01CRDB4Wm8zSlhkRzN0RnF6TV8ySkc2YVhZeE1od24xd2p6VFl4ajBSWDVDNThILXhrTkNLNnE0WG9NU2pJRGhjSmg2Q0VHSWVIcWd4MkNwMTJkcHRBZTBpVzhUUkJjbWM5alZJT25XNC1CU0djQmJ5bw?oc=5",
+   "source": "CBS Sports",
+   "date": "2026-10-30T06:47:58.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "Cyberattacks hit European supermarket chains and disrupt refrigeration systems",
+   "link": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPeTdDUTdYVlJyV185d2MxajVGRk1lT3pEMWdTVDItSk1KSC1vUk16QUhWeUdNckFRVENOZkNHaldFVFplM3NxbGpnU3I0SnhNUlBZUW5SNjl3MkNSYzIxd0xCcDJ0Mm9xRzU4RUNyUHhZWngzZWQtX3FTa01lOWtkOXVIMGpEUFJ0WndNZElHYVpqMHBpVmdEODVMeENfbkRpOVA1cXJqM3hENlhUNWF2WGxLSmRDa0JIc3hTMUVoV2NqUk9ZT3hsZDhnbzZheFE?oc=5",
+   "source": "wtvcfox",
+   "date": "2026-10-30T06:05:48.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Jaylon Tyson (neck) available vs. Atlanta",
+   "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOTkJBMnV3SUNIQ3FDNkQyb3ZOU0F6N3lKX281ZE1pQ2Fnb3U5ZjRhcWozRHcwVy1iMWxvbnk4VmdFMjFWMzVVYVZBOXNLR3pjaDNoOUJLWERlQ1I1eVd4RUVGUDY3M1IwZlBzaGdlVVA1R2JCT1dDTEVwX2lSaGtfRFprWE50bUJOeDljMG04Y3FTbkdLS0VFZGlGMnVxWXNMdS1xQlJadFRZdw?oc=5",
+   "source": "NBC Sports",
+   "date": "2026-10-30T03:14:59.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "Ex-Long Island woman charged in killing of newborn found in Commack movie theater toilet 30 years ago",
+   "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNR25YbFFISEhEYzIzRy1ON2llQXlfaUxwR2k2SEtsQ2NpS3Q2WG1kTVJfdUpMS0sxTEtuRlJzSWlVZmRtSmhQbFp2VkZnYnhRWC1PZTVwejVJdXFUQnNTRGFuaFVvVl82dE1NYm5acVdtS01MV3Y0TG1mTzRTdFZyaVlMYUFIbHR1akRnSERGNTFFaHoyakc0Ul9Pa1BwMzdFeXFid1VtRGlqRzJId1B3bmxacENZZXRDeUdLOA?oc=5",
+   "source": "Newsday",
+   "date": "2026-10-30T02:44:36.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "Registration Opens for the 2027 Virginia Food and Beverage Expo",
+   "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPOElMai1ydUdjQlJtYkNJMF9wQjNYbDNGdFB4Tzl0RGpadWpYeHlHemRJYnAzVVdsQkFHemp6SE9fQXpIMkRuQ3NEQVJtRVJfc2l4cUdPbHpmU18zWHh3YUlCY19ObUlLN3dFdjh2OW92c3p0U3AtRVEybzdJemZNWjBXU1dheU1tNndzN09pX0VhYmZ6WVduNXFYdw?oc=5",
+   "source": "Morning Ag Clips",
+   "date": "2026-10-30T01:55:38.000Z",
+   "topics": [
+    "local"
+   ]
+  },
+  {
+   "title": "Halloween chocolate prices jump 15% over last year",
+   "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOeFg1LXFTd1ZjeGo2X2cxMW8xeFlkZDFyM0JhSlQwT1pkNDJLai04UFo3d0xKQ3p1YkJpQlE4VFhDZmcwV0lHZnhzbTBFYmFPNWhBTWloYm4tS3lUbmtyR2dZUG1zUGtuYjQ3cWdkb1lFc2phM3JpVjdGMW1HZ0Ixcmx3aWRqbzR3ZEs3ZmI2eG9QS2Z4T1NjTi0wYVJOMkpWTkxUMk1Ocw?oc=5",
+   "source": "ABC17NEWS",
+   "date": "2026-10-30T01:51:08.000Z",
+   "topics": [
+    "cocoa"
+   ]
+  },
+  {
+   "title": "Don't blame farmers for those high grocery prices | John Lindt",
+   "link": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxNTklDdFdtampxTHBRdUFYYmh4OXhCQkliNnBhTzZJQ2JrbGxqU2xoUjZLREZydm5tV0lJcVk5aDJDUHdCcXQzdl9zTFRGay13MTFxR3F5ZDlQNHlEY1ZqSmpLWXAwWHpHc3RvclIwOWt4S0c0cmRhdk1SLWFoTTVBTDIxUEdCaWVhR01MajRtU0t5T05xb1RHUjJyLXFtclhGT1AwTmdtWGFNQ3p5eVlBcHlncWcxUzd3T3lsdGtxcG1nTTZCckNxQzJ6VWstenhaYWhB?oc=5",
+   "source": "Hanford Sentinel",
+   "date": "2026-10-30T01:45:00.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Connecticut grocery changes: Second Aldi opens in Bristol as Stop & Shop closes in Clinton",
+   "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPcmJiSWdMbEQ0anZ0dEJ0NDFVdkVaMGNMdU5yVXl3MUtVdWJ3VVZvNkVvcnNtaXd0N0VpQUc5NGhRT2VnQ1lON0h2WU9BcFREZkI0LXNCRGdaZ3d6U0sweXlfb18wWERoaEdfTGtGQWpsdjNmZTBfOWtrdFp3YUV1UmZVLUNJd2l4YkVmbnpPSlVEbm5rYm5nd21OY24wT3QyU1lCZjR1TQ?oc=5",
+   "source": "Greenwich Time",
+   "date": "2026-10-30T01:19:35.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "St. Paul candy shop sticks to “no skimping on the family recipe” as chocolate prices climb",
+   "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPa19BQ2Jqc0l1cW0yZ0hCWDNmRFVvTnJrN0dJa0NOUXNaQmIwSHd2UEQweU5LVmp3S29Bb3hRN0ZWOTRweUQ3eFc3NjZyellzNGp5MFYzSldYZkZfMURTc0hWV3JvZnViN0wyZWtjRGRtdDhya1U0ZDBLV3p3S0hLdHVZN2l5MkpnVnl1Y3N3c1N2SXVzN21VbTEyU3h6elJXUUgzZlBfWklUcGowMjkzMENhUU5GZElwc1dfNjhtNmFhOU9BbDBN?oc=5",
+   "source": "CBS News",
+   "date": "2026-10-29T23:34:00.000Z",
+   "topics": [
+    "cocoa"
+   ]
+  },
+  {
+   "title": "Cavs injury report: Meleek Thomas, Jaylon Tyson questionable vs. Hawks",
+   "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNSnRSU1NSZ0htOVJDMGhwTVZINndTTkJwQ2hWdml3MVVkOHRibWJGMVJnWWJrNDFsMHdra1h5WkYwZk9fOE14UFFVZXVOZ1FJWjFfRHJDZll2eTN3ZkxQR3V1VWVlcGplVjM0c251akpWdGNLQ0lsN3VSdkM1VjZndE1hTGlzME4wZnd3MDlIcldGcWZwYlB5UGd5X1dLa1dfRUJYRUhoVjRoREU?oc=5",
+   "source": "Cavaliers Nation",
+   "date": "2026-10-29T23:12:52.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "A big all-night Indian supermarket just opened in the East Bay",
+   "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQODJpX3A0T2ZOX3QwcXc4WGN1ZEc1WUxfR0oyeElEUTFncjdRSEpUTGt1a1NYQjZuQy0xLTdrMzlLd3RXUUVLTjhlRWFISEotRlVTSE9pRFBoek5wajVJS1d0LUdqSlVuR0VpRlBIVHZpcHR0TVdpZUtlQng0Zkljby1TcG1DdTJ6bHI1anl0QktBdXluYVV3YXBQNnhYdTl2VVpIcA?oc=5",
+   "source": "The Mercury News",
+   "date": "2026-10-29T22:56:30.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Cattle See Thursday Weakness, as Feeders Close Mixed",
+   "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNU0NfTzVDY2NkOW5yYzM0NG9aUC1aeXVyU0lhU1BoZ3BpYVZySExyUGVxMmRnVVpuZWpHcDQ5dGZaTlUyb2tiNGc2OEVQcXU2MnVRaDZheTkxZnh5T1NVdkRCcl9rcV9EWmtCeU9hRkhMU3RmZjNMdkF0anlIaWFtMlh0cmdQcTNTME03UEhNZHFGVC1pMmtWd0R1alJEck9KQ0RqZmZvVGI5ZXFmSmtB?oc=5",
+   "source": "TradingView",
+   "date": "2026-10-29T22:21:02.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "USDA backs $24.6M loan to build Texas beef plant",
+   "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPM2tWei1CNUdCYmx1SW1GaldCYmxLTTBlaVk3U3c1c1Z5RE8ybXVXbUFuWGpnUE52RTZ2cl9lWmtLT1g5Sy02NUlvVW9uWUVZYWU2NUtqV3ZZVmtNMzhJTklERndtcUVESHdvZzZkZHRmem1YY21FTnYtVFUxMGl2elFEdWhGNUxfSjBjYWNkbnVBdw?oc=5",
+   "source": "Beef Magazine",
+   "date": "2026-10-29T21:37:19.000Z",
+   "topics": [
+    "usda"
+   ]
+  },
+  {
+   "title": "Gophers coach still fuming over Cade Tyson's eligibility ahead of opener",
+   "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPRVR5WTZSUHJpUFRBa3o0OFF0MkhVUUprQ0h3anlSZmVMcWFja2F6VFZ4RHlSbEVzNHpXSHNsUHJYX3dSR0JIRVZvWHJIakhRRUtBRWktU29SdkMwVWF0djZUM2xnTEYtTVRIcmp6clV6Zkp0TUpjN1MtdElnWVZkTmZQRXNTNVI1SkVSNFBwb3NZeDFaOG9QVFRtU2E?oc=5",
+   "source": "FOX 9 Minneapolis-St. Paul",
+   "date": "2026-10-29T21:34:51.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "Beef prices squeeze a beloved Texas BBQ joint as midterm voters weigh costs in the Rio Grande Valley",
+   "link": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxOSEpWd1E3b0EyclhlZkltOTNEOEt3b3h5ems0X25XMG1oM21SZVQwZlVaVlZKRTZhekZ4ZUZ6LUVqNkpHWDRxWXhLS3ZsV3lyN0RiNmRNa1hON3BsYURzZGo0RWNCeEUyd1duVFF1WXFoWUFXeldHXzk4V1JvM3lPdnpxS3h1Q3NPc2ZJRTRSTmhqdjRaMFhZWG1PNjJOX2hXSlRxWUNSdjRTTWg0bGw2WDFGeGw4ZjR2bzdBbGk0MVJpZll5bmtOWDNwRVphWkI0SWc?oc=5",
+   "source": "Scripps News",
+   "date": "2026-10-29T21:19:37.000Z",
+   "topics": [
+    "beef"
+   ]
+  },
+  {
+   "title": "McGhee Tyson Airport parking lot upgrades almost complete, work continues on new garage",
+   "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQa0VFWkZlYWp5NEw3Y2lma240NGRsUGpSWERpcW9ES1ZTdy1sTnJvSS16b0pra1oyTXJNbUVoc0hYaEFvcU1WNE9pbEIybGNJQzhVT3UxRGxCZjM1V3VUbE9EQ0JPdnFMbThRNUpXOVhvZExkOERaRDBfNXZRV1V1ZGRiM054NFBNOGdrZXBPc0RRSVhwUEtWLUcwdWFoZUhfSnJrTWR1MWV6UTFGWTZRa0tvbFlIdW53UlppN2phSjZTbEJISVp0c0luOXNNTTh1YUFtOHB5TjI?oc=5",
+   "source": "WBIR",
+   "date": "2026-10-29T21:04:00.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "Virginia Mom Accused Of Killing Newborn Found In Commack Movie Theater Toilet 30 Years Ago",
+   "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQT0UzcDViNmtqRGlpeGhUWFUxdzZlOUxYRU5DaDM2VGU4Q3psZlNIdEVvdUxqbEp2bzE4VzNxdFVaTUl1R3hRMVRlV2M1U1F4dG9GRzdpVHZSNzExdFJNSExpMjdHSEkyOFZIcjZHdTk4TTViTU1VT2tfa21yNmlkcXlDdWV4S3VkdUdyRnBqc2cxcWl6LVFB?oc=5",
+   "source": "DailyVoice.com",
+   "date": "2026-10-29T20:57:07.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "Shapiro makes campaign stop at Reading supermarket",
+   "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNanNzbTk1dlBVeDgyUzQxYWJEMXB6RUM2YXY1YmRiUVBKWkhoZm5rSXhiQnhQRmU4bmJoQWxBdkxidnpUdjZwYi1BRjdRdDhoeVh4cmtMNktkZ1RZOUttNDhNaVVkdjhOWl9MVGJBdjVKME5uRHhPYmNHOThnc0Z5dEthNTZZck1iYUwtbTV1Q0F4OHJHMWc?oc=5",
+   "source": "Reading Eagle",
+   "date": "2026-10-29T20:55:29.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Richmond Food News: Oct. 29-Nov. 4, 2026",
+   "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQMUhZT1pnUmZaSGo1aF9BTlQ0TnZOeXU3VUY1VUtsNWZiUEl2LUFtS3E1b0FVU2tYd1RZODFLd3UwU2FXTlNBYU5kSEVhUEt2cFZncm9hYjJJeVluMS1RaDA2RmhiZV9sdUpRM1VVUTQ0MXozTHBnZWNSeV9TUThDQ0QzV1RnZHhR?oc=5",
+   "source": "richmondmagazine.com",
+   "date": "2026-10-29T20:51:00.000Z",
+   "topics": [
+    "local"
+   ]
+  },
+  {
+   "title": "Cattle futures mixed waiting on direct trade",
+   "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPcVVHb0hjMlVZczlzQ2poN2Jta1ltT2tJQ1NIUkhOR2FjTXZ6bVd1aEMzcGdMWVUtV09YMk5wYjFSU0E3UnpkSU8zMnlDVXlBWDFLZEVha1A3Y1NOa015LS1ZbEVCUjBNaFpDRTNuT2pIdWQ1Sk9qTzRKXzFpSV8yNmllY3hldw?oc=5",
+   "source": "Brownfield Ag News",
+   "date": "2026-10-29T20:34:38.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "USDA Boxed Beef Report: Mixed Daily Cutout Values for October 29, 2026 - News and Statistics",
+   "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPU2h0WFFQSzk1eTVYVVlSZk9ZLTA4LXJOWU5oME44Q01RaGtZSDBCUF9PX2ZMbVJocEQtUVBwY0Q0ZEdjVHlQcXhWSmM1Y2R6dEU4bzNjd1VvMjRYTmNERjlta3hYaURJajdPSDNvTmZIQ1pKcVdCcHljaWZHWkVCdldwUmYzakdXaWVXaw?oc=5",
+   "source": "IndexBox",
+   "date": "2026-10-29T20:30:27.000Z",
+   "topics": [
+    "beef",
+    "usda"
+   ]
+  },
+  {
+   "title": "National Beef workers ratify new five-year contract in Kansas",
+   "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOZjVGeGwtT28xejVmbzJwYkR0TkVlamU4dHJJTkhRQUpUNHVFbHdlNm1uQkF3TVhLT1hadTlzX2FTdm1xRmFVb3dtdEttMU1JTGQyTG9SS2VGai1fSmJfdV9WVkV3alhCOTlwNHhObmNxQmhLLTVaRS1MRnlvTlhLRUk5eFZacXRscFdzN29kYXVSWTBZVGN6blFfSVY?oc=5",
+   "source": "Brownfield Ag News",
+   "date": "2026-10-29T19:43:07.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "New World screwworm was detected in Arizona. What does that mean for beef prices?",
+   "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9zdnhyeV8tZnpJeDNTRUQ0S1cxY3Yxc2JzWjdZdVZnVzEtcWlVZnRRd01yTExHS1lCR2dPRkdnNjBpeDhZYmpoMGRoNHhpNjhOLUNaS1lGbTZpUzUtQVFJQWc3YnNEdkxtbzFtV0ZkaURZVFE?oc=5",
+   "source": "KTAR News 92.3 FM",
+   "date": "2026-10-29T19:39:54.000Z",
+   "topics": [
+    "beef"
+   ]
+  },
+  {
+   "title": "USDA Cattle Report: Mixed Negotiated Cash Trade, Lower Nebraska and Western Cornbelt Prices - News and Statistics",
+   "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNM2ppN1hiTVY3b0o5NV8wanNvVVN1eDNOd3BWZktvdElyVndTV3hGZTZoYmI5SGkyenNINm5lRjMzWTU2Y2pSV0l0NXZ2LU1qWGZuU0RfX1Ztb0xBS1Y0N0kwakFGVFg5ZVZmUHhxb2JJUnR6QlIydVJvaXFxRmhIWDloMjA4UG5LVkRqYnJwclcxTl9MMkk5Wnc5RXNZR1N3Tng0?oc=5",
+   "source": "IndexBox",
+   "date": "2026-10-29T19:10:20.000Z",
+   "topics": [
+    "usda"
+   ]
+  },
+  {
+   "title": "Virginia Woman Indicted for Cold Case Killing of Infant in 1996; Extradited to Face Murder Charges",
+   "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQWkNIZGk1MFI0LWdRN0lTUXoxcWVab21xSWV2S0w4aWVxNndENzdwWnFGajdQN0E5Q1hpYjRQNlNHVTViZ2YxRjhQdFJ3em5VVlJ1VXpSUXZoMXMtSDZyVVNlYS1XckdmNmJCSzJxbFJ6bDJON2FvaFNCa2pkem5XR1pBa3RUU3JoWG81LWZVY09tN1A3NmFYOU5ZaEVucVVZZUczT21sNURyenlQemJiVjJ6YVVlVVNiMERjaHE1NkxyZkdRRExyY2F3?oc=5",
+   "source": "suffolkcountyny.gov",
+   "date": "2026-10-29T19:09:53.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "Falling cocoa prices offer little relief for Halloween candy shoppers",
+   "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNOWRqYzZGNjNqYWtwQmRZVTdUQ2N3WWxzSUk1Z3NTXzd4T2IxU3MzRmloR3RCaE9mLXZETDNnQUFldUlwR1lmTHJHamI5TkR4dzBKLUpYQ0FfaS1tRDVBLVhBckdnY04zZ215UU1DUEJPUEdzaGtNYXFsZWNzcFZlNlQxam1aNUhkeTBRaVJxOVdUN2hRRHhyYmV3?oc=5",
+   "source": "Ohio's Country Journal",
+   "date": "2026-10-29T19:00:00.000Z",
+   "topics": [
+    "cocoa"
+   ]
+  },
+  {
+   "title": "Cocoa Remains Weak on Rising ICE Inventories and Potential Brazilian Cocoa Sales",
+   "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNdG9Pa1VkUHBWS1pWbXFqZVJyWU9zeGtNdk5KaG5Qekp2MUo3YnJFQ2xOVHpMX0lzbW5kdGY2cG40S19ibDVxVWU0Y3pwaWxJeGhvaVYwaHV0LXcyczZnZ2NaLUs3b2RzX1ZFc0FjZUdGQ0d5SWVzZ0dIX2RsaDhVbzRBSy1PZkhCNEVkNktWTEN1SVM2bW9wWXdSbkM5UzBwUU9kcWJYN3lYaW9IeVVnVFZMZmdOSUd4dHZJWHVadHZxWC1CbndDNmdiNEw5WjQyUDdEVVVn?oc=5",
+   "source": "TradingView",
+   "date": "2026-10-29T18:41:52.000Z",
+   "topics": [
+    "cocoa"
+   ]
+  },
+  {
+   "title": "Rising Grocery Prices Bring Little Return to Farmers",
+   "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE41RmcySC1USFpiemxrWE9QYi1qQi1Bb3hMdDBMWUo2TVBUcVRwQmdnOW4yRWd2Q3dVam9KcEcya3F5dnFlSHVaYlM1Y2ZZNkVFU2RvdTBCSFdjZGlPanN6dXRtcDBJV0ZHblVJM2I2dWdQdEFTUHBTcDNlcnQ2RHM?oc=5",
+   "source": "RFD-TV",
+   "date": "2026-10-29T18:27:20.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "PlantSwitch moves manufacturing to China amid rapid growth",
+   "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNNDMyMlV5QmxMZzhzeDNaY1RzZlk3OU9Mbmszc3RQeU43Sk5DU0RPeHg4NHZjMGoyWnZ6aThwcVg5YnJZaVRETHRVbnJqS0dNTUYxTGJBbm9fa1dpS05LcmZHZ0FfR2JjbzM1Q2xKZVBFUFNXaXpEM1V0RFdhbVRQMm1aYkloUW1Oa0M2U0R0UQ?oc=5",
+   "source": "Plastics News",
+   "date": "2026-10-29T17:52:00.000Z",
+   "topics": [
+    "deli"
+   ]
+  },
+  {
+   "title": "Hollywood Hills Home Owned by Mike Tyson's Former Wife Robin Givens Is Listed for $3.5 Million",
+   "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPUmZFRGg0aUNfaDNpM21NSlhBeWZYSnFBTXJyT1hOTk0xaGJfTVpCbUlNdUhiRWhVaEdpck9lNUlzQU5BcXU4OEk3MkJBM3VPd0RGTnVXNUtwc3JPVU1tREFxdWNueUNQdE10Z09qQXRZUE9kVEtXVWMzcWg4ZHVwalk4eDFPazlub2k2Tzd1S1RLZVpNZE1kZ1JuZW9jRnp1?oc=5",
+   "source": "Realtor.com",
+   "date": "2026-10-29T15:10:00.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "ShopRite starts the countdown clock for $20 million supermarket opening on Danbury’s Newtown Road",
+   "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxOUFpzUTloQzBmSWJHcElHVWRXNEhMVk9UNmthTDN2Y3FUQ041Rzc4dmdpT0J2bmxXMndtWXRhb2VFa1praks1ZnVkSlFQVmdpN09aWEhEZVd2MlpWTkZpLWh5U2lNU29pYUE5SU5KOTdvd1B2Mm5JZjM1c21PMEhURjRSQjYtX3lSNmRJb00tUGVoVzhYTXlmVWVhbi1qdw?oc=5",
+   "source": "News-Times",
+   "date": "2026-10-29T13:59:57.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "PPC: Prepared foods momentum and ample liquidity offset a sharp YoY decline in adjusted EBITDA",
+   "link": "https://news.google.com/rss/articles/CBMijAJBVV95cUxPWWdwTFhISnJWc0kyWHdzR3p2NGY4R0FXNlh2MmRxMC1SeVJsdGcyajByQWhWOGJVYXpnSnpqMUdnR1JRTElGYXV6ako4WUxQSENtTVB4LWJnYm1EdS1PQmRCLXpXWXVLZWxzV1l5MDItTGhUbWxJeGJJbnhFX2d1cDB5QlRubEtORE92aG5ld3VjcFU5Mmc2bzdzTkRBeWdKajJtaXFIZ1NYem1LZFoyUDRIbXZhN1lLdF9QVTZvZl9HY0drY0w4TERON25kUldIM2dmVjFEcGFUbmpJYVdMcTV3WE5oV3ZWVzlnTy1TUmMzMEVIN0JtT0xqX204ZGNOeC15NnpCLUNYMU9k?oc=5",
+   "source": "TradingView",
+   "date": "2026-10-29T13:49:43.000Z",
+   "topics": [
+    "deli"
+   ]
+  },
+  {
+   "title": "Will Gamified Employee Engagement Catch on Across Foodservice?",
+   "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPb3BrRThIN3dsRlJKa3FHQnFQcll6MmlDYlJKOGJsMm96X3h3Q1EwazFJMmliUnZzYjVEU2R4S09mc0JZZWtYQzZZbF9XYXVzRHc0cFAxNzJieHB1TGpfTzdKWlZ5N25FZ3lkckVUNk5yZVBjOTE1UkJoTlZSZHFfQ3hlMEJYb1JqTW9uUWRGWDVsbFotVjc2MFF3?oc=5",
+   "source": "The Food Institute",
+   "date": "2026-10-29T11:30:25.000Z",
+   "topics": [
+    "deli"
+   ]
+  },
+  {
+   "title": "TYSON FURY Documentary Goes Beyond the Ring Ahead of Joshua Fight",
+   "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxORGVzUkRtb3pZMVBvcEVpdW5RbEZFTjZJX1pZRTVrUkRiZFJObWdxV2dWVmdLRURUYkI3aklMajdLZjUyUUYyZGZBcWpxUkU0c0ZHel91V1dRNlZvaW5aYjY5QVJRTWtiOXp4ai14OHRkdTU4NTJ6cnNka1h2ckJsWjFQaF9JTVZuWHFIakxBUno?oc=5",
+   "source": "Netflix",
+   "date": "2026-10-29T09:34:38.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "America’s fastest-growing grocery chain is quietly forcing your favorite store to lower prices",
+   "link": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxObWhEelB1dnZKNl9ad3JMLVNwSFBKWDhUekg0ektqUnh2QWRlT1lRRkRaTXhLckNCbG9QbWx5YnpWZVVLd2tOOFRMRmVoeC1IeDJ1dExMU2xYUndreWdQUWxYU2doaWtyaFppLVEtMG1PZnJ1NkIyTk16aEE3R0N4NS14SUpyR1BWY05RSUdhN0dFYlkwdmlHUUU1X1M3aE1IY1oyQWVqX21IaVl2UXhlTzQtaWVnT0hBNk9iWlJ0ZXRUeWZ3bzlyVjBoUjlaeE8zNGlB0gHnAUFVX3lxTE5NU2FiMWFKVkdscDlja0RpbkNOWmdtQklWRkZvZ1hCbEpsZEVZZjB3c2tvampvblpCNmE0bHczUmE4c1h6elp3bUZHWS1SMEwxY3dXOENfMFV6dUdiVXdTbFhFMjZOUEdXWFVTOGFNbEZyM3hrWF9oS0lQcXpDQmZ4N0YycVozZlpBQXBOZ042UDRnMFNCUUVlXzJXcndJN2FGTEZXdm9kUWVoSFA3d0xPTVJVX3ZkcGFhQTZCQjVVdlV2R3FpQ1FvbGZOa1RUbFdpMHNvSklWY0lPSF9idVFfR2xjVXVhUQ?oc=5",
+   "source": "Cleveland.com",
+   "date": "2026-10-29T09:30:00.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Wendy’s, struggling with beef prices and growing competition, gets a buyout offer",
+   "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNQlhDbW5uOXJHY3ltckk0dEcyT1kwaENCcnZ2NzlMdFNfZmRMSHpoLWNWbURhSm41X3Vfd1NDeGVvZ2JKTk5JNXBRWG9Hc2F5OHNNMFNRU0NrbVNrRWhDVkhGMEF2cEJDcEVjTlF4aUdRU2FhNnp1NHZYZHpLd3dfV21tWXFYOVB4b2NsNmtRMVZaLW9LUVoyRVFQTlBKanVrZzJzY1lCSmRQZ1VjOHdfOHFJWU8zUFZpOEdpaE5EOXg?oc=5",
+   "source": "NBC News",
+   "date": "2026-10-29T08:40:50.000Z",
+   "topics": [
+    "beef"
+   ]
+  },
+  {
+   "title": "Public notice: Notice of estate of Lucy Norma Tyson",
+   "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQZFlWMFZOWnA4Mi1rNVlNNFFYVkcwSkx5dHlnUkx4dzRxNmhKeW80eUJRejB6T2pieWxZXzBGWW5DSXZSdjJfVThkclp0LWNqaE5fZDRmeGtMSWRXdjU5dE9GaklNTWQ3Q01YSF80VDYxRHZCQ3F0OTBCMGRqQ2J5a191aEEybFpnbXRpMmlfcjc4VlVWVE53?oc=5",
+   "source": "Salem Reporter",
+   "date": "2026-10-29T00:34:43.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "Beef Prices Remain High. Social Security's 3.6% Raise Uses a Price Index Built Around Workers, Not Retirees",
+   "link": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxQUG1WVFNpNFRqVUw1Z0s5QmFoeFlHMGkyNm9zdk42OUdHUWd3OHZOeFlhX1d2U2s2ZXczU3VpSlJkUmRCa0pmTXU2bFdyVkxST3hUclpWSVo4eG9WUm9MSnJPbDFPWjgtcnF0SnVTOXA2ZDFzbXlqcXN1bG5OMFJ4S3BIS0h4YlluMmlIdkJ5YzhGZzBYMFd6Y214UWI1R1ZfYlNIM0tiRkp5dm9wVGw3VUtMNVIzOExKV0FkTmZmbGxpaDJjVjRJQkVodEJaWnJWNWxmU2dXU19kM1ZCR19FTzc2UGg0aDBDNlEzWlZLVGlyVjZ0T2FVYUxfYy10UU0?oc=5",
+   "source": "24/7 Wall St.",
+   "date": "2026-10-29T00:00:00.000Z",
+   "topics": [
+    "beef"
+   ]
+  },
+  {
+   "title": "Cattle Producers See Limited Gains From High Beef Prices",
+   "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPY2xBd0dkZmdUaG03TTFCRjhtOHd1T3pVUTc2eE9tRmZNOTdjX2cxU000RlZmaVZCUk9obVIwc3A5a3Fia05nQW5CRXc5YmhuNkZwVkh1TW1PSVBITXVhdm90ZlJwQzZicFh0d0MxSU42Q3AzaTEzQ05hRzF3Rm5TYVJ4ZU8?oc=5",
+   "source": "RFD-TV",
+   "date": "2026-10-28T23:13:38.000Z",
+   "topics": [
+    "beef"
+   ]
+  },
+  {
+   "title": "Cattle Futures Fall in Chicago as Cash Trade Weakens and Beef Prices Decline",
+   "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQODZLTkc2c0R4Z3BSTlVfTTd0T3plRlZVWVdQaHY5MmlPZEpXWmNnMXowQXNfR3ZTNGs4VW5vNHVuMUJsaWNrTGdqaWdUTVBiOHdKQVRFSTRsRW0zU0JkdVBzR21ySk5kY1dPbGtxLXdxWVB1a29BMzdxbVcwU25FbHItX2tnaXN6MTdwZG9aT3ljSW9Xd1ZkQzM0OE11X0thakpOZ24zNWFjbjFySHlXdGRGRl9zRjR4?oc=5",
+   "source": "AgroLatam",
+   "date": "2026-10-28T22:32:03.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "Popular Asian supermarket chain closing SoCal store with dozens of layoffs",
+   "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPcWZSN1pCLVZJdXFGT2F4UlJGZnFCRjZ2bmdNVk5BcWw2TlpUMHhmdFo3bkQxR1U1aEI0dVl4b1ZVZUpUeDlhSTZmN2pScFBUNFJzRUMwaTJsUVVkd0xjUGlQMjNXMHVyVVduelJqT3BxUTZCRmo2VjhtNVpBQjZvSXVzVUNzVklGeHBmZUVJZ1QxVHNtMUw2X24xY0QwdFRLbUJQMDQydko?oc=5",
+   "source": "New York Post",
+   "date": "2026-10-28T21:35:00.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Bird flu detected in Benton County cattle herd",
+   "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQd2tCTVc2MmYtX080bWRPLVlkVkFVd0pjQ09NQXhWbElKbUJ3MzlKRFJ3UkhPQVdXb2JXajhEUUdwZWFiaEdReGdwU0cxclZYV0JKVkVEZzBzdVhQclhhRjFlZjhfUGJUcHNfSnRueXhjTS1jZTRoWU5GdjJOcTZ5Z3VLVDNWbWJzMHI3Vm45RUdqMkt2OER3a0xZbjhQRGFzbnlYclVnR19QV18xRDQwSkFfdFkxd1hodFk2akxQWkZEQWxFeFRQNQ?oc=5",
+   "source": "Nonstop Local News",
+   "date": "2026-10-28T21:08:20.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "Cattle futures lower ahead of widespread direct business",
+   "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOT2YzcUM0Zm15WnNmekhlTlJJajI0NHhuNE8zU3dkZ05Md1VkZ3NDd1dsRU52Z0Q1bndYNGVmZmhUTFpwYWQ0YXRaNHRoMnA2Zkw1b0lIVlNiNHVrX1hHZXVfb2QyN1ZhSGl5WnpGOG9tR25vMjlITEZVRGtvOEx6djhoSUhkbHFneWlmSl9tRHZocnFOYzM2bQ?oc=5",
+   "source": "Brownfield Ag News",
+   "date": "2026-10-28T20:59:10.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "Cargill Introduces Craftiva Brand for Consumers Cutting Back on Sugar, Not Taste",
+   "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQZlRCdnNOVWgta3BqRjBqbV9hdkdoTDVYSFhXV1hFXzF0dnNOMHZwNFNXWTFQMjQ1cDBIU3lnb3I5ZjQzX0gzUWdhazE0Z3JNN2NsVXNmV0M4SDdleTQzTnhtSUQwbnhmSW1JSld0SDV1N1RMVjFvZEJxdloyX2tWU0lkYkM1NFVmckwzeTRRR3p3RmRzbXRVSEEwWGJqRlhGVzhaOVkweV9FZHpfOVRFTndRdjluams?oc=5",
+   "source": "BevNET.com",
+   "date": "2026-10-28T19:07:07.000Z",
+   "topics": [
+    "cargill"
+   ]
+  },
+  {
+   "title": "USDA opens new Southwest Watershed Research Facility",
+   "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPWkNFYTE3LWdFNHhUTGRBUWw4VUdjRkhacWItSWFmcmVWd21Fc1RBMGFXeVByZ05KVnpsZTJCWGQ4eV9WSFd0YWRuVE1tYTJfd1VLWWlQNldHRXA1aG45eW5jMEI2V19XUmhRNmxVdmZpZE55YUtjZ3JLaGVuTk9RNzN3SDFIV0MzYWRwcHRKYmVQenU3TVhHbU5UQU4zTExUcEVqZ3ZneUJPdw?oc=5",
+   "source": "Beef Magazine",
+   "date": "2026-10-28T16:58:37.000Z",
+   "topics": [
+    "usda"
+   ]
+  },
+  {
+   "title": "Chartwells K12 brings wraps and other handheld favorites to students with new Wrap & Roll promotion",
+   "link": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxOdFhOb1luRVRPV1JwQTF4TlRoRHIwSk11Z0IyWjJjdU1FT2tRcG05UlZmSDdISUpMdDBFT3ZzZU9QN3RQVFZmTnpHOTZoLWc5Ukx6eTJQSUdScklMSzBvZENGOF9Ua19OVlM3SVQtb25QVFRRVjlnVjlBWHFDQTIyTkxTQmcxVmYwSDRfUnJfYkZCeElLdGI2dDl2aDN1UGJGenB0b01Lem1MRlZ2QnV3ODlDS2lLRFlucUJJVTJLSWg5UmZfdTg3RVhWbEhkWHFqLVQ4M2xkMUxNV1AwTDg4?oc=5",
+   "source": "FoodService Director",
+   "date": "2026-10-28T15:10:44.000Z",
+   "topics": [
+    "deli"
+   ]
+  },
+  {
+   "title": "Orangewood forms THRM foodservice platform, acquires RSG in first investment",
+   "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQcjlDNy1kTG53U2pfVTI5WFI1SE1xcG5aSXpvVGxCT1doVWZneUV1VUZHbXAwbzZRRTl5emZ3NFRXeVdTRkhYdllObXIxX1pCM2xraFl4cnpFTTViR3FRY2tjYnRoVjBsbWZrOGlNSmFlblJwbzRnVmtmaDVReldsLWFfdTYxMk5nS2VjR2duSzdiUE92SlAtLWVMdmJ6ZmRjajEwcXRFbFJYWERCTWxxYVNPaEZ0bTdzNXFz?oc=5",
+   "source": "PEI Private Equity",
+   "date": "2026-10-28T11:15:38.000Z",
+   "topics": [
+    "deli"
+   ]
+  },
+  {
+   "title": "USDA Announces Recall of Popular Beef Jerky in These States—Here’s Everything to Know",
+   "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNa2dIQ1dISFlfQi1peFBMOVo5b0ZhYkt6Wm1VeVppNHYyb3BRZU5SVkpPWmNUNEtTX09fNFNFWkwwVlJSUHJ6eTBIRU1oVjJPcWR6SjlyVlBIVmtlMG1rQzhFVXNhYkNuWVhyQk1mNl9peGs3R0lIS0dNMG9IUVUtYUQ1SnhWckF2U2c?oc=5",
+   "source": "Good Housekeeping",
+   "date": "2026-10-28T11:11:00.000Z",
+   "topics": [
+    "usda"
+   ]
+  },
+  {
+   "title": "US Cocoa Futures (COCOA-F) Is down by 2.05% on Oct 28: Is the Demand Outlook Changing?",
+   "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOM2EzdnF4ZV9XeFdhZjJ6MUJ6Y3NYV0dIVkZIdkpJNXlNOXZ1dmNOQ2pSSFkwd19hSkNMZk5FaEJHaXdJVkVpT0ZDYjBxZ2dmcFVDYVVCZ0JNVmZiX0JUVVNINzBySkVxa2k1OVgxaVh3ekVWeGxaV0hNbXViRnNPN2tRWTVQbnotbXhiQmkxaw?oc=5",
+   "source": "TradingKey",
+   "date": "2026-10-28T10:57:50.000Z",
+   "topics": [
+    "cocoa"
+   ]
+  },
+  {
+   "title": "EXCLUSIVE: Jade Cargill, Michin & B-Fab vow to run SmackDown: Main Event highlights, Oct. 28, 2026",
+   "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNRlVkYUNka3dkV2drVGVoUXlkVUhGRldsei1HeWh0MUNJMEo2RGxzYllkdVVzYXM4Qm14V01jbzA4MW1jelRncjBrcTdXeURBZG9CcVM1aGxkOF9hSFk3UjBJWERlNG5ZSzQzWlBWY3Z4eW9yTlcxWEFlU1BiV2VmZzE3anY0UlhVVHRVclRqR0VIVDlaRHpEUDYybXVCUzZXaktFbTYzWUEtZERETkluZWk2QzVFSjll?oc=5",
+   "source": "WWE",
+   "date": "2026-10-28T07:00:00.000Z",
+   "topics": [
+    "cargill"
+   ]
+  },
+  {
+   "title": "Cattle futures mixed as feeders gain on weaker grain markets - CME",
+   "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOWGJRUTdldEIybzNPdHdHVGJ0Sk1qS1FrNlhHRDBPWk5rTEVuNFNBY3U1TVVLbDI2cWQyREEwZDdvUDhJdnJIc2JldFotVm1UUVBnelBXZ0dsRk1EbW1HT0MxQ0NZdkJvRWl0VVdrNlpkZGZDWk5ycnBBdVNfUVhKOGY4U3RzRTd2MG1yb0wyb3dqZGEtNElIWFRwall5RzI3?oc=5",
+   "source": "The Cattle Site",
+   "date": "2026-10-28T06:45:48.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "Bovine tuberculosis discovered in Alcona County cattle herd",
+   "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQXzlvZ1VqaGxJenozblp2bXFwNVBHM3lIVDlmNXlXVmhqdU1Fb3BpTmJTVm9MN1dLb3Q0bUhBclpfMWpmM2RjZnR3MU9LRGxzZ09Da3QySWNLQjJNdUlGR2tkUGV1TFUxQ245TU1BRW96aUJGd3YwcHYyQzJYQ1B6bVA2aFAxc21XVEFTbHRudVVPNGZ6NC1lajI1bmhiNGpNUGE0V2FwZUN2RmQ0VU1ucA?oc=5",
+   "source": "WCMU Public Media",
+   "date": "2026-10-28T02:46:00.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "Saints may have tipped their hand on Jordyn Tyson with roster moves",
+   "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOa21wYTkweERub3BUZWpKX0NMX1JyV3dIbXFyVjBOX2FVM29Qcms0MTF4SjNjQ0hVZWhhR2hkYTNzVEFUN1V6eVZZXzF6VFpSTXhZdmt6SWhWdDR3VTJBVllNeFBua01xbklmUnRlZ1RuemwwZW1oaVc5U3dtYlZYa25tQ2Y?oc=5",
+   "source": "Yahoo Sports",
+   "date": "2026-10-27T23:27:41.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "Colorado ranchers face rising costs as US cattle herd shrinks to decades-low levels",
+   "link": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxPSHpNeEdjSW9Uem1JeE5iR0pJRWZjbUZKM0JvWmR4REY4VHdxLXFmdnRVcmtzWnA3cjBhU2JGQ0o0bk04WEZVWGZSbjk4b3BXUGtPR2ttNkFkRDJCZG9HbGlPWWFtTWVtRVBoSXdGanQ2RnZ4OXE2NlpMd1JTTFVyT3U5c2ZLV3ZWanN2Q0NnX18wcU54WmZnSmVibHp3MHhWVDY3Ni11cG55d19vdWJwS2FSVXV0bWdibEFydGRjSktPalo0NWZpN2JpNDhQWC0wanJUYzJ6X1BrRS1BQTFRWU5mVzZJYVp4?oc=5",
+   "source": "9News",
+   "date": "2026-10-27T22:51:00.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "USDA direct cattle prices",
+   "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE1HWGJ2YktaWDhiMTU1QVVTdWplbWdKaHk2SU9NQm1lWGZKall6OWlxSGpjNVBxa0NROTZPNnpUbXJxX2Y2aDFKd2tLaFQ0X1hwUFpiT2tEbi11QWxwcW9PU3cxVQ?oc=5",
+   "source": "High Plains Journal",
+   "date": "2026-10-27T21:42:54.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "High beef prices aren’t delivering anticipated lift in protein demand",
+   "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNdWVBV21VYUNQZ0xBbFA5aFpIcEVWb2FGV2hZZllObFJ2c0xlMjBjVUplNWlNY1MtaGtBUnpmak5SWEdNdTI5Mm1ZRE9DYjFGWU10RWV0dzZpUWNzVlRuT3ZwVjNfUFZMdlA5ODVpWFkwUkNvWFUta2pfb3AzZlNDUlQ5R29zWExDSnlpRV9Rc1ZYemJCaWV0d3JRTTBLR3FvTXlYSWRR?oc=5",
+   "source": "Brownfield Ag News",
+   "date": "2026-10-27T19:35:13.000Z",
+   "topics": [
+    "beef"
+   ]
+  },
+  {
+   "title": "5 tricks on how to save on Halloween treats despite rising candy prices",
+   "link": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNcmJLVEtNRkpRTEs1dS1kRHVZZXpjNDVlcDlVdUR2WXhmb3VjQnd5SU1LRHZueVhEVm9xVmo4Y0xmS0lXQlJWU21PbXZuWEFESHloS3hEbWh3eXVid09DRzdUSGVrRk15dlhKWXg4aHpCZW9mM1BuZVJZZ2R6UE9VMnpLMjJidzZIMVM4TTd5RmEwN2MzY1FfUGZXMWdjeDk0TVctdVpYT1VGVVRLSjR0ZFh3QXd5d0NTTF8tQ1ZEMFMzLTZleDJaTFlTRG1zZ1k2cjQ4R24zSFNwMlk?oc=5",
+   "source": "Daytona Beach News-Journal",
+   "date": "2026-10-27T19:30:00.000Z",
+   "topics": [
+    "cocoa"
+   ]
+  },
+  {
+   "title": "Bovine tuberculosis found in a cattle herd in Alcona County",
+   "link": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQMEhleHVpanlSSDZvWHNha0tkLVZTS3BWakJ5MU9yYmZLYTA1MnBET1J3NWEtamdnLTRzd3RwWTB2VXhheVNmU0g5T3pCcVNhSnBfSklLbFJienYxZnBJOXRCRGJjYWtSb1pHb2JWYTFBdG8tZ21ER0MzbnlBMFhkMkhzc0NuZzUtZWZNdkVUSzhXMy1rVzJ2amhqZmxiZUtwVlE3M2oxWk01R1pOb1p5ZXlQRk13ZHJDYjhGQVg3MTAxTVR3Y25zak5tNXI3V2JBYVpJUnhacHVPRFU?oc=5",
+   "source": "WJRT ABC12",
+   "date": "2026-10-27T18:24:00.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "IFFO, Cargill call for more data on environmental impacts of alternative feed ingredients as supply pressure mounts",
+   "link": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxNd1NsZmtsODBCeUdFREtOSzhWU2hHOHAwYVVVQ3BBM0Rma3g5TTlVbjllcmF5MThJTGJ2UWVTSDVWenlNcFVkTjVkdlNtTUo1VnZFTWVKaGRqX0d6aGNlb1UwcW1sMHBmZkxzVG5laW1NdzV6eUxjbnB5Rkc0alR3WFhFeDgwcDBxQjZnTi1ESzlNSkVlZk9nU3dZSVJxdTl5RmhOOXBzcTdHWk05QlhGMWFEM2lRbUFuQkxuTjVuZW1ZcGpaYVh2UUZobzZCXy1wVVo5ZGt1Smt5YmFqSXlBMUNtNA?oc=5",
+   "source": "SeafoodSource",
+   "date": "2026-10-27T18:00:00.000Z",
+   "topics": [
+    "cargill"
+   ]
+  },
+  {
+   "title": "Four Reasons New WWE Tag Team Champions B-Fab And Michin Owe Jade Cargill Everything",
+   "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBYclduMXl0b05WXzBNYkFSay1KaTdLdUZGeWhKSVZYVjNKQ3dYa2VmQWotQjBwYUFKaUpEbW96Y2VHNHp5ZG5kcHRfQW1FRmdTRklpdFltdzYzbE95Y1NxSXBQSGRrS2ZmTVlQaXo1NEd0N05ibmtLR3I5RjVmNnM?oc=5",
+   "source": "Yahoo Sports",
+   "date": "2026-10-27T16:02:26.000Z",
+   "topics": [
+    "cargill"
+   ]
+  },
+  {
+   "title": "USDA’s $382M Push: What Packing Grants and Grazing Dollars Mean for Beef Producers",
+   "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPQmxiOVJmbzJPXzZHM1F4cGtIaUgyN1B2WjB1U0Nqb2RYQjBWUC1oSlQ3NG9tVG1WUThMcWpOWFFsejJPMmpBNGk1SnJWVWFNX2FmbmpmVmNHN3NPemx5OG9rdHRTdEM5d1RJbjlOaHMtMjJTb3RheTlFakgtenJ4bkN5V3ZYV3k0NUt0ZjhSeHRweWpQRHQ5aV9URTFoZHJpY0pNMFhpMA?oc=5",
+   "source": "Drovers Magazine",
+   "date": "2026-10-27T15:58:09.000Z",
+   "topics": [
+    "usda"
+   ]
+  },
+  {
+   "title": "Beef jerky recalled under most serious classification in Iowa and 6 other states",
+   "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNSHlaS3hYWE9xOWx5NzdNSV9lN08za0d0RG1jTW43c1lYSkNCXzM1alVKNnNaQ29TT3Z3Zl9vWUhuZkN2bFFySEY0RkJiWUsyZDA1eTNpVlEtMXJ0WjZ1cVFSRkk1NzNJa1RjTko4djFlSGdMYzdNaTdOMUtsREFLeDI0OTh2anA3amRBUGtTTk54TzNlNEdITDFQZVZSMTA2b3BSalJPZzA0d9IBvgFBVV95cUxOeW05ZmVIVFNJM2hJYV9vMUJoVTc0Um5VT3pxak0wblh4WDZ2YTFucG81dnVoSWtsS3JLeE1kSGRhUXJYeGoyWEdfX1BfWEFxb21HdW5CZmtoS2dCbDl3WTU2cWw0dlNXc3pCVHVtTm9JU2NaNmVyVElQLTNTdGlFejZ4WXczcHhRdDlaa3RfcnBqUS1McWYtOWRsZ01FR3hHSFpZc2pVVFZZRXJReFpEWUp0UnNiaHItdmctRU5B?oc=5",
+   "source": "KCRG",
+   "date": "2026-10-27T13:20:00.000Z",
+   "topics": [
+    "usda"
+   ]
+  },
+  {
+   "title": "Halloween candy sales are off to a slow start amid high chocolate prices and affordability",
+   "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQUVlpMktwdWVfLW1LLWotYVJzcVdRMFZqbHRYSWJnSHBZek1PeTJfYzRrSE1YRlJMOTQ1M1VaYWplSDlsRVVHY3BDNXlIcFAtcWQ4eGpxa2E4SjdYSlN4RWZaSEIxMzRNZXh5bHdnaU8wVXJlRkpaXzAweGRxZWhpZUxoNVhkSi1GSE1DTHV1ZHNwazJKblJTeHY2U0ZjN1JTS3hYdU5OR1poNWhnSUpfTGQzU0tVRnJnVzNtclF3azFDWHB3V2FIcHI2SnR5cGREWTNHc2hB?oc=5",
+   "source": "Mon Valley Independent",
+   "date": "2026-10-27T12:11:15.000Z",
+   "topics": [
+    "cocoa"
+   ]
+  },
+  {
+   "title": "Drought Could Continue Limiting U.S. Cattle Herd Rebuilding",
+   "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQNXNrMnZkQ2ZNZi1jdjVwaE5BLTRYWEZucXlLc1NxQnFfZEloRlRqYTNzdDZMS2QwdVdUbHhrbVdHQVBrZDUxR1RIU0ROT0RHYTFNeWxHblZXb0FDX0M2UmJySlhCQnktcnAxcnctQnNpSThmWWRpbTVFLWVUOGhCdi1lRmpncGs?oc=5",
+   "source": "RFD-TV",
+   "date": "2026-10-27T12:04:15.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "Cattle futures rally on bullish Cattle on Feed report",
+   "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNZGxBNTFXSmllVllqekRvODhfVnhLRy1TSXZPUkhtcEJ4UzFEanNrS3N3Rk0weWl5ZjRqUVp0aXBGZzJjTklDNnVsRjFINkpZaWJuOHAtcTA2cGY0NDRRbkJDQURyTHU1VWw5M2ZkMFlRQzBCTHNTaTFQeXQ4R0lPRUZtNXpJTHNzclFWZ0hoNDBkUVV5M2tTTzZR?oc=5",
+   "source": "Beef Magazine",
+   "date": "2026-10-27T11:13:39.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "Live Cattle futures climb on tight supply as Lean Hogs hit new lows. 10/26/26",
+   "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNM2NiWlNiU3dpTTdNbUJNX1FTNVZmVGg3djQtNHJpMnFsSGVJbzcwTDhXODJaSDhWUzZXV0lpY3lDZ2tOT1FwR3VFS3FpQnFqcTRmV3BrZE92V1pzdVRKZXc3aUp5MDUyOXFneEwwemdrMTQ0NHdsUFRkSWRqczg4bVpMS0wtRzdBUndTNDBGbkxDMVBuTzBvUmdRMDB3YUtrekZQWXRYR09hb3JyNHM4QXdn?oc=5",
+   "source": "CME Group",
+   "date": "2026-10-27T08:51:58.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "Opinion: Lowering beef prices requires curtailing ICE activity in Kansas and elsewhere",
+   "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQbW5wZGFkN24yeGJaNl93cTRmendsM1VraDBvWTBnREx4M1VjTUFKZVFtNXhhNE1rTFlIQk9VUlZYcVlIcnBCd2xFT2hUa1BsWGVqREthQXRNZENKenk4S3NkM1RNNXJVSnVGaU1TN1JiYWV4ZkFjeGRoODcwUjh4TkY2VjVDWlBVcEJBeGd1R1ctN0VrSmozT2RxMzA3NkpDb3V2OUhDem1zSHloSk9GZC13bXZkaGx3?oc=5",
+   "source": "Kansas Reflector",
+   "date": "2026-10-27T08:39:46.000Z",
+   "topics": [
+    "beef"
+   ]
+  },
+  {
+   "title": "Halloween candy sales see a slow start amid high chocolate prices and affordability concerns",
+   "link": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE15elRyTWU3Z1pMbFB5bHhGTmJ5QnJGakQxT0taNEg3LVNrOFVkaURLbEpFZXlUX1V6ejdPejh2cmphTi1BRHNIckdDYXNJUDRXTTZV?oc=5",
+   "source": "DJC",
+   "date": "2026-10-27T07:00:15.000Z",
+   "topics": [
+    "cocoa"
+   ]
+  },
+  {
+   "title": "Sirha Lyon 2027: The world's leading foodservice event reaches new heights for its 23rd edition",
+   "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOVlhlWEgzMTc3bU5EZWxPSkJPUS1aSFlOT1lINFpGTDB2WUhuMHh4YnZ3VEIxM2NnTUNhWU5xLWVfOGE4R2JzeGEtRmh0QzV5THJnRDgwd2k5bnh6OWR1TkwwTzV6akJ5SmVHYWtyaTR4TkVLMHNmaFBYM2ducDZKdl9GdzJpOTB3Qlc4STR1U2JLV0hkTEZhbWw0VXpNT0VmN3p4a3FzQWRYYTRUN1ZNMEQ0VTU4MGFVUkZxY1pHNA?oc=5",
+   "source": "Comunicaffe International",
+   "date": "2026-10-26T23:17:07.000Z",
+   "topics": [
+    "deli"
+   ]
+  },
+  {
+   "title": "Nearly 1,000 pounds of beef jerky recalled. See affected products",
+   "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPdElBcXB5QTBPdVVEZEJnVHVGdGFOSTFjNllTSDVURjRQLVNiZlNCV2Eyak1ja0RtZWxkajJQM3pJNnhxZU1qS05wX2ppeGR1MDNBU2JucVdIOUFiWDdRYU01V3RTN0hOUENiN1hhZHhyTWliZDN1bElGZnZDT1dGU0dlSmFWR3RQSkxqQzNjbXNiNTR2ckNHbUpMcVpsbnBGY3BjSUd4QUxXYXpXUkd1NUU0VUR1UnRQVWxWSTVub0Znd1Np?oc=5",
+   "source": "USA Today",
+   "date": "2026-10-26T22:35:00.000Z",
+   "topics": [
+    "usda"
+   ]
+  },
+  {
+   "title": "USDA recalls Imperio Beef Jerky for bypassing inspection",
+   "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQSjd1VWZnVjA4ZTRxaDkwRVE5UnNRajVYR1hhbU54NmRQdkY2YTlDLWl5MGUtRGlXQ2pJcUdQLVdvYmt1TWlVWTkzS1M5c2s3bXMyUHJvOFZRQWVHM1d4M1k4d0pfSUJWNlVBOEFZVWd5XzJGTUZCVXZndU5GOFZZdzZSN2hFV3hucnAyX3ZoWkhKanc3REQzcFNZTQ?oc=5",
+   "source": "CBS News",
+   "date": "2026-10-26T21:45:00.000Z",
+   "topics": [
+    "usda"
+   ]
+  },
+  {
+   "title": "Halloween candy sales are off to a slow start amid high chocolate prices and affordability concerns",
+   "link": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxNc1gxMzJVTTR0ekY1X0ZERGpFc3EtZUtTVWJkR1dqRVRJMFhzeTVfUWU5ZFJvWDdLUElfWU1OaFF0SWR0RXpOcDFocG9nRk9td2tFMnNDRVF1Yk1PdS1sbDRtT1RucTdKSFA4QTlvUmRSbDN0SU1zdlFEWEdQZjJrd2xRWnJlY1hTQXNvYVl6bVk0NUQ4Wm95ZmdvbVRUYnlXMElqRlNLeEFzcVQzR0RidWVLaktLU1F4ZUh1RG0wcWZoSnZEcy1wd00tMTNSaExwTW0xWlJ3TmtKaHRX?oc=5",
+   "source": "Durango Herald",
+   "date": "2026-10-26T19:25:44.000Z",
+   "topics": [
+    "cocoa"
+   ]
+  },
+  {
+   "title": "Elgin, Illinois-based Imperio Beef Jerky recalled across Midwest for bypassing federal inspection",
+   "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOX01uOVQwNGFSRlRYck9lZi16ejgyOWh0Q01qUDZFdXV2NEwxcm8yc1N6Z1pMTS1LcURKWFpFN24xSnk1MnR4WXdObHJBNGxKcFc0SVR6QjBWdmhVelFxMF80WC1FX01BcU9CNHZTQldyckhSdjNMbVJjUlRkUWRlVzU3RlM?oc=5",
+   "source": "CBS News",
+   "date": "2026-10-26T18:51:00.000Z",
+   "topics": [
+    "usda"
+   ]
+  },
+  {
+   "title": "Cocoa Prices Fall on Brazilian Real Decline",
+   "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxObERyY2RncjlFN19wZTluUFZNYXBqeU5NZG4xQUdFd25hUE5KeDVKVW40NUNUdGZqS2JlY2RTeGxERWZubDFCU0Jpc2xVd19Ec0VScFhVNjNBazVOMmY0WEJySWRpZmNJSnlxYzBQc1ZacTdzYVZBalJWbkVNblRwclViclhuOEw4RklZMkJReHY?oc=5",
+   "source": "Barchart.com",
+   "date": "2026-10-26T18:47:47.000Z",
+   "topics": [
+    "cocoa"
+   ]
+  },
+  {
+   "title": "What Is Happening With Cattle Prices?",
+   "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE0yVVNsdGEzUnhxWjY2V3h4WEJESG9ORTFESEEzMVVjUTVMeVNWQ1NBTTRSOVB0Z2FxUnpDNDdxdWdwRUNGZEZUV1E1dlhWbnN1VnBvcWR4dlFqa1ItdW1ZV0RDWlFmc3owODQ1ZEZqM3VXQS1YekdJU1lDTEZIZw?oc=5",
+   "source": "Successful Farming",
+   "date": "2026-10-26T16:12:38.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "Chocolate Prices Are Up 15.5% Even as Cocoa Prices Fall",
+   "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNNWl1YWpqZVBEeFpXZ2QzODd0S3BjNmVpVTllUzd1cmpNQ2I2SHRZZllXYjF6ZDZfMV9zMHF6cUt4QUZTRklGNW14S0tDbVNFd2V5NnByVXpxOUhaVnpiVTByc0pjczdMRVpJMkROV2JrRGtaQVRtOUhlOWwxMEQ1UlFYN3YwWm5lVlZlU0NUMVc?oc=5",
+   "source": "Men's Journal",
+   "date": "2026-10-26T12:08:00.000Z",
+   "topics": [
+    "cocoa"
+   ]
+  },
+  {
+   "title": "U.S. Halloween candy sales are falling as chocolate prices and costs bite",
+   "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE4xRFF2bnFxY2xzeldFVkRpRHhmYy16NW45SVYteGpfQmhRZWVLWDNPRW9zQ1pZYTU3bldmY2t2LVJKek1lM19CbTZyZW0zNHZKRGtzWDdhaUhOcXlOUklxV1V0TG9kcUkwMVBONEhOSjJ3WUlIV1phT0VIZFJlbGc?oc=5",
+   "source": "Quartz",
+   "date": "2026-10-26T12:07:51.000Z",
+   "topics": [
+    "cocoa"
+   ]
+  },
+  {
+   "title": "‘Real problems’ if El Niño gets more frequent, Cargill warns, as experts disagree on trend",
+   "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOUFdSdWZSNDYtLTYwT2V3VWw5V3FpdkJtMWhERUs0SzBuSkEwdU5XUlpYVGpscEF4dUgwYXV0MnFtTG9YRUF0S0FtWExON2FHMk9rTjFpb3V5d2NIalZMZHB5VHNXRVlJT2p2MlV0RzZXTm1JalNtYkpnd3lJMXEyU1I0MzBfci13RUg4TXRkQmp1alZSTk80QkJLbVBQaW92NGVpc1dXb1hJZGlLWmNySkZOaUN0ZHZYVGl5TzBJenM5MGYxUnRkbk1B?oc=5",
+   "source": "IntraFish",
+   "date": "2026-10-26T10:33:03.000Z",
+   "topics": [
+    "cargill"
+   ]
+  },
+  {
+   "title": "USDA: Nearly 1,000 pounds of beef jerky recalled in Wisconsin, six other Midwest states",
+   "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTE80NU1VQlRMVnhmeEQwb0MtRW5EWDNFSnpwT0U1MHp3NFc0U3RQQTJ1Z1NRQURjRU8zc3hPUXhDUWVGZ2pINmdSSGQ3VFBidVZUVnliamh3dFd1NDg1STF1a2E3Nkx3azNOdW9iUTBNQlg0VnQxRVc2dHFIMjYzbjDSAYQBQVVfeXFMT2l2eW9MSnhZT0V4cHZWUmlxd3FhUHlERUg4RDYxVHp2UmNxUHVKN1V4YWota2FTbTd3MlhsUWtUQ1ktdzZURmFacC1rU1RScWMtVGtfakJ0ODlHSnhzSjd4V213ZTdtR1ZrSzVrQ0FRSTJUUDBBMmRoVHVZb3RyNXUxUzZ4?oc=5",
+   "source": "WFRV Local 5",
+   "date": "2026-10-25T22:34:11.000Z",
+   "topics": [
+    "usda"
+   ]
+  },
+  {
+   "title": "Massive recall on hot dogs, bacon, deli meat and more: USDA",
+   "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQYmw5bmh1UE9hUnVvd09HWHRJbkk3Y0FOQjM5VGNuZDBJdmtNWmlZUXlNWTFqaEpYb3ktT2FqbFFDaEJzZmZvN28tVFBhYzNSdlkzcnBPZmh3UklGQUM3VjRpUkp1ZkMzVjFIVjJtVWVqQUJVeVdac3RPa2dyOXV0ZFR0T2w0d9IBiwFBVV95cUxNdHdYMWswdWNuaFhGWC13MTd5SF9oLXlqQ3lZbmxIR28tcXdIRW1yWlFGaS1YeGl2YW9GdmVPVzlEcVF4VnlEeUlZWDBnYUhLMnRxZ1Bxcm9nUzk4QlAySE1RTUFDbURWN21yczVMQUZIQ3JBMUx2SjZPLU80eTRoMDN2TWFUVHdmenRF?oc=5",
+   "source": "FOX 8 News",
+   "date": "2026-10-25T15:16:22.000Z",
+   "topics": [
+    "deli"
+   ]
+  },
+  {
+   "title": "This Old-School Deli Meat Is Still In Stores — But Younger Generations Wouldn't Touch It",
+   "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5BakZWNlNhTVpYMEtFdWFrWmNqR21VWEVGRG9MV2c4N3dfa2p0UFpnZ2JnaGZRRXllb2h3bWlDNDRVMjM4RGN6S0gwWExhVXA2blp4cWdEeF80SllHVWlmeFNienk0Y1ZORzRXdF9zYUVqcS1INzlr?oc=5",
+   "source": "Chowhound",
+   "date": "2026-10-25T10:05:00.000Z",
+   "topics": [
+    "deli"
+   ]
+  },
+  {
+   "title": "Beef jerky recalled because of lack of inspection, illegal use of USDA seal",
+   "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQRUphUW4td0JNUlN4UFRnTEhkMTlZUl9zcUpldjFqS002WnRHSXlWNjc0UUpkNFpyLVFpajN0eXJDQjkzZ1V6OE5tRjJhcUozTjlObXVWUThIR3A2Y0xwM2tnQlJtbWI4aHRUMUEwMzRBSnRVbGlDUy1UajNaRjBaVG1EVmk5OG1TNlZtSThNZC1vcjAwWmxTNG9qdFkxeklJVmtyOTFjc0k2M1NxWmdVYUhJQVU?oc=5",
+   "source": "Food Safety News",
+   "date": "2026-10-25T01:39:07.000Z",
+   "topics": [
+    "usda"
+   ]
+  },
+  {
+   "title": "9 Gas Station Chain Prepared Foods That Are Actually Worth Trying",
+   "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOdktQTFJMaFNyUWZKVmlJVUtEUkFUanhTdFFPV1lKWEdSUnpXQm5PekdRV3k5aHJCdDBVMUxja2lVV0dkWG0yeTZFa3g0U3JRSXBUYmdxNkpuR1NnNXFLOXBhUTR4clFNQnc2OUNpLWc0dnhnR1NLdVNLbkZISEp3OV93Tzk0X1hGSnM0?oc=5",
+   "source": "Tasting Table",
+   "date": "2026-10-24T18:20:00.000Z",
+   "topics": [
+    "deli"
+   ]
+  },
+  {
+   "title": "Big Y adds omnichannel foodservice ordering",
+   "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPZ1pCUUJYdlFXbFlkWVYxM1dFUGV1YUswYTZHem5RUVlsanEwaUJ6a1ctQ1lhd25Sd2Q3Ylg1bFRVdlpBN2FscFZJZ3k0SUVhQlowcTZYMTYxdExyenVfcmdzZElDTHVMOXVHd2tVTXUtR2xOS0h3Nm9TZEltVUJnSWlmVEE1Z1VPc1A2bDRhT3dXVXgtQ3VDWmV2TlUwZzFyWlE?oc=5",
+   "source": "Grocery Dive",
+   "date": "2026-10-23T15:46:08.000Z",
+   "topics": [
+    "deli"
+   ]
+  },
+  {
+   "title": "Richmond Fall Restaurant Week is here! Check out the menus",
+   "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNckNOZG5sQUxTY2I0Rk4yRTItTUlNNmdDdXgxYk4ySEJab0NnQ1FaNjdrOEpMY2dGNzluZ2U0eEpwdUdOZVdDV3A5aW1PNjBQalVPY2VHbUFTZnFhTUNjWE5Db0FJRWlMdTh4Z0k2Y2Z3VnRSR1ctS1ZMSDVJSHBJQUd5Skc4YTBuNDdjVkxhWHhQc1lLY3BlZVNwNmV6bWNkemt1WEtqenpRZw?oc=5",
+   "source": "Richmond Times-Dispatch",
+   "date": "2026-10-21T14:30:00.000Z",
+   "topics": [
+    "local"
+   ]
+  },
+  {
+   "title": "Tyson J. Browning Obituary Oct 21, 2026",
+   "link": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE02bHptMmRvSkhwQTJnekxielZvVFhkTUdaSU1nSGVmWmlLUHhiQWNGbm45NUlMZE1mMzNiYVVMVU83RFBHYVhHdHB1Z2ZRdjI4VXg2VWVuc0tHT0s1bmoyTHRYWQ?oc=5",
+   "source": "Lucas-Batton Funeral Home",
+   "date": "2026-10-21T07:00:00.000Z",
+   "topics": [
+    "protein"
+   ]
+  }
+ ]
+}
