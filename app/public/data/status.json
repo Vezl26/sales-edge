@@ -1,7 +1,7 @@
 {
  "seed": true,
  "usda": {
-  "updatedAt": "2026-10-30T13:42:52.117Z",
+  "updatedAt": "2026-10-30T14:11:22.269Z",
   "sources": {
    "boxedBeef": {
     "ok": true,
@@ -25,9 +25,9 @@
   }
  },
  "news": {
-  "updatedAt": "2026-10-30T13:43:05.650Z",
-  "added": 37,
-  "total": 105,
+  "updatedAt": "2026-10-30T14:11:34.608Z",
+  "added": 40,
+  "total": 115,
   "errors": {}
  }
 }
