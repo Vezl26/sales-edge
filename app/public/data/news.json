@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-06T01:06:00.329Z",
+ "updatedAt": "2026-11-06T01:37:17.054Z",
  "topics": [
   {
    "id": "beef",
@@ -64,6 +64,15 @@
    "date": "2026-11-05T23:15:00.000Z",
    "topics": [
     "protein"
+   ]
+  },
+  {
+   "title": "Matt & Myron - Hour 1: Throwing Deli Meat",
+   "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE13MUVYa2xwZDRSeTV1NnFNWmNoUWFyUjJRTUZGUDdsYk9pejgyaHhucnpyNVdtbHQtVTBlQkZpNUxKcEg2aGVMWkotNlZCOTVXem1tZTA3ZGg?oc=5",
+   "source": "ESPN",
+   "date": "2026-11-05T22:58:49.000Z",
+   "topics": [
+    "deli"
    ]
   },
   {
@@ -1832,15 +1841,6 @@
    "date": "2026-11-03T17:04:38.000Z",
    "topics": [
     "cocoa"
-   ]
-  },
-  {
-   "title": "Two C-store Retailers Compete for Global Foodservice Honors",
-   "link": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBxd19DZzRId0U5S0wtZVFhX2Ntc1RwZWc0OF9pU3hLQmFOdVQ5MGVEUmZDSllUdV9mY2ZfaVdmR2lNSXpPaHB0ZXZMX29jTXZOSGUwWm92RWpWY1NYWUp4TktadnNvUFY1dl94Q0Q0dmNhd1VLV2RWcTNtNkRoU2s?oc=5",
-   "source": "Convenience Store News",
-   "date": "2026-11-03T16:47:47.000Z",
-   "topics": [
-    "deli"
    ]
   }
  ]
