@@ -1,5 +1,5 @@
 // Market data access, conversions and card formatting.
-import type { BeefData, Cut, MarketData, NewsData, Settings } from '../types'
+import type { BeefData, Cut, MarketData, NewsData, RetailBrief, Settings } from '../types'
 import type { Store } from '../store'
 import { CUTS, lexFor } from './lexicon'
 
@@ -7,6 +7,7 @@ export interface MarketBundle {
   beef: BeefData | null
   market: MarketData | null
   news: NewsData | null
+  retail?: RetailBrief | null
   loadedAt: number
   from: string
 }
@@ -20,12 +21,13 @@ export async function loadMarket(store: Store, settings: Settings): Promise<Mark
   for (const base of bases) {
     try {
       const bust = `?t=${Math.floor(Date.now() / 300000)}`
-      const [beef, market, news] = await Promise.all([
+      const [beef, market, news, retail] = await Promise.all([
         fetchJson<BeefData>(base + 'beef.json' + bust),
         fetchJson<MarketData>(base + 'market.json' + bust).catch(() => null),
         fetchJson<NewsData>(base + 'news.json' + bust).catch(() => null),
+        fetchJson<RetailBrief>(base + 'retail-brief.json' + bust).catch(() => null),
       ])
-      const bundle: MarketBundle = { beef, market, news, loadedAt: Date.now(), from: base }
+      const bundle: MarketBundle = { beef, market, news, retail, loadedAt: Date.now(), from: base }
       void store.set('cache:market', bundle)
       return bundle
     } catch { /* try next */ }

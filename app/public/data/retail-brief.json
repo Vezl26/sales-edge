@@ -1,0 +1,39 @@
+{
+  "updatedAt": "2026-11-09T18:30:00Z",
+  "weekOf": "Nov 9",
+  "takeaways": [
+    "DOJ antitrust probe covers beef pricing at 8 retailers: Kroger, Publix, Walmart, Albertsons, Aldi, Ahold Delhaize USA, Costco, Amazon.",
+    "The DOJ letters (dated July 16) ask for retail and wholesale beef prices, costs, margins and pricing strategy, so expect retailers to scrutinize their suppliers' costs.",
+    "Walmart: the White House said on July 6 that Walmart would cut ground beef about 15%. The claim came from the President, and I found no Walmart statement confirming it.",
+    "Cocoa has fallen from its highs and 2026 is on track for a second year of surplus, but retail chocolate has been slow to follow."
+  ],
+  "chains": [
+    { "chain": "Walmart", "items": [
+      { "kind": "news", "text": "Trump said July 6 that Walmart would cut ground beef about 15% at his administration's request. No Walmart statement found confirming size or timing.", "source": "Washington Examiner", "url": "https://www.washingtonexaminer.com/?p=4637915" },
+      { "kind": "news", "text": "Named in the DOJ beef price probe (retail and wholesale prices, costs, margins).", "source": "Newsweek, Sep 2", "url": "https://www.newsweek.com/doj-probes-soaring-beef-prices-at-eight-major-stores-including-walmart-12393757" }
+    ]},
+    { "chain": "Kroger", "items": [
+      { "kind": "news", "text": "Named in the DOJ beef price probe.", "source": "Newsweek, Sep 2", "url": "https://www.newsweek.com/doj-probes-soaring-beef-prices-at-eight-major-stores-including-walmart-12393757" }
+    ]},
+    { "chain": "Aldi", "items": [
+      { "kind": "news", "text": "Named in the DOJ beef price probe.", "source": "Newsweek, Sep 2", "url": "https://www.newsweek.com/doj-probes-soaring-beef-prices-at-eight-major-stores-including-walmart-12393757" }
+    ]},
+    { "chain": "Food Lion / Giant (Ahold Delhaize USA)", "items": [
+      { "kind": "news", "text": "Ahold Delhaize USA is named in the DOJ beef price probe. This is the parent of Food Lion and Giant, so it matters for Virginia accounts.", "source": "Newsweek, Sep 2", "url": "https://www.newsweek.com/doj-probes-soaring-beef-prices-at-eight-major-stores-including-walmart-12393757" }
+    ]},
+    { "chain": "Wegmans, Price Chopper, Foodtown", "items": [
+      { "kind": "news", "text": "No verified beef or deli news found this week. Not in the DOJ probe list.", "source": "searched Nov 9" }
+    ]},
+    { "chain": "Chocolate (all chains)", "items": [
+      { "kind": "trend", "text": "Cocoa prices have fallen from record highs and 2026 is on track for a second year of surplus. Analysts expected retail relief by Halloween, but chocolate stayed high through Easter because supply chains were tight. Check shelf prices before promising anything.", "source": "Semafor, Apr 6", "url": "https://www.semafor.com/article/04/06/2026/chocolate-prices-expected-to-ease-by-autumn" }
+    ]},
+    { "chain": "Beef market (all chains)", "items": [
+      { "kind": "trend", "text": "Retail beef set record highs in 2026 and the cattle herd is near historic lows. A Fortune headline from April says prices won't come down until about 2028. Treat that as an opinion, not a forecast.", "source": "Fortune, Apr 22", "url": "https://fortune.com/2026/04/22/beef-prices-record-high-wont-come-down-2028/" }
+    ]}
+  ],
+  "talkingPoints": [
+    "Your retail customers are under DOJ scrutiny on beef margins, so ask distributors how they plan to document cost and price changes.",
+    "Ground beef is the political price item right now. Ask what end users are doing on case-ready ground price points.",
+    "Ask whether customers expect cocoa relief to show up in chocolate pricing before the holidays."
+  ]
+}

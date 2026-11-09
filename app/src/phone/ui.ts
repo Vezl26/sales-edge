@@ -379,9 +379,24 @@ export class PhoneUI {
         ${rows.map(r => `<tr data-act="cutCard" data-imps="${r!.imps}" data-grade="${r!.grade}"><td>${esc(r!.imps)} ${esc(lexFor(r!.imps)?.label)}</td><td>${r!.grade[0]}</td><td>${money(perLb(r!.wavg))}</td><td>${fmtPct(pct(r!.wavg, r!.prev))}</td></tr>`).join('')}
       </table><p class="muted">Tap a row for conversions and questions. Default grade: ${s.defaultGrade}.</p></div>
       <div id="cutDetail"></div>
+      ${this.retailBriefView()}
       <h3 class="sect">News</h3>
       <select id="newsTopic"><option value="">All topics</option>${(m.news?.topics || []).map(t => `<option value="${t.id}" ${t.id === this.newsTopic ? 'selected' : ''}>${esc(t.label)}</option>`).join('')}</select>
       ${news.map(n => `<a class="card news" href="${esc(n.link)}" target="_blank" rel="noopener"><b>${esc(n.title)}</b><div class="muted">${esc(n.source)} · ${new Date(n.date).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric' })}</div></a>`).join('') || '<p class="muted">No news yet.</p>'}`
+  }
+
+  private retailBriefView(): string {
+    const r = this.app.market.retail
+    if (!r || !r.chains?.length) return ''
+    const icon: Record<string, string> = { price: '$', ad: 'AD', news: 'NEWS', trend: 'TREND' }
+    const link = (i: { text: string; source?: string; url?: string }) => i.url ? ` <a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.source || 'source')}</a>` : i.source ? ` <i class="muted">· ${esc(i.source)}</i>` : ''
+    return `<h3 class="sect">Retail brief · week of ${esc(r.weekOf)}</h3>
+      <div class="card">
+        ${r.takeaways?.length ? `<ul>${r.takeaways.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+        ${r.talkingPoints?.length ? `<h3>Bring up with distributors</h3><ul>${r.talkingPoints.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+        ${r.chains.map(c => `<details><summary><b>${esc(c.chain)}</b> <span class="muted">(${c.items.length})</span></summary>${c.items.map(i => `<p><b>${icon[i.kind] || ''}</b> ${esc(i.text)}${link(i)}</p>`).join('')}</details>`).join('')}
+        <p class="muted">Public sources only, written by Claude once a week. Check it before you quote it. Updated ${esc(new Date(r.updatedAt).toLocaleDateString())}.</p>
+      </div>`
   }
 
   private cutTable(): string {

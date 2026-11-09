@@ -190,5 +190,16 @@ export interface MarketData {
   fedCattle?: { reportDate: string | null; rows: { cls: string; basis: string; grade: string; head: number | null; price: number; low: number | null; high: number | null; weight: number | null }[] }
 }
 
+/** Weekly retail research written by the scheduled Claude task (public sources only). */
+export interface RetailBrief {
+  updatedAt: string
+  weekOf: string
+  /** The few things worth knowing before Monday */
+  takeaways: string[]
+  chains: { chain: string; items: { kind: 'price' | 'ad' | 'news' | 'trend'; text: string; source?: string; url?: string }[] }[]
+  /** Things to bring up with distributors, tied to what their end users are doing */
+  talkingPoints?: string[]
+}
+
 export interface NewsItem { title: string; link: string; source: string; date: string; topics: string[] }
 export interface NewsData { updatedAt: string | null; topics: { id: string; label: string }[]; items: NewsItem[] }
