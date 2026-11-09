@@ -5,7 +5,7 @@ import { EnergyTracker, SpeakerMapper } from '../audio/speaker'
 import { startDeepgram, type SttClient, type SttResult, type SttWord } from '../audio/stt-deepgram'
 import type { Card } from '../intel/market'
 import type { IntelEngine } from '../intel/engine'
-import { autoSummary } from './summarize'
+import { autoSummary, isGroup } from './summarize'
 import { uid } from '../kb/knowledge'
 import { recognizerKeyterms } from '../intel/lexicon'
 import type { Prompter } from '../prep/prompter'
@@ -137,6 +137,12 @@ export class CallSession {
     this.touch()
   }
 
+  /** Group meeting: everyone but you shares one label, and only your own promises become follow-ups. */
+  setGroup(g: boolean) {
+    this.call.group = g
+    this.touch()
+  }
+
   addCard(c: Card) {
     this.cards.push(c)
     this.cardIndex = this.cards.length - 1
@@ -237,7 +243,7 @@ export async function deleteCall(store: Store, id: string) {
 
 /** Plain transcript lines for the glasses (newest at the bottom). */
 export function glassTranscript(call: Call, interim: string, maxChars = 260): string {
-  const other = (call.otherLabel || 'Cust').split(' ')[0].slice(0, 8)
+  const other = isGroup(call) ? 'Group' : (call.otherLabel || 'Cust').split(' ')[0].slice(0, 8)
   const tag = (s: Segment) => (s.spk === 'A' ? 'Me' : s.spk === 'C' ? other : '··')
   const lines: string[] = []
   let lastSpk = ''

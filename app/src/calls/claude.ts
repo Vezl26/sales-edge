@@ -3,7 +3,7 @@
 import type { Call, Customer, KnowledgeDoc, FollowUp, CallSummary } from '../types'
 import type { KB } from '../kb/knowledge'
 import { numbersDigest } from '../kb/knowledge'
-import { transcriptText, customerBrief, fmtClock } from './summarize'
+import { transcriptText, customerBrief, fmtClock, isGroup } from './summarize'
 
 /** Paste this once into the Claude Project's "Instructions". */
 export const PROJECT_INSTRUCTIONS = `You are Alan's sales assistant. Alan sells beef, deli, chocolate and prepared foods for Cargill and talks with customers in person and by phone. His smart glasses record conversations and send them here.
@@ -11,7 +11,7 @@ export const PROJECT_INSTRUCTIONS = `You are Alan's sales assistant. Alan sells 
 The project files contain his customers, his sales numbers, his price lists, and a USDA market snapshot. Use them, and cite the file when you use a number. Never invent prices, volumes or commitments. If something is unclear in the transcript, say so.
 
 WHEN I PASTE A <call>:
-The transcript labels come from microphone loudness ("Alan" = me, the other name = customer). They are usually right but can flip. Use context to fix obvious mistakes.
+The transcript labels come from microphone loudness ("Alan" = me, the other name = customer). They are usually right but can flip. Use context to fix obvious mistakes. In a group meeting everyone except me shares one label, so work out who said what from context. The text comes from a microphone, so names and numbers can be misheard: write "(unclear)" rather than guessing.
 
 Reply in exactly this format so my app can read it back:
 
@@ -38,6 +38,12 @@ Only real commitments someone made. No "keep in touch" filler. Write "None" if t
 ## Talking points for next time
 - 3-5 specific things to bring up next conversation
 
+## Decisions & owners
+- who agreed to do what, and by when (include the other side's plans, e.g. changes they will make)
+
+## Check before sending
+- anything said in the room, including by me, that should be verified against official documents or the plant before it goes in writing
+
 ## Remember about this customer
 - new durable facts (people, preferences, schedules, competitors). These get saved to the customer profile.
 
@@ -58,18 +64,21 @@ export function callPacket(call: Call, customer: Customer | null, marketSnapshot
     `time: ${start.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`,
     `length: ${mins} min`,
     `customer: ${call.customerName || 'not tagged'}`,
-    `speaker labels: Alan = me, ${call.otherLabel || call.customerName || 'Customer'} = them`,
+    isGroup(call)
+      ? `speaker labels: Alan = me. Everyone else shares one label (${call.otherLabel || call.customerName || 'Customer'}) because several people were in the room, so work out who said what from context.`
+      : `speaker labels: Alan = me, ${call.otherLabel || call.customerName || 'Customer'} = them`,
     `call id: ${call.id}`,
   ].join('\n')
   const auto = call.summary
   const autoNotes = auto ? [
-    auto.followUps.length ? `possible follow-ups: ${auto.followUps.map(f => `${f.owner}: ${f.text}`).join(' | ')}` : '',
-    auto.prices.length ? `prices heard: ${auto.prices.join(', ')}` : '',
-    auto.volumes.length ? `volumes heard: ${auto.volumes.join(', ')}` : '',
+    auto.keyPoints?.length ? `key points the app spotted (may be mis-heard): ${auto.keyPoints.join(' | ')}` : '',
+    auto.followUps.length ? `possible follow-ups (rule-based guesses, verify): ${auto.followUps.map(f => `${f.owner}: ${f.text}`).join(' | ')}` : '',
+    auto.prices.length ? `prices heard: ${auto.prices.join(' | ')}` : '',
+    auto.volumes.length ? `volumes heard: ${auto.volumes.join(' | ')}` : '',
   ].filter(Boolean).join('\n') : ''
   const cards = call.cards.filter(c => c.kind === 'price' || c.kind === 'mine').map(c => `[${fmtClock(c.t)}] ${c.title}: ${c.body.split('\n').slice(0, 4).join(' · ')}`).join('\n')
   return [
-    'Summarize this sales call using the format in the project instructions. (If there are no project instructions: give headline, key topics, real follow-ups with owner and due date, prices & volumes, customer needs, market angle, talking points for next time, and facts to remember.)',
+    'Summarize this sales call using the format in the project instructions, and add two sections: "## Decisions & owners" (who agreed to do what, and by when) and "## Check before sending" (anything said in the room, including by me, that should be verified against official documents or the plant before it goes in writing). (If there are no project instructions: give headline, key topics, real follow-ups with owner and due date, prices & volumes, customer needs, market angle, talking points for next time, and facts to remember.) The transcript comes from a glasses microphone, so names and numbers can be misheard: write "(unclear)" instead of guessing.',
     '',
     `<call>`,
     tag('call_info', info),

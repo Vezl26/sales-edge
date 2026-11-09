@@ -99,11 +99,15 @@ export class App {
   }
 
   // ---------- calls ----------
-  async startCall(customer: Customer | null, forcedPrep?: Prep) {
+  async startCall(customer: Customer | null, forcedPrep?: Prep, group = false) {
     if (this.session) return
     await this.glasses.ensureStarted()
-    const extra = [...this.kb.customers.flatMap(c => [c.name, ...c.aliases]), ...this.kb.customers.flatMap(c => c.items.map(i => i.name))]
+    // This customer's names and contacts go first so the recognizer hears "Brad" and not "brisket".
+    const contacts = (customer?.contact ?? '').split(/[,;/&\n]| and /).map(x => x.trim()).filter(Boolean)
+    const mine = customer ? [customer.name, ...customer.aliases, ...contacts, ...contacts.flatMap(x => x.split(/\s+/).filter(w => w.length > 2))] : []
+    const extra = [...mine, ...this.kb.customers.flatMap(c => [c.name, ...c.aliases]), ...this.kb.customers.flatMap(c => c.items.map(i => i.name))]
     const s = new CallSession(this.store, this.settings, this.engine, customer, extra)
+    if (group) s.call.group = true
     this.session = s
     s.onChange = () => { this.renderCallOnGlasses(); this.emit() }
     s.onCustomerTagged = c => this.attachPrep(c.id)

@@ -37,6 +37,10 @@ Customers, your numbers, price lists and call transcripts are stored **only on y
 - **Glasses home menu:** Start call · Start call with a customer · Market brief · News · Recent calls · Open follow-ups.
 - **During a call:** tap = pause/resume · swipe = flip through cards · double-tap = end the call and summarize.
 - **Phone:** Live tab shows everything. Tap any transcript line to switch who said it.
+- **Group meetings:** tick "Group meeting" before you start (or flip "Group: on" during the call). Everyone except you shares one label, and only *your* promises become follow-ups, because the labels can't tell several people apart.
+- **Follow-ups marked "guess, check it"** come from simple rules, not understanding. Tick the real ones. For the real list, use Send to Claude.
+- **Summary "Key points"** pull out the sentences with money, temperatures, decisions and problems. Prices and volumes show the words around them.
+- **Names:** put the customer's contact names in the Clients tab (for example "Brad Holma, Alan Atwood"). The app listens for them during the call.
 - **Deep notes with Claude (on your subscription):** see below.
 
 ## Meeting prep (read it on your glasses mid-conversation)

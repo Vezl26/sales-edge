@@ -21,6 +21,8 @@ export interface FollowUp {
   text: string
   due?: string
   done?: boolean
+  /** Found by the app's rules, not confirmed by you or Claude */
+  auto?: boolean
 }
 
 export interface CallSummary {
@@ -32,6 +34,8 @@ export interface CallSummary {
   volumes: string[]
   customerNeeds: string[]
   talkingPointsNext: string[]
+  /** The sentences that matter most: numbers, temperatures, decisions, problems */
+  keyPoints?: string[]
   aiText?: string
 }
 
@@ -42,6 +46,8 @@ export interface Call {
   customerId?: string
   customerName?: string
   otherLabel?: string
+  /** Several people on the other side: speaker labels can't tell them apart */
+  group?: boolean
   segments: Segment[]
   cards: CardRef[]
   summary?: CallSummary

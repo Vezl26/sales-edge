@@ -5,7 +5,7 @@ import { uid, importCustomersCsv, parseDelimited, numbersDigest, reportHighlight
 import { pdfToText } from '../kb/pdf'
 import { CUTS, lexFor } from '../intel/lexicon'
 import { bestRow, perLb, money, pct, fmtPct, shortDate, priceCard, cutoutCard, killCard, cattleCard } from '../intel/market'
-import { transcriptText, summaryToText, fmtClock } from '../calls/summarize'
+import { transcriptText, summaryToText, fmtClock, isGroup } from '../calls/summarize'
 import { PROJECT_INSTRUCTIONS, customersFile, docsFile } from '../calls/claude'
 import { draftPrep, prepPacket, prepCards, type Prep } from '../prep/prep'
 import { AI_PRESETS, aiEnabled } from '../ai/llm'
@@ -115,6 +115,7 @@ export class PhoneUI {
           <h2>Start a conversation</h2>
           <label>Customer (optional — it also listens for their name)</label>
           <select id="startCustomer"><option value="">— none —</option>${opts}</select>
+          <label class="check"><input type="checkbox" id="startGroup"> <span>Group meeting (several people on their side)</span></label>
           <button class="primary big" data-act="start">● Start listening</button>
           <p class="muted">On the glasses: tap = pause, swipe = flip through cards, double-tap = end &amp; summarize.</p>
         </div>
@@ -122,7 +123,8 @@ export class PhoneUI {
         ${this.quickMarket()}`
     }
     const segs = s.call.segments
-    const other = s.call.otherLabel || 'Customer'
+    const grp = isGroup(s.call)
+    const other = grp ? 'Others' : s.call.otherLabel || 'Customer'
     const lines = segs.map((g, i) => `<div class="seg ${g.spk}" data-act="flip" data-i="${i}"><span class="who">${g.spk === 'A' ? 'Alan' : g.spk === 'C' ? esc(other) : '?'}</span> ${esc(g.text)}</div>`).join('')
     const cards = [...s.cards].reverse().map(c => `<div class="icard ${c.kind}"><div class="ititle">${esc(c.title)}</div><pre>${esc(c.phone)}</pre></div>`).join('')
     return `
@@ -134,7 +136,7 @@ export class PhoneUI {
         </div>
       </div>
       <div class="card">
-        <div class="row"><h3>Transcript</h3><button class="small" data-act="swap">Swap Alan/Customer</button></div>
+        <div class="row"><h3>Transcript</h3><span class="btns"><button class="small" data-act="group">Group: ${grp ? 'on' : 'off'}</button> <button class="small" data-act="swap">Swap Alan/Customer</button></span></div>
         <div class="transcript">${lines}${s.interim ? `<div class="seg interim">${esc(s.interim)}</div>` : ''}${!lines && !s.interim ? '<p class="muted">Waiting for speech… (tap a line later to fix who said it)</p>' : ''}</div>
         <label>Customer for this call</label>
         <select id="liveCustomer"><option value="">— none —</option>${a.kb.customers.map(c => `<option value="${c.id}" ${c.id === s.call.customerId ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</select>
@@ -263,11 +265,11 @@ export class PhoneUI {
         <button data-act="saveClaude" data-id="${call.id}">Save Claude's notes</button>
       </div>
       ${s ? `<div class="card"><h3>Summary ${s.generatedBy === 'ai' ? '(AI)' : '(automatic)'}</h3><pre>${esc(summaryToText(s))}</pre>
-        ${s.followUps.length ? `<h3>Follow-ups</h3>${s.followUps.map((f, i) => `<label class="check"><input type="checkbox" data-act="fuDone" data-id="${call.id}" data-i="${i}" ${f.done ? 'checked' : ''}> <span><b>${esc(f.owner)}:</b> ${esc(f.text)}${f.due ? ` (${esc(f.due)})` : ''}</span></label>`).join('')}` : ''}
+        ${s.followUps.length ? `<h3>Follow-ups</h3>${s.followUps.map((f, i) => `<label class="check"><input type="checkbox" data-act="fuDone" data-id="${call.id}" data-i="${i}" ${f.done ? 'checked' : ''}> <span><b>${esc(f.owner)}:</b> ${esc(f.text)}${f.due ? ` (${esc(f.due)})` : ''}${f.auto ? ' <i class="muted">· guess, check it</i>' : ''}</span></label>`).join('')}` : ''}
       </div>` : ''}
       <div class="card"><h3>My notes</h3><textarea data-field="callNotes" data-id="${call.id}" rows="3" placeholder="Anything to add…">${esc(call.notes || '')}</textarea></div>
       <div class="card"><h3>Transcript</h3>
-        ${call.segments.map((g, i) => `<div class="seg ${g.spk}" data-act="flipSaved" data-id="${call.id}" data-i="${i}"><span class="who">${fmtClock(g.t)} ${g.spk === 'A' ? 'Alan' : g.spk === 'C' ? esc(call.otherLabel || 'Customer') : '?'}</span> ${esc(g.text)}</div>`).join('') || '<p class="muted">Empty</p>'}
+        ${call.segments.map((g, i) => `<div class="seg ${g.spk}" data-act="flipSaved" data-id="${call.id}" data-i="${i}"><span class="who">${fmtClock(g.t)} ${g.spk === 'A' ? 'Alan' : g.spk === 'C' ? esc(isGroup(call) ? 'Others' : call.otherLabel || 'Customer') : '?'}</span> ${esc(g.text)}</div>`).join('') || '<p class="muted">Empty</p>'}
         <p class="muted">Tap a line to switch who said it.</p>
       </div>
       ${call.cards.length ? `<div class="card"><h3>Cards shown</h3>${call.cards.map(c => `<details><summary>${fmtClock(c.t)} ${esc(c.title)}</summary><pre>${esc(c.body)}</pre></details>`).join('')}</div>` : ''}
@@ -454,9 +456,11 @@ export class PhoneUI {
     switch (act) {
       case 'start': {
         const cid = ($<HTMLSelectElement>('#startCustomer')?.value) || ''
-        await a.startCall(a.customerById(cid))
+        const group = !!$<HTMLInputElement>('#startGroup')?.checked
+        await a.startCall(a.customerById(cid), undefined, group)
         break
       }
+      case 'group': if (a.session) a.session.setGroup(!isGroup(a.session.call)); break
       case 'pause': a.togglePause(); break
       case 'end': await a.endCall(); this.tab = 'calls'; this.openCallId = a.lastEnded?.id ?? null; this.render(); break
       case 'swap': a.session?.swapAll(); break

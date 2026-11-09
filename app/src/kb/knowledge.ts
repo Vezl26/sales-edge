@@ -182,18 +182,31 @@ export function numbersDigest(doc: KnowledgeDoc): string[] {
 
 /** Pull the key points out of a long prose report (e.g. a weekly market outlook PDF). */
 export function reportHighlights(text: string, max = 8): string[] {
-  const flat = text.replace(/\r/g, '')
+  // PDFs drop the dash at a line break: "$7-\n$10/cwt" arrives as "$7$10/cwt"
+  const flat = text.replace(/\r/g, '').replace(/(\$\d[\d.,]*)(?=\$\d)/g, '$1-')
   // 1) Executive-summary bullets with CAPS labels: "• CATTLE PRICES (link): ..."
   const bullets = flat.split(/\n?\s*[•▪●]\s+/).slice(1)
     .map(b => b.replace(/\s*\n\s*/g, ' ').trim())
     .filter(b => /^[A-Z][A-Z0-9 ,&/-]{3,}(\s*\([^)]*\))?\s*:/.test(b))
   if (bullets.length >= 2) {
-    return bullets.slice(0, max).map(b => {
+    // Whole sentences only, never cut mid-sentence.
+    const fit = (sents: string[], n: number) => {
+      let out = ''
+      for (const s of sents) { if ((out + ' ' + s).trim().length > n) break; out = (out + ' ' + s).trim() }
+      return out || sents[0].slice(0, n)
+    }
+    const ORDER = ['cattle prices', 'beef cutout', 'weights', 'harvest', 'futures']
+    const rank = (l: string) => { const i = ORDER.findIndex(p => l.toLowerCase().includes(p)); return i < 0 ? 99 : i }
+    const main = bullets.map(b => {
       const m = b.match(/^([A-Z][A-Z0-9 ,&/-]{3,})(?:\s*\([^)]*\))?\s*:\s*(.+)$/)!
       const label = m[1].trim().replace(/\b\w+/g, w => w[0] + w.slice(1).toLowerCase())
-      const body = m[2].split(/(?<=[.!?])\s+/).slice(0, 2).join(' ')
-      return `${label}: ${body}`.slice(0, 320)
-    })
+      return { label, text: `${label}: ${fit(m[2].split(/(?<=[.!?])\s+/), 320)}` }
+    }).sort((a, b) => rank(a.label) - rank(b.label)).map(x => x.text).slice(0, max)
+    // Ground beef and trim matter for most of your calls: pull those lines from the commentary slides.
+    const gb = flat.replace(/\s*\n\s*/g, ' ').split(/(?<=[.!?])\s+/)
+      .filter(x => /ground beef|fat trim|trimmings/i.test(x) && x.length > 40 && x.length < 300 && !/©|permission|copyright/i.test(x))
+      .slice(0, 2).map(x => `Ground beef & trim: ${x.trim().replace(/^[•▪●]\s*/, '')}`)
+    return [...main, ...gb]
   }
   // 2) Otherwise: sentences that carry numbers
   return flat.replace(/\s*\n\s*/g, ' ').split(/(?<=[.!?])\s+/)
