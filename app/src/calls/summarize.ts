@@ -37,20 +37,29 @@ const TEMP = /\b\d{2,3}\s?(?:°\s?f?|degrees?|deg)\b|\b\d{2,3}\s?f\b/i
 const MONEY = /\$\s?\d|\b(thousands?|millions?) of dollars\b/i
 const DECISION = /\b(we('re| are)? (going|gonna) to|we will|we'll|moving forward|going forward|the plan|agreed|decided|propos(e|ed|al)|suggest(ed|ion)?|we need to|we want to|we gotta|(i|we) (asked|told) (them|him|her|y'all))\b/i
 const ISSUE = /\b(credits?|discolor\w*|brown|purge|gass(ed|ing)|reject\w*|complain\w*|problem|issue|recall|shortage|spoil\w*|cold chain|temperature|warm)\b/i
-const NEED = /\b(need|needs|looking for|want|wanted|short on|out of|running low|problem|issue|complain|too high|too expensive|competitor|cheaper|quality|late|delivery|shortage|promo|feature|ad)\b/i
+// A real need or objection, not "let me know what you need" or "what we need to talk about".
+const NEED = /\b(we need|i need|they need|need (?:to get|more|some|a few|\d)|looking for|short on|running low|too (?:high|expensive)|cheaper|competitor|complain\w*|problem|issue|shortage|late delivery|quality)\b/i
+const NEED_META = /\b(talk about|let me know|what you need|what we need|need to (?:talk|chat|touch|catch|discuss)|need from you)\b/i
+// Words that show an internal call (your boss or team) and not a customer.
+const INTERNAL_HINT = /\b((?:my|our|your) (?:boss|manager|director)|(?:new|this|last|my|your) role|one[- ]on[- ]one|1:1|performance review|team meeting)\b/i
+// Business substance: used to pick the sentences worth keeping when there are few numbers.
+const BIZ = /\b(pric(?:e|es|ing)|cost(?:s|ing)?|contract|commitment|formula|usda|margin|volume|supply|case[- ]ready|leverage|quote|retailers?|cutout|forecast|rebate|credits?|freight|ground beef|trim|chubs?|deli|chocolate|cocoa)\b/gi
+const ADVICE = /\b(remember|the idea is|you(?:'ll| will| can| should| gotta)|we (?:should|gotta)|make sure|the (?:key|point|goal) is)\b/i
 const PRICE = /(\$\s?\d[\d,]*(\.\d+)?|\d+(\.\d+)?\s?(dollars|bucks|cents))(\s?(a|per|\/)\s?(lb|pound|case|cwt|hundredweight|box))?/gi
 const VOLUME = /\b\d[\d,]*(\.\d+)?\s?(k\s)?(lbs?|pounds|cases|loads|boxes|pallets|trucks|combos|head)\b/gi
 
 const PRODUCT_WORDS: [RegExp, string][] = [
-  [/\bdeli|turkey breast|roast beef|ham|salami|pastrami|lunch ?meat/i, 'Deli'],
-  [/\bchocolate|cocoa|confection|coating|chips?\b/i, 'Chocolate'],
-  [/\bprepared|ready to (eat|cook)|meal kit|fully cooked|rotisserie|heat and eat/i, 'Prepared foods'],
-  [/\bground beef|chubs?|patties|grind|trim\b|81\/19|80\/20|93\/7/i, 'Ground beef & trim'],
-  [/\bcutout|market|futures|cattle|slaughter|kill|usda/i, 'Market conditions'],
-  [/\bdelivery|truck|freight|route|ship/i, 'Logistics & delivery'],
-  [/\bprice|pricing|quote|cost|margin/i, 'Pricing'],
-  [/\bpromo|feature|ad\b|circular|holiday|thanksgiving|christmas|easter|memorial|labor day|july/i, 'Promotions & features'],
+  [/\b(?:deli|turkey breast|roast beef|salami|pastrami|lunch ?meat)\b/i, 'Deli'],
+  [/\b(?:chocolate|cocoa|confection\w*|coating)\b/i, 'Chocolate'],
+  [/\b(?:prepared foods?|ready to (?:eat|cook)|meal kits?|fully cooked|rotisserie|heat and eat)\b/i, 'Prepared foods'],
+  [/\b(?:ground beef|chubs?|patties|grinds?|trim|81\/19|80\/20|93\/7)\b/i, 'Ground beef & trim'],
+  [/\b(?:cutout|futures|cattle|slaughter|usda|boxed beef)\b/i, 'Market conditions'],
+  [/\b(?:deliver(?:y|ies)|trucks?|freight|routes?|shipping|shipment)\b/i, 'Logistics & delivery'],
+  [/\b(?:pric(?:e|es|ing)|quotes?|costs?|costing|margins?)\b/i, 'Pricing'],
+  [/\b(?:promos?|promotions?|features?|ads?|circular|holiday|thanksgiving|christmas|easter|memorial day|labor day)\b/i, 'Promotions & features'],
 ]
+/** A topic needs to come up in at least this many lines before it is listed. */
+const MIN_TOPIC_LINES = 2
 
 export function autoSummary(call: Call, customer?: Customer | null): CallSummary {
   const segs = call.segments
@@ -62,7 +71,7 @@ export function autoSummary(call: Call, customer?: Customer | null): CallSummary
   }
   for (const [re, label] of PRODUCT_WORDS) {
     const n = segs.filter(s => re.test(s.text)).length
-    if (n) topics.set(label, (topics.get(label) || 0) + n)
+    if (n >= MIN_TOPIC_LINES) topics.set(label, (topics.get(label) || 0) + n)
   }
   for (const it of customer?.items || []) {
     const w = it.name.toLowerCase().split(/\s+/).filter(x => x.length > 3)
@@ -70,6 +79,7 @@ export function autoSummary(call: Call, customer?: Customer | null): CallSummary
   }
 
   const group = isGroup(call)
+  const internal = isInternal(call)
   const followUps: FollowUp[] = []
   for (const s of segs) {
     if (s.spk === '?') continue
@@ -86,17 +96,17 @@ export function autoSummary(call: Call, customer?: Customer | null): CallSummary
 
   const prices = withContext(segs, PRICE)
   const volumes = withContext(segs, VOLUME)
-  const keyPts = keyPoints(segs)
-  const customerNeeds = segs
+  const keyPts = keyPoints(segs, internal)
+  const customerNeeds = internal ? [] : segs
     .filter(s => s.spk !== 'A')
     .flatMap(s => s.text.split(/(?<=[.!?])\s+/))
-    .filter(x => NEED.test(x) && x.split(' ').length > 3)
     .map(tidy)
+    .filter(x => NEED.test(x) && !NEED_META.test(x) && !x.endsWith('?') && x.split(' ').length >= 5 && !HABITUAL.test(x))
     .slice(0, 6)
 
   const top = [...topics.entries()].sort((a, b) => b[1] - a[1]).map(([t]) => t)
   const mins = Math.max(1, Math.round(((call.endedAt ?? Date.now()) - call.startedAt) / 60000))
-  const headline = `${call.customerName ? call.customerName + ' — ' : ''}${group ? 'Meeting · ' : ''}${top.slice(0, 3).join(', ') || 'General call'} (${mins} min)`
+  const headline = `${call.customerName ? call.customerName + ' — ' : ''}${internal ? 'Internal call · ' : group ? 'Meeting · ' : ''}${top.slice(0, 3).join(', ') || 'General call'} (${mins} min)`
   const talkingPointsNext = [
     ...followUps.filter(f => f.owner === 'Alan').slice(0, 2).map(f => `Close the loop: ${f.text}`),
     ...customerNeeds.slice(0, 2).map(n => `Address: ${n}`),
@@ -116,8 +126,34 @@ export function isGroup(call: Call): boolean {
   return [...counts.values()].filter(n => n >= 3).length >= 4
 }
 
+/** A catch-up with your boss or team, not a customer. Set by hand, or guessed from the words used. */
+export function isInternal(call: Call): boolean {
+  if (call.internal !== undefined) return call.internal
+  if (call.customerId) return false
+  return call.segments.filter(s => INTERNAL_HINT.test(s.text)).length >= 2
+}
+
+/** Sentences about pricing, contracts and strategy. Fills in when a call has few numbers. */
+function substance(segs: Segment[]): { n: number; text: string; score: number }[] {
+  const out: { n: number; text: string; score: number }[] = []
+  let n = 0
+  for (const s of segs) {
+    if (s.spk === '?') continue
+    for (const sent of s.text.split(/(?<=[.!?])\s+/)) {
+      const t = tidy(sent)
+      const words = t.split(/\s+/).length
+      n++
+      if (words < 8 || words > 40 || t.endsWith('?') || MEETING_TALK.test(t)) continue
+      const biz = new Set((t.match(BIZ) ?? []).map(x => x.toLowerCase())).size
+      const score = Math.min(2, biz) + (ADVICE.test(t) ? 1 : 0)
+      if (biz >= 2 || (biz >= 1 && ADVICE.test(t))) out.push({ n, text: t.length > 220 ? t.slice(0, 217).replace(/\s\S*$/, '') + '…' : t, score })
+    }
+  }
+  return out
+}
+
 /** The sentences that carry numbers, temperatures, decisions and problems. */
-function keyPoints(segs: Segment[]): string[] {
+function keyPoints(segs: Segment[], internal = false): string[] {
   const found: { n: number; text: string; score: number }[] = []
   let n = 0
   for (const s of segs) {
@@ -130,6 +166,12 @@ function keyPoints(segs: Segment[]): string[] {
       const score = (MONEY.test(t) ? 2 : 0) + (TEMP.test(t) ? 2 : 0) + (DECISION.test(t) ? 2 : 0) + (ISSUE.test(t) ? 1 : 0) + (/\d/.test(t) ? 1 : 0)
       if (score >= 3) found.push({ n, text: t.length > 220 ? t.slice(0, 217).replace(/\s\S*$/, '') + '…' : t, score })
     }
+  }
+  const want = internal ? 6 : 5
+  if (found.length < want) {
+    const have = new Set(found.map(x => x.n))
+    const extra = substance(segs).filter(x => !have.has(x.n)).sort((a, b) => b.score - a.score || a.n - b.n).slice(0, want - found.length)
+    found.push(...extra)
   }
   const top = found.sort((a, b) => b.score - a.score || a.n - b.n).slice(0, 8).sort((a, b) => a.n - b.n)
   return dedupe(top.map(x => x.text))
@@ -158,7 +200,7 @@ function withContext(segs: Segment[], re: RegExp, max = 8): string[] {
 }
 
 const dedupe = (a: string[]) => a.filter((x, i) => a.findIndex(y => y.toLowerCase().slice(0, 40) === x.toLowerCase().slice(0, 40)) === i)
-const tidy = (s: string) => s.replace(/\s+/g, ' ').replace(/^(so|and|um|uh|okay|ok|yeah|well|you know),?\s+/i, '').trim()
+const tidy = (s: string) => s.replace(/\s+/g, ' ').replace(/^((so|and|but|um|uh|okay|ok|yeah|well|like|right|you know),?\s+)+/i, '').trim()
 const uniq = (a: string[]) => [...new Set(a.map(x => x.toLowerCase()))].map(x => a.find(y => y.toLowerCase() === x)!)
 function dedupeFollowUps(f: FollowUp[]) {
   const seen = new Set<string>()
@@ -205,7 +247,7 @@ export function summaryToText(s: CallSummary): string {
   if (s.aiText) return s.aiText
   return [
     s.headline,
-    sec('Key points', s.keyPoints ?? []),
+    sec(s.headline.includes('Internal call') ? 'What was discussed' : 'Key points', s.keyPoints ?? []),
     sec('Topics', s.topics),
     sec(s.followUps.some(f => f.auto) ? 'Possible follow-ups (check them)' : 'Follow-ups', s.followUps.map(f => `${f.owner}: ${f.text}${f.due ? ` (${f.due})` : ''}`)),
     sec('Prices mentioned', s.prices),

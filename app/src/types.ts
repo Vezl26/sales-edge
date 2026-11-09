@@ -48,6 +48,8 @@ export interface Call {
   otherLabel?: string
   /** Several people on the other side: speaker labels can't tell them apart */
   group?: boolean
+  /** A catch-up with your boss or team, not a customer */
+  internal?: boolean
   segments: Segment[]
   cards: CardRef[]
   summary?: CallSummary

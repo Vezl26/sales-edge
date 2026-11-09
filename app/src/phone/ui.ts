@@ -5,7 +5,7 @@ import { uid, importCustomersCsv, parseDelimited, numbersDigest, reportHighlight
 import { pdfToText } from '../kb/pdf'
 import { CUTS, lexFor } from '../intel/lexicon'
 import { bestRow, perLb, money, pct, fmtPct, shortDate, priceCard, cutoutCard, killCard, cattleCard } from '../intel/market'
-import { transcriptText, summaryToText, fmtClock, isGroup } from '../calls/summarize'
+import { transcriptText, summaryToText, fmtClock, isGroup, autoSummary } from '../calls/summarize'
 import { PROJECT_INSTRUCTIONS, customersFile, docsFile } from '../calls/claude'
 import { draftPrep, prepPacket, prepCards, type Prep } from '../prep/prep'
 import { AI_PRESETS, aiEnabled } from '../ai/llm'
@@ -116,6 +116,7 @@ export class PhoneUI {
           <label>Customer (optional — it also listens for their name)</label>
           <select id="startCustomer"><option value="">— none —</option>${opts}</select>
           <label class="check"><input type="checkbox" id="startGroup"> <span>Group meeting (several people on their side)</span></label>
+          <label class="check"><input type="checkbox" id="startInternal"> <span>Internal call (my boss or team, not a customer)</span></label>
           <button class="primary big" data-act="start">● Start listening</button>
           <p class="muted">On the glasses: tap = pause, swipe = flip through cards, double-tap = end &amp; summarize.</p>
         </div>
@@ -265,6 +266,8 @@ export class PhoneUI {
         <button data-act="saveClaude" data-id="${call.id}">Save Claude's notes</button>
       </div>
       ${s ? `<div class="card"><h3>Summary ${s.generatedBy === 'ai' ? '(AI)' : '(automatic)'}</h3><pre>${esc(summaryToText(s))}</pre>
+        <p class="muted">Wrong kind of call?</p>
+        <div class="btns"><button class="small" data-act="resum" data-kind="internal" data-id="${call.id}">Redo as internal call</button> <button class="small" data-act="resum" data-kind="customer" data-id="${call.id}">Redo as customer call</button></div>
         ${s.followUps.length ? `<h3>Follow-ups</h3>${s.followUps.map((f, i) => `<label class="check"><input type="checkbox" data-act="fuDone" data-id="${call.id}" data-i="${i}" ${f.done ? 'checked' : ''}> <span><b>${esc(f.owner)}:</b> ${esc(f.text)}${f.due ? ` (${esc(f.due)})` : ''}${f.auto ? ' <i class="muted">· guess, check it</i>' : ''}</span></label>`).join('')}` : ''}
       </div>` : ''}
       <div class="card"><h3>My notes</h3><textarea data-field="callNotes" data-id="${call.id}" rows="3" placeholder="Anything to add…">${esc(call.notes || '')}</textarea></div>
@@ -457,7 +460,8 @@ export class PhoneUI {
       case 'start': {
         const cid = ($<HTMLSelectElement>('#startCustomer')?.value) || ''
         const group = !!$<HTMLInputElement>('#startGroup')?.checked
-        await a.startCall(a.customerById(cid), undefined, group)
+        const internal = !!$<HTMLInputElement>('#startInternal')?.checked
+        await a.startCall(a.customerById(cid), undefined, group, internal)
         break
       }
       case 'group': if (a.session) a.session.setGroup(!isGroup(a.session.call)); break
@@ -521,6 +525,14 @@ export class PhoneUI {
         const text = `${call.summary ? summaryToText(call.summary) : ''}\n\n---\n${transcriptText(call)}`
         if (navigator.share) { try { await navigator.share({ title: call.summary?.headline || 'Call notes', text }) } catch { /* cancelled */ } }
         else if (await copy(text)) a.notify('Copied notes')
+        break
+      }
+      case 'resum': {
+        const call = await a.getCall(id!)
+        if (!call) break
+        call.internal = el.dataset.kind === 'internal'
+        call.summary = autoSummary(call, a.customerById(call.customerId))
+        await a.updateCall(call); this.render(); a.notify('Summary redone')
         break
       }
       case 'aiSum': a.notify('Summarizing…'); await a.aiSummarize(id!); break

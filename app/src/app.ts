@@ -99,7 +99,7 @@ export class App {
   }
 
   // ---------- calls ----------
-  async startCall(customer: Customer | null, forcedPrep?: Prep, group = false) {
+  async startCall(customer: Customer | null, forcedPrep?: Prep, group = false, internal = false) {
     if (this.session) return
     await this.glasses.ensureStarted()
     // This customer's names and contacts go first so the recognizer hears "Brad" and not "brisket".
@@ -108,6 +108,7 @@ export class App {
     const extra = [...mine, ...this.kb.customers.flatMap(c => [c.name, ...c.aliases]), ...this.kb.customers.flatMap(c => c.items.map(i => i.name))]
     const s = new CallSession(this.store, this.settings, this.engine, customer, extra)
     if (group) s.call.group = true
+    if (internal) s.call.internal = true
     this.session = s
     s.onChange = () => { this.renderCallOnGlasses(); this.emit() }
     s.onCustomerTagged = c => this.attachPrep(c.id)

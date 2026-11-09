@@ -1,5 +1,5 @@
 // Run: cd app && bun test
-import { test, expect } from 'bun:test'
+import { test, expect, describe } from 'bun:test'
 import { autoSummary, isGroup } from '../src/calls/summarize'
 import type { Call, Segment } from '../src/types'
 
@@ -49,4 +49,44 @@ test('prices and numbers keep their context', () => {
 test('temperatures and decisions become key points', () => {
   const c = call([['C', "We are going to lower the ground beef cooler to 20 degrees during the summer months."]])
   expect(autoSummary(c, null).keyPoints?.[0]).toContain('20 degrees')
+})
+
+describe('internal calls and loose keywords', () => {
+  const mk = (lines: [string, string][], extra: any = {}) => ({
+    id: 'i', startedAt: 0, endedAt: 600000, cards: [], ...extra,
+    segments: lines.map(([spk, text], i) => ({ t: i * 5000, spk: spk as 'A' | 'C', text })),
+  }) as any
+
+  test('a catch-up with the boss is internal, with no customer needs and no "Address:" filler', () => {
+    const call = mk([
+      ['C', 'Let me know what you need and we should catch up soon.'],
+      ['A', 'I congratulated her on the new role because she is our boss.'],
+      ['C', 'In this role you will have some slow days, that is normal and you get better at it.'],
+      ['C', 'You can get more aggressive on costing because you can take cost out of the contract.'],
+      ['C', 'Remember that case ready formulas are a USDA driver plus a spread over the market.'],
+    ])
+    const s = autoSummary(call)
+    expect(s.headline).toContain('Internal call')
+    expect(s.customerNeeds).toEqual([])
+    expect(s.talkingPointsNext.some(x => x.startsWith('Address'))).toBe(false)
+    expect(s.keyPoints!.join(' ')).toContain('costing')
+  })
+
+  test('meta talk is not a customer need, and one stray word is not a topic', () => {
+    const call = mk([
+      ['C', 'I want to give you an update on what we need to talk about later.'],
+      ['A', 'Sounds good, I had a long weekend and the ham sandwich was great.'],
+      ['C', 'We need 2,000 lb of 80/20 chubs by Thursday or we will run short on grind.'],
+    ], { customerName: 'Test Co' })
+    const s = autoSummary(call)
+    expect(s.customerNeeds.join(' ')).toContain('2,000')
+    expect(s.customerNeeds.join(' ')).not.toContain('talk about')
+    expect(s.topics).not.toContain('Deli')
+    expect(s.topics).not.toContain('Promotions & features')
+  })
+
+  test('picking internal by hand wins over the guess', () => {
+    const call = mk([['A', 'Quote them $4.10 a pound for the chubs tomorrow morning please.']], { customerName: 'X', internal: false })
+    expect(autoSummary(call).headline).not.toContain('Internal')
+  })
 })
