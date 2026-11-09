@@ -77,6 +77,9 @@ jobs:
         working-directory: app
         env:
           EVENHUB_CREDENTIALS: ${{ secrets.EVENHUB_CREDENTIALS }}
+          # Optional: a token that can write this repo's secrets. Lets the job save the refreshed
+          # Even Hub login back, because Even's refresh token changes every time it is used.
+          SECRETS_PAT: ${{ secrets.EVENHUB_SECRET_WRITER }}
           XDG_CONFIG_HOME: ${{ runner.temp }}/evenhub-config
         run: |
           set -e
@@ -84,11 +87,18 @@ jobs:
           umask 077
           mkdir -p "$XDG_CONFIG_HOME/evenhub"
           printf '%s\n' "$EVENHUB_CREDENTIALS" > "$XDG_CONFIG_HOME/evenhub/credentials.yaml"
-          trap 'rm -rf "$XDG_CONFIG_HOME/evenhub"' EXIT
+          cleanup() {
+            if [ -n "$SECRETS_PAT" ] && [ -s "$XDG_CONFIG_HOME/evenhub/credentials.yaml" ]; then
+              GH_TOKEN="$SECRETS_PAT" gh secret set EVENHUB_CREDENTIALS --repo "$GITHUB_REPOSITORY" < "$XDG_CONFIG_HOME/evenhub/credentials.yaml" \
+                && echo "Saved the refreshed Even Hub login" || echo "::warning::could not save the refreshed Even Hub login"
+            fi
+            rm -rf "$XDG_CONFIG_HOME/evenhub"
+          }
+          trap cleanup EXIT
           VERSION=$(node -p "require('./package.json').version")
           PKG=$(node -p "require('./app.json').package_id")
           MSG=$(git log -1 --pretty=%s | cut -c1-200)
-          npx evenhub upload sales-edge.ehpk --package-id "$PKG" -m "$MSG" || { echo "::warning::upload skipped or failed (version $VERSION may already exist)"; exit 0; }
+          npx evenhub upload sales-edge.ehpk --package-id "$PKG" -m "$MSG" || { echo "::warning::Even Hub upload skipped or failed. If the log says auth error, the Even Hub login expired: log in again and replace the EVENHUB_CREDENTIALS secret. Otherwise version $VERSION may already exist."; exit 0; }
           npx evenhub promote "$VERSION" --to beta --package-id "$PKG" || echo "::warning::promote to beta failed"
 
       - name: Make the install QR code
