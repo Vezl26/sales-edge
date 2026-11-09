@@ -22,6 +22,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # true only after the one-time Even Hub sign-in is saved as the EVENHUB_CREDENTIALS secret
+      HAVE_EVENHUB: ${{ secrets.EVENHUB_CREDENTIALS != '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -67,6 +70,28 @@ jobs:
           npm run manifest
           npx evenhub pack app.json dist -o sales-edge.ehpk || echo "::warning::pack failed - the URL install still works"
           [ -f sales-edge.ehpk ] && cp sales-edge.ehpk dist/ || true
+
+      # Sends the new build to Even Hub and promotes it to Beta. Runs only on pushes (not the
+      # 3-hourly data jobs) and only once the EVENHUB_CREDENTIALS secret exists. A repeat of an
+      # already-uploaded version just logs a warning, so ordinary pushes are safe.
+      - name: Upload to Even Hub and promote to Beta
+        if: github.event_name == 'push' && env.HAVE_EVENHUB == 'true'
+        continue-on-error: true
+        working-directory: app
+        env:
+          EVENHUB_CREDENTIALS: ${{ secrets.EVENHUB_CREDENTIALS }}
+          XDG_CONFIG_HOME: ${{ runner.temp }}/evenhub-config
+        run: |
+          set -e
+          umask 077
+          mkdir -p "$XDG_CONFIG_HOME/evenhub"
+          printf '%s\n' "$EVENHUB_CREDENTIALS" > "$XDG_CONFIG_HOME/evenhub/credentials.yaml"
+          trap 'rm -rf "$XDG_CONFIG_HOME/evenhub"' EXIT
+          VERSION=$(node -p "require('./package.json').version")
+          PKG=$(node -p "require('./app.json').package_id")
+          MSG=$(git log -1 --pretty=%s | cut -c1-200)
+          npx evenhub upload sales-edge.ehpk --package-id "$PKG" -m "$MSG" || { echo "::warning::upload skipped or failed (version $VERSION may already exist)"; exit 0; }
+          npx evenhub promote "$VERSION" --to beta --package-id "$PKG" || echo "::warning::promote to beta failed"
 
       - name: Make the install QR code
         run: |
