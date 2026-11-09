@@ -22,9 +22,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      # true only after the one-time Even Hub sign-in is saved as the EVENHUB_CREDENTIALS secret
-      HAVE_EVENHUB: ${{ secrets.EVENHUB_CREDENTIALS != '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -75,7 +72,7 @@ jobs:
       # 3-hourly data jobs) and only once the EVENHUB_CREDENTIALS secret exists. A repeat of an
       # already-uploaded version just logs a warning, so ordinary pushes are safe.
       - name: Upload to Even Hub and promote to Beta
-        if: github.event_name == 'push' && env.HAVE_EVENHUB == 'true'
+        if: github.event_name == 'push'
         continue-on-error: true
         working-directory: app
         env:
@@ -83,6 +80,7 @@ jobs:
           XDG_CONFIG_HOME: ${{ runner.temp }}/evenhub-config
         run: |
           set -e
+          [ -n "$EVENHUB_CREDENTIALS" ] || { echo "No EVENHUB_CREDENTIALS secret, skipping Even Hub upload"; exit 0; }
           umask 077
           mkdir -p "$XDG_CONFIG_HOME/evenhub"
           printf '%s\n' "$EVENHUB_CREDENTIALS" > "$XDG_CONFIG_HOME/evenhub/credentials.yaml"
