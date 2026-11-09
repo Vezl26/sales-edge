@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-09T18:27:32.451Z",
+ "updatedAt": "2026-11-09T18:32:35.126Z",
  "topics": [
   {
    "id": "beef",
@@ -55,6 +55,15 @@
    "date": "2026-11-09T18:05:09.000Z",
    "topics": [
     "protein"
+   ]
+  },
+  {
+   "title": "France blames Iran for last month's cyberattack on supermarket fridges | National News | 2news.com",
+   "link": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNeVc4azdhMERXUGtkejBvVzc2MGZCUlVNSTZLZ1V0ZEV3X0NXd1FZVlJzMmNyWWNDVXA5dzFoRzlkVGdzMThQajI2UVV1VUkwZ0RHWmhfOU9pRWc5UU9odlNNUUFXXzR5SXFTN2Y3eWtyeGdOdktOSkFoREZJUkZJOWJPUDFJVTk4dTIycFJfQUdua0pIMlNDM3FuVWxDM2dTeElXc1lNTDFEcGZEMkRiZG1zeGdKS3Y0b0JaZGd6eENSSXRvZWlVMFQtcGJxYzJTV2NlWTIxalUtaDFxY09NRG1QNi1EbUlh?oc=5",
+   "source": "KTVN",
+   "date": "2026-11-09T17:50:14.000Z",
+   "topics": [
+    "grocery"
    ]
   },
   {
@@ -1829,15 +1838,6 @@
    "date": "2026-11-06T13:06:18.000Z",
    "topics": [
     "beef"
-   ]
-  },
-  {
-   "title": "Cattle prices face steep declines — what now? | Beef Market Update, Nov 6, 2026",
-   "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNR2tKZWpITHJPcXF3WHZzUGx2MW1nUWVBUXZCNGpiN2lfU2tfTmNDRUdzemFEdUh3SlZxSUN6Rlc0cjJhUjVnWlhxYkE1SGRNTWF3UFpNRHN3TUg0VXA4RFY2TGMwMmJkaHJURXhSYjFOd1hiUnFhWkN6d2xXV3ZySDJFRGtiS0ViaTN1SHgyY2tTZzkxaVBtUVBxTHB1WGtFbGtFZ2F4XzcwRzZVVWdmbVEzaw?oc=5",
-   "source": "RealAgriculture",
-   "date": "2026-11-06T12:45:53.000Z",
-   "topics": [
-    "cattle"
    ]
   }
  ]
