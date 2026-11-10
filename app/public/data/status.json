@@ -1,29 +1,32 @@
 {
  "seed": true,
  "usda": {
-  "updatedAt": "2026-11-10T07:28:05.378Z",
+  "updatedAt": "2026-11-10T17:08:04.426Z",
   "sources": {
    "boxedBeef": {
-    "ok": false,
-    "error": "no usable boxed beef report (see pipeline/raw)"
+    "ok": true,
+    "reportDate": "2026-11-09",
+    "cuts": 76,
+    "via": "USDA AMS LM_XB403 (PDF)"
    },
    "slaughter": {
-    "ok": false,
-    "error": "HTTP 403 for https://www.ams.usda.gov/mnreports/ams_3208.pdf"
+    "ok": true,
+    "reportDate": "2026-11-09"
    },
    "fedCattle": {
     "ok": false,
     "error": "no fed cattle rows"
    },
    "retail": {
-    "ok": false,
-    "error": "HTTP 403 for https://www.ams.usda.gov/mnreports/ams_3228.pdf"
+    "ok": true,
+    "reportDate": "2026-11-02",
+    "items": 148
    }
   }
  },
  "news": {
-  "updatedAt": "2026-11-10T07:28:16.488Z",
-  "added": 70,
+  "updatedAt": "2026-11-10T17:08:16.902Z",
+  "added": 88,
   "total": 200,
   "errors": {}
  }
