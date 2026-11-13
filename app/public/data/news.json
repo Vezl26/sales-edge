@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-13T01:31:54.802Z",
+ "updatedAt": "2026-11-13T01:55:53.287Z",
  "topics": [
   {
    "id": "beef",
@@ -39,6 +39,15 @@
   }
  ],
  "items": [
+  {
+   "title": "USDA backs new beef plant in Dimmitt",
+   "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9KbVdMTTdKZ0p3WW1JNzFYdVdpRHJuY3k5S0dOVTVFZVVZWVV0X1h0ZFZ2MlF1NWMxcXAxNFRZVkV0MFZNeWxIUmdlRWp4VTlLQmFxeUNoWWFRRnBSOVVBSmdMTkJ3VGRsR3dGQ1ZuS045UmEtc1NCeTQzV1A?oc=5",
+   "source": "KVII",
+   "date": "2026-11-13T01:52:33.000Z",
+   "topics": [
+    "usda"
+   ]
+  },
   {
    "title": "When the Cold Chain Breaks: What European Supermarket Refrigeration Hacks Mean for Industrial Users",
    "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPZHNVbFhGQ3YxNExtQ3E2aENMaEM4dEdTLTJ1WXczMDRwMFBSeU5FR3hNZDNROUZPaWhzY2tCWDdzak5KbWh0RWdKM0JCWVd6d0k5TWhoOWZ6aHJNSVNjTkowdXZEWU5zOE1UX1R3Z3RxX1JWT3pyd2NzTHF3S3o2dm9xamxmcXk3REwtcjEyWGlnS0ZGXzFfemJLUV9yWDV5V0lFRnljeHo5RTRzMHpzWDZ2cVo1MmVobHViVw?oc=5",
@@ -125,6 +134,15 @@
    "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPNU04TXgxWTREVk9hOW1YU0U0YjBjcDlJOGdqYVBHZXpka1ZjNzBuSzNXS0JvTzA4RUpVTlRQNGl6SmpDSXYwZFpzS0RwVEFNcTNqeFpsSnRVM2JJTjdsb0dEc1ZoaHpSR203V1RTZGJRUmdCOWxzZndYLUZQMjhuQjhHNkN5dC1ZVGpNMEtSUHFxMExucENveXJiY092aUtRSDR3cEZxMA?oc=5",
    "source": "whodatdish.com",
    "date": "2026-11-12T22:00:03.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "Tyson Foods (TSN) Suffers a Larger Drop Than the General Market: Key Insights",
+   "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPVzNaTm15VUpibkRmYmFtTnZSWHNxT05MdGlWSFZ1U3ZJWHpqLU9lem9kY3JXU2Y3LU4wNGxYS2JHVGZBMzR6cWlPMnRHV0cxNHpBV1RHeE5kZVdhN0ZNWlpQVG16NENKdkpMOFpjaEg4Y1ltZF90eE1TNjZiaThEamc3TFpPQQ?oc=5",
+   "source": "Yahoo Finance UK",
+   "date": "2026-11-12T22:00:02.000Z",
    "topics": [
     "protein"
    ]
@@ -1657,6 +1675,15 @@
    ]
   },
   {
+   "title": "USDA warns: Don't eat these frozen meat products",
+   "link": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNMG9faTVyanFkQkxIVGlHcDdwM0M5VTZkSUVrd1dJVG1hWmJCYXN1R1F1LWdpNS01ZU00MUVaa0xmdzNnakpBT0Q2ZmUwT013UlVoQlZUdzB3UjJPa1pjelVNLWJaTEhsVE1LcUM2WG9ENFFOZ3Bzd2g2Rm9jcER3OU9QSVV4SVY5NzUwMG9URU5kSlJXMjEwdDlIdF9lNFFwdC1DbjlRbHJkalZZWjFaWGdQbmQtUWJiZjVNZkFCTHNKVlFiOFp5ZWxpQVI?oc=5",
+   "source": "USA Today",
+   "date": "2026-11-10T13:30:00.000Z",
+   "topics": [
+    "usda"
+   ]
+  },
+  {
    "title": "France Summons Iranian Ambassador Over Supermarket Cyberattacks, Threatens Retaliation",
    "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOTVVQUjJpV2NaUmkwTXVOUXNQOV94WjZfVUVzQXd6aTNwcGx2UmdTVWdiQkwtSjVJS1FDbFdEeEk0VnpOYkdMQ0NJWXJwck92SFFwRUotX1NSaC10dHh4THBPX0hXb1MyRE1oQXRYdGNFX3hYVzNoNWw4LVliN2Nub2d3M0JQOVRETnNxNjJPSmRsWWUzcVlBa0I0MlZPN29sQy1rS25KbEFuUlZKTGpLSGpUQmNVWTZTaWdaN2dpRTl5UjZueXNxU3V3?oc=5",
    "source": "The Media Line",
@@ -1816,33 +1843,6 @@
    "date": "2026-11-10T07:43:55.000Z",
    "topics": [
     "grocery"
-   ]
-  },
-  {
-   "title": "USDA flags frozen beef, pork and chicken products over hidden allergens. Check the affected lot codes and",
-   "link": "https://news.google.com/rss/articles/CBMiiAJBVV95cUxQd3MyVDNPLTZvN2ZvRS1FUlJkN2dlYXJBTks2aWdTUVpCdnJIVWxsVlVBRnlvWURSd0lEWFZyNW5lNElXa1FYYjhKem5jU29kX2xxNTd6cjJ2NkVJVEZRaDBjYUR5cU41ckM1ZURBLXZORGUxSVRMYWl2eURNTzNVOXBVZFlHOC1DbFdnTXM3Qlo2RlRJYV9NQ055dnRwX2NJYUM1MjZEZm9XZ19tZU90QWRTcHZ4b3N1bUZ4WVNzVDBHenBFZnBBNmdkMnhnOUxJV2dMU2k5N2pjRWl3ZEwyMzFDZkFEVjJwQmk3Tk9GUzBvMFBJVVZjM1Q0Rk02c19aRDNOTWdhR2fSAY4CQVVfeXFMT0wtOEVRTEdfczNNellqSXhybGM3SnRLa2ZrYzh3dDhPQ3k4OW8xOGZLNDFZUFlHN1dhWUJidk8ybjljb1JsMk85dVVVSDJiZ3d4cEdLbnhYczk2MC1kdkZMdkVwVHpNWkpNOHlaRDhGT3ZUQkVoSV95ejdlY1BZbm1HSTZicXN2Y2RSSFZqVHdiY1d2V1RxVDl2NC1JX3Z4c3JuYzNseWFjMW5iemx5VVVLVzlLUUh2MkpUN3VmdG5iTlg2MGx1bGxKYllzclVCSWpqVG9jYV85V0l3eVZKNm5JRS1nRUdkd3NkVFliSkFUVFdhY1pOdnoxUUdDN3pfUWVQV1lkMXFVWXIzWUZ3?oc=5",
-   "source": "The Economic Times",
-   "date": "2026-11-10T07:31:03.000Z",
-   "topics": [
-    "usda"
-   ]
-  },
-  {
-   "title": "'Throwing deli meat' - Fans are split on Tom Brady's harsh words on Patriots successor Drake Maye",
-   "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQdmtmVndvQVIxMl9jNjNHcEw0OXM4SWFnejBzMUlNQzM1ZTNxampmOU94U2RUcDMtaG1xTV81c0s2V255cDVhNnR3c3NTNTY3ZVpPeTM2a28xVmwyWjNfTmMyVmhGYnVfbmlOZWgweC14NnVoaFQ3a3JPeEd6cm9QLTRPeDFGMlAwNXpFQlRRRXdxMG1DSHZoeFJXd2twTmo1V2Y0eGtkLXdOWXJhMFlwU3hWY0o?oc=5",
-   "source": "HITC",
-   "date": "2026-11-10T06:49:01.000Z",
-   "topics": [
-    "deli"
-   ]
-  },
-  {
-   "title": "Pat Tyson named Pac-12 Cross Country Coach of the Year",
-   "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPaEtmNnB6ODl1SFhSVVJiMVFabjl6MmZUdFVCblRGc0Vfb0lza1pRYU9oTDZzRnhPTEUxWmdIa1F5Wk1LRmVNNDdsRGY4T3psemxnbEE3UzBQOEdKejVPWHFsZUVYQTVCeTQzclAzdWFRcGNENTJzd1pmYnlaYzQ2dDItWGVwWVBsRDViLUU4TEtyZw?oc=5",
-   "source": "Gonzaga University Athletics",
-   "date": "2026-11-10T05:48:45.000Z",
-   "topics": [
-    "protein"
    ]
   }
  ]
