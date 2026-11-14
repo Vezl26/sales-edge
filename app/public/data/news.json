@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-14T01:01:22.340Z",
+ "updatedAt": "2026-11-14T01:30:27.011Z",
  "topics": [
   {
    "id": "beef",
@@ -46,6 +46,15 @@
    "date": "2026-11-14T00:51:00.000Z",
    "topics": [
     "grocery"
+   ]
+  },
+  {
+   "title": "CLE starts Harden, Mitchell, Tyson, Watson, Allen",
+   "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNVFhfYWdRZm1IUkVHQS1hc2RXMUpaNlJ5QVU1WjQwOVMzU1htS1hyejk0MlE3YUp0OUxmTnl0TXB3LW01d3BRb3dvVnpaSGdwekZDT2x4TzRLUWRSdHNHN1ozT1JiNHlqd1JUVFQ1Wm4wMkNDMlplaEt2Rmc2SVEwRTBUOTJNa2V3Zk9SanBTSmY2Y0oyZVAybUZfX24wNWdrWkpFLVhGdDRwbnZJMHdyc3dfUQ?oc=5",
+   "source": "NBC Sports",
+   "date": "2026-11-14T00:45:38.000Z",
+   "topics": [
+    "protein"
    ]
   },
   {
@@ -1835,15 +1844,6 @@
    "date": "2026-11-11T00:32:33.000Z",
    "topics": [
     "usda"
-   ]
-  },
-  {
-   "title": "What to know about 'unprecedented' cyberattacks on refrigerators in France",
-   "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNd3gzVHhSWHZGNElZTzE1VG4wbmJsTlpsYkhaN2VIZzJrOENlN0tJd2tYNjRtNURlTzd5Sk53T3Zab3RIUTJDWU5HamxzclpsODdIMEVLRjRGa3RZWnVqMkI0UWloTTZpem1uSDhxcW9mbEh2U244bkNoV095WGItWkRqNVJpUl80QzVKdkF2TEVQSjViaDZvYWQwX2pYVVdEY3fSAacBQVVfeXFMTjdOMGw5V296OV8zT05ONXY1cGRVVTJSZDRQX2hhQk56RjlGVjl3UXBMTXlESVpsZnY3dHFHbU1BUWpOR2hQYWl6TS1fQ2RNS1dxcmx5TWR3MjE1WDhWT3hVSHlCRFlud1h3cmlMa21IdGlWN0oyOUhXQy03SW1xcWIyWDUwVHlrZGY0WG41RngwSHJHaXhhT3ZBTjUwWnNwNXI3WTJYaEk?oc=5",
-   "source": "ABC News - Breaking News, Latest News and Videos",
-   "date": "2026-11-10T23:48:45.000Z",
-   "topics": [
-    "grocery"
    ]
   }
  ]
