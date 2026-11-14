@@ -1,7 +1,7 @@
 {
  "seed": true,
  "usda": {
-  "updatedAt": "2026-11-14T01:29:05.380Z",
+  "updatedAt": "2026-11-14T10:39:00.200Z",
   "sources": {
    "boxedBeef": {
     "ok": true,
@@ -15,7 +15,7 @@
    },
    "fedCattle": {
     "ok": false,
-    "error": "HTTP 500 for https://mpr.datamart.ams.usda.gov/services/v1.1/reports/2466?allSections=true"
+    "error": "no fed cattle rows"
    },
    "retail": {
     "ok": true,
@@ -25,8 +25,8 @@
   }
  },
  "news": {
-  "updatedAt": "2026-11-14T01:30:27.013Z",
-  "added": 58,
+  "updatedAt": "2026-11-14T10:39:11.592Z",
+  "added": 77,
   "total": 200,
   "errors": {}
  }
