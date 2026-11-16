@@ -11,7 +11,7 @@ export type GEvent = 'tap' | 'double' | 'up' | 'down' | 'exit'
 
 interface ListScreen { kind: 'list'; title: string; items: string[]; onPick: (i: number) => void; onBack?: () => void }
 interface PagesScreen { kind: 'pages'; title: string; pages: string[]; page: number; onBack: () => void; onTap?: () => void }
-export type CallLayout = 'split' | 'prep'
+export type CallLayout = 'split' | 'prep' | 'conv'
 interface CallScreen { kind: 'call'; layout: CallLayout; onTap: () => void; onDouble: () => void; onStep: (d: 1 | -1) => void }
 type Screen = ListScreen | PagesScreen | CallScreen
 
@@ -101,7 +101,10 @@ export class Glasses {
     this.screen = { kind: 'call', layout, ...handlers }
     this.callText = { status, transcript, intel }
     // split: transcript left, cards right. prep: prep full width, a short transcript strip at the bottom.
-    const boxes = layout === 'prep'
+    // conv: Conversate-style. Main area (captions, a cue, or the notes) and a one-line strip at the bottom.
+    const boxes = layout === 'conv'
+      ? [this.text(3, 'transcript', 0, 28, W, H - 28 - 46, transcript), this.text(4, 'intel', 0, H - 44, W, 44, intel, 0, 1)]
+      : layout === 'prep'
       ? [this.text(4, 'intel', 0, 30, W, 188, intel, 0, 1), this.text(3, 'transcript', 0, 220, W, H - 220, transcript)]
       : [this.text(3, 'transcript', 0, 30, 300, H - 30, transcript), this.text(4, 'intel', 302, 30, W - 302, H - 30, intel, 0, 1)]
     await this.apply({

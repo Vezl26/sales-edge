@@ -109,16 +109,18 @@ export class App {
     const s = new CallSession(this.store, this.settings, this.engine, customer, extra)
     if (group) s.call.group = true
     if (internal) s.call.internal = true
+    s.cueMs = (this.settings.cueSeconds || 8) * 1000
+    s.autoPopup = this.settings.cueAutoPopup !== false
     this.session = s
     s.onChange = () => { this.renderCallOnGlasses(); this.emit() }
     s.onCustomerTagged = c => this.attachPrep(c.id)
     s.onLines = (text, spk) => this.assist(text, spk)
     this.attachPrep(customer?.id ?? null, forcedPrep)
     await this.glasses.showCall({
-      onTap: () => this.togglePause(),
+      onTap: () => { if (!s.tap()) this.togglePause() },
       onDouble: () => void this.endCall(),
       onStep: d => s.swipe(d),
-    }, this.callStatus(), glassTranscript(s.call, '', this.transcriptChars()), this.intelText(), this.callLayout())
+    }, this.callStatus(), this.lensMain(), this.lensFooter(), 'conv')
     const ok = await this.mic.open(this.settings.micSource)
     if (!ok) this.notify('Microphone did not open — check app permissions')
     this.emit()
@@ -132,8 +134,10 @@ export class App {
     const s = new CallSession(this.store, this.settings, this.engine, this.customerById(call.customerId), extra, call)
     this.session = s
     s.onChange = () => { this.renderCallOnGlasses(); this.emit() }
-    await this.glasses.showCall({ onTap: () => this.togglePause(), onDouble: () => void this.endCall(), onStep: d => s.swipe(d) },
-      this.callStatus(), glassTranscript(s.call, '', this.transcriptChars()), this.intelText(), this.callLayout())
+    s.cueMs = (this.settings.cueSeconds || 8) * 1000
+    s.autoPopup = this.settings.cueAutoPopup !== false
+    await this.glasses.showCall({ onTap: () => { if (!s.tap()) this.togglePause() }, onDouble: () => void this.endCall(), onStep: d => s.swipe(d) },
+      this.callStatus(), this.lensMain(), this.lensFooter(), 'conv')
     await this.mic.open(this.settings.micSource)
     this.emit()
   }
@@ -176,8 +180,8 @@ export class App {
     if (!s) return ''
     const st = s.paused ? 'II PAUSED' : s.sttState === 'live' ? '● LIVE' : s.sttState === 'error' ? '! ' + s.sttDetail.slice(0, 30) : `… ${s.sttState}`
     const who = s.call.customerName ? ` · ${s.call.customerName.slice(0, 16)}` : ''
-    const cards = s.prompter ? ` · ${s.prompter.done}/${s.prompter.points.length}✓` : s.cards.length ? ` · card ${s.cardIndex + 1}/${s.cards.length}` : ''
-    return `${st} ${fmtClock(s.elapsedMs)}${who}${cards}${s.prompter ? '' : ' · 2×tap end'}`
+    const cards = s.cues.length ? ` · ${s.cues.length} cue${s.cues.length > 1 ? 's' : ''}` : ''
+    return `${st} ${fmtClock(s.elapsedMs)}${who}${cards}`
   }
 
   private lastRefAt = 0
@@ -223,31 +227,51 @@ export class App {
     }
   }
 
-  intelText(): string {
-    const s = this.session
-    if (s?.prompter) {
-      if (s.overlay && Date.now() < s.overlayUntil) {
-        const left = Math.ceil((s.overlayUntil - Date.now()) / 1000)
-        setTimeout(() => this.renderCallOnGlasses(), (left + 0.3) * 1000)
-        return `${s.overlay.glass}\n\n(back to prep in ${left}s, swipe to return)`
-      }
-      return s.prompter.view()
-    }
-    if (!s || s.cardIndex < 0) {
-      const co = cutoutCard(this.market)
-      return co ? `Say a cut to see price.\n\n${co.glass}` : 'Say a cut name\n(e.g. "strip loin")\nto see USDA price.'
-    }
-    return s.cards[s.cardIndex].glass
+  /** Cue label, Conversate-style: what kind of help this is. */
+  private cueLabel(kind: string, key: string): string {
+    if (key.startsWith('say:')) return 'SAY'
+    if (key.startsWith('ref:')) return 'ANSWER'
+    return ({ price: 'PRICE', cutout: 'MARKET', kill: 'MARKET', cattle: 'MARKET', ground: 'PRICE', mine: 'MY PRICE', tip: 'SUGGEST', customer: 'ACCOUNT', news: 'NEWS', info: 'NOTE' } as Record<string, string>)[kind] ?? 'CUE'
   }
 
-  /** With a prep loaded the prep gets the whole lens and the transcript shrinks to a strip. */
-  callLayout(): 'split' | 'prep' { return this.session?.prompter ? 'prep' : 'split' }
-  transcriptChars(): number { return this.session?.prompter ? 110 : 260 }
+  /** Main lens area: an open cue, else the prep notes if expanded, else live captions. */
+  lensMain(): string {
+    const s = this.session
+    if (!s) return ''
+    if (s.cueOpen && s.cue) {
+      const body = s.cue.glass.replace(/^(REFERENCE \(off prep\)|SAY:)\n/, '')
+      const left = Math.max(1, Math.ceil((s.cueUntil - Date.now()) / 1000))
+      return `${this.cueLabel(s.cue.kind, s.cue.key)} · ${s.cue.title}\n${body}`.slice(0, 600) + `\n\n(${left}s · tap to close)`
+    }
+    if (s.notesOpen && s.prompter) return s.prompter.view(300, 7)
+    if (this.settings.lensTranscript === false) return s.paused ? 'Paused' : 'Listening…'
+    return glassTranscript(s.call, s.interim, 230)
+  }
 
+  /** One-line strip at the bottom: next talking point, a waiting cue, or the last cue. */
+  lensFooter(): string {
+    const s = this.session
+    if (!s) return ''
+    if (s.cuePending && s.cue && !s.cueOpen) return `● ${this.cueLabel(s.cue.kind, s.cue.key)}: ${s.cue.title} · tap to open`
+    if (s.prompter && !s.notesOpen) {
+      const p = s.prompter.points[s.prompter.idx]
+      if (p) return `NOTES ${s.prompter.done}/${s.prompter.points.length} ▶ ${p.text}`.slice(0, 90)
+    }
+    if (s.notesOpen) return 'Swipe = next point · tap = close notes'
+    const last = s.cues[s.cues.length - 1]
+    if (last && !s.cueOpen) return `Last: ${last.title} · swipe to review`.slice(0, 90)
+    return s.prompter ? '' : 'Tap = pause · 2× tap = end'
+  }
+
+  private fadeTimer: number | null = null
   renderCallOnGlasses() {
     const s = this.session
     if (!s) return
-    this.glasses.updateCall(this.callStatus(), glassTranscript(s.call, s.interim, this.transcriptChars()), this.intelText(), this.callLayout())
+    this.glasses.updateCall(this.callStatus(), this.lensMain(), this.lensFooter(), 'conv')
+    // Bring captions back when the cue times out.
+    if (s.cueOpen && this.fadeTimer === null) {
+      this.fadeTimer = window.setTimeout(() => { this.fadeTimer = null; this.renderCallOnGlasses() }, Math.min(1000, s.cueUntil - Date.now() + 50))
+    }
   }
 
   async endCall() {

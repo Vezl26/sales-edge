@@ -30,9 +30,16 @@ export class CallSession {
   onCustomerTagged: (c: Customer) => void = () => {}
   /** Teleprompter for the attached prep (null = no prep). */
   prompter: Prompter | null = null
-  /** A pop-up card shown over the prep for a few seconds. */
-  overlay: Card | null = null
-  overlayUntil = 0
+  /** Conversate-style cue: the card on the lens right now, until cueUntil. */
+  cue: Card | null = null
+  cueUntil = 0
+  /** A cue arrived while auto pop-up is off and hasn't been opened yet. */
+  cuePending = false
+  /** Prep notes expanded on the lens (tap toggles). */
+  notesOpen = false
+  /** How long a cue stays up (ms) and whether it opens on its own. */
+  cueMs = 8000
+  autoPopup = true
   /** Extra listener for finished lines: (text, speakers) */
   onLines: (text: string, spk: string[]) => void = () => {}
 
@@ -146,7 +153,7 @@ export class CallSession {
   addCard(c: Card) {
     this.cards.push(c)
     this.cardIndex = this.cards.length - 1
-    if (this.prompter) { this.overlay = c; this.overlayUntil = Date.now() + 20000 }
+    this.showCue(c, this.autoPopup)
     this.call.cards.push({ t: this.elapsedMs, kind: c.kind, title: c.title, body: c.phone })
     this.onCard(c)
     this.onChange()
@@ -164,15 +171,40 @@ export class CallSession {
     this.onChange()
   }
 
-  /** Ring swipe. With prep: an open pop-up closes first, then swipes move through the prep. */
+  /** Put a cue on the lens (open = shown in the main area; closed = one-line alert, tap to open). */
+  showCue(c: Card, open = true) {
+    this.cue = c
+    if (open) { this.cueUntil = Date.now() + this.cueMs; this.cuePending = false; this.notesOpen = false }
+    else this.cuePending = true
+  }
+
+  /** Cards that popped up during the call (prep pages are not cues). */
+  get cues() { return this.cards.filter(c => !c.key.startsWith('prep:')) }
+
+  get cueOpen() { return !!this.cue && Date.now() < this.cueUntil }
+
+  /** Single tap: close an open cue, open a waiting one, else show/hide the prep notes. Returns false if there was nothing to do. */
+  tap(): boolean {
+    if (this.cueOpen) { this.cueUntil = 0; this.onChange(); return true }
+    if (this.cuePending && this.cue) { this.showCue(this.cue, true); this.onChange(); return true }
+    if (this.prompter) { this.notesOpen = !this.notesOpen; this.onChange(); return true }
+    return false
+  }
+
+  /** Ring swipe: with notes open, move through the prep. Otherwise flip back through earlier cues. */
   swipe(dir: 1 | -1) {
-    if (this.prompter) {
-      if (this.overlay && Date.now() < this.overlayUntil) { this.overlay = null; this.onChange(); return }
+    if (this.notesOpen && this.prompter) {
       this.prompter.step(dir)
       this.touch()
       return
     }
-    this.stepCard(dir)
+    const cues = this.cues
+    if (!cues.length) return
+    const i = this.cueOpen && this.cue ? cues.indexOf(this.cue) : cues.length
+    const next = Math.max(0, Math.min(cues.length - 1, i + (dir === 1 ? 1 : -1)))
+    this.cardIndex = this.cards.indexOf(cues[next])
+    this.showCue(cues[next], true)
+    this.onChange()
   }
 
   stepCard(dir: 1 | -1) {

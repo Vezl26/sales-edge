@@ -118,7 +118,7 @@ export class PhoneUI {
           <label class="check"><input type="checkbox" id="startGroup"> <span>Group meeting (several people on their side)</span></label>
           <label class="check"><input type="checkbox" id="startInternal"> <span>Internal call (my boss or team, not a customer)</span></label>
           <button class="primary big" data-act="start">● Start listening</button>
-          <p class="muted">On the glasses: tap = pause, swipe = flip through cards, double-tap = end &amp; summarize.</p>
+          <p class="muted">On the glasses: tap = close a cue or show your prep notes (pause when there's nothing open) · swipe = next talking point or earlier cues · double-tap = end &amp; summarize.</p>
         </div>
         ${a.lastEnded ? `<div class="card"><h3>Last call</h3><p>${esc(a.lastEnded.summary?.headline || '')}</p><button data-act="openCall" data-id="${a.lastEnded.id}">Open notes</button></div>` : ''}
         ${this.quickMarket()}`
@@ -268,14 +268,14 @@ export class PhoneUI {
       ${s ? `<div class="card"><h3>Summary ${s.generatedBy === 'ai' ? '(AI)' : '(automatic)'}</h3><pre>${esc(summaryToText(s))}</pre>
         <p class="muted">Wrong kind of call?</p>
         <div class="btns"><button class="small" data-act="resum" data-kind="internal" data-id="${call.id}">Redo as internal call</button> <button class="small" data-act="resum" data-kind="customer" data-id="${call.id}">Redo as customer call</button></div>
-        ${s.followUps.length ? `<h3>Follow-ups</h3>${s.followUps.map((f, i) => `<label class="check"><input type="checkbox" data-act="fuDone" data-id="${call.id}" data-i="${i}" ${f.done ? 'checked' : ''}> <span><b>${esc(f.owner)}:</b> ${esc(f.text)}${f.due ? ` (${esc(f.due)})` : ''}${f.auto ? ' <i class="muted">· guess, check it</i>' : ''}</span></label>`).join('')}` : ''}
+        ${s.followUps.length ? `<h3>Next steps</h3>${s.followUps.map((f, i) => `<label class="check"><input type="checkbox" data-act="fuDone" data-id="${call.id}" data-i="${i}" ${f.done ? 'checked' : ''}> <span><b>${esc(f.owner)}:</b> ${esc(f.text)}${f.due ? ` (${esc(f.due)})` : ''}${f.auto ? ' <i class="muted">· guess, check it</i>' : ''}</span></label>`).join('')}` : ''}
       </div>` : ''}
       <div class="card"><h3>My notes</h3><textarea data-field="callNotes" data-id="${call.id}" rows="3" placeholder="Anything to add…">${esc(call.notes || '')}</textarea></div>
       <div class="card"><h3>Transcript</h3>
         ${call.segments.map((g, i) => `<div class="seg ${g.spk}" data-act="flipSaved" data-id="${call.id}" data-i="${i}"><span class="who">${fmtClock(g.t)} ${g.spk === 'A' ? 'Alan' : g.spk === 'C' ? esc(isGroup(call) ? 'Others' : call.otherLabel || 'Customer') : '?'}</span> ${esc(g.text)}</div>`).join('') || '<p class="muted">Empty</p>'}
         <p class="muted">Tap a line to switch who said it.</p>
       </div>
-      ${call.cards.length ? `<div class="card"><h3>Cards shown</h3>${call.cards.map(c => `<details><summary>${fmtClock(c.t)} ${esc(c.title)}</summary><pre>${esc(c.body)}</pre></details>`).join('')}</div>` : ''}
+      ${call.cards.length ? `<div class="card"><h3>Cues (${call.cards.length})</h3>${call.cards.map(c => `<details><summary>${fmtClock(c.t)} ${esc(c.title)}</summary><pre>${esc(c.body)}</pre></details>`).join('')}</div>` : ''}
       <button class="danger" data-act="delCall" data-id="${call.id}">Delete call</button>`
   }
 
@@ -443,6 +443,13 @@ export class PhoneUI {
         <label>Model</label><input id="s_aiModel" value="${esc(s.aiModel)}">
         <label>API key <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">(get a free Gemini key)</a></label><input id="s_aiKey" type="password" value="${esc(s.aiKey)}" placeholder="paste key, then Save">
         <label class="check"><input type="checkbox" id="s_aiPrivate" ${s.aiPrivate ? 'checked' : ''}> <span>Keep my customer numbers, margins and prep out of AI requests (recommended with free Gemini)</span></label>
+      </div>
+      <div class="card form">
+        <h2>Lens</h2>
+        <label class="check"><input type="checkbox" id="s_lensTx" ${s.lensTranscript !== false ? 'checked' : ''}> <span>Show live captions</span></label>
+        <label class="check"><input type="checkbox" id="s_cueAuto" ${s.cueAutoPopup !== false ? 'checked' : ''}> <span>Cues pop up on their own (off = one-line alert, tap to open)</span></label>
+        <label>Cue stays up (seconds)</label><input id="s_cueSec" type="number" min="3" max="30" value="${s.cueSeconds || 8}">
+        <p class="muted">On the glasses: tap = close a cue or show/hide your prep notes · swipe = next talking point, or flip back through cues · double-tap = end.</p>
       </div>
       <div class="card form">
         <h2>Claude</h2>
@@ -739,6 +746,8 @@ export class PhoneUI {
       defaultGrade: v('s_grade') as Settings['defaultGrade'], caseWeights: cases,
       aiProvider: v('s_aiProvider') as Settings['aiProvider'], aiBaseUrl: v('s_aiBase'), aiModel: v('s_aiModel'), aiKey: v('s_aiKey'),
       dataBaseUrl: v('s_data'), claudeProjectUrl: v('s_claude'), aiPrivate: !!$<HTMLInputElement>('#s_aiPrivate')?.checked,
+      lensTranscript: !!$<HTMLInputElement>('#s_lensTx')?.checked, cueAutoPopup: !!$<HTMLInputElement>('#s_cueAuto')?.checked,
+      cueSeconds: Math.max(3, Math.min(30, Number(v('s_cueSec')) || 8)),
     }
     const dataChanged = patch.dataBaseUrl !== this.app.settings.dataBaseUrl
     await this.app.saveSettings(patch)

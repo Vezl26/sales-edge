@@ -121,6 +121,12 @@ export interface Settings {
   claudeProjectUrl: string
   /** Keep customer numbers and prep out of AI requests (default on) */
   aiPrivate: boolean
+  /** Lens: show live captions when no cue or notes are open */
+  lensTranscript: boolean
+  /** Lens: cues open on their own (off = a one-line alert, tap to open) */
+  cueAutoPopup: boolean
+  /** Lens: how long a cue stays up, in seconds */
+  cueSeconds: number
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -139,6 +145,9 @@ export const DEFAULT_SETTINGS: Settings = {
   liveAiTips: false,
   claudeProjectUrl: '',
   aiPrivate: true,
+  lensTranscript: true,
+  cueAutoPopup: true,
+  cueSeconds: 8,
 }
 
 // ---- USDA data shapes (written by the pipeline) ----

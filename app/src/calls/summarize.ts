@@ -242,17 +242,22 @@ export function customerBrief(c: Customer): string {
   ].filter(Boolean).join('\n')
 }
 
+/** Conversate-style recap: Overview, Highlights, Details, Next steps. */
 export function summaryToText(s: CallSummary): string {
   const sec = (t: string, a: string[]) => (a.length ? `${t}\n${a.map(x => `• ${x}`).join('\n')}` : '')
   if (s.aiText) return s.aiText
+  const kp = s.keyPoints ?? []
+  const highlights = kp.slice(0, 4)
+  const details = [...kp.slice(4), ...s.prices.map(p => `Price: ${p}`), ...s.volumes.map(v => `Volume: ${v}`), ...s.customerNeeds.map(n => `Need: ${n}`)]
+  const guess = s.followUps.some(f => f.auto)
+  const next = [
+    ...s.followUps.map(f => `${f.owner}: ${f.text}${f.due ? ` (${f.due})` : ''}${f.auto ? ' (check)' : ''}`),
+    ...s.talkingPointsNext.filter(t => !s.followUps.some(f => t.includes(f.text))),
+  ]
   return [
-    s.headline,
-    sec(s.headline.includes('Internal call') ? 'What was discussed' : 'Key points', s.keyPoints ?? []),
-    sec('Topics', s.topics),
-    sec(s.followUps.some(f => f.auto) ? 'Possible follow-ups (check them)' : 'Follow-ups', s.followUps.map(f => `${f.owner}: ${f.text}${f.due ? ` (${f.due})` : ''}`)),
-    sec('Prices mentioned', s.prices),
-    sec('Volumes mentioned', s.volumes),
-    sec('Customer needs', s.customerNeeds),
-    sec('Next time', s.talkingPointsNext),
+    `Overview\n${s.headline}${s.topics.length ? `\nTopics: ${s.topics.slice(0, 5).join(', ')}` : ''}`,
+    sec('Highlights', highlights.length ? highlights : s.customerNeeds.slice(0, 3)),
+    sec('Details', details),
+    sec(guess ? 'Next steps (rule-based, check them)' : 'Next steps', next),
   ].filter(Boolean).join('\n\n')
 }
