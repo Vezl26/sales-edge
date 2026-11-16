@@ -1,39 +1,57 @@
 {
-  "updatedAt": "2026-11-09T18:30:00Z",
-  "weekOf": "Nov 9",
+  "updatedAt": "2026-11-16T12:00:00Z",
+  "weekOf": "Nov 16",
   "takeaways": [
-    "DOJ antitrust probe covers beef pricing at 8 retailers: Kroger, Publix, Walmart, Albertsons, Aldi, Ahold Delhaize USA, Costco, Amazon.",
-    "The DOJ letters (dated July 16) ask for retail and wholesale beef prices, costs, margins and pricing strategy, so expect retailers to scrutinize their suppliers' costs.",
-    "Walmart: the White House said on July 6 that Walmart would cut ground beef about 15%. The claim came from the President, and I found no Walmart statement confirming it.",
-    "Cocoa has fallen from its highs and 2026 is on track for a second year of surplus, but retail chocolate has been slow to follow."
+    "USDA's latest retail beef feature report shows ground beef (80-89%, 1-2 lb) advertised at a $5.75/lb national weighted average, down from $6.27 the week before, with a 95.6% feature rate.",
+    "Thanksgiving meal-deal wars are on: Walmart $35, Aldi under $39, Food Lion under $40, Price Chopper/Market 32 under $40, Wegmans under $40 (8 people). The baskets are turkey-led, with no beef featured.",
+    "Ahold Delhaize (Food Lion/Giant) cut its 2026 outlook after an October cyberattack hit online operations; Food Lion still led U.S. online growth above 20% in Q3.",
+    "The DOJ probe of eight retailers' beef pricing (opened in September) is the backdrop for any beef price talk; I found no new development this week.",
+    "I found no fresh verified cocoa or chocolate retail pricing news this week."
   ],
   "chains": [
     { "chain": "Walmart", "items": [
-      { "kind": "news", "text": "Trump said July 6 that Walmart would cut ground beef about 15% at his administration's request. No Walmart statement found confirming size or timing.", "source": "Washington Examiner", "url": "https://www.washingtonexaminer.com/?p=4637915" },
-      { "kind": "news", "text": "Named in the DOJ beef price probe (retail and wholesale prices, costs, margins).", "source": "Newsweek, Sep 2", "url": "https://www.newsweek.com/doj-probes-soaring-beef-prices-at-eight-major-stores-including-walmart-12393757" }
+      { "kind": "ad", "text": "Holiday Meal Basket serves 10 for $35 ($3.50 per person), 26 items, through Dec. 24; the Butterball turkey is cited at 97 cents/lb.", "source": "Food Trade News, Nov 11", "url": "https://foodtradenews.com/2026/11/11/thanksgiving-grocery-deals-2026/" },
+      { "kind": "price", "text": "In a WSMV (Nashville) check of eight Thanksgiving side items, Walmart totaled $19.95 versus Aldi $14.78.", "source": "WSMV, Nov 13", "url": "https://www.wsmv.com/2026/11/14/shoppers-concerned-about-rising-grocery-prices-where-find-best-deals-your-thanksgiving-meal/" }
     ]},
     { "chain": "Kroger", "items": [
-      { "kind": "news", "text": "Named in the DOJ beef price probe.", "source": "Newsweek, Sep 2", "url": "https://www.newsweek.com/doj-probes-soaring-beef-prices-at-eight-major-stores-including-walmart-12393757" }
+      { "kind": "price", "text": "In the WSMV side-item check Kroger totaled $24.50, or $19.55 with a Kroger Plus card.", "source": "WSMV, Nov 13", "url": "https://www.wsmv.com/2026/11/14/shoppers-concerned-about-rising-grocery-prices-where-find-best-deals-your-thanksgiving-meal/" },
+      { "kind": "ad", "text": "Promoting a 'feast for a few' with fully cooked turkey breast or rotisserie chicken and single-slice pies; no prices given.", "source": "The Shelby Report, Nov 13", "url": "https://theshelbyreport.com/2026/11/13/shoppers-will-protect-the-thanksgiving-feast-and-grocers-are-meeting-them-there/" }
     ]},
     { "chain": "Aldi", "items": [
-      { "kind": "news", "text": "Named in the DOJ beef price probe.", "source": "Newsweek, Sep 2", "url": "https://www.newsweek.com/doj-probes-soaring-beef-prices-at-eight-major-stores-including-walmart-12393757" }
+      { "kind": "ad", "text": "Thanksgiving meal for 10 under $39 with a 16-lb turkey, no loyalty card needed, through Nov. 25.", "source": "Food Trade News, Nov 11", "url": "https://foodtradenews.com/2026/11/11/thanksgiving-grocery-deals-2026/" },
+      { "kind": "price", "text": "Lowest total ($14.78) in WSMV's eight-item side-dish comparison.", "source": "WSMV, Nov 13", "url": "https://www.wsmv.com/2026/11/14/shoppers-concerned-about-rising-grocery-prices-where-find-best-deals-your-thanksgiving-meal/" }
+    ]},
+    { "chain": "Wegmans", "items": [
+      { "kind": "ad", "text": "Thanksgiving meal for 8 under $40 (under $5 per person) with a 13-lb Shady Brook turkey; frozen turkey promo Nov. 8-22.", "source": "Food Trade News, Nov 11", "url": "https://foodtradenews.com/2026/11/11/thanksgiving-grocery-deals-2026/" }
     ]},
     { "chain": "Food Lion / Giant (Ahold Delhaize USA)", "items": [
-      { "kind": "news", "text": "Ahold Delhaize USA is named in the DOJ beef price probe. This is the parent of Food Lion and Giant, so it matters for Virginia accounts.", "source": "Newsweek, Sep 2", "url": "https://www.newsweek.com/doj-probes-soaring-beef-prices-at-eight-major-stores-including-walmart-12393757" }
+      { "kind": "ad", "text": "Food Lion's Thanksgiving Meal Deal serves 10 for under $40 at last year's price, Nov. 11-26, with an MVP card. No beef item in the bundle.", "source": "Food Lion via GlobeNewswire, Nov 10", "url": "https://globenewswire.com/news-release/2026/11/10/3400044/0/en/food-lion-s-thanksgiving-meal-deal-returns-serves-10-for-less-than-40.html" },
+      { "kind": "ad", "text": "GIANT is running a free-turkey program for 400 Choice points, Nov. 6-26.", "source": "Food Trade News, Nov 11", "url": "https://foodtradenews.com/2026/11/11/thanksgiving-grocery-deals-2026/" },
+      { "kind": "news", "text": "Ahold Delhaize's U.S. Q3 sales rose 1.1% at constant rates. An October cyberattack hit online operations and the company cut its 2026 EPS outlook; Food Lion led U.S. online growth above 20%.", "source": "Supermarket News, Nov 5", "url": "https://www.supermarketnews.com/finance/ahold-delhaize-u-s-sales-rise-1-1-as-cyberattack-weighs-on-q4-outlook" }
     ]},
-    { "chain": "Wegmans, Price Chopper, Foodtown", "items": [
-      { "kind": "news", "text": "No verified beef or deli news found this week. Not in the DOJ probe list.", "source": "searched Nov 9" }
+    { "chain": "Price Chopper / Market 32", "items": [
+      { "kind": "ad", "text": "Thanksgiving feast for 10 under $40 (under $4 per person) from Nov. 1 through Thanksgiving with an AdvantEdge card; cooked meals could be ordered Nov. 2-16 for Nov. 24-26 pickup.", "source": "Mass Market Retailers, Oct 29", "url": "https://massmarketretailers.com/market-32-price-chopper-offer-thanksgiving-feast-for-10-for-under-40/" }
     ]},
-    { "chain": "Chocolate (all chains)", "items": [
-      { "kind": "trend", "text": "Cocoa prices have fallen from record highs and 2026 is on track for a second year of surplus. Analysts expected retail relief by Halloween, but chocolate stayed high through Easter because supply chains were tight. Check shelf prices before promising anything.", "source": "Semafor, Apr 6", "url": "https://www.semafor.com/article/04/06/2026/chocolate-prices-expected-to-ease-by-autumn" }
+    { "chain": "Foodtown", "items": [
+      { "kind": "news", "text": "Nothing verified found this week.", "source": "searched Nov 16" }
+    ]},
+    { "chain": "Other chains", "items": [
+      { "kind": "ad", "text": "Winn-Dixie has a heat-and-serve holiday deli meal at $39.99 through Dec. 29 and a $14.99 rotisserie chicken meal for four.", "source": "The Shelby Report, Nov 13", "url": "https://theshelbyreport.com/2026/11/13/shoppers-will-protect-the-thanksgiving-feast-and-grocers-are-meeting-them-there/" },
+      { "kind": "ad", "text": "Hy-Vee lowered its holiday meal deal to under $35 for 10 and has premade holiday meals for 2-12 people.", "source": "The Shelby Report, Nov 13", "url": "https://theshelbyreport.com/2026/11/13/shoppers-will-protect-the-thanksgiving-feast-and-grocers-are-meeting-them-there/" },
+      { "kind": "trend", "text": "FMI survey: 45% of shoppers are very or extremely concerned about holiday food prices (up 8 points) and 72% call loyalty programs essential to budgeting.", "source": "The Shelby Report, Nov 13", "url": "https://theshelbyreport.com/2026/11/13/shoppers-will-protect-the-thanksgiving-feast-and-grocers-are-meeting-them-there/" }
     ]},
     { "chain": "Beef market (all chains)", "items": [
-      { "kind": "trend", "text": "Retail beef set record highs in 2026 and the cattle herd is near historic lows. A Fortune headline from April says prices won't come down until about 2028. Treat that as an opinion, not a forecast.", "source": "Fortune, Apr 22", "url": "https://fortune.com/2026/04/22/beef-prices-record-high-wont-come-down-2028/" }
+      { "kind": "ad", "text": "USDA feature report: ground beef 80-89%, 1-2 lb, advertised at $5.75/lb (5,081 stores) vs $6.27 prior week and $6.32 a year ago; overall feature rate 95.6%. The report's date stamps are inconsistent (Nov 9 vs Nov 13).", "source": "USDA AMS weekly grocery beef feature report", "url": "https://www.ams.usda.gov/mnreports/ams_3228.pdf" },
+      { "kind": "news", "text": "DOJ's beef price probe covers Kroger, Walmart, Publix, Albertsons, Aldi, Ahold Delhaize, Costco and Amazon; no new development found this week.", "source": "Meatingplace (undated)", "url": "https://meatingplace.com/doj-targets-major-retailers-in-expanded-beef-price-probe/" }
+    ]},
+    { "chain": "Chocolate (all chains)", "items": [
+      { "kind": "trend", "text": "Background only, from March: cocoa futures were about $3,100/t versus over $6,000 at the end of 2025, while U.S. chocolate shelf prices were up 14.4% in early 2026. I found no newer verified data.", "source": "CoBank, Mar 26", "url": "https://www.cobank.com/knowledge-exchange/chocolate-lovers-shift-to-premium-brands-as-cocoa-prices-swing" }
     ]}
   ],
   "talkingPoints": [
-    "Your retail customers are under DOJ scrutiny on beef margins, so ask distributors how they plan to document cost and price changes.",
-    "Ground beef is the political price item right now. Ask what end users are doing on case-ready ground price points.",
-    "Ask whether customers expect cocoa relief to show up in chocolate pricing before the holidays."
+    "Holiday featuring is turkey and meal-bundle driven, so ask distributors whether beef is getting any December feature support at their retail accounts.",
+    "Ground beef ad prices dipped week over week in USDA's feature data; ask whether end users are using that to drive volume.",
+    "Shoppers are price-anxious and loyalty-driven, so ask which value-tier deli and prepared items distributors' chains are pushing.",
+    "Ahold Delhaize's cyber disruption hit online sales; ask Food Lion/Giant-supplying distributors whether it affected order patterns."
   ]
 }
