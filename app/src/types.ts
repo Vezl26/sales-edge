@@ -25,6 +25,9 @@ export interface FollowUp {
   auto?: boolean
 }
 
+/** A question the customer asked, the answer the app showed, and what you said. */
+export interface QA { t: number; q: string; a: string; src: string; alan?: string }
+
 export interface CallSummary {
   generatedBy: 'auto' | 'ai'
   headline: string
@@ -36,6 +39,10 @@ export interface CallSummary {
   talkingPointsNext: string[]
   /** The sentences that matter most: numbers, temperatures, decisions, problems */
   keyPoints?: string[]
+  /** Questions they asked, the data's answer and yours */
+  qa?: QA[]
+  /** Numbers you said that the data disagrees with */
+  checks?: string[]
   aiText?: string
 }
 
@@ -54,6 +61,8 @@ export interface Call {
   cards: CardRef[]
   summary?: CallSummary
   notes?: string
+  /** Questions asked during the call and the answer shown on the lens */
+  qa?: QA[]
 }
 
 export interface CallIndexEntry {

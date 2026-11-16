@@ -258,6 +258,8 @@ export function summaryToText(s: CallSummary): string {
     `Overview\n${s.headline}${s.topics.length ? `\nTopics: ${s.topics.slice(0, 5).join(', ')}` : ''}`,
     sec('Highlights', highlights.length ? highlights : s.customerNeeds.slice(0, 3)),
     sec('Details', details),
+    sec('Questions they asked', (s.qa ?? []).map(q => `Q: ${q.q}\n  Data: ${q.a}${q.alan ? `\n  You said: ${q.alan}` : ''}`)),
+    sec('Check this (you said vs the data)', s.checks ?? []),
     sec(guess ? 'Next steps (rule-based, check them)' : 'Next steps', next),
   ].filter(Boolean).join('\n\n')
 }

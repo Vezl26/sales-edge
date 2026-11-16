@@ -38,6 +38,8 @@ Customers, your numbers, price lists and call transcripts are stored **only on y
 - **During a call:** tap = pause/resume · swipe = flip through cards · double-tap = end the call and summarize.
 - **Phone:** Live tab shows everything. Tap any transcript line to switch who said it.
 - **Group meetings:** tick "Group meeting" before you start (or flip "Group: on" during the call). Everyone except you shares one label, and only *your* promises become follow-ups, because the labels can't tell several people apart.
+- **Questions get answers:** when a customer asks something, the lens shows `Q:` and an `A:` from the USDA data (or "Not in my data, say you'll confirm"). If you answered a similar question on an earlier call, it adds "Last time you said".
+- **Fact check:** after the call, any price you said that the USDA data disagrees with shows under "Check this": "You said X. USDA had Y." The Claude packet asks Claude to do the same.
 - **Internal calls:** tick "Internal call" for a catch-up with your boss or team. The summary then lists what was discussed, with no made-up customer needs. If you forget, the app guesses from words like "my boss" or "new role", and any saved call has "Redo as internal call" / "Redo as customer call" buttons.
 - **Topics need two mentions** before they are listed, and "what we need to talk about" or "let me know what you need" is no longer treated as a customer need.
 - **Follow-ups marked "guess, check it"** come from simple rules, not understanding. Tick the real ones. For the real list, use Send to Claude.

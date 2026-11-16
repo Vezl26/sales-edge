@@ -43,6 +43,8 @@ Only real commitments someone made. No "keep in touch" filler. Write "None" if t
 
 ## Check before sending
 - anything said in the room, including by me, that should be verified against official documents or the plant before it goes in writing
+- if I said a number the data contradicts: "You said X, but the data shows Y (source, date)"
+- for each question they asked: my answer vs the data, and whether I should follow up with a correction
 
 ## Remember about this customer
 - new durable facts (people, preferences, schedules, competitors). These get saved to the customer profile.
@@ -75,10 +77,12 @@ export function callPacket(call: Call, customer: Customer | null, marketSnapshot
     auto.followUps.length ? `possible follow-ups (rule-based guesses, verify): ${auto.followUps.map(f => `${f.owner}: ${f.text}`).join(' | ')}` : '',
     auto.prices.length ? `prices heard: ${auto.prices.join(' | ')}` : '',
     auto.volumes.length ? `volumes heard: ${auto.volumes.join(' | ')}` : '',
+    auto.qa?.length ? `questions they asked (answer shown on my glasses / what I said): ${auto.qa.map(q => `Q: ${q.q} → shown: ${q.a}${q.alan ? ` → I said: ${q.alan}` : ''}`).join(' | ')}` : '',
+    auto.checks?.length ? `numbers I said that the USDA data disagrees with: ${auto.checks.join(' | ')}` : '',
   ].filter(Boolean).join('\n') : ''
   const cards = call.cards.filter(c => c.kind === 'price' || c.kind === 'mine').map(c => `[${fmtClock(c.t)}] ${c.title}: ${c.body.split('\n').slice(0, 4).join(' · ')}`).join('\n')
   return [
-    'Summarize this sales call using the format in the project instructions, and add two sections: "## Decisions & owners" (who agreed to do what, and by when) and "## Check before sending" (anything said in the room, including by me, that should be verified against official documents or the plant before it goes in writing). (If there are no project instructions: give headline, key topics, real follow-ups with owner and due date, prices & volumes, customer needs, market angle, talking points for next time, and facts to remember.) The transcript comes from a glasses microphone, so names and numbers can be misheard: write "(unclear)" instead of guessing.',
+    'Summarize this sales call using the format in the project instructions, and add two sections: "## Decisions & owners" (who agreed to do what, and by when) and "## Check before sending" (anything said in the room, including by me, that should be verified against official documents or the plant before it goes in writing). (If there are no project instructions: give headline, key topics, real follow-ups with owner and due date, prices & volumes, customer needs, market angle, talking points for next time, and facts to remember.) The transcript comes from a glasses microphone, so names and numbers can be misheard: write "(unclear)" instead of guessing. Stick to the facts in the files and market data: if I said a number that the data contradicts, correct it in "Check before sending" as "You said X, but the data shows Y (source, date)". For each question they asked, compare what I said to the data and note anything I should send them corrected.',
     '',
     `<call>`,
     tag('call_info', info),

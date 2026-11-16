@@ -14,6 +14,9 @@ export interface ReplyCtx { m: MarketBundle; s: Settings; kb: KB; goal?: string;
 const has = (re: RegExp, t: string) => re.test(t)
 const spokenPct = (p: number | null) => (p == null ? '' : `${p >= 0 ? 'up' : 'down'} ${Math.abs(p).toFixed(0)}%`)
 
+/** Is this a question? */
+export const isQuestion = (text: string) => /\?\s*$/.test(text.trim()) || /^(what|how|why|when|where|can|could|will|would|do|does|is|are|any|did|should)\b/i.test(text.trim())
+
 /** Returns a short line Alan can say, or null. */
 export function suggestReply(text: string, ctx: ReplyCtx): string | null {
   const t = text.toLowerCase()
@@ -51,7 +54,8 @@ export function suggestReply(text: string, ctx: ReplyCtx): string | null {
   if (has(/cheaper|competitor|too (high|expensive)|better price|beat that|lower price|undercut/, t)) {
     const supply = kill ? ` Kill is ${kill.ytdPct > 0 ? 'up' : 'down'} ${Math.abs(kill.ytdPct)}% vs last year, so supply is tight.` : ''
     const sel = co?.spread ? ` One option is Select, about $${(co.spread / 100).toFixed(2)}/lb under Choice right now.` : ''
-    return `Understood. The market's been firm${co?.choice ? ` (Choice cutout ${co.choice.toFixed(0)})` : ''}.${supply}${sel} What volume would you need to make it work?`
+    const dir = co?.choice && co.avg5Choice ? (co.choice >= co.avg5Choice ? 'firm' : 'softening') : co?.choiceChg != null ? (co.choiceChg >= 0 ? 'firm' : 'softening') : ''
+    return `Understood.${dir ? ` The market's been ${dir}${co?.choice ? ` (Choice cutout ${co.choice.toFixed(0)})` : ''}.` : ''}${supply}${sel} What volume would you need to make it work?`
   }
   // Supply / availability
   if (has(/supply|availability|available|short(age)?|tight|can you get|in stock|out of/, t) && kill) {

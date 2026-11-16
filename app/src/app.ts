@@ -14,7 +14,8 @@ import { EnergyTracker } from './audio/speaker'
 import { prepFor, prepCards, type Prep } from './prep/prep'
 import { tickerText } from './intel/ticker'
 import { Prompter, searchDocs, onPrepShare } from './prep/prompter'
-import { suggestReply, aiReplyPrompt } from './intel/replies'
+import { suggestReply, aiReplyPrompt, isQuestion } from './intel/replies'
+import { attachAnswers, factCheck, recallAnswer, learnAnswers, type Learned } from './calls/factcheck'
 
 export interface Mic {
   open(source: 'glasses' | 'phone'): Promise<boolean>
@@ -112,6 +113,7 @@ export class App {
     if (internal) s.call.internal = true
     s.cueMs = (this.settings.cueSeconds || 8) * 1000
     s.autoPopup = this.settings.cueAutoPopup !== false
+    this.learned ??= await this.store.get<Learned[]>('answers:learned', [])
     this.session = s
     s.onChange = () => { this.renderCallOnGlasses(); this.emit() }
     s.onCustomerTagged = c => this.attachPrep(c.id)
@@ -205,19 +207,29 @@ export class App {
   }
 
   private lastReplyAt = 0
-  /** Suggested line to say back when the customer asks or pushes back. */
+  private learned: Learned[] | null = null
+  /** Customer asks something: show the question and an answer from the data. Pushback: a suggested line. */
   private maybeReply(text: string) {
     const s = this.session
-    if (!s || Date.now() - this.lastReplyAt < 20000) return
+    if (!s) return
+    const q = isQuestion(text)
+    if (Date.now() - this.lastReplyAt < (q ? 8000 : 20000)) return
     const goal = s.prompter?.goal
     const line = suggestReply(text, { m: this.market, s: this.settings, kb: this.kb, goal, customer: this.customerById(s.call.customerId) })
-    const show = (say: string, via: string) => {
+    const qShort = text.trim().replace(/\s+/g, ' ').slice(-110)
+    const show = (ans: string, via: string) => {
       this.lastReplyAt = Date.now()
-      s.addCard({ kind: 'tip', key: `say:${Date.now()}`, title: 'Suggested reply', glass: `SAY:\n${say}`, phone: `They said: "${text}"\n\nYou could say (${via}):\n${say}`, at: Date.now() })
+      if (q) {
+        const past = this.learned ? recallAnswer(this.learned, text) : null
+        s.call.qa = [...(s.call.qa ?? []), { t: Math.max(0, s.elapsedMs - 4000), q: qShort, a: ans, src: via }]
+        const glass = `Q: ${qShort}\nA: ${ans}${past ? `\nLast time you said: ${past.alan.slice(0, 90)}` : ''}`
+        s.addCard({ kind: 'tip', key: `qa:${Date.now()}`, title: 'Question', glass, phone: `They asked: "${text}"\n\nAnswer (${via}):\n${ans}${past ? `\n\nLast time you said:\n${past.alan}` : ''}`, at: Date.now() })
+      } else {
+        s.addCard({ kind: 'tip', key: `say:${Date.now()}`, title: 'Suggested reply', glass: `SAY:\n${ans}`, phone: `They said: "${text}"\n\nYou could say (${via}):\n${ans}`, at: Date.now() })
+      }
     }
     if (line) { show(line, 'from market data'); return }
-    const asked = /\?\s*$/.test(text.trim())
-    if (asked && aiEnabled(this.settings)) {
+    if (q && aiEnabled(this.settings)) {
       this.lastReplyAt = Date.now()
       const recent = s.call.segments.slice(-8).map(x => `${x.spk === 'A' ? 'Alan' : 'Customer'}: ${x.text}`).join('\n')
       const priv = this.settings.aiPrivate
@@ -225,7 +237,10 @@ export class App {
       aiComplete(this.settings, aiReplyPrompt(text, recent, goal || '', facts), 120)
         .then(say => { if (say && this.session === s) show(say.replace(/^["']|["']$/g, ''), 'AI') })
         .catch(() => {})
+      return
     }
+    // No data for it: say so honestly, and it becomes something to check after.
+    if (q && findAnyTopic(text)) show("Not in my data. Say: \"Let me confirm that and get back to you today.\"", 'no data')
   }
 
   /** Cue label, Conversate-style: what kind of help this is. */
@@ -288,6 +303,17 @@ export class App {
     await this.mic.close()
     const customer = this.customerById(s.call.customerId)
     const call = await s.end(customer)
+    // Questions: what you said back. Numbers: anything you said that the data disagrees with.
+    if (call.summary) {
+      call.qa = attachAnswers(call)
+      call.summary.qa = call.qa
+      call.summary.checks = factCheck(call, this.market, this.settings.defaultGrade)
+      if (call.qa.length) {
+        this.learned = learnAnswers(this.learned ?? [], call.qa)
+        await this.store.set('answers:learned', this.learned)
+      }
+      await s.save()
+    }
     this.session = null
     this.lastEnded = call
     this.index = await this.store.get<CallIndexEntry[]>('calls:index', [])
@@ -477,3 +503,8 @@ export function paginate(text: string, size = 420): string[] {
 }
 
 export type { Card }
+
+/** Worth an honest "I'll check" only if it's a real business question, not small talk. */
+function findAnyTopic(t: string): boolean {
+  return /\b(price|cost|pay|quote|supply|deliver|order|volume|cases?|pounds?|lbs|beef|cut|deli|chocolate|cocoa|turkey|ham|brisket|ground|chub|trim|market|holiday|feature|ad|credit|spec|temp|shelf life|lead time)\b/i.test(t)
+}
