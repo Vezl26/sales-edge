@@ -7,7 +7,8 @@ import type { Card } from '../intel/market'
 import type { IntelEngine } from '../intel/engine'
 import { autoSummary, isGroup } from './summarize'
 import { uid } from '../kb/knowledge'
-import { recognizerKeyterms } from '../intel/lexicon'
+import { recognizerKeyterms, findCuts } from '../intel/lexicon'
+import type { Mention } from '../intel/ticker'
 import type { Prompter } from '../prep/prompter'
 
 export type SttState = 'idle' | 'connecting' | 'live' | 'reconnecting' | 'closed' | 'error' | 'paused'
@@ -35,6 +36,8 @@ export class CallSession {
   cueUntil = 0
   /** A cue arrived while auto pop-up is off and hasn't been opened yet. */
   cuePending = false
+  /** Cuts talked about on this call (for the ticker column). */
+  mentions = new Map<string, Mention>()
   /** Prep notes expanded on the lens (tap toggles). */
   notesOpen = false
   /** How long a cue stays up (ms) and whether it opens on its own. */
@@ -120,6 +123,10 @@ export class CallSession {
     }
     this.relabel()
     const joined = newText.join(' ')
+    for (const h of findCuts(joined)) {
+      const m = this.mentions.get(h.imps) ?? { n: 0, last: 0 }
+      this.mentions.set(h.imps, { n: m.n + 1, last: Date.now() })
+    }
     if (this.prompter) this.prompter.ingest(joined)
     for (const c of this.engine.ingest(joined)) this.addCard(c)
     this.onLines(joined, this.call.segments.slice(-runs.length).map(s => s.spk))

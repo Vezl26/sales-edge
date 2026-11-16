@@ -12,6 +12,7 @@ import { aiComplete, aiEnabled } from './ai/llm'
 import type { Glasses } from './glasses/ui'
 import { EnergyTracker } from './audio/speaker'
 import { prepFor, prepCards, type Prep } from './prep/prep'
+import { tickerText } from './intel/ticker'
 import { Prompter, searchDocs, onPrepShare } from './prep/prompter'
 import { suggestReply, aiReplyPrompt } from './intel/replies'
 
@@ -120,7 +121,7 @@ export class App {
       onTap: () => { if (!s.tap()) this.togglePause() },
       onDouble: () => void this.endCall(),
       onStep: d => s.swipe(d),
-    }, this.callStatus(), this.lensMain(), this.lensFooter(), 'conv')
+    }, this.callStatus(), this.lensMain(), this.lensFooter(), this.lensLayout(), this.lensTicker())
     const ok = await this.mic.open(this.settings.micSource)
     if (!ok) this.notify('Microphone did not open — check app permissions')
     this.emit()
@@ -137,7 +138,7 @@ export class App {
     s.cueMs = (this.settings.cueSeconds || 8) * 1000
     s.autoPopup = this.settings.cueAutoPopup !== false
     await this.glasses.showCall({ onTap: () => { if (!s.tap()) this.togglePause() }, onDouble: () => void this.endCall(), onStep: d => s.swipe(d) },
-      this.callStatus(), this.lensMain(), this.lensFooter(), 'conv')
+      this.callStatus(), this.lensMain(), this.lensFooter(), this.lensLayout(), this.lensTicker())
     await this.mic.open(this.settings.micSource)
     this.emit()
   }
@@ -263,11 +264,18 @@ export class App {
     return s.prompter ? '' : 'Tap = pause · 2× tap = end'
   }
 
+  /** Notes read full width; everything else keeps the ticker column. */
+  lensLayout(): 'conv' | 'conv-wide' { return this.session?.notesOpen ? 'conv-wide' : 'conv' }
+  lensTicker(): string {
+    const s = this.session
+    return s ? tickerText(s.mentions, this.market.beef, this.settings.defaultGrade) : ''
+  }
+
   private fadeTimer: number | null = null
   renderCallOnGlasses() {
     const s = this.session
     if (!s) return
-    this.glasses.updateCall(this.callStatus(), this.lensMain(), this.lensFooter(), 'conv')
+    this.glasses.updateCall(this.callStatus(), this.lensMain(), this.lensFooter(), this.lensLayout(), this.lensTicker())
     // Bring captions back when the cue times out.
     if (s.cueOpen && this.fadeTimer === null) {
       this.fadeTimer = window.setTimeout(() => { this.fadeTimer = null; this.renderCallOnGlasses() }, Math.min(1000, s.cueUntil - Date.now() + 50))

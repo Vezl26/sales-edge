@@ -11,7 +11,7 @@ export type GEvent = 'tap' | 'double' | 'up' | 'down' | 'exit'
 
 interface ListScreen { kind: 'list'; title: string; items: string[]; onPick: (i: number) => void; onBack?: () => void }
 interface PagesScreen { kind: 'pages'; title: string; pages: string[]; page: number; onBack: () => void; onTap?: () => void }
-export type CallLayout = 'split' | 'prep' | 'conv'
+export type CallLayout = 'split' | 'prep' | 'conv' | 'conv-wide'
 interface CallScreen { kind: 'call'; layout: CallLayout; onTap: () => void; onDouble: () => void; onStep: (d: 1 | -1) => void }
 type Screen = ListScreen | PagesScreen | CallScreen
 
@@ -23,7 +23,7 @@ export class Glasses {
   private started = false
   private lastScroll = 0
   private renderQueue: Promise<unknown> = Promise.resolve()
-  private callText = { status: '', transcript: '', intel: '' }
+  private callText = { status: '', transcript: '', intel: '', ticker: '' }
   private pendingCall: typeof this.callText | null = null
   private callTimer: number | null = null
 
@@ -97,14 +97,25 @@ export class Glasses {
     await this.renderPage()
   }
 
-  async showCall(handlers: Omit<CallScreen, 'kind' | 'layout'>, status: string, transcript: string, intel: string, layout: CallLayout = 'split') {
+  async showCall(handlers: Omit<CallScreen, 'kind' | 'layout'>, status: string, transcript: string, intel: string, layout: CallLayout = 'split', ticker = '') {
     this.screen = { kind: 'call', layout, ...handlers }
-    this.callText = { status, transcript, intel }
+    this.callText = { status, transcript, intel, ticker }
+    // conv: captions/cue on the left, a stock-ticker column of cuts on the right, one-line strip at the bottom.
+    // conv-wide: same without the ticker (used while the prep notes are open, so they read full width).
+    if (layout === 'conv' || layout === 'conv-wide') {
+      const TW = 214, mainH = H - 28 - 46
+      const boxes = [
+        this.text(1, 'evt', 0, 0, W, H, ' ', 1),
+        this.text(2, 'status', 0, 0, W, 28, status),
+        this.text(3, 'transcript', 0, 28, layout === 'conv' ? W - TW - 2 : W, mainH, transcript),
+        this.text(4, 'intel', 0, H - 44, W, 44, intel, 0, 1),
+      ]
+      if (layout === 'conv') boxes.push(this.text(5, 'ticker', W - TW, 28, TW, mainH, ticker || ' ', 0, 1))
+      await this.apply({ containerTotalNum: boxes.length, textObject: boxes })
+      return
+    }
     // split: transcript left, cards right. prep: prep full width, a short transcript strip at the bottom.
-    // conv: Conversate-style. Main area (captions, a cue, or the notes) and a one-line strip at the bottom.
-    const boxes = layout === 'conv'
-      ? [this.text(3, 'transcript', 0, 28, W, H - 28 - 46, transcript), this.text(4, 'intel', 0, H - 44, W, 44, intel, 0, 1)]
-      : layout === 'prep'
+    const boxes = layout === 'prep'
       ? [this.text(4, 'intel', 0, 30, W, 188, intel, 0, 1), this.text(3, 'transcript', 0, 220, W, H - 220, transcript)]
       : [this.text(3, 'transcript', 0, 30, 300, H - 30, transcript), this.text(4, 'intel', 302, 30, W - 302, H - 30, intel, 0, 1)]
     await this.apply({
@@ -114,14 +125,14 @@ export class Glasses {
   }
 
   /** Throttled in-place updates for the live call (BLE is slow; ~150 ms/update). */
-  updateCall(status: string, transcript: string, intel: string, layout: CallLayout = 'split') {
+  updateCall(status: string, transcript: string, intel: string, layout: CallLayout = 'split', ticker = '') {
     if (this.screen?.kind !== 'call') return
     if (this.screen.layout !== layout) {
       const { onTap, onDouble, onStep } = this.screen
-      void this.showCall({ onTap, onDouble, onStep }, status, transcript, intel, layout)
+      void this.showCall({ onTap, onDouble, onStep }, status, transcript, intel, layout, ticker)
       return
     }
-    this.pendingCall = { status, transcript, intel }
+    this.pendingCall = { status, transcript, intel, ticker }
     if (this.callTimer !== null) return
     this.callTimer = window.setTimeout(() => {
       this.callTimer = null
@@ -132,6 +143,7 @@ export class Glasses {
       if (next.intel !== this.callText.intel) jobs.push([4, 'intel', next.intel])
       if (next.transcript !== this.callText.transcript) jobs.push([3, 'transcript', next.transcript])
       if (next.status !== this.callText.status) jobs.push([2, 'status', next.status])
+      if (next.ticker !== this.callText.ticker && this.screen.layout === 'conv') jobs.push([5, 'ticker', next.ticker || ' '])
       this.callText = next
       for (const [id, name, content] of jobs) {
         const job = () => this.bridge!.textContainerUpgrade(new TextContainerUpgrade({ containerID: id, containerName: name, content: content.slice(0, 1900) }))
