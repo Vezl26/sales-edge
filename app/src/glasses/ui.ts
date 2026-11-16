@@ -11,7 +11,8 @@ export type GEvent = 'tap' | 'double' | 'up' | 'down' | 'exit'
 
 interface ListScreen { kind: 'list'; title: string; items: string[]; onPick: (i: number) => void; onBack?: () => void }
 interface PagesScreen { kind: 'pages'; title: string; pages: string[]; page: number; onBack: () => void; onTap?: () => void }
-interface CallScreen { kind: 'call'; onTap: () => void; onDouble: () => void; onStep: (d: 1 | -1) => void }
+export type CallLayout = 'split' | 'prep'
+interface CallScreen { kind: 'call'; layout: CallLayout; onTap: () => void; onDouble: () => void; onStep: (d: 1 | -1) => void }
 type Screen = ListScreen | PagesScreen | CallScreen
 
 const W = 576
@@ -96,23 +97,27 @@ export class Glasses {
     await this.renderPage()
   }
 
-  async showCall(handlers: Omit<CallScreen, 'kind'>, status: string, transcript: string, intel: string) {
-    this.screen = { kind: 'call', ...handlers }
+  async showCall(handlers: Omit<CallScreen, 'kind' | 'layout'>, status: string, transcript: string, intel: string, layout: CallLayout = 'split') {
+    this.screen = { kind: 'call', layout, ...handlers }
     this.callText = { status, transcript, intel }
+    // split: transcript left, cards right. prep: prep full width, a short transcript strip at the bottom.
+    const boxes = layout === 'prep'
+      ? [this.text(4, 'intel', 0, 30, W, 188, intel, 0, 1), this.text(3, 'transcript', 0, 220, W, H - 220, transcript)]
+      : [this.text(3, 'transcript', 0, 30, 300, H - 30, transcript), this.text(4, 'intel', 302, 30, W - 302, H - 30, intel, 0, 1)]
     await this.apply({
       containerTotalNum: 4,
-      textObject: [
-        this.text(1, 'evt', 0, 0, W, H, ' ', 1),
-        this.text(2, 'status', 0, 0, W, 30, status),
-        this.text(3, 'transcript', 0, 30, 300, H - 30, transcript),
-        this.text(4, 'intel', 302, 30, W - 302, H - 30, intel, 0, 1),
-      ],
+      textObject: [this.text(1, 'evt', 0, 0, W, H, ' ', 1), this.text(2, 'status', 0, 0, W, 30, status), ...boxes],
     })
   }
 
   /** Throttled in-place updates for the live call (BLE is slow; ~150 ms/update). */
-  updateCall(status: string, transcript: string, intel: string) {
+  updateCall(status: string, transcript: string, intel: string, layout: CallLayout = 'split') {
     if (this.screen?.kind !== 'call') return
+    if (this.screen.layout !== layout) {
+      const { onTap, onDouble, onStep } = this.screen
+      void this.showCall({ onTap, onDouble, onStep }, status, transcript, intel, layout)
+      return
+    }
     this.pendingCall = { status, transcript, intel }
     if (this.callTimer !== null) return
     this.callTimer = window.setTimeout(() => {

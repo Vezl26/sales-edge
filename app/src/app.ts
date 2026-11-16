@@ -118,7 +118,7 @@ export class App {
       onTap: () => this.togglePause(),
       onDouble: () => void this.endCall(),
       onStep: d => s.swipe(d),
-    }, this.callStatus(), glassTranscript(s.call, ''), this.intelText())
+    }, this.callStatus(), glassTranscript(s.call, '', this.transcriptChars()), this.intelText(), this.callLayout())
     const ok = await this.mic.open(this.settings.micSource)
     if (!ok) this.notify('Microphone did not open — check app permissions')
     this.emit()
@@ -133,7 +133,7 @@ export class App {
     this.session = s
     s.onChange = () => { this.renderCallOnGlasses(); this.emit() }
     await this.glasses.showCall({ onTap: () => this.togglePause(), onDouble: () => void this.endCall(), onStep: d => s.swipe(d) },
-      this.callStatus(), glassTranscript(s.call, ''), this.intelText())
+      this.callStatus(), glassTranscript(s.call, '', this.transcriptChars()), this.intelText(), this.callLayout())
     await this.mic.open(this.settings.micSource)
     this.emit()
   }
@@ -176,8 +176,8 @@ export class App {
     if (!s) return ''
     const st = s.paused ? 'II PAUSED' : s.sttState === 'live' ? '● LIVE' : s.sttState === 'error' ? '! ' + s.sttDetail.slice(0, 30) : `… ${s.sttState}`
     const who = s.call.customerName ? ` · ${s.call.customerName.slice(0, 16)}` : ''
-    const cards = s.prompter ? ` · prep ${s.prompter.done}/${s.prompter.points.length}✓` : s.cards.length ? ` · card ${s.cardIndex + 1}/${s.cards.length}` : ''
-    return `${st} ${fmtClock(s.elapsedMs)}${who}${cards} · 2×tap end`
+    const cards = s.prompter ? ` · ${s.prompter.done}/${s.prompter.points.length}✓` : s.cards.length ? ` · card ${s.cardIndex + 1}/${s.cards.length}` : ''
+    return `${st} ${fmtClock(s.elapsedMs)}${who}${cards}${s.prompter ? '' : ' · 2×tap end'}`
   }
 
   private lastRefAt = 0
@@ -229,7 +229,7 @@ export class App {
       if (s.overlay && Date.now() < s.overlayUntil) {
         const left = Math.ceil((s.overlayUntil - Date.now()) / 1000)
         setTimeout(() => this.renderCallOnGlasses(), (left + 0.3) * 1000)
-        return `${s.overlay.glass}\n\n(back to prep in ${left}s · swipe = now)`
+        return `${s.overlay.glass}\n\n(back to prep in ${left}s, swipe to return)`
       }
       return s.prompter.view()
     }
@@ -240,10 +240,14 @@ export class App {
     return s.cards[s.cardIndex].glass
   }
 
+  /** With a prep loaded the prep gets the whole lens and the transcript shrinks to a strip. */
+  callLayout(): 'split' | 'prep' { return this.session?.prompter ? 'prep' : 'split' }
+  transcriptChars(): number { return this.session?.prompter ? 110 : 260 }
+
   renderCallOnGlasses() {
     const s = this.session
     if (!s) return
-    this.glasses.updateCall(this.callStatus(), glassTranscript(s.call, s.interim), this.intelText())
+    this.glasses.updateCall(this.callStatus(), glassTranscript(s.call, s.interim, this.transcriptChars()), this.intelText(), this.callLayout())
   }
 
   async endCall() {

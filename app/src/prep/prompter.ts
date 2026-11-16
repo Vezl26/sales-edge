@@ -33,7 +33,8 @@ export class Prompter {
   /** Words of the prep — used to tell on-topic talk from drift. */
   vocab(): Set<string> { return new Set(this.points.flatMap(p => p.words)) }
 
-  /** Check off points that were just talked about. Returns how many got checked. */
+  /** Check off points that were just talked about. Returns how many got checked.
+   *  The cursor only moves when the point you're on gets covered, so the screen never jumps ahead. */
   ingest(text: string): number {
     const said = new Set(keywords(text))
     let n = 0
@@ -43,38 +44,52 @@ export class Prompter {
       const need = p.words.length <= 3 ? Math.max(1, p.words.length - 1) : Math.max(2, Math.ceil(p.words.length * 0.4))
       if (hit >= need) { p.covered = true; n++ }
     }
-    if (n) this.moveToNextOpen()
+    if (n && this.points[this.idx]?.covered) this.moveToNextOpen()
     return n
   }
 
   private moveToNextOpen() {
-    const next = this.points.findIndex((p, i) => i >= this.idx && !p.covered)
-    this.idx = next >= 0 ? next : Math.max(0, this.points.findIndex(p => !p.covered))
+    const next = this.points.findIndex((p, i) => i > this.idx && !p.covered)
+    if (next >= 0) this.idx = next
   }
 
-  /** Ring swipe: down = mark current done and go to next, up = go back. */
+  /** Ring swipe: down = done, go to the next point in order. Up = back one. */
   step(d: 1 | -1) {
     if (!this.points.length) return
-    if (d === 1) { this.points[this.idx].covered = true; this.moveToNextOpen() }
-    else this.idx = Math.max(0, this.idx - 1)
+    if (d === 1) {
+      this.points[this.idx].covered = true
+      if (this.idx < this.points.length - 1) this.idx++
+    } else this.idx = Math.max(0, this.idx - 1)
   }
 
-  /** Glasses view: current section, the point you're on, and what's next. */
-  view(maxChars = 260): string {
+  /** Section names in order (each "## heading" = one slide or topic). */
+  sections(): string[] { return [...new Set(this.points.map(p => p.section))] }
+
+  /** Glasses view: the slide/section you're on, its points in order, the current one marked. */
+  view(maxChars = 300, maxLines = 6): string {
     if (!this.points.length) return 'Prep is empty.'
-    if (this.points.every(p => p.covered)) return `PREP ✓ ${this.done}/${this.points.length}\nAll points covered.\n\nSwipe up to review.`
     const cur = this.points[this.idx]
-    const short = (x: string) => x.replace(/^topic:\s*/i, '').split(/\s+/).slice(0, 2).join(' ').slice(0, 14)
-    const lines = [`PREP ${this.done}/${this.points.length}✓ · ${cur.section.toUpperCase().slice(0, 24)}`]
-    if (this.goal) lines.push(`Goal: ${this.goal.slice(0, 70)}`)
-    lines.push(`▶ ${cur.covered ? '✓ ' : ''}${cur.text}`)
-    for (const p of this.points.slice(this.idx + 1)) {
-      if (p.covered) continue
-      const l = `○ ${p.section !== cur.section ? `${short(p.section)}: ` : ''}${p.text}`
-      if ((lines.join('\n') + '\n' + l).length > maxChars) break
+    const secs = this.sections()
+    const si = secs.indexOf(cur.section)
+    const inSec = this.points.filter(p => p.section === cur.section)
+    const pos = inSec.indexOf(cur)
+    const head = `${(cur.section || 'Prep').toUpperCase().slice(0, 34)}   ${si + 1}/${secs.length}`
+    const lines = [head]
+    // One finished line above for context, then the current one, then what's left in this section.
+    for (const p of inSec.slice(Math.max(0, pos - 1))) {
+      const mark = p === cur ? '▶ ' : p.covered ? '✓ ' : '   '
+      const l = mark + p.text
+      if (p !== cur && (lines.length >= maxLines || (lines.join('\n') + '\n' + l).length > maxChars)) break
       lines.push(l)
     }
-    return lines.join('\n').slice(0, maxChars + 40)
+    const last = inSec[inSec.length - 1]
+    const shownAll = lines[lines.length - 1].endsWith(last.text)
+    if (shownAll && secs[si + 1]) {
+      const nx = `Next: ${secs[si + 1]}`
+      if (lines.length <= maxLines - 2) lines.push('', nx)
+      else if (lines.length <= maxLines - 1) lines.push(nx)
+    }
+    return lines.join('\n')
   }
 
   uncovered(): string[] {

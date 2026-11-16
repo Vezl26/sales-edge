@@ -190,7 +190,7 @@ export function draftPrep(c: Customer | null, calls: Call[], m: MarketBundle, de
 }
 
 /** Split prep into glasses cards: one per "## section", chunked to fit the side panel. */
-export function prepCards(p: Prep, maxChars = 230): Card[] {
+export function prepCards(p: Prep, maxChars = 320): Card[] {
   const sections: { h: string; body: string[] }[] = []
   for (const line of p.notes.split('\n')) {
     const m = line.match(/^#{1,3}\s+(.+)/)
@@ -213,7 +213,7 @@ export function prepCards(p: Prep, maxChars = 230): Card[] {
     kind: 'info' as const,
     key: `prep:${p.id}:${i}`,
     title: `Prep · ${pg.h}`,
-    glass: `PREP ${i + 1}/${pages.length} · ${pg.h.toUpperCase()}\n${pg.text}`,
+    glass: `${pg.h.toUpperCase()}   ${i + 1}/${pages.length}\n${pg.text}`,
     phone: `${pg.h}\n${pg.text}`,
     at: Date.now(),
   }))
