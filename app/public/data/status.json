@@ -1,11 +1,11 @@
 {
  "seed": true,
  "usda": {
-  "updatedAt": "2026-11-16T19:41:44.081Z",
+  "updatedAt": "2026-11-17T03:06:30.317Z",
   "sources": {
    "boxedBeef": {
     "ok": true,
-    "reportDate": "2026-11-13",
+    "reportDate": "2026-11-16",
     "cuts": 72,
     "via": "USDA AMS LM_XB403 (PDF)"
    },
@@ -25,9 +25,11 @@
   }
  },
  "news": {
-  "updatedAt": "2026-11-16T19:41:55.480Z",
-  "added": 68,
+  "updatedAt": "2026-11-17T03:06:54.637Z",
+  "added": 66,
   "total": 200,
-  "errors": {}
+  "errors": {
+   "usda": "HTTP 429 for https://news.google.com/rss/search?q=USDA%20beef%20OR%20%22meat%20inspection%22%20OR%20%22beef%20imports%22%20OR%20%22beef%20tariffs%22&hl=en-US&gl=US&ceid=US:en"
+  }
  }
 }
