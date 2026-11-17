@@ -1,7 +1,7 @@
 {
  "seed": true,
  "usda": {
-  "updatedAt": "2026-11-17T03:06:30.317Z",
+  "updatedAt": "2026-11-17T03:58:56.730Z",
   "sources": {
    "boxedBeef": {
     "ok": true,
@@ -25,11 +25,9 @@
   }
  },
  "news": {
-  "updatedAt": "2026-11-17T03:06:54.637Z",
-  "added": 66,
+  "updatedAt": "2026-11-17T03:59:09.093Z",
+  "added": 60,
   "total": 200,
-  "errors": {
-   "usda": "HTTP 429 for https://news.google.com/rss/search?q=USDA%20beef%20OR%20%22meat%20inspection%22%20OR%20%22beef%20imports%22%20OR%20%22beef%20tariffs%22&hl=en-US&gl=US&ceid=US:en"
-  }
+  "errors": {}
  }
 }
