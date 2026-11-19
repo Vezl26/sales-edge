@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-19T01:59:08.629Z",
+ "updatedAt": "2026-11-19T02:40:20.740Z",
  "topics": [
   {
    "id": "beef",
@@ -39,6 +39,24 @@
   }
  ],
  "items": [
+  {
+   "title": "Erewhon membership — LA Organic Grocery Chain’s $15,000 Tiered Perks Spark Debate",
+   "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE4wNnZONUFmS2NOZ1VDd3ZZS1pZdTJXSlZzQXExTXlmcWtodlppT3RXN0JEaHZXazJPeEIzWnJjcTZydnVkaENyUnNjZkpEUWVHYWxuNlg0X0plRDA5cW16bzZCTzlWSVdvWHdLU0pPRW9Yd1FTalB4dnN2aw?oc=5",
+   "source": "The Korea Daily",
+   "date": "2026-11-19T02:14:08.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "October issue is live",
+   "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5IVkJheXEyS1duWDFfVy02ZUV4QW0yWGlOUENpZzVCQ2FDS29yOC14X29mQk1sbTNKazJFUjdxeXNZWnFvR21leFd2V2FYb19fdGlkWTRydVAtcEJKa2JIc2hyTzcxV0x0WHNwdHhLTmFzUEYyanVQOTlZMUVfZw?oc=5",
+   "source": "Supermarket News",
+   "date": "2026-11-19T01:59:10.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
   {
    "title": "Asia leads signs of chocolate demand recovery as cocoa prices fall",
    "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQTDY0YUZ1YUp0dF94bG5FMjJ2OUFnLUc1TVgySllXeUdmQTVkU3VJLTR2OGRBcG50ZTBfa1YyT1N1Tk1iNnJTZTBfYTJmOXNQcHdVUERlRFdHU1lBSXoydEtOMWhCZXJBRGUxVGdsaFZoQ0FzLUExMjIyeEZ1aVZhbUJRdms3ZUNK0gGcAUFVX3lxTE0zTUJSeklTblZ0bS1TSHZsNEtTZTgzSGh6NHEwakdDVjB3eW1rY1VQMjc1ZUhMWEdyV0RsSVRMcDRFa05xX0R2ekJQQmVCdzRXaHZOQUZLb2Q3bjNxQjlnVHNNeEd0WFJzUTV0NTJhOHNRRnBSN3FMNWtoQWRKNkd3TTd2Qzdod2x2a3MtU3hQT2wtUE1SVDY1ZVpXdQ?oc=5",
@@ -116,6 +134,15 @@
    "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPd1d6aUowbkdYOFZUbU5iODVrb1FEOE9Ca1dtMnlpQkNINUQ4bEdtMlBwenhTQk4ydkhXemdBRnRicHF5ZzdHNnI1Yi1XVFR5cW5pVExGSWRISjc0aW51YjZUOE9CQXM4Mkl6Zjh2ajRrTEl6bzBValpCdm4xcUVEeFk3blVxRmVrb3poM0R1ajh1REJWQW5UYzZCa0wyNkFXWkZnellyMkpFajFJYVE?oc=5",
    "source": "NBC Sports",
    "date": "2026-11-18T23:00:21.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "Jaylon Tyson (ankle) out Wednesday vs. Grizzlies",
+   "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPMmRVeUdDczFaTWo5SFFyc3VGTWVYdE9RbzJfd1VYQXJDc1pSOHVzNFFQWE5kRkNRWnp5ZzRDQU5lUGEzeW5TNW0yaVZ6Q3QxLXRNT1ppNlhySU92OGh6TXhZdTktbXJEOHlVUnluTjA0aXp4bVppYkVlV1pCck1ZMHRXX2F5dzNFbUR3b1AtVENVcU91S01teWg0OXJzTXBJUFdDaUJqazFoNWdndUZpV08zZw?oc=5",
+   "source": "NBC Sports",
+   "date": "2026-11-18T22:25:20.000Z",
    "topics": [
     "protein"
    ]
@@ -316,6 +343,15 @@
    "date": "2026-11-18T18:20:58.000Z",
    "topics": [
     "cargill"
+   ]
+  },
+  {
+   "title": "Cattle Bouncing Back on Wednesday",
+   "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOTUF3NURtdV9SdlFRUVVYYUw5RG1SZXRtaHlHdzZ4alhaM09hR1V5dU9HM01FcTdndFRQVUZNeWxHel8xQlRfYmFBYWVmVEJ0RG5ITk5XM01JT29OaVQ2d2xrVEFCWG01THBlMnpocE1aS0ZHakc3RDZGeVB6UlFNMjRzZkNsY2czYlFFbUhxZER2cUpFTjMw?oc=5",
+   "source": "TradingView",
+   "date": "2026-11-18T18:11:29.000Z",
+   "topics": [
+    "cattle"
    ]
   },
   {
@@ -1807,42 +1843,6 @@
    "topics": [
     "beef",
     "usda"
-   ]
-  },
-  {
-   "title": "Consumer Demand in Response to Increased Beef Quality",
-   "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPMVVBd1E3Ry1MOUtKaW9fS016UG1VcmNQMmJsMVVkYW5xSjN1SHpYZXpPYzlhZUN6VXpxbWhzay1RXy1PRjduaFJJZk1vM0dXT1NWM0NCZDBURlp4R2pDdDg4dC12U1Bnal81dzRaVEdUb1hTSTBjM2wyc0RYdVpQNW5YSHNzUWN3QWNoRDl3?oc=5",
-   "source": "Drovers Magazine",
-   "date": "2026-11-16T16:15:59.000Z",
-   "topics": [
-    "usda"
-   ]
-  },
-  {
-   "title": "Bulls Are Stepping Up to Give Cattle Prices a Boost",
-   "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOazcyT2E0cmJCdWhxYmZVeVJKeDUxVmNIRzNsYjNnYW5mVDljQzFiWHZnM2dial84bUNYUWRCNXBGell6V20wdXBzQXRiUl9OV0FCeWdYc0JRcVA1Si1Lb3FXWF9QeGl6aG12RHpCRnNDRDRnYjBOMld5QmdsMGIzM0NMSUlndmFCcFhfaks0b1dibURWSXlUZ2Z2SQ?oc=5",
-   "source": "Barchart.com",
-   "date": "2026-11-16T16:12:16.000Z",
-   "topics": [
-    "cattle"
-   ]
-  },
-  {
-   "title": "France seeks new EU sanctions on Iran over IRGC cyberattacks targeting supermarket refrigerators",
-   "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE51SjZ4N0pOSG5xak1UQUMyaEpIVVdHSTh1MzJpR3JQZldsOHJ4R0lWdmdRdGFSVDJETWk4ZzE0OHhqOHhSc0p6MkVfTmU4SUpJbTNqeDJTeHdzT3BfRGJPMGp1a1BHYlE3LXc?oc=5",
-   "source": "The Jerusalem Post",
-   "date": "2026-11-16T16:09:10.000Z",
-   "topics": [
-    "grocery"
-   ]
-  },
-  {
-   "title": "France accuses Iran of cyberattacks on supermarket fridges, seeks EU sanctions",
-   "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE51SjZ4N0pOSG5xak1UQUMyaEpIVVdHSTh1MzJpR3JQZldsOHJ4R0lWdmdRdGFSVDJETWk4ZzE0OHhqOHhSc0p6MkVfTmU4SUpJbTNqeDJTeHdzT3BfRGJPMGp1a1BHYlE3LXc?oc=5",
-   "source": "The Jerusalem Post",
-   "date": "2026-11-16T16:09:10.000Z",
-   "topics": [
-    "grocery"
    ]
   }
  ]
