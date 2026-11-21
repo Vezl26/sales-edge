@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-21T02:28:06.319Z",
+ "updatedAt": "2026-11-21T11:21:37.900Z",
  "topics": [
   {
    "id": "beef",
@@ -40,12 +40,84 @@
  ],
  "items": [
   {
+   "title": "New supermarket, retail hub near opening in sprawling S.A. area",
+   "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPTHhpa2xMd2tZQ0ljdHJ5N3ZXeU1OS1NxcExpcjBfdFJheWJKdFBDM1o1eS11UlAzV2lqRk1Ya2tCYnlFMlB3NlpGUzVZRUwyeTZSeXU1endxZXY0WXk5SndXT0xGQ3NuYlQ5Um5kSWx1RG0wS1VaVDVYcE96THR5OHJsRUpLc3YtM29IZ19EWk5Sdw?oc=5",
+   "source": "MySA",
+   "date": "2026-11-21T11:08:31.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Europe's cyber weak spot is the everyday businesses nobody thought to protect",
+   "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9PSmprZnpzY1VmNDJ4SkNxMTFOb2E2SHBFQUkxaUR0bGJocU9DcEI2M1Z2Z1RtQXRXaFo3S0w3MjhJelFtZk9HYWE0VnVEQWVWLTJGYWhsNzRBLXR0LWZpSFZpbU9kcHI0V3ZwZ09adEtBUVByZ1RCdHJjbmjSAYIBQVVfeXFMT0laUmFHYXE2LWw0WFlvdUItU3FWWkdkMWY1cVRkWkU1WlZNZVgtOU12MUJUZEE3Z2lpNW5McXlabHY2bFFHS1NGaEtPQmRKdlVPSzJQQk9vTTNDbGtJWmNmSlZnRUxpN29sMGVPWmJaUFpsZDNUaFhkZHdXWUstdmJuUQ?oc=5",
+   "source": "CNBC",
+   "date": "2026-11-21T06:00:02.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Jade Cargill earns WarGames Advantage: SmackDown highlights, Nov. 20, 2026",
+   "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxPWU00QnM4SE9FSTVpcGtkR1g4Q000T2x0TkxQQnRXZnExeHRnRjg2RTJtbTlCUVhrYUQ2RW1zREczWVRCZG1nRF9pSHZHUW0tVXFVRDJVX0p2VjlSRVZKT29ueHdXMlVzTUNfWkhDblBuS0NEanlaeUhBTGdMQzEycTZMb05GRFprdS1ELVZHdlNMUTg1U1hZTnFQTk9Zdw?oc=5",
+   "source": "WWE",
+   "date": "2026-11-21T05:27:36.000Z",
+   "topics": [
+    "cargill"
+   ]
+  },
+  {
+   "title": "WWE SmackDown: Jade Cargill Gives Her Team A Crucial Edge Ahead of WarGames Showdown",
+   "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPdmlUbzVPZVhMS2FiQUxGWUdrcUpwSmhlMmtjV2Z3endhd2lmMHNWdVY1N0pKcjJkRTBYVm8yN0hLYmVIUGdvZjhEWnRGUFFxeTVZT05rUEpXaElQTVlBd185UzJQc1RvYjlIdVhzNXg1MkhGbDYzeVZ3Zmg4aXljR3dBMFFDcXMyYTBZVmkzcl85X3d6RmRTZ0tVU2gxYzNrR0t5MWZHOE43UURDQl9rQTZFcFdmQ3VOaVZMeEl3OS0?oc=5",
+   "source": "NDTV Sports",
+   "date": "2026-11-21T04:44:32.000Z",
+   "topics": [
+    "cargill"
+   ]
+  },
+  {
+   "title": "Cattle futures rise ahead of bullish USDA feedlot data",
+   "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPSHhfZUp6aUE1YUZZbXBFdm91cm0ySGtpekpPLVJCWlA1Z0VKVHRXalZRRldaM2E0eWo5aG04MmdGaHE0cFl4WGRoU2EzTnlZaTJoNTRxVmhnVFFscFBpMkZjQTBWZUlJWjJHZW03MDU0M3V1X2lnVGVRNzFFSmdKSDZIeC1Ob0h6UGxPYkdPNkYyYVpOaDVSNnRSNlVETjJiLXRpQXFuZmxBdnN1VU54MHl6VXBRZzdmazFqa2QzQmdjdw?oc=5",
+   "source": "TradingView",
+   "date": "2026-11-21T02:48:00.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "Jade Cargill Wins WarGames Advantage For Her Team On WWE Smackdown",
+   "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQc1NkT1BrMS1hb0p6eDcxUmVtTGdLR19pTlNlRzZYQ1p1ZTVjeG1sWk5PeHNhTHBuVU5uSFM2VEZhUm0wTW9XT0ktcTdnSkZEcTdQOWIwLWNPNTVWcXc4TVZkNGhqUjRMZW12RU1tMnFkYmJIWUZNZ2ZuOGhhZlpvcWhPZUJKQmdEMzFGdzhXYw?oc=5",
+   "source": "411MANIA",
+   "date": "2026-11-21T02:09:38.000Z",
+   "topics": [
+    "cargill"
+   ]
+  },
+  {
    "title": "Jade Cargill Defeats Charlotte Flair To Secure WarGames Advantage For Her Team",
    "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNRndrdmZoNTZ5WkRfaXdqZ3RCVjU0c3A0dHFVZWVIcnVDaUZLVTJIWjFEQjdORmdMTzU2R3RXc1V4V2VKS0xoa2lVQWNNU0d0VFY2c1NYLXBlU1YwQUkyUFNtamxiQm9nSTJVR1FRT0VzZVhrQm5DTkpMZG45LUJrQ2IzcmdOaFdHODNNaHhndVN2ZXJrLVB5U1h3TVppY1c2WngycHVBRmxPNEV3VW0wZThUM00?oc=5",
    "source": "Fightful",
    "date": "2026-11-21T01:39:08.000Z",
    "topics": [
     "cargill"
+   ]
+  },
+  {
+   "title": "Jade Cargill gets her team War Games advantage at Survivor Series",
+   "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQQXJOV2tPSE9wM0wwODgzTXRvR0NvRUVDNE41QnEtNmxMV05zZFFsclF3YmswU3dFbVdiRTdsa3dMWU5tcEtSc0lIa1FFYmptT3ZwZzdTMVF5c1hVeXdQUFRoS0ZzbzJ6Xy1PalNoeXA0UUUtMU94N185T3VOZTRrbXIyLTc4dXJ0cjlzVG93UTdVXy1FbHlDOFp3WWVqOGthV09YdlJKS3pZZFFOM19F?oc=5",
+   "source": "Cageside Seats",
+   "date": "2026-11-21T01:39:00.000Z",
+   "topics": [
+    "cargill"
+   ]
+  },
+  {
+   "title": "California grocery chain opens a massive new store in Riverside County",
+   "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPOEIyT200Vmg2VURuOTBtUG1nTHUtNFRvUUZkcG5zdDlDNW16V0toN25IOEVldWw2Qm5FWS1nTWl2MDdkVDlrNFQzSDA0LU4xc2xxRVRKcmRQS0FIQ0RzdjZJUnJxYTZyUm5uYzg4RjVBamVBenN5emVnN0pWU1doV2ZSWGtiOG9wS1pwN2hSU1JKUmM?oc=5",
+   "source": "Yahoo",
+   "date": "2026-11-21T01:10:00.000Z",
+   "topics": [
+    "grocery"
    ]
   },
   {
@@ -130,6 +202,15 @@
    ]
   },
   {
+   "title": "Cattle Post Mixed Trade Heading into Another Bullish Cattle on Feed Report",
+   "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQd3dNQnFwM3NCOWlOWEhxNnpONFFTSUFyWU96Q2RxT0poeUl6V2tTcGU2ZGViRVZVRnR3WUhWbnRjdzNmTUluUm5wQVV2WXFueDk0Tl91ZUJ2cE4tZ195dVlKXzVldlJKQ1pxNXNTMHFuTjVXVUxPaUt5QnF4YTBIbFh4MS1JTmUySDhEMUtVai1OQjdtYWlCX2JQV005YVlFWFJiQTIxbjVnaWsta1cxSlF3eXVCcjJwOXVjTTdkRFhzT1kzME8tZGVRTGpDdw?oc=5",
+   "source": "TradingView",
+   "date": "2026-11-20T22:52:39.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
    "title": "Shoppers deal with high grocery prices",
    "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPZzljS2xCd29xbmJCSmtBZ09Yemd2ZkpyRnA0NDQtSklReDUyU1A3eVRRQlozRHV4WHQ5NUdJY3dWcC02T2hDcmwtek1Ja0hyWGU4c3N5cmZ2cDNTTkdmODdSd3BNNTJNNFphWExIS2YzX0l3ZWNQY0FkZVdGMDFUNlJROExpYksycUlYMk15SUhfTlA1YkhkZUdBOFNJN05jVzZFcGRKaDV5SFFqWnhTalBIcVN1aGNtX0ZBSQ?oc=5",
    "source": "KSDK",
@@ -193,12 +274,22 @@
    ]
   },
   {
+   "title": "Asia Harvest Supermarket opens in Menomonee Falls",
+   "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPODBzX25VdTc3dGEwWkpuOXd5elRGc1lwLWRfMTZXaXRDOXFsUUo4UDJkMzNkM1FvX3RNaDdBN3BnRVRrX08wbDlYa2xxakFyOEtyR3Q2RmRGNFFRUUxUQlF6YUdtN3ZWMGZmTjJxb1huODZVbXBqQWJubTVkenZ0RzBBYWVxeFlwd3pfaV9nU2ZXbHlKY3liVm5SRHdCLWlwclZvLWtSMEZTTmhXVzlMTmFrZ1B5NkIwX0dQTGJiZ053bVdOWWNVeWRLMlhmSXd3NHB2dg?oc=5",
+   "source": "Milwaukee Journal Sentinel",
+   "date": "2026-11-20T20:51:00.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
    "title": "Top 50 Foodservice in Retail",
    "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxONExjckpMOVRKZktMeGdnNkY0ckZUcWpHOXVaNExQOGhJcEU1blI5TUJPRjgzMWd3WV9tWk91R1E2cnlLbTh4UkNNODVJYlRqeHAxZFFKVU9IRFlvaDZkd3JLY3c4NkhUZVRRZDVoLUZ1RkMzR3Y3eWxzSkFOQTNMNlYwZk1vZw?oc=5",
    "source": "Supermarket News",
    "date": "2026-11-20T20:42:16.000Z",
    "topics": [
-    "deli"
+    "deli",
+    "grocery"
    ]
   },
   {
@@ -1749,96 +1840,6 @@
    "date": "2026-11-18T19:00:24.000Z",
    "topics": [
     "usda"
-   ]
-  },
-  {
-   "title": "Live Cattle",
-   "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE52ZjVWcmlPT2hlZHJFdlA0OUxJN3FmbWdOQUJrdjNmb0ZDc3RselBpcnFjOGtjMm9ieFE3LWU5emR6TnVBYmVTNzRVcDFycjN4SWNPUkluMWI4NmZGWnVMZmZYYTZuMU9GU21CVVMwT1NqOTJT?oc=5",
-   "source": "CME Group",
-   "date": "2026-11-18T18:59:45.000Z",
-   "topics": [
-    "cattle"
-   ]
-  },
-  {
-   "title": "Shoppers brave wind, rain for Vallarta Supermarket opening in San Jose",
-   "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOTDRlbzIta3IxUzVtcE5YeXhvQTUxd3ZZV054UDZjeTBkRVZISXU4ci10dWJKWmw3MmRfZFd3U3hFQVI1eTZZb3B5Zm5FRmpDSnkySHB5aW4wZXNGVUpEZElueVZhRFNYMnVJTDB3dGhBZUhQaVVmOXNDa0hzZE92WkhR0gGKAUFVX3lxTFBPMTBCQ1NMVE5IUUlpUExNWEdmS1BqRkRDRzd4Wk11UkpwZ2ktSVZYWWw5SUdyTEV6MmVnTU5PNll3cm4tZ1ZkOG9NSlpkMThrMEFFY0ZUS2tOMlNQZnBocVRmbUt6QVUtTGZCRkRYZ21nNFRwQ2QzZ2IzdERQYjZXYTFud3Blem5PUQ?oc=5",
-   "source": "NBC Bay Area",
-   "date": "2026-11-18T18:36:40.000Z",
-   "topics": [
-    "grocery"
-   ]
-  },
-  {
-   "title": "Cavaliers' Jaylon Tyson: Out Wednesday",
-   "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQSVVJak9iSzhrUHZjZnpad1FaRTlPV3BPVEMtYzNOMDljODFRc1Y4M3RmQmFkUzRUV2tXZS1Ic0N0MjRPeUZQNzNDczlhQ1dvTXVBbHJZZkVXNDZyckgwaWk4RGFDeDMyQmpGSGFXQ1dxWWpDU0pXNWpNQzVNTUJOZFRiMkhZcldya1VPQXBMNFI?oc=5",
-   "source": "CBS Sports",
-   "date": "2026-11-18T18:21:40.000Z",
-   "topics": [
-    "protein"
-   ]
-  },
-  {
-   "title": "Jade Cargill Further Addresses Criticism About Her Skipping NXT",
-   "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQUWoyWjZFcTJkT2F3ZkdCUlIxTldNMUxSWXByUWZKUDhGSzk4c2U3dFpmemtERi1oRy1qbm9udHpZZm5QbUpOZC1MS1FFN3VTV0wzdkJ3ZXI3c0ZKR1RFRkZ2VE1jV0VlVDZuR1BtZlRmSWpGdnhHeUd1cUs1dVI1UjctQ0xxS3NRWTcxa1I3eWhaMTZFamo3N0wtcEd1NFFJ?oc=5",
-   "source": "Fightful",
-   "date": "2026-11-18T18:20:58.000Z",
-   "topics": [
-    "cargill"
-   ]
-  },
-  {
-   "title": "Cattle Bouncing Back on Wednesday",
-   "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOTUF3NURtdV9SdlFRUVVYYUw5RG1SZXRtaHlHdzZ4alhaM09hR1V5dU9HM01FcTdndFRQVUZNeWxHel8xQlRfYmFBYWVmVEJ0RG5ITk5XM01JT29OaVQ2d2xrVEFCWG01THBlMnpocE1aS0ZHakc3RDZGeVB6UlFNMjRzZkNsY2czYlFFbUhxZER2cUpFTjMw?oc=5",
-   "source": "TradingView",
-   "date": "2026-11-18T18:11:29.000Z",
-   "topics": [
-    "cattle"
-   ]
-  },
-  {
-   "title": "USDA Morning Report: Modest Negotiated Cash Cattle Trade - News and Statistics",
-   "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOajBEUEhneHFPcGRqZk5Bbmg1YTFWN2ZQajV0TVNoTmpiSTdYaEloY2tzcWFkVW9oMGphYi1EM1FXVy1rNGJ2aks0ZmRQb0VJN3NVLTVuQk9lTGpNWUk5aHA1blIxdVlMd1VlV3RuNV9QUDNlR0FLc2NwQVM1amNZNVdwMVluU05Sd05oZ05wRmdBSXpmaUw1Nw?oc=5",
-   "source": "IndexBox",
-   "date": "2026-11-18T18:10:28.000Z",
-   "topics": [
-    "usda"
-   ]
-  },
-  {
-   "title": "USDA: Thin Negotiated Slaughter Cattle Trade, 32 Head on Nov. 17 - News and Statistics",
-   "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQQXZsdFJUa1RxM25FdTRYd2diTTZ3dm5YRmNUN0lGWUxYYzBBRW5ONjNuQXZjVFpxQUNQOFhnUVIwVG9QYzR4Y3RQMjc3V2NOTWRrOTh4TUZ6ZXV0eG5EdEJVMm00UWxaa3pLXzdZX1h3eG5WR2czVkRkMVVWWE55M2JmMlRHNUhtWDRtM1JOR2pXeTQ?oc=5",
-   "source": "IndexBox",
-   "date": "2026-11-18T18:10:28.000Z",
-   "topics": [
-    "usda"
-   ]
-  },
-  {
-   "title": "Inside the ‘Kroger Hurts Families’ campaign taking aim at major grocery chain",
-   "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNZXZoRkVvZ1UzcXhBd1U1MzRqY1JuOTk5RC1yckl1UXdRYlo0MWplUzNtMzQ0S1VYbURRUGxjSG9BdFJZdTl0RTV0THdvbUxJWkl4cms5ajRrc0VOMkZJblZINVdia2pIcXR3c0pwZXVrN1FVLWxacEJrOHRzZ1JkS3FMSXVjcy14RU1JZWtyN3djRHJYVXd6dE8xeHU5LUJZMmRYVTBDUktLRFhreEctbWJaTGxHcmFK0gG4AUFVX3lxTE1ldmhGRW9nVTNxeEF3VTUzNGpjUm45OTlELXJySXVRd1FiWjQxamVTM20zNDRLVVhtRFFQbGNIb0F0Ull1OXRFNXRMd29tTElaSXhyazlqNGtzRU4yRkluVkg1V2JrakhxdHdzSnBldWs3UVUtbFpwQms4dHNnUmRLcUxJdWNzLXhFTUlla3I3d2NEclhVd3p0TzF4dTktQlkyZFhVMENSS0tEWGt4Ry1tYlpMbEdyYUo?oc=5",
-   "source": "WKRN News 2",
-   "date": "2026-11-18T17:34:52.000Z",
-   "topics": [
-    "grocery"
-   ]
-  },
-  {
-   "title": "Mandatory Beef Labeling Proposal Would Exclude Foodservice Sales",
-   "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNZ2NEUFZtUkJ6Y0xTTjlFeDU3eE01LUJQeTBpNDJqWWlGeXkwUDRjQU1RSzY3UFJqejcwcXpEUDNDZ3hENDVtZTc0Z1FpZ1BKU0JZRFA2NE9ST3dMOTMtN0RTNnY1RjJIYzFCT244LVBDRG93Q20wQzRkemJYNFhXRVR6QUtGWUU0cTY2aldTVQ?oc=5",
-   "source": "RFD-TV",
-   "date": "2026-11-18T17:29:39.000Z",
-   "topics": [
-    "deli"
-   ]
-  },
-  {
-   "title": "2027 FAME Award winners announced",
-   "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOZXZ2UTRlOWJVM2RSc3huYVVkN0ItTm5QY3VZRkU5Qm9PNE1nMEtSMElvY3djNDE2NUp5MEJIVEU1VEI4RHhENGlBdmdScE5oeUQybDR2OTFTbHVRWVV5NXBfWTVady1GVTFQbVhUNTJxOE5LZTVzcDZCTkJ1NTM1SDdpTFFINGhyd0E?oc=5",
-   "source": "FoodService Director",
-   "date": "2026-11-18T17:25:41.000Z",
-   "topics": [
-    "deli"
    ]
   }
  ]
