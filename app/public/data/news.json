@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-25T03:47:17.705Z",
+ "updatedAt": "2026-11-25T08:48:33.730Z",
  "topics": [
   {
    "id": "beef",
@@ -40,6 +40,123 @@
  ],
  "items": [
   {
+   "title": "Colombia hostages rescued after forces storm Cartagena supermarket",
+   "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOd1VqX1pfaUJOZDhqeTlUenU0bkRLMWhEYVh2b3NfYTd1TE1ub0lLTndqUkQtM04yVGZuR0RqZ3hZLTV0NEVzMDhkQ2JiTTRKYTJqRDZIU1lGdzluNkZFeUVtbjItY2NZZU5RVlZDaXJUeTFNalVXa1RwUFBQYkFpeTBYZGtZeHZ5NC1JSUo4M1VKQW5ubHMwQnNncXl1S2FNYUk2Q3RTSmU?oc=5",
+   "source": "Arab News",
+   "date": "2026-11-25T08:29:24.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Lean hogs fall to new lows on weak pork demand - CME",
+   "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNdWE0RG5yOEtiMUdLREpwbVZ4bExfemdfMG0tUkNDTEJCNGROcUNjbEwzZklCV1F1aG9vbWRiVkl4RGZoNllqZ0JMczRpUmdOOFp5aTQ5dEFIcXROOG5sb3IydnQ4T0RXckZYZDNBZzk1Q2dXdDE4LTB1YThkU2tXUUJLWU1sVWhJdGhzRUFQR3hvVnI1VldNX25B?oc=5",
+   "source": "The Pig Site",
+   "date": "2026-11-25T08:26:15.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "All hostages freed from supermarket in Cartagena, Colombian president confirms",
+   "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9pQUZDaWpOWXJVUkpub3hjbGhYeEN2NzB0M0RMNTllcnFoenMxb1ZiSnZoSWxUMTdoNGFmTHNXM0xvM1c2dTRucmFqLUpLanV4emgxamxab2czUmVhcGtJ?oc=5",
+   "source": "The Jerusalem Post",
+   "date": "2026-11-25T08:01:57.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Sorry, even store brands are expensive now : The Indicator from Planet Money",
+   "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPQTMyWE4xc3I3eEZ6Sjl4RDh0TnJTVEI2QlpGWWJQZld3WTZHLVZnWVRrODJySkxKbGtmcFNhVTJadDdzVzhNUmJSSnVTeVlTbWNhSk1aMnZCTUkybXhXMXlXSjNaY2lfeDBJWEFyTjkyOUdMOURpLVgxOG02N3Q5b3BUU3psVHlqR210NUlVZw?oc=5",
+   "source": "NPR",
+   "date": "2026-11-25T08:00:00.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "All hostages held in Colombian supermarket freed, AFP reports",
+   "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOMEp3d0NUTDkxVWpMLU8xVUxESVBOazI5TXdyeFRFeVNGaHVBcE9jYVNydndNbkRfTjA0c3JXYmRlb0h5a3hVSXpGZ3hJSWZSU1I0QkJQc0I3S2VfU1IzQkg2QkFDbGhWNWFhOVVZNU9BZmh3dkhraEZzM1lvU0lSZ05oTUhsMXZ5VlNibWx6Y2N1bEFsV2pWaFJId0FpajNzWnh5anJEOVc5S3Fl?oc=5",
+   "source": "Reuters",
+   "date": "2026-11-25T07:47:00.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "All hostages rescued after Colombian forces supermarket",
+   "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPNFd3Yl84eVZkcHQ2MUVydG1BbDNQTEtGb1RSS09LRm52cE96bm9VdFBPMkk5b3FUMGFEWG5UYmtldDlBQjI5cHBhS2M2dUEyTFRVS0x1XzJXcmdnSWxGeDZNZ0tGYUZpeHhyYlIzdVVKa3ZQS0hEMG52Q21hUVRjTTBhTHNFV004WTFfU0NJWVlwUHp1UnRQRjlEZmRnSXo0UXowYmVmMGZBa1Ux?oc=5",
+   "source": "Euronews.com",
+   "date": "2026-11-25T07:02:51.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Feeder Cattle Futures: What Do US Feedlot Placements Mean for Beef Supply?",
+   "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNN1IxaHlmeGxuQmR2SHV0STdoeXFyYk5VMkxFSkFsekQ2MGJZNHJIb0NOaF8xRUZabFlVWjdRYXFXaEo4MkJxZTVQS2tWSlZYVUdmWkVPeVo5NlhVTVBvZjFJSzEwYjJqLTZTbzB2ajNqR1pTT1YzM0FxS3dfTlROTXI4XzNBU29vaHRIc0hCYW1Eek43cUNyUlNBMUVXQXR3ajBlRHBGYUFsanNmLThJbllfOHo?oc=5",
+   "source": "Kalkine",
+   "date": "2026-11-25T06:04:00.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "Cost of a Thanksgiving menu: Higher grocery prices hit Thanksgiving shoppers",
+   "link": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxPRUtubTBRNF9BcmVNUkR5MFdVNnhQM29PRnFVVDNoVXY4c0poR0d1M280c29KdmVCNVQ0WVpBS3p3Rk9LZE9tdTJuNm9zWW9sWGh2Wk1SY3dnOWNXaWJmVTYyclZoY1gySU5Mam1wRXBHa1RPdGNpUmNUN2M1OEl4MHhaek1sOFd5ZXlGQnlGUzFwRDlidEI3UU5hSGlwc09XYjdna2hHbGVMZmd4M21ta1QzaEltRm53Mk1DNW5uWDB4YkptYjBwempIaVFYZWxEX3BNUi1ONHQ0TkNEbXJ3MWVRUnJ6LTg0cWZmSXJfNk1KRVE?oc=5",
+   "source": "The Mountaineer",
+   "date": "2026-11-25T05:00:00.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "McGhee Tyson advances expansion plans with more TSA lanes, gates and maybe more food",
+   "link": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxOd3pqTlBmSENtVlhiRzRVQmE5bFE2RUhCOERDZFZVTVN3WFVsTzhlNjhSa3hOam8xd19oWlh1ZFJ3MXdyeVFoS2J6am9KUzIxaW5ENm9QWnlQUE85ZWlOLUpIQ2xYOWxQd0ktaHFBRUFrZUktSDhmTk1jS1lOTVF1ekVCVEZLQmt5ZG9QWGc4d3pTNEVrblVMYl95di1NcmJZNFBZUHYxT1lRNGFyY3hVaUVoekllX2w1b3RRbjY1YV9lcnZrdTVZQnFIZG1Vam91VHc?oc=5",
+   "source": "WBIR",
+   "date": "2026-11-25T04:31:00.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "Ten hostages released in standoff with gunmen at Colombia supermarket",
+   "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxORDYxTGxpUE1xV2dLWmcxbWtYaUpiMk5vTEY2ZFYwcDhLYmdkNGFpRGFXX3dyMFVnV0VHNG40WThPN2VaYmFLZGI0TzlxYTc1ZHVWeEFuS2l5eHB4V2k3WGlwSUFZQTVsbnNlNzhIUUIyTWtCYmpydVBmVDVJTGFVZWZiZFc3aTVLanBwa0toODRnbEw2VEk2aFpTODJXRWg1bXpEQnZ0d1BrYWRTRmNHVVZ5OXlyUdIBuwFBVV95cUxPdXpjZnhheGtGMUYxZ2FEbTV3WU5pa2NGTHNNbzRPTm43M2ZOS0pxWDR1bFpNT1JZdW11V25ieFRzMkgyd29tTm1rZG90NHI1aHNMYnRidUI4N0RzNHdQN3AxbENHNkVleWFteXNDU2g2WlRJUWdLVkRYRFpUUGIwR2hwcDZseVBLc0tObGlsQW9Qc0N3T2ZzZlN5TmJHbC1HVmU3b2Q5WTJEaUNkRTEzRjI1RTFsTXRWTUo4?oc=5",
+   "source": "Al Jazeera",
+   "date": "2026-11-25T03:07:18.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "25 held hostage in supermarket after botched robbery in Colombia",
+   "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQY3dST2R2bGxlZHlnbW5Ud0pGRlBoX0Y5OFR3Ty02RzFkcTk1T01MbkFTeS1WTU9ON3NzR3hrT3FPWUtiaEpiWjFmY2VTNFZVR284RXMwQUYwWWN2enQ2M2JnejZkTlZ1dXEyVi1MYl96YXdoOS11cFJCNkJ2NkhLc1BnVklDWXNZVS1vRm8xS1hBdzFVYXFrblFuYUxlYkd3a09ZRUhaNmnSAa4BQVVfeXFMUFpjVEF2TDEyWlg4VURKZElBR3NuNWluaFBwLTRvUjVNU1I2STB5ZE1pRFh5ZWJBSXdKWGdhekt0MmZjbDRoRnNsZFpVMGxSTS1ELXJkYXVjbFVpSmZyV3dVWGNFaEVpYTM1cmlpN0pxZTd5X2NpX2cwU1Z3LWJxUnIzb2tENXBaSm1pMzQxSF85S1YtRlVjWmJPM1UwaUJGWExETXhKSFRlY0ZLZ2NR?oc=5",
+   "source": "NewsNation",
+   "date": "2026-11-25T02:44:55.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Pearl River Bridge Hosts China-Japan Culinary Exchange Focused on Foodservice Innovation",
+   "link": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNOXliSzZMOXlVdnFrQm50OFl4aTRNWG1XaktFT1AtUHF1UWxiMVAtcW5IczM2M3FtUHNrc2hOd2xzM3dXQXhCU0E5Y2dMaW5Jb2dIRDQxUHg3VVFHTHUzcUZseElnSFZQekNtVVcwWEMyWWVzN0FJOHRtcjh1UG5LckJZNi1qeDRic01VTE5aT3JuajlYX0h1NTE5SEtqMWkwdmZJQ2NORkJsNmx4Y3RYZGRQOXJUOVMwWGpsU0hnQVFTR0Vqd3JjTV9JakF5aWNSWlEyVXphVWtNMlU?oc=5",
+   "source": "StreetInsider",
+   "date": "2026-11-25T02:01:51.000Z",
+   "topics": [
+    "deli"
+   ]
+  },
+  {
+   "title": "Tracking local grocery prices continues; relief efforts expected",
+   "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPZG50QXJBTjRPSjhfaDhsN2prdXpnQWQ4ZkhzZ3JQQUZCYXVUNkdZSWZsMmdZUHZUeTJhNkZFelJvZnlKQjVVbUJtQ2k1eXR0bXY5UXNQTllnTGxYVTVDSm1nZnhzSjA3SF9Dd29nbWx0SXhaR2hZemJZX19qTkZzYkZZYVQ5bFZBeF9FQ0hOdWNyT1RnVWtrUzNnSEpyZWJJd0E?oc=5",
+   "source": "5 EYEWITNESS NEWS",
+   "date": "2026-11-25T00:17:36.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
    "title": "Hostage drama inside Colombia supermarket",
    "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxQbmhVQXFoRmVuVkRyWXAwQXhfbVhuSEhvUlI2cEF5c05JakwyTnpqRDZWSWdTZy02WjRxcTNzZ2IwZkhDLXN0clpZZmVOLWR4LU5HR2pLb1dTWGVocjN5RWZUVVFHNTlPMk9kMDNFZmN4aXFGMlg4QVZ4a2E2YlhJZW44Sk9mVi1NeXBYODZMdHpCeDI1b29SQ041MWVIdw?oc=5",
    "source": "NBC News",
@@ -58,12 +175,39 @@
    ]
   },
   {
+   "title": "CME cattle futures mixed on profit-taking, technical trading",
+   "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNTTVLXzY5YzF3cDhTMXpvSkNHUF9nVFB0NEN6dmlJZnRnczZvU0c2RGowYmRNczlrNGhQbFYzY3hFWmJrUGpuR1VYOXVJZ0xIMGl0UjFQaHBFOTIxQ3lpT0tOZzZzaHVBVU1SSWhMWDZIQjFsUG9YakJibXM3MmpCbVFxa0lKWU5HdFpKb25mWEVCT0E2aTlkbmt6VzJZQ0w2aXppMVdKdTM0WW5seU5YODhZVVJYRnVnNEcxR0U1bzFWYU1HdHdTbQ?oc=5",
+   "source": "TradingView",
+   "date": "2026-11-24T23:31:56.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
+   "title": "Red Lion Football Player, 16, Dies Suddenly After Medical Event, Community Mourns",
+   "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPQmN2VVd1bmdDSktabWZZaGt6MTFpZzlnay15akczaFBpWGZBRW5NclNKSEp2djJ3cllHdWhoNHp6WWhYWjgyNlc3OXlsdDktRDltWG5Pb1F1bHM0dTVsVWxXUWlQaDUzeXhZTnktQlhteG9Pa1NBTU9DTk5ZcWpFcTRmZGdUU1VfcUc2WVhIUVNSNEU?oc=5",
+   "source": "DailyVoice.com",
+   "date": "2026-11-24T23:29:41.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
    "title": "Tracking local grocery prices continues up, with relief efforts expected",
    "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOaHBCMmc4b0hEMklUczZYYmlKOGZsT05Ud0o3Ti13d1p2bEdHcDlaTVk4VE9ZN0VMd2lsejB6TmRwZTNsbUowTGc0VTRCNHo2RUdGU05UQWpKdVJ4TkhpdDNkdUhGTEhlVjZDZGVPV0prWFNWRG9UU21GWUtjem9qM3JrUzBzMDczakFZYzhwejRRY2tBUjM0Mkh0WlBmVXh3dkV5QXRJRkZGeWI0?oc=5",
    "source": "5 EYEWITNESS NEWS",
    "date": "2026-11-24T23:02:02.000Z",
    "topics": [
     "grocery"
+   ]
+  },
+  {
+   "title": "Got to be grounded",
+   "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOemZDOEpSWXdmZDNCQlpvUjd3c2w4bk8xTk1LQ1BzeVpobVpNaGFnVGNSRTJwaGRfdkhMTGxMek5xYktFTXNQY2lpOTE3VlhrUUoyU0lIUWFKUEk4bmtGYm8xLS1RVGRfdnF2RmZsVG9BNzh5Z2tzNmtHYzVwOFJfclRvdk5lUEM2N29TMEpydnk?oc=5",
+   "source": "Facebook",
+   "date": "2026-11-24T23:00:08.000Z",
+   "topics": [
+    "protein"
    ]
   },
   {
@@ -211,6 +355,15 @@
    ]
   },
   {
+   "title": "Cocoa Prices Climb as Ivory Coast Shipments Decline",
+   "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOeTQwSVFtbHVCUTEtWkpYQm5Db1M2cjAtYWlncE83NF9tVEFNWUFvMFJBeG9naHQtc0MwMUlpUmNsOU50Y3ZWR1Z3NmJoS0MxRkd0MmExSHQySFhDY05rYUdHZXlJWUluYjU0VnVPSmNJZjR0S2xzUmVRQ05MSldvMENIS3hCbEtYVHZrVVBCME1GSEV1NGU3eGtrbw?oc=5",
+   "source": "Barchart.com",
+   "date": "2026-11-24T19:23:21.000Z",
+   "topics": [
+    "cocoa"
+   ]
+  },
+  {
    "title": "Photos: The Sikh Association of Central Virginia donates food at Feed More",
    "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOS3ZKdnU0NVl2UTdqY2JZeVo3NUZObTFZNF9UTkJwVGttRmdScFQzbkpvZEdFWlg1RGhnTXJ2elFmN3dYTDFtdDczZW1sbGFvWXVpcWxYcFV6SkdnVU5rYnZPcnJGbkEwX1JFUDZIMG54QzVPd2RpOUtzdmtYUmdWZzYxUmZFdnVxd014TQ?oc=5",
    "source": "Richmond Times-Dispatch",
@@ -221,6 +374,15 @@
   },
   {
    "title": "Armed men hold hostages at supermarket in top Colombian tourist destination",
+   "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNdjBBNmluQUtFZGNIdTVyM3RqaFlvSWQxMGpaWnBEQlFGUjhJX3ZDc0J6MENrN294ZEZCVmVZbVBINVNpRndUaEdrRHhVYzdKUjVzN1ZtOWV1QXlwNW1ORlhDaXQ1MjNVYnBNU0s2Rk4welVsQmxWdGxNemJOR3gySEFhaWVaTWtsclBSYS13?oc=5",
+   "source": "The Guardian",
+   "date": "2026-11-24T18:08:00.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Colombia’s president arrives at scene of supermarket hostage siege in tourist city",
    "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNdjBBNmluQUtFZGNIdTVyM3RqaFlvSWQxMGpaWnBEQlFGUjhJX3ZDc0J6MENrN294ZEZCVmVZbVBINVNpRndUaEdrRHhVYzdKUjVzN1ZtOWV1QXlwNW1ORlhDaXQ1MjNVYnBNU0s2Rk4welVsQmxWdGxNemJOR3gySEFhaWVaTWtsclBSYS13?oc=5",
    "source": "The Guardian",
    "date": "2026-11-24T18:08:00.000Z",
@@ -248,6 +410,15 @@
   },
   {
    "title": "Gunmen hold 25 people hostage at supermarket in Colombia's Cartagena",
+   "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNWUt1ZHBLNlRpUV9RTjBvbnpxeW5VMVFMMW0ta1BlTDI4S3RqYURBOFd4ekRtV1pFNEhnUlRUQlBfT19nVUI3NWJDck5JeUN3WTRhMjB4SldJV3lfRTFra1o5X1FrQ181OEwtUlpQVnBvVDAxWnIwd3FMcHdDSnZrclNqLTg3dTV5Y0dNSWpDZ2ZVZm41Y25QSQ?oc=5",
+   "source": "France 24",
+   "date": "2026-11-24T17:35:48.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Security forces storm supermarket hostage siege in Colombia's Cartagena",
    "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNWUt1ZHBLNlRpUV9RTjBvbnpxeW5VMVFMMW0ta1BlTDI4S3RqYURBOFd4ekRtV1pFNEhnUlRUQlBfT19nVUI3NWJDck5JeUN3WTRhMjB4SldJV3lfRTFra1o5X1FrQ181OEwtUlpQVnBvVDAxWnIwd3FMcHdDSnZrclNqLTg3dTV5Y0dNSWpDZ2ZVZm41Y25QSQ?oc=5",
    "source": "France 24",
    "date": "2026-11-24T17:35:48.000Z",
@@ -392,6 +563,15 @@
    ]
   },
   {
+   "title": "US lean hogs stay near contract lows on weak pork demand - CME",
+   "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNRW02ZGhFUVh1Zm0wRVNQRm4zdi1QTkVDVHdhSnViOW52dkZ2U2JWYzdpSW91UEVfTm10MF9OVS10QXpBVXY2eW9kZ1piVFdhWkI0ZWhNOUhERXJ4RFR5bVM5Wlc1emRqRHBIb2NPTzVGRjQxYnJaWUN0a1h1dlRQZkx1M3BTQUxoX2tnQ1diTzlkR3p5NWxj?oc=5",
+   "source": "The Pig Site",
+   "date": "2026-11-24T12:17:50.000Z",
+   "topics": [
+    "cattle"
+   ]
+  },
+  {
    "title": "Kellen Moore explains why Jordyn Tyson saw reduced role vs. Bears",
    "link": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOUUQ0OElVLXNFQXl0YXBjSmZsWVZrZUthVnluRmxSLVdyOHNUSlZYSU9xTFVOelJlQTZuanFyYmctaFJ6ZG83VHdXVFlURmF1dFl4ZkRuT1pja3o2bkJKM0dPYy01X2VRV0JVWEFWOXM3bnRiWUF0R2NUNDlUY0hnUjkzOVlMRmR2YnNFMGhPYWJfaGU4Wk9SYmtnMjVxU0xocTdHNVEydU5LeDFKNTFrWURoXy1Dbm8wYmo3MVZ6Q2tocmY3bllTalIzcw?oc=5",
    "source": "Saints Wire",
@@ -497,6 +677,15 @@
    "date": "2026-11-24T03:22:04.000Z",
    "topics": [
     "cargill"
+   ]
+  },
+  {
+   "title": "Top 50 Foodservice in Retail",
+   "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxONExjckpMOVRKZktMeGdnNkY0ckZUcWpHOXVaNExQOGhJcEU1blI5TUJPRjgzMWd3WV9tWk91R1E2cnlLbTh4UkNNODVJYlRqeHAxZFFKVU9IRFlvaDZkd3JLY3c4NkhUZVRRZDVoLUZ1RkMzR3Y3eWxzSkFOQTNMNlYwZk1vZw?oc=5",
+   "source": "Supermarket News",
+   "date": "2026-11-24T02:49:44.000Z",
+   "topics": [
+    "deli"
    ]
   },
   {
@@ -1655,196 +1844,6 @@
    "date": "2026-11-21T18:27:15.000Z",
    "topics": [
     "protein"
-   ]
-  },
-  {
-   "title": "USDA Lists E. Coli O157 Outbreak With Ground Beef as Suspected Source but Releases No Case Count",
-   "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPTTQxNFgxZG9RZGxQUU84WEg0RnhJS0Nsc0psc3FDcmFJN0dCRTk1YlZBM3FNMkZUeHBUdXh4Rjg5MXFqcXg1aW01YzZLdTFWVWxTVGdtbGhFSW9vTGJmamthaE0wb2tHM0NNeHVaN2hadFpBSkJKWVhDUUwtNVVWMUlGRjg?oc=5",
-   "source": "Medical Daily",
-   "date": "2026-11-21T17:55:29.000Z",
-   "topics": [
-    "usda"
-   ]
-  },
-  {
-   "title": "Could rookie Jordyn Tyson eventually leapfrog Chris Olave in fantasy?",
-   "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxOR3d5YUI5Yld3VjZPdWpiYkpQZUg4RE1oLTFDYUFVSHFtbndnZFUxa0tlZ0ZKMmNrN295QXE5SlBvaWJDcmFiNkdRX1FtNDgyZTFJYk9za0ZXWVpNZl9kWFlmWlF4RHg5encteUtBV250MXpwWnVyaHIwdndycEd5OENYZE1zUTFpWDZMdzlLc3dfVlBsTWdvLW5JN3FIN29OMDJrVmJXdnVoZl9zR0tLN2V4RkpxV1FGajZNVl83QWNTa2l4eGk3eWhqdmtIcl9EakNHZXpxZEstM1pNeHRKQ3ZyOU9GN1U5dXc?oc=5",
-   "source": "Touchdown Wire",
-   "date": "2026-11-21T17:21:00.000Z",
-   "topics": [
-    "protein"
-   ]
-  },
-  {
-   "title": "Bears' Updated Cap Space After Tyson Bagent Contract Restructure & What it Could Mean",
-   "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPejJzbUIxbjJGR1RoTGNob1BUaEpxRjBFWkJ5Wnlvc21vd05pSnF2RTN6cXJ5TmJDQ1pIcjJDOHVvT3RhY2dxMDVxRVBBalBrUk9vcm5OWnppRVFQOVg0VE81OXFvT0RTQWpMRHBJZUdJcmI1dWlIR3lBd0tJY1hTSkNrT1ExbzF5Q2c?oc=5",
-   "source": "Sports Illustrated",
-   "date": "2026-11-21T16:39:12.000Z",
-   "topics": [
-    "protein"
-   ]
-  },
-  {
-   "title": "Latest contract decision with Tyson Bagent could signal what's next for the Bears QB and hint at another 2026 roster addition",
-   "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOLXFBU0oxXzNkb29Wc2VtMDZFRVFJRFV1QjlhWFpaR094Qm5fYVlDNzZwczJzTnhwVFFTRjJnSmpfRG9LaUtHQTQ1aFFjQkhId2hEd05xdnYwTVFhY2VBYWZkVHBYTUZBZTVFX1pjMTgwLU1RcHFtX0Q5eTVBbFlkYjhqS3puS29WcE5odFpQaW5aTGlIN2hRZzNVOC1BRklTYjV1ZDNSN1BGckZPLXM3Vk91MVlkOXUwUU1kQg?oc=5",
-   "source": "A to Z Sports",
-   "date": "2026-11-21T16:35:20.000Z",
-   "topics": [
-    "protein"
-   ]
-  },
-  {
-   "title": "Bears Free Up $634K By Reworking Tyson Bagent's Deal — What's Next?",
-   "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9XVDM2MktFWDZ2NXY3YmV6amxDZ2hpdUZRZV9HVW9GZmlWR1NPTmppNlhuYlpfODFzN3dCWEp5M2kyOHp3a1d6MmplbFpsYmJLclR0RnBRUm45SVZWMVNXdXFPOGhtV3Z2MVlldy12RjRzVHVPazNHV1g2TTN4dw?oc=5",
-   "source": "Bleacher Nation",
-   "date": "2026-11-21T15:30:20.000Z",
-   "topics": [
-    "protein"
-   ]
-  },
-  {
-   "title": "Bears news roundup: Ozzy Trapilo's Week 11 status, Tyson Bagent contract change",
-   "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOZFNNeDVCRUtsdXFXMU01cFR2cjhMT1ZkRFFFTU84T2FjY0o5b0k0YzBkODFOV29SU19fdTdSUEFIU3poQURscDIzTVVaRVFsWEJ1clNoUUUtTlZNTFFVR2VZZ0lXMGtFMDRkRTdPRVo1Z1l2ZUstQjFHNG5XUHgtSS1vcGFGck9HTk9CRHNJeDFIcmRfalhIdXhvQnZveDlkMEh1aFNB?oc=5",
-   "source": "Bear Goggles On",
-   "date": "2026-11-21T15:27:05.000Z",
-   "topics": [
-    "protein"
-   ]
-  },
-  {
-   "title": "Tyson Foods changes course after meat plant closures",
-   "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPMHNpN3hXV2gzTnpha21hTDJaamR0bWlRVnlFRXV2d0pjNnRERUJNYTR1a2tNem9RNjR6S25lREh5bUxiZGYwSmxaSjdfbXpQd2J4RW40SDB2Z2tVckFGNmd6YWNRVlJiNHYtMXluTGhCbW9qRUJTMUU0UnZ5Mzc4bGwtWUNka1JHcTRYZFNXYUNOTDNKTndaS0J2Zmc4RHpsbVE0?oc=5",
-   "source": "Yahoo Finance",
-   "date": "2026-11-21T15:07:00.000Z",
-   "topics": [
-    "protein"
-   ]
-  },
-  {
-   "title": "Grocery prices prompt dinner collection",
-   "link": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxPTl9keXFLa245MmZTVjhQaWl3Z1kweWpOeGhQYXo1Rm56V2NQMW9EWnptMGlBWUt0NXdMRVpsNmRsOEZNa3h3SkhtSjhNYTBfYVZTbjYweUVhODdIbW11bGJ6R2N1ZUlUSm9WMVV2MEYyYkR0bE1rbDVrakdrX29LLW5SLWRPLXh5QVhEaVJ3NTE5MnY3TFBSanNGNDM3SmFUZ21IdFBNSTRFd1FDb3lrb2V0UDVfMm1HdWJfSFpWNWp2Ykh1bXRSR0FEY0Y3eDI2Yk5yUDlDUUN3UUpmci1WVHF3?oc=5",
-   "source": "Mid Florida Newspapers",
-   "date": "2026-11-21T13:36:32.000Z",
-   "topics": [
-    "grocery"
-   ]
-  },
-  {
-   "title": "Make Gifu’s famous autumn chestnut sweet at home with just two Japanese supermarket snacks",
-   "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQOFNVQUJ0aElJblg2Mzgyd2UwaTFJVVB1UDdTYlZXY1AtaDBETWpvaEctV1lldmhnb3NwOFJMUk1nalBXRFllZ2NNMzdWYWNSVUZYWmtQXzlQOWFnMFpnM19lQ0x5bmliVjNZNXdCQ00xZnlrN2VBX1NaZWFzZUxIN1J4SWRCeHFTVEQxMEw4LWx6czJka0ZvNXJCQ293OW5UX0xJRU03aXlvZTUwTHFxZE5ZcG5xMF9FS0JjLVhjWHQzUdIBxwFBVV95cUxOajV4V3AwT2ZiR0xFRl90T2VHYlpqWmoyeHczU2pvQ21ZVzVYRGZYV25uQjd5Wlo0S0dvQ2VtSXFpZUZKV19MYU1meXM2OVlURGNQYWRoVnY5WkNiUWRoNThyX0F4eXphaGVFLXdlS05EOUtpQWVYVUhBcUw1NUktUHlIczR5dC1wWGotUFFiN0JzUC1icGVPQjVsbFY4ZElJLWFSdlpfM2F4b2FQd0pyb0JuSjVyaTlDNWFkd3RIelhwekdDMlBZ?oc=5",
-   "source": "SoraNews24",
-   "date": "2026-11-21T13:00:45.000Z",
-   "topics": [
-    "grocery"
-   ]
-  },
-  {
-   "title": "‘Bland, faintly sugary and cardboardy’: the best (and worst) supermarket porridge oats, tasted and rated",
-   "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNakU2RGpudnhEbGZfOUIwcE1CZDZiR3k4a29GUVhnNUV2cG9QbjlQMXRJa0VlakJRRGtTc1VyVmtkb1RuM0dyZFhSSkhQTm9wUUs3QUwzbTloWF9tRHFYNEVmTmRmZjZOY09KQjQzSnJvQkhJeFBhdGtIQ2hNdnVZYTNZeWZxUElyNkVCRkF6dHY5VGM3Tkt6VHV0eENBSDJM?oc=5",
-   "source": "The Guardian",
-   "date": "2026-11-21T13:00:01.000Z",
-   "topics": [
-    "grocery"
-   ]
-  },
-  {
-   "title": "What's Driving Food and Beverage Choices in China's Foodservice Market?",
-   "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOQmxtenJrLWl5ZVlwY25CWm9yTXFKWWM0Q01CbjI5aDdabEZDd1hkWmd5M0NOY3dfaXQzaXFlcHE4dHpCNVpvYk42QndrbGNPTXZtLXo1WFYzMFNEUkRVUGlQQTRIbG14UWlhQ0lidVctbWk3WkdsZzRUMDU0SFlHRUpjd2RaNmNmWnl3dkM1TUEzOFFybnQ1MXNJSmtiSl9r?oc=5",
-   "source": "Circana",
-   "date": "2026-11-21T12:52:52.000Z",
-   "topics": [
-    "deli"
-   ]
-  },
-  {
-   "title": "Lexington looks toward future a year after announcement of Tyson closure",
-   "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNdnh1UG5Yb0pybllCZzhxcmI1QXNkaUpkZkE5T0JLY2VJcGFocHRBVXBKS3JoN1FYdEtwYTR1cGtES0RrNm5TMUdoV2FKTGV6RkhZUm03R0VFeE9ZbHQ0RmJVT3lSS2Q5d29QQ2ZZSl9xZ3VPUEhtcGpiQXdWem1YUFFTYVpfSi16ZVRGaXY4Qm5iT3VyREk3a2NiRk5vSE5NOVAzZmE0R2xqV0VEd2ppTF9ZZHgwX1BtbHlBazZvSHdkcGZQZEE?oc=5",
-   "source": "Nebraska Public Media",
-   "date": "2026-11-21T12:07:30.000Z",
-   "topics": [
-    "protein"
-   ]
-  },
-  {
-   "title": "New supermarket, retail hub near opening in sprawling S.A. area",
-   "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPTHhpa2xMd2tZQ0ljdHJ5N3ZXeU1OS1NxcExpcjBfdFJheWJKdFBDM1o1eS11UlAzV2lqRk1Ya2tCYnlFMlB3NlpGUzVZRUwyeTZSeXU1endxZXY0WXk5SndXT0xGQ3NuYlQ5Um5kSWx1RG0wS1VaVDVYcE96THR5OHJsRUpLc3YtM29IZ19EWk5Sdw?oc=5",
-   "source": "MySA",
-   "date": "2026-11-21T11:08:31.000Z",
-   "topics": [
-    "grocery"
-   ]
-  },
-  {
-   "title": "Supermarket, retail hub near opening in booming San Antonio area",
-   "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPTHhpa2xMd2tZQ0ljdHJ5N3ZXeU1OS1NxcExpcjBfdFJheWJKdFBDM1o1eS11UlAzV2lqRk1Ya2tCYnlFMlB3NlpGUzVZRUwyeTZSeXU1endxZXY0WXk5SndXT0xGQ3NuYlQ5Um5kSWx1RG0wS1VaVDVYcE96THR5OHJsRUpLc3YtM29IZ19EWk5Sdw?oc=5",
-   "source": "MySA",
-   "date": "2026-11-21T11:08:31.000Z",
-   "topics": [
-    "grocery"
-   ]
-  },
-  {
-   "title": "Cattle futures supported by sharply higher boxed beef",
-   "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbU9YMG1TelRYbi15b2I4WFFNbUlJcGV1SWdFZEhUTVVwZ05DQ05QTk5LemM4Q3FfUlFudERUcDdTT2taQnA5V0hCWkFKWm0yZFE0b2tQMlc1X01CN2t6a2VHc2VEOFFIdXp2ZzJwbHladktwM0RMRVVNckJsbWgxVHBkeFRoSGVJSXhXSDFJV19lY1FP?oc=5",
-   "source": "Brownfield Ag News",
-   "date": "2026-11-21T08:51:47.000Z",
-   "topics": [
-    "beef",
-    "cattle"
-   ]
-  },
-  {
-   "title": "Europe's cyber weak spot is the everyday businesses nobody thought to protect",
-   "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9PSmprZnpzY1VmNDJ4SkNxMTFOb2E2SHBFQUkxaUR0bGJocU9DcEI2M1Z2Z1RtQXRXaFo3S0w3MjhJelFtZk9HYWE0VnVEQWVWLTJGYWhsNzRBLXR0LWZpSFZpbU9kcHI0V3ZwZ09adEtBUVByZ1RCdHJjbmjSAYIBQVVfeXFMT0laUmFHYXE2LWw0WFlvdUItU3FWWkdkMWY1cVRkWkU1WlZNZVgtOU12MUJUZEE3Z2lpNW5McXlabHY2bFFHS1NGaEtPQmRKdlVPSzJQQk9vTTNDbGtJWmNmSlZnRUxpN29sMGVPWmJaUFpsZDNUaFhkZHdXWUstdmJuUQ?oc=5",
-   "source": "CNBC",
-   "date": "2026-11-21T06:00:02.000Z",
-   "topics": [
-    "grocery"
-   ]
-  },
-  {
-   "title": "Jade Cargill earns WarGames Advantage: SmackDown highlights, Nov. 20, 2026",
-   "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxPWU00QnM4SE9FSTVpcGtkR1g4Q000T2x0TkxQQnRXZnExeHRnRjg2RTJtbTlCUVhrYUQ2RW1zREczWVRCZG1nRF9pSHZHUW0tVXFVRDJVX0p2VjlSRVZKT29ueHdXMlVzTUNfWkhDblBuS0NEanlaeUhBTGdMQzEycTZMb05GRFprdS1ELVZHdlNMUTg1U1hZTnFQTk9Zdw?oc=5",
-   "source": "WWE",
-   "date": "2026-11-21T05:27:36.000Z",
-   "topics": [
-    "cargill"
-   ]
-  },
-  {
-   "title": "As beef prices climb, one Nashville restaurant works to keep burgers affordable for its customers",
-   "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOUDF4YkNLTmdJQnh4UUZWVjJlWTg4d3RCOE9uM2hKYjBfb3VyNmo4Snl1ZUl2NkpIanA3UW5nT2pfRHZoUHk4Rk9nR0ZQVXlQWFVfM3BxN2xzQ0hCenhObzNqUnBvY2pmV2JPUERRVUFiSldmNWRKWTdtdGVpWUdoX29BQUlKcC03NlFWd2xxeWdmZzNZQV9Tb2dLZnJCS3ByOHRDd3Q2MnVZeFZtUndYVEk0NERaZHJCTm9oS2FhdktoQ1RvYlBSM1hR?oc=5",
-   "source": "News Channel 5 Nashville",
-   "date": "2026-11-21T04:59:10.000Z",
-   "topics": [
-    "beef"
-   ]
-  },
-  {
-   "title": "WWE SmackDown: Jade Cargill Gives Her Team A Crucial Edge Ahead of WarGames Showdown",
-   "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPdmlUbzVPZVhMS2FiQUxGWUdrcUpwSmhlMmtjV2Z3endhd2lmMHNWdVY1N0pKcjJkRTBYVm8yN0hLYmVIUGdvZjhEWnRGUFFxeTVZT05rUEpXaElQTVlBd185UzJQc1RvYjlIdVhzNXg1MkhGbDYzeVZ3Zmg4aXljR3dBMFFDcXMyYTBZVmkzcl85X3d6RmRTZ0tVU2gxYzNrR0t5MWZHOE43UURDQl9rQTZFcFdmQ3VOaVZMeEl3OS0?oc=5",
-   "source": "NDTV Sports",
-   "date": "2026-11-21T04:44:32.000Z",
-   "topics": [
-    "cargill"
-   ]
-  },
-  {
-   "title": "WWE SmackDown results, grades (Nov. 20): Kevin Owens beats Gunther; Jade Cargill wins WarGames advantage",
-   "link": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQc3Q0dmNDX3YzQlZqa3F4TTVGc2hBV0RMcUl3OE1CbWptbVZTNEtxWTlkM3ZTd3FIVTFJY3d6Wl9GcWo1Y2p0aTVubXlqdlUzQkl0WDVtVkFvbzNFcjJyNXJsMjFQT2hyWXVoMjZGM2o3cG5BR3BkOFRjSGdtYlB2Q3ktQldpcEdvcEJNNnZzVVdUa1pJMGd6SUxwQ3pwb0tkUlVudW0tYlFwb1NKVlBRUTdjWVVZZFozTjVLenl0OWVyTE5zTkVZcXFoX0I4OEVYaUFEUXVBRFFmcklZYVE?oc=5",
-   "source": "Yahoo Sports",
-   "date": "2026-11-21T04:08:00.000Z",
-   "topics": [
-    "cargill"
-   ]
-  },
-  {
-   "title": "Cattle futures rise ahead of bullish USDA feedlot data",
-   "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPSHhfZUp6aUE1YUZZbXBFdm91cm0ySGtpekpPLVJCWlA1Z0VKVHRXalZRRldaM2E0eWo5aG04MmdGaHE0cFl4WGRoU2EzTnlZaTJoNTRxVmhnVFFscFBpMkZjQTBWZUlJWjJHZW03MDU0M3V1X2lnVGVRNzFFSmdKSDZIeC1Ob0h6UGxPYkdPNkYyYVpOaDVSNnRSNlVETjJiLXRpQXFuZmxBdnN1VU54MHl6VXBRZzdmazFqa2QzQmdjdw?oc=5",
-   "source": "TradingView",
-   "date": "2026-11-21T02:48:00.000Z",
-   "topics": [
-    "cattle"
    ]
   }
  ]
