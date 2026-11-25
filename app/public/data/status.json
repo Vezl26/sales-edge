@@ -1,7 +1,7 @@
 {
  "seed": true,
  "usda": {
-  "updatedAt": "2026-11-24T23:56:41.612Z",
+  "updatedAt": "2026-11-25T03:42:43.275Z",
   "sources": {
    "boxedBeef": {
     "ok": true,
@@ -25,9 +25,19 @@
   }
  },
  "news": {
-  "updatedAt": "2026-11-24T23:56:54.105Z",
-  "added": 86,
+  "updatedAt": "2026-11-25T03:47:17.707Z",
+  "added": 0,
   "total": 200,
-  "errors": {}
+  "errors": {
+   "beef": "HTTP 503 for https://news.google.com/rss/search?q=%22boxed%20beef%22%20OR%20%22beef%20prices%22%20OR%20%22beef%20cutout%22&hl=en-US&gl=US&ceid=US:en",
+   "cattle": "HTTP 503 for https://news.google.com/rss/search?q=%22cattle%20prices%22%20OR%20%22cattle%20futures%22%20OR%20%22cattle%20herd%22%20OR%20%22cattle%20slaughter%22&hl=en-US&gl=US&ceid=US:en",
+   "usda": "HTTP 503 for https://news.google.com/rss/search?q=USDA%20beef%20OR%20%22meat%20inspection%22%20OR%20%22beef%20imports%22%20OR%20%22beef%20tariffs%22&hl=en-US&gl=US&ceid=US:en",
+   "grocery": "HTTP 503 for https://news.google.com/rss/search?q=supermarket%20OR%20%22grocery%20chain%22%20OR%20%22grocery%20prices%22%20when%3A3d&hl=en-US&gl=US&ceid=US:en",
+   "deli": "HTTP 503 for https://news.google.com/rss/search?q=%22deli%20meat%22%20OR%20%22prepared%20foods%22%20OR%20%22grocery%20deli%22%20OR%20%22foodservice%22&hl=en-US&gl=US&ceid=US:en",
+   "cocoa": "HTTP 503 for https://news.google.com/rss/search?q=%22cocoa%20prices%22%20OR%20%22chocolate%20prices%22%20OR%20%22cocoa%20futures%22&hl=en-US&gl=US&ceid=US:en",
+   "cargill": "HTTP 503 for https://news.google.com/rss/search?q=Cargill&hl=en-US&gl=US&ceid=US:en",
+   "local": "HTTP 503 for https://news.google.com/rss/search?q=Richmond%20Virginia%20grocery%20OR%20restaurant%20OR%20food&hl=en-US&gl=US&ceid=US:en",
+   "protein": "HTTP 503 for https://news.google.com/rss/search?q=%22meat%20industry%22%20OR%20%22meatpacker%22%20OR%20Tyson%20OR%20JBS%20OR%20%22National%20Beef%22&hl=en-US&gl=US&ceid=US:en"
+  }
  }
 }
