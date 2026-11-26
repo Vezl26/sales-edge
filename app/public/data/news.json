@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-25T19:24:51.553Z",
+ "updatedAt": "2026-11-26T03:02:02.986Z",
  "topics": [
   {
    "id": "beef",
@@ -40,12 +40,112 @@
  ],
  "items": [
   {
+   "title": "Korean supermarket chain H Mart coming to St. Paul's Midway",
+   "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQdFdxWjhkVDdpLVE5Mmxsa3BJWlJpQlFEU1BoUWpaaDIyZzAwWWpNRWJWWmdNY0lsOTJsMk1DMUNIZzdaZzVlWW5VSnE1czM1RTNFUGpwMDA5UzZKZFM0UUtoMEFXQWNVUFdDMm00eEo1aThJMzdtNmNOQVJ1Yk1JbHQ0eHpKZmpi?oc=5",
+   "source": "CBS News",
+   "date": "2026-11-26T00:26:13.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Sarnia grain terminal gets 300-metre buffer from new housing",
+   "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9SN09NcGcyLTNMVGJERFhYd2dVcWwyUURQdjFzcDZpaGVXYlFpYXRTOWd0STRYekVhWXJtbGxtTUFHVDREZXJmQkJkWEpaODFrU0duRlJhLWxBMHo2M3Y4SGVUc1hIemNMVTlMWVdvS291eUt6SjFz?oc=5",
+   "source": "Farmtario",
+   "date": "2026-11-25T22:57:53.000Z",
+   "topics": [
+    "cargill"
+   ]
+  },
+  {
+   "title": "Chicago Bears QB, WV native Tyson Bagent visits kids at hometown hospital",
+   "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQU1VrdnI0dmhGTnJ0VzdUSWM0YUl4ZC1SN3JlVENHTk1obXFtdlY0eWU4UkdfMjlKLUZxaklyN0ZxaUJadlpCdENOR0tSUU1acXNDR0xfV0dMekJDZzhxaHgzaWI3SFdPNHBrdUYzd0hsV2JzdWlkdFdCVmZkcFFOQjN1T2pHNTVETXNXMEVvcU9wVURTLUk3d2NPb0xYU0FEY19LaW1Kc0poWFQ0N2tySGczTdIBuAFBVV95cUxPUmJhSE1uWHVGNGZKLVpvMVl3TDZORUJPSG5MRmdZZUt3UGJJQi1iNWljREY2eGFIMUZBSnNRT2tySHRyZjZWWDhSUjVqVDhUM1kxak1vb1hKMjMzSUVodWxfcjhXaTZDbmZtcUg5bXY5UU1wU3BiVWFPcG10UVlQU2Z6ZzBBRXdNaGprU3M4NTNPTUZKVURmQlpOVDdFdkRodlNxcU9mY2xTZnZ6UDltenFUSGxlXzFz?oc=5",
+   "source": "WBOY.com",
+   "date": "2026-11-25T22:38:33.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "Charleston shoppers pack stores ahead of Thanksgiving as grocery prices rise",
+   "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOU3o5Znk5LVdrUFNXbHBib2U5bmJ1a1VFZ3ZHSk1LSFBVWk41amJfZDR0TTk2VzIyZlJPekp5VzZCZWpQRnBrcWUyY0R5dHNRMXN3OE9OdDBLbnE5QVZvc2h0LUVNUzRsQzU3dW5oUVkyT0cxYnFTVnNvVzZkTVVCaHlvbEVvTTJkVXg0bmhnNHItSkJaWmtaQ0d6Z0s5WVBZR1RXa2wwNl9Pdw?oc=5",
+   "source": "WCHS",
+   "date": "2026-11-25T22:23:31.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Tyson Fury vs. Anthony Joshua full fight card: 8 bouts added to Netflix show in Cardiff, Wales",
+   "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPcU9SdWM3TEtQS004bjBnZTBqU2F5b0dxYndvaE1JR3pvN3VGWFhKdlU3N0NTbk43TkxkSlBmbThkMVlYVjJOWHZRWVoxWXJuVEFGTjRaMGs3MzZfXzFKaEFzWU1tY0RXLUQtbjZna1lKZzVpLXd4aEtQc3BhWm10eUhRS1hLc1JUYUloaXpwdUR1WDdOc05lR0xjRURmT3N6cVBNR1NvWkFlUEZDSU45djNaVFlxbVNrVF9oVEpTWGw4RlpxOUh5dWxYME11aEY2aVItSFY1WQ?oc=5",
+   "source": "Yahoo Sports",
+   "date": "2026-11-25T22:14:25.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "TEAMSTERS WIN 104-DAY ULP STRIKE AT CARGILL SALT",
+   "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPMFJ5dDNQMTNwY2d1Z0hvUUhmX3k5enRSZDZEM05MRGJackdGRElTMDgwT2I2VXhzSGhDSEctRUtBaktjanNTRGlSNl91NHpqbzZjWC1vNThocTFaYTVmS0gwZHFSRHRnazBGc0xfRmkydUtYRFVqUl9LanljZDBta19iWlNPOG5Nc3BtTFZWNFBKVGNq?oc=5",
+   "source": "Yahoo Finance",
+   "date": "2026-11-25T21:59:00.000Z",
+   "topics": [
+    "cargill"
+   ]
+  },
+  {
+   "title": "USDA Boxed Beef Cutout: Choice Up, Select Down on November 25, 2026 - News and Statistics",
+   "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOLU5SVkczVHJzb0s2RDA0cFVzTkF3SmpDR01zSWRoOFN0dGJtRkRYYjl3QjdIS3ZjOTd5dFpOUFUybFdqUVpiSDFQd2lZMmxKUjZJcEdEUW5od3FYWU1oVzE1Q2pVTkFnUkpZak9NLTlTQmZZX0JNbnNKQ2IzSU9CVGxjdjdzYXlzREItOEpRTlZRZGlMTlgtUS1HZmxqMGxGSzVsMkNQOA?oc=5",
+   "source": "IndexBox",
+   "date": "2026-11-25T21:30:24.000Z",
+   "topics": [
+    "beef",
+    "usda"
+   ]
+  },
+  {
+   "title": "‘A tremendous loss’: Yale, New Haven communities mourn Officer Charles Tyson",
+   "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxObkZSaUJpdXBiSVc4RWpfc1dGTkVlSFQ0d0d4T1VNc040VTdPNlR1VzV3dkx6VW5za0ZxNkpqXzZ1Qzladk5BRURCUkx3b3lBbXNJMkRLUEUwcXhqNkZ0YjcxSVJENV8ybkNVUFk3UWh1V204bXlWZFBxTmRvRi1PQjN0NmIwU1FhUnRyNW9SQU9LTWhx0gGoAUFVX3lxTFAyTzI0am00NUlVRmpWaWw5emEyMFVRVHdjbGlVZUJIQVRvaldnTGRDVnhKbllQd2J6bm83Xy1vaVNucVR6TVlZaV9vTWxiLU95Z2tYUFpZZ2JodjNDZm1EZmhhUUE2UUplLTdsR01wM1FPRjR2Y3JzYkZGV2lIV3pVaXZBOWVvb1RaZUtGbXl6M1U5aWN3UElHbnBCeXVKMVJlVFBXQWlBeQ?oc=5",
+   "source": "WFSB",
+   "date": "2026-11-25T20:10:00.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
+   "title": "Colombian police rescue hostages from supermarket",
+   "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNeWJYdHQyNmQtbjI4ZmQ0LTRrUFZaSi1TUlMxSy0yNUtKcy1ZY2lZYkliOEd4WElPQWFrTm5MTUVWVDVTLVhUbHFfNWp1YUNOT1hwb0p6VWUzRXRvNXF0blZ2VkhwaTM2bnoxVDlqRVpDVVJnWVZlcmZnbTVhRHVWVGlGRVo3TnFQeGkxSjBZUQ?oc=5",
+   "source": "DW.com",
+   "date": "2026-11-25T19:57:39.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
    "title": "Thanksgiving travel crowds build at McGhee Tyson Airport",
    "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOc21FUm4tY05IejVwQXNWM3dmQkRQaVc2MjgyTE11bDJWTlc5akhFT2lNOFpicEdnWFV5ZEQ3aTdPNDVVdjNWUkU0aW5tQlA2OU5GMlhyQ21lb09mM3U1VVJiek91cmVsZkNoaG12aGp1SWx4ZnNxWnY2b3RCREwyaUoxTThPcUwxVkp30gGQAUFVX3lxTE5QMjRRX0YtcGxJQ1NnZkJaUnRIS0kyMkszR0p4YkF6RXlSWkZYR2lfa1dBUlRiOHp3VFRadFJNYkZRaTdVNFpQZVdGVzZ0UFZHRFVYOUxUaW8zVFRKSWQ4eEswV3R2VkxzTUtFM0dYZjVmSjlwYmtPMG0zVEp4RlptdVNMYnljckVFM1N4TEthdQ?oc=5",
    "source": "WAVY.com",
    "date": "2026-11-25T18:24:26.000Z",
    "topics": [
     "protein"
+   ]
+  },
+  {
+   "title": "Red Bull is fully stocked once again at this popular grocery store",
+   "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOdjhVd3EycU0wdzNtWmxfcGtvSGxSY1F6OUF6aE5iMGxNekxTYk1mOUhrb0w1bzJ1WGlvX1RjSG5YTklUcEhFSURVUkpRQzI0OGR4SWg0WHBOUEd2ZGYwTzNtWXZPTDNPWFBrSFlsV3FnOUd0NHV0MUdBTUJQeGhRdnlwLUlfR2dMTzgxSEpaV2FnVnJjUndJMGVKRnpMVTFYWkZv?oc=5",
+   "source": "azcentral.com and The Arizona Republic",
+   "date": "2026-11-25T18:20:00.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "Cattle Falling Ahead of Turkey Day",
+   "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOMlJVS3Z6YnpUdk5xNjhZWUFsenl2blpOTnVZYjdLV0ctVGVjNnRLMFQ5RzZhZ2tQTlhacWxfRUc5SUxuV1hzdm9ma1Ytb2ZYZ29lOTRQLTEyR1paal9MM1RwaUhFdnlMem1xLXRFMXk5WFdlNll0SEtsQVNPbXBfVEx2ME1HZDEyN1AyVHl2ejY1VGRDbWRGbQ?oc=5",
+   "source": "TradingView",
+   "date": "2026-11-25T18:14:08.000Z",
+   "topics": [
+    "cattle"
    ]
   },
   {
@@ -166,12 +266,30 @@
    ]
   },
   {
+   "title": "Why Field Yates is banking on Jordyn Tyson to bounce back",
+   "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNVkxnQUYwU2NhWUN2Y1JBWmNOc0VMZzVkNWNHXzJZUFN3TlllM3M3YkVnSDJzNUFPUUhpYjJMS3h2T0dtc2pzRUdaQk9ISnNTdk5qMDdWb3JjWUJueVpHeVFqTVpId051NXBHZEd4dEtOMi10YnVsYzRrVzJjY0x0N2RFZENJODJkeEVkU1JzMUhlTTlQWFlIWEVn?oc=5",
+   "source": "ESPN",
+   "date": "2026-11-25T16:16:45.000Z",
+   "topics": [
+    "protein"
+   ]
+  },
+  {
    "title": "Couche-Tard bets on food to fuel Circle K's growth",
    "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOTGVkWkFDakF5MFdCeWxtT0x5NnNHSlVNdFdycXBqNEdiNTkxQWUtZ0ZPa1B2SS1lZ2Zac0VyamEwdjRlbUp6bWZJaXNfdC0wV1dLY2lSR0ExNlZVb2M0UVl1ZnZxcWNTWW93V0VFSFU4NG5mNTR6RXVXZ1VMLWhTNXlqSE9renBBSWxiSA?oc=5",
    "source": "CSP Daily News",
    "date": "2026-11-25T16:14:33.000Z",
    "topics": [
     "deli"
+   ]
+  },
+  {
+   "title": "Cocoa Futures Weakness and Sluggish Export Enquiries Deepen Ghana's November Price Correction",
+   "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxON1JCbjJOTmFiUmdkTl9PWF9vclMwVDBhdnEwOVVqUkhrNnIwY0JnazVsTjVUcjFkS3dKcTBITGVuelVEcmZKejZjNlFsd2VTU0xKVDRvWldMZzJMeEpEUzJJZlptWGVpNmc2MDR6VnFNVGU0TUk4TU5rNXE1dkJCR2ZSTVgzV0FMMG5Bb1lPeS1MRUhRd3BzYVVvVk9EVEJtRF9XVHdDc1ZyR0VHM01qOVZqZFYyUTVPV2c?oc=5",
+   "source": "ChemAnalyst",
+   "date": "2026-11-25T16:08:48.000Z",
+   "topics": [
+    "cocoa"
    ]
   },
   {
@@ -357,6 +475,15 @@
    ]
   },
   {
+   "title": "Farm Hands on the Potomac: Walmart promotes Phuong Ha, American Conservation Experience names Jeff Parker CEO, Cargill appoints Sara Herman as director of renewable fuel regulatory affairs",
+   "link": "https://news.google.com/rss/articles/CBMiugJBVV95cUxNSnctblY1X05tLWpBQVJ0VS1fOXgwU2d5NmdaNE1JcmtIZy1tVHBUU2RIQl9ndnpHUnU4LTFSUGlzZFFaUHJWS0lTXy1FZTZfNi14ZkRDVVpPMnlFUTBybThKbC1oRmVnMWZzZFpsd2hsUncxallCZHVENlBINmZyQkhNOE9YMGpHcmJJOS1ZMUJjVzh6NXZDTDgyOFBCYWtWemJnZzdDNWhib05CNENOMVk2MW5uUjQycVBFNXlycGtWQ3JZV3YzcHN1ME92U0hSRmZDSkxZNFUtOEpVYmlQM3pVekkwMzdXMVU1RDFhejQ4LVgzN19Yelh0cVpGblR6b0pIZTNhMmp6TnJvVmM3WXZ4Vmh5V1RoWDBaZF9wYlpyYTlrUE9TMWtDeEs3ZWc3Y1JuUlU1X3BQUQ?oc=5",
+   "source": "Agri-Pulse Communications, Inc.",
+   "date": "2026-11-25T11:05:00.000Z",
+   "topics": [
+    "cargill"
+   ]
+  },
+  {
    "title": "What’s open on Thanksgiving in the Richmond area? Restaurants, groceries for 2026",
    "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPdmpOZEFFOWVnWDc4UWpKZS1lUWMtdWFLLXVXRzFpSFlhY3ZjMk9PTEdGWTlIYWJRQTdqY0ZDd21UU0t0Tm9qOUdHYjZpSm5aY3RMSDNlRnBrRjM2TlVyUFdrdE9NaUdNR1lDX0tWOXFvQVlsei1JdUtNckZrUUd6N1Jkb2J4OVZVRG9Da2M3YndZZTFQLUxoa0ZsQU5kbHIxeHljczZkYTQ?oc=5",
    "source": "WWBT",
@@ -393,6 +520,15 @@
    ]
   },
   {
+   "title": "Colombian security forces rescue hostages in supermarket siege",
+   "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNRU1GRWFGLWR1QWVOZHd1WHN0WkZDOEluMFNOdkRNMkIzS1EyOHRveTc1RDFIN1hwTUxHZE9SSU1RNGo4V2Z0VkJXSm5ia2xRZWh3SXpFbDE3V2ZVZkxyWi0zcmRFanNDalR3VkYxcGdzeGdyR3JJRjNtdWJucTJaVWdtUk9OcHpJT3Q2S3lPYWFEalV5THpqVUZiRXBjTjY1VjktVEhjLUtLZjZUYWlCVFlmMGc?oc=5",
+   "source": "NBC News",
+   "date": "2026-11-25T09:14:37.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
    "title": "Colombia: All hostages rescued and one gunman killed after supermarket hostage crisis in Cartagena ends",
    "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQM0NBbk9kcHhKTlA4X1pyLUczYVF1V0J5UHZVQjRxak9wSzk5amZTNFR0LVFpdmlhTWZXbEY0bXRMN2V5RE1MLUlyZjhqTUp3WVM1M21haG5PN21WTDRMQ2VoazktY05SX1BvRjd1Tk9hOWxMRVJxOUxHZC1ZRncweUgzVF84ZHp0OG9xZTRVMHN3RlFa0gGUAUFVX3lxTE9VQ0ZPN0tQSllIc0xXVWdUX2dPV3ZBNXBtTU1IZ1NWa1dLaUFaSG1xRjRCcmt6M2JZWFNvN1FPODJNOWp2UHdMRUJWYTJLQkY0NlFuTTZnSEJ4WGt5NGpIZU4tN1l1WHF4S1VUUGF5NHFoYzN6UnBscmxTNkNicTF5ZktERnJkY2p3eHh4MHI2c1hoMjU?oc=5",
    "source": "DW.com",
@@ -403,6 +539,15 @@
   },
   {
    "title": "All hostages rescued after Colombian security forces storm supermarket",
+   "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPd1otTXZHZkpuTkt1bjljUUNJU0VKTmJRcW9UVXNOaUwyQkhrY1hpZngzWkM0WUtzdjBzeXRLVVVPZl9JZnFlM2xpcC1KQTdXZEJ0Z0YtZnZnQzNFYTYxdU11TkstVTBVcVhDaHRxdE9nczBMS3RBVlk1LWc5TXZZZmdjNnhuNWJGV29BMUoxVmNmYV9QT1Z6MHVSVS1fbWZwLTI1cnl6eXVaV1dMVkU0dDVSYw?oc=5",
+   "source": "The Guardian",
+   "date": "2026-11-25T08:31:00.000Z",
+   "topics": [
+    "grocery"
+   ]
+  },
+  {
+   "title": "All hostages rescued after Colombian security forces storm supermarket, police say",
    "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPd1otTXZHZkpuTkt1bjljUUNJU0VKTmJRcW9UVXNOaUwyQkhrY1hpZngzWkM0WUtzdjBzeXRLVVVPZl9JZnFlM2xpcC1KQTdXZEJ0Z0YtZnZnQzNFYTYxdU11TkstVTBVcVhDaHRxdE9nczBMS3RBVlk1LWc5TXZZZmdjNnhuNWJGV29BMUoxVmNmYV9QT1Z6MHVSVS1fbWZwLTI1cnl6eXVaV1dMVkU0dDVSYw?oc=5",
    "source": "The Guardian",
    "date": "2026-11-25T08:31:00.000Z",
@@ -453,6 +598,15 @@
    "date": "2026-11-25T07:47:00.000Z",
    "topics": [
     "grocery"
+   ]
+  },
+  {
+   "title": "Live cattle futures edge higher while feeders ease - CME",
+   "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPX29iSGdlVUtRblZfMlFlQVM3b1BJQnhfdWFlU3NYeTdHanRzRWFOb0hOTm94SGpEZk5DckdVb1k1ZmF3bjFFYjVmcVVhYzJuNzFqRzR2bFFBczFoUmN6aFZfdFB2Snh6bHRUajFOYjZ4QjVoQ1pDX25pNVR2eGpvUUVaMGlfNi1CM0I5WC1CUHBsS0k?oc=5",
+   "source": "The Cattle Site",
+   "date": "2026-11-25T07:27:31.000Z",
+   "topics": [
+    "cattle"
    ]
   },
   {
@@ -542,7 +696,8 @@
    "source": "CME Group",
    "date": "2026-11-25T00:05:12.000Z",
    "topics": [
-    "beef"
+    "beef",
+    "cattle"
    ]
   },
   {
@@ -1693,159 +1848,6 @@
    "date": "2026-11-23T12:24:21.000Z",
    "topics": [
     "grocery"
-   ]
-  },
-  {
-   "title": "Tyson Fury reveals schizophrenia and bipolar disorder diagnosis ahead of Anthony Joshua fight",
-   "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPV2cxaExkeVRwRDhrb01wUHdjVnNxdmtFOHRRQ1V1ZkMzdmp3UEp3TEl3WHZJenlIcG1HZlZPVlhSaVd0WE1QUU1vOFV1dE5hZFFRT1RsdnhRRktzaXA0dWFGWENtTnVXZ2oxRjJzVlRodkkwNVlYejE4LW5fSzdZS0pOWi1TMW5haElmaFIzTHk0aGxVRlF5bk44LWFWX21uV2ZVWXUtY1JWNXVHQWpndXNiQ1BiRkg2enhNdGIwY0FEQ3FraWxOTFd1ZzZLN29sX0RFYkFPdw?oc=5",
-   "source": "Sky Sports",
-   "date": "2026-11-23T11:59:24.000Z",
-   "topics": [
-    "protein"
-   ]
-  },
-  {
-   "title": "Tyson Fury Reveals Schizophrenia Diagnosis In Netflix Doc",
-   "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPSjFJM3ZMa01fWVdsVEZXTkN1SU5HWXhRT3ZuM2lIcS0wNW5pQzl1LUVIMERaSnZIWWlxY3luUFlCZEx1VlJOVmZ4dlJ6RzJ0MEdNdVNHWnptdlFZWkJqckdtd3owbjFjZnM3cVJoZ1RoSVM2YmlOeWtJd1RmU2pMcWg2dUJHTGdmM3JzU0h0VmlFWTc3dnpaa1d4VQ?oc=5",
-   "source": "Deadline",
-   "date": "2026-11-23T11:44:00.000Z",
-   "topics": [
-    "protein"
-   ]
-  },
-  {
-   "title": "The raw truth behind Tyson Fury’s family revealed in new Netflix documentary",
-   "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNc2RhZjB0RG8zZHh2NDlIZlJ4Qjd3dTJDdE16VWhxcGNyb0ZNeWQ0S1c4UG9pUGFuS2hsazNfTEVTRmVrd0FkSldVTm5iWTJuNjVmeUduVmo1NkgxVkgxSjFiam1lejlrVnB0SE5sQ1BMSnN3Sk1zSXM3aXlDVFJ2WWlNN0t4RGtTTGdTUk5FQWo1a2E4TDFhYVdGTVZnRWctWkE?oc=5",
-   "source": "The Independent",
-   "date": "2026-11-23T11:38:00.000Z",
-   "topics": [
-    "protein"
-   ]
-  },
-  {
-   "title": "Tyson Fury Reveals Schizophrenia Diagnosis and Says He Heard Threatening Voices: how 12 outlets framed it",
-   "link": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNMjVMTDI2NFlZckRWMnRJaUlKbUxoaHNlWmpBSldiYkNVSENJM0IwbDFBZnN1ZUluSnVXdi15RFQtTzJOWDhOam5HME9CdVhIZVdwTXU2LXJsRzNrcGxQbGpXYzBHbkZ5cmRkTUsxc1NhSGxLSXZDcEpLMXlpR1VOamlZUU1OSllVZmdSZ1Z2QV9aeS13b0pIajZ2bGo3WnJNMlFGcmRTYU9hSDAycWJySzBwUjFMMEM1VWdyWklsVERzU0sybk9veU5seDdtSFMwZTZaellFVDdVTlB1MFVadmU5MEdKRmFB?oc=5",
-   "source": "NewsCord",
-   "date": "2026-11-23T11:24:07.000Z",
-   "topics": [
-    "protein"
-   ]
-  },
-  {
-   "title": "ADM to Invest More Than $60 Million in Decatur Oilseeds Facility",
-   "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPU1pGMVg0OElwY3M2bngtUy1PLV9ZVTF1aHVqbXBPOEw0UUNLS0dqeGVjZ1M1dmZDQXBMV1pDWDFEaWRoVDQwenlJdmRuTnh1Z25zS1FGdEhtenAyZlRxcTA1VUxzS0MxTW9mUU9wVU95Y1ZTeGUyTFVTaGwwd0I1SmE2QU9UdGlVR3k2TUVJVWtkOXhjcDFocHJSSU9SbmlkVVVpRm91ZVpHRjFIWEE?oc=5",
-   "source": "Prepared Foods",
-   "date": "2026-11-23T11:00:00.000Z",
-   "topics": [
-    "deli"
-   ]
-  },
-  {
-   "title": "2026 C-store IQ National Shopper Study Foodservice Report",
-   "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNS3ZZWWJxdnlpTk5zcG1JTEQzMmg3VE9OTl82aW9zQTg1dnNjNk5NcHloNjlSQXFJT1FvTXBfcEViRElVcXEyR291TVhSU0RhNDFXQjUyZ1Z4Qlc4cTRvLWFCclNLU1FCTnpCWmlnNmROS3VPdTJmN2JRc3ZKUHBUSzZBcw?oc=5",
-   "source": "CCentral",
-   "date": "2026-11-23T11:00:00.000Z",
-   "topics": [
-    "deli"
-   ]
-  },
-  {
-   "title": "Weekly Recap: Q4 sales rise, EPS falls and segment results diverge",
-   "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNOUVjRThsR0tTc0ZYOGl3S2dDdW5FNjR5NmpFVVZCaDFtbjRRT3ctVDZyN29BNS1CX2MydnRjRmNiQ0dzYlgwMHRVWm5xOHlYRjBVVWdSVnYtMHh2Zm0zV25YM1NKbDk4N1c0Zlg2dnc3M3puWU9pYy1fQmM3N0JJOWdpOEU3RjJPTjNjaU8yc1pUZlRvanFCR0lUa0NUQ1BuWmR3eTFJZ21aTVBta0pNOFlNU2lJVmhMQW5lVFY4TkZCMDhj?oc=5",
-   "source": "TradingView",
-   "date": "2026-11-23T11:00:00.000Z",
-   "topics": [
-    "protein"
-   ]
-  },
-  {
-   "title": "Tight supplies keep beef prices elevated",
-   "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQZTR1THA3ek1OTmQ3V09GMU9vYlRfRE1tUWFra0gzQUNiZzNkVUtiTU5KX2MxSXRMZWNJZDNHUnpSR0tnSVZhc1YwRDZxbVRFUlNzZjRfYlNqbWRaQTgtdEJ4dVJ6UWdWOUR2MnVUcHdmR25KbXBqdkc5X2dZcVp3RGxDWWFYTXl6MV9JWGNYUFJiYjc0bzJqMg?oc=5",
-   "source": "Farmers Guide",
-   "date": "2026-11-23T10:37:19.000Z",
-   "topics": [
-    "beef"
-   ]
-  },
-  {
-   "title": "How much will hosting Thanksgiving dinner cost this year?",
-   "link": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNdDNVN2dsVXZvejJCRDZwSmVVYTJKOWxuZV9TMVp2M1FreGJvb1I4MFk3bnUtdS01RmhyQmZQMnF0MjlwS2x6QmhUcm1lSVVGVVIzNTRfaGRjMlpUdlJIN1RqRVFyRE9RaEcxZ1k4Mm9Uck9SVEZ6TWlRYVEyZ1BMaEZyWUFBcTBHUDRBOTZaUk14VjY4Vm11RFhULURjUmR2cW5XMnhuVEtnaE95dmYzRm1Ddnh5M29QTlIyOGlxMy13N2c?oc=5",
-   "source": "The Baltimore Banner",
-   "date": "2026-11-23T10:30:00.000Z",
-   "topics": [
-    "grocery"
-   ]
-  },
-  {
-   "title": "America Is Betting on Ostrich Again",
-   "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOXzZpTl95ODZhS0RTbWlseEIzb1duUkdXVDQxZ1RGeTdFd19IdnotMmFvM2VRYmZoQnMwQjN0QVBiYXhyZWZqVUFTWUI5eHN6ZkZNTzNCMG0yQURRby1ZSjNPWnZ0YUlVSEZOWTRjTVExMGZFNF90VVZVS1NOTlRMYWNaeHlaMGctX1p2RlloLUh5TjdTd0tOa2F5TDdpdUx5WFVyUkRyMHdlRUE?oc=5",
-   "source": "Bloomberg.com",
-   "date": "2026-11-23T10:00:10.000Z",
-   "topics": [
-    "beef"
-   ]
-  },
-  {
-   "title": "Let's talk turkey: Here's how Thanksgiving meal costs have changed this year",
-   "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTFB1bzRUNHUxSVgyNEtGTW4xV0wxeWpQSzRibHN2eWVMUWxPMnNnYnR4VzU3NXR3azFBWUFDVU11TTRvY0Jad2Y1S1dPeXhIZF85MEFsWDdVNUdzQ1dPOWZJWG1WX3ZkdExKYm5sMk5DMU0xZXdlVmFR?oc=5",
-   "source": "NPR",
-   "date": "2026-11-23T10:00:00.000Z",
-   "topics": [
-    "grocery"
-   ]
-  },
-  {
-   "title": "Tyson Fury has schizophrenia, wife reveals",
-   "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOejhFMFZaTi1lSWhHY19ZVkwwREpFZnNTWmpnVURubTM0bFlXTXlhYW5vcWJBWGxGbXdNNFpqLUlVNGw0YnhjWkZ0SG9VVUpZUXVjWU9nX1YzTmdNUTZEUExkeGV3cEhIeEpoQWZoWHNLS0tqcEZETG1tZTlXMTgtWjFvNmw1Q1FMMGxYc2pCY3I1akhNQ1lHc0M5YzJ1ekRDSlF1WE1n?oc=5",
-   "source": "The Telegraph",
-   "date": "2026-11-23T09:54:00.000Z",
-   "topics": [
-    "protein"
-   ]
-  },
-  {
-   "title": "Tyson Fury reveals schizophrenia diagnosis in new Netflix documentary",
-   "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9KNTlvbmF0YXR3Q3E0cHZ5S0daTHdfdFpXRENtNENONl9NaHUybExfRi1Zal9VanN2Q1g2NURCY1J2QXZFVnRSOE9ZdUZyeFlsOTJncnVna1VTTENRdllZaE50cGh3QQ?oc=5",
-   "source": "BBC",
-   "date": "2026-11-23T09:53:52.000Z",
-   "topics": [
-    "protein"
-   ]
-  },
-  {
-   "title": "UK Markets Brief: Why Supermarket Stocks Are Rising and Where Oil Prices Go Next",
-   "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNQTZvLV9kZlJ4dnRUcXctX3hnVmJWcDloOGxuTE56bW9jWGY0bGtQZUNoU2JpVGNMeUJRT0Q2RE4tdmdtUVdjTC1nMVAtSFg2Sm1TMjlORnE5Zm11QXlDZGJLNktUcUJLTTVwdENTTWVVUFNrdC1NaFdvMU5JeHNpVlNvU3hzck84c1hPZ0tOWGRiNDlpekF0QVliX3RZZGhNSHd0cFRlNWxDMEV5NmdHWGRCTFhHb284Tk1WWA?oc=5",
-   "source": "Morningstar",
-   "date": "2026-11-23T09:42:38.000Z",
-   "topics": [
-    "grocery"
-   ]
-  },
-  {
-   "title": "Tyson Fury Netflix review: Addiction, schizophrenia and glory – but a big unanswered question",
-   "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxOSmdDTy00WXlxcE1YSXhOM0pJNkJ6aW15dDhBZlU4cGo0bktoNWxzRWxybm10a0xzYXJGN2R5SGk5R1oyeWt4dHlMNGY2RXAycThzSHhHRXdzM01mSEYxeTJNeVp0R20tRlltWG41Z0ZYdGNZTGFYSEdzT2hqcU1MZE5GeHFVUlNlb2JhY2E1Q1RyYnFOMjlYVXdrdVZIeDFDLVJIRF9OUHRiT2VSTWJlUWpaMDUwNDk2VFpDTUxnX3lncks1MFlGcUZORjNkNmViZnZoTG1DYjl2R09aNDVaOEZjRk1OdURmNUE?oc=5",
-   "source": "The New York Times",
-   "date": "2026-11-23T09:14:16.000Z",
-   "topics": [
-    "protein"
-   ]
-  },
-  {
-   "title": "Russian Drone Strikes Kill Civilians Near Kyiv as Residential Building Collapses and Supermarket Is Hit",
-   "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5wUEpZelRvc3lmaUxxYVd4bHBET1FsMVJhQ0txQ3JwWmtlaEIxYWhPajRSYkFhdl9uaWxkR1dEcmFJMlVnbW1rY2c3ZGRSZFJXN01fWnIxY2Z4WmMwWGxtYUVKVE5iS2ZNS3d6cTRoUEgxNW5rdHZFaQ?oc=5",
-   "source": "EU Today",
-   "date": "2026-11-23T07:30:00.000Z",
-   "topics": [
-    "grocery"
-   ]
-  },
-  {
-   "title": "Trent Woods Mayor Chuck Tyson to retire",
-   "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOQ3J5NVNGelJOcU94eF95SEJUbUNxRlVScHljZGtlbUR0Qkg1YWtjdExZT1AxOFRROEtSVVE4eVY1N1BaSTF6MXluV3htd25lRVB2ejlsTTMxWjJWX2pwMG9vQUk5cFR3eE9kSVJRWTFraUxycWNteE9Pa0kwSEgzSFFWUFpaQmVUVlRQazlmUnhxcFpnSlJVRU1uUmp3dklENENxWmpPeWhDQ2lReklFOGhEYXFyVk5Tcmg1OU9FTnJfRW5sUXdSMWdn?oc=5",
-   "source": "New Bern Sun Journal",
-   "date": "2026-11-23T06:30:00.000Z",
-   "topics": [
-    "protein"
    ]
   }
  ]
